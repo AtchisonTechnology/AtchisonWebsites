@@ -1,0 +1,17 @@
+---
+layout: none
+sitemap_exclude: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<% site.collections.each_value do |collection| %>
+<%   collection.resources.reject { |r| r.data.sitemap_exclude }.each do |r| %>
+  <url>
+    <loc><%= site.config.url %><%= r.relative_url %></loc>
+<%     if r.data.date %>
+    <lastmod><%= r.data.date.strftime('%Y-%m-%d') %></lastmod>
+<%     end %>
+  </url>
+<%   end %>
+<% end %>
+</urlset>

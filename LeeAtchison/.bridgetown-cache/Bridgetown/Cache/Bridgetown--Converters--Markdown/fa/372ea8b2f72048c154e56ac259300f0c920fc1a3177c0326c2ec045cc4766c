@@ -1,0 +1,14 @@
+I"ú<h2 id="about-the-book">About the Book</h2>
+
+<p>Application performance at scale often comes down to one thing: how effectively you cache. <em>Caching at Scale with Redis</em> is a practical primer on designing and implementing caching strategies using Redis, covering the patterns and pitfalls that separate high-performing systems from brittle ones.</p>
+
+<h2 id="what-youll-learn">What Youâ€™ll Learn</h2>
+
+<ul>
+  <li>Core Redis data structures and when to use each</li>
+  <li>Cache invalidation strategies and how to avoid common mistakes</li>
+  <li>Patterns for caching at the application, API, and database layers</li>
+  <li>How to scale Redis itself as your caching needs grow</li>
+  <li>Real-world examples from high-traffic production systems</li>
+</ul>
+:ET

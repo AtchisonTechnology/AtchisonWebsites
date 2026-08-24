@@ -1,0 +1,12 @@
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.metadata.title }}, {{ site.metadata.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.metadata.myvariable }}.
+
+title: "Business Breakthrough 3.0"
+tagline: "An accessible, no-nonsense guide for transforming your company and implementing sustainable change"
+description: "The Amazon #1 best-selling guide to transforming your company from within. Build engaged teams, make decisions from data, and grow a highly profitable organization."
+author:
+  name: "Lee Atchison and Ken Gavranovic"
+  url: "https://leeatchison.com"

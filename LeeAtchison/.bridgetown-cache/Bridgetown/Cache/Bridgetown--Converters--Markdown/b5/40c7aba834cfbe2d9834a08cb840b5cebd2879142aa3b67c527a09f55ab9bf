@@ -1,0 +1,26 @@
+I"w<h2 id="about-the-book">About the Book</h2>
+
+<p>Every day, companies struggle to scale critical applications. As traffic volume and data demands increase, these applications become more complicated and brittle, exposing risks and compromising availability. With the popularity of software as a service, scaling has never been more important.</p>
+
+<p>Now updated with an expanded focus on modern architecture paradigms such as microservices and cloud computing, this practical guide provides techniques for building systems that can handle huge quantities of traffic, data, and demand — without affecting the quality your customers expect.</p>
+
+<p>Architects, managers, and directors in engineering and operations organizations will learn how to build applications at scale that run more smoothly and reliably to meet the needs of customers.</p>
+
+<h2 id="what-youll-learn">What You’ll Learn</h2>
+
+<ul>
+  <li>How scaling affects the availability of your services, why that matters, and how to improve it</li>
+  <li>A modern, service-based application architecture that ensures high availability and reduces the effects of service failures</li>
+  <li>The Single Team Owned Service Architecture paradigm (STOSA) — a model for scaling your development organization in tandem with your application</li>
+  <li>How to understand, measure, and mitigate risk in your systems</li>
+  <li>How to use the cloud to build highly scalable applications</li>
+</ul>
+
+<h2 id="recognition">Recognition</h2>
+
+<p><em>Architecting for Scale</em> is featured in <strong>50 Books from Thinkers360 Thought Leaders You Should Read in 2021</strong> and ranked <strong>#3 in Network Computing’s 10 Tech Books For Summer Reading</strong>.</p>
+
+<h2 id="free-resource">Free Resource</h2>
+
+<p>Download a free <a href="/Risk%20Matrix%20Template.xlsx">Risk Matrix Template</a> as discussed in “The Risk Matrix” chapter of the book.</p>
+:ET

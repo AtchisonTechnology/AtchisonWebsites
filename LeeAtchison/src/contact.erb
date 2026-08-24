@@ -1,0 +1,71 @@
+---
+layout: default
+page_class: homepage
+title: Contact
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <span class="hero-eyebrow">Get in Touch</span>
+    <h1>Contact Lee Atchison</h1>
+    <p>Whether you&rsquo;re interested in consulting, speaking engagements, or have a media inquiry, Lee would love to hear from you.</p>
+  </div>
+</section>
+
+<section class="contact-page-body">
+  <div class="contact-page-inner">
+
+    <div class="contact-page-info">
+      <h2 class="section-title">How Can Lee Help?</h2>
+      <p style="color:var(--text-muted); line-height:1.75; margin-bottom:1.5rem;">Lee works with organizations and individuals across a range of engagements. Use the form to get in touch, or connect directly via LinkedIn.</p>
+      <ul class="services-list" style="margin-bottom:2rem;">
+        <li>Cloud modernization consulting and strategy</li>
+        <li>Fractional Chief Architect services</li>
+        <li>Architecture review and assessment</li>
+        <li>Speaking and conference appearances</li>
+        <li>Media and press inquiries</li>
+      </ul>
+      <a href="https://www.linkedin.com/in/leeatchison" class="contact-info-link" target="_blank" rel="noopener noreferrer">
+        <div class="contact-info-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <strong>Connect on LinkedIn</strong>
+          <span>Message Lee directly on LinkedIn</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-form-wrap">
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="form-hidden">
+          <label>Don&rsquo;t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="form-group">
+          <label for="name">Name <span class="form-required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="form-required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What&rsquo;s this about?" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message <span class="form-required">*</span></label>
+          <textarea id="message" name="message" required placeholder="How can Lee help you?"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">Send Message &rarr;</button>
+      </form>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,86 @@
+---
+layout: default
+page_class: homepage
+title: Courses
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <div class="courses-hero-content">
+      <div>
+        <span class="hero-eyebrow">Training &amp; Education</span>
+        <h1>Courses by Lee Atchison</h1>
+        <p>Lee&rsquo;s courses have reached over 160,000 professionals worldwide, covering software architecture, cloud computing, and technology leadership.</p>
+        <div class="btn-group" style="justify-content:flex-start; margin-top:1.5rem;">
+          <a href="/academy" class="btn btn-primary" rel="noopener noreferrer">Atchison Academy &rarr;</a>
+          <a href="https://www.linkedin.com/learning/instructors/lee-atchison" class="btn btn-outline" target="_blank" rel="noopener noreferrer">LinkedIn Learning</a>
+        </div>
+      </div>
+      <div class="courses-hero-badge">
+        <img src="<%= relative_url '/images/linkedin-learners-badge.png' %>" alt="100,000 LinkedIn Learning learners" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<%
+  all_courses = site.collections["courses"].resources.sort_by { |c| c.data.order || 99 }
+  featured_courses  = all_courses.select { |c| c.data.featured }
+  remaining_courses = all_courses.reject { |c| c.data.featured }
+%>
+
+<% unless featured_courses.empty? %>
+<section class="featured-courses-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">Featured</span>
+      <h2 class="section-title">Featured Courses</h2>
+    </div>
+    <div class="courses-grid">
+      <% featured_courses.each do |course| %>
+        <a href="<%= relative_url course.relative_url %>" class="course-card course-card--featured">
+          <span class="course-card-platform"><%= course.data.platform %></span>
+          <h3><%= course.data.title %></h3>
+          <p><%= course.data.summary %></p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<section class="courses-grid-section">
+  <div class="section-inner">
+    <% unless featured_courses.empty? %>
+      <div class="section-header">
+        <span class="section-label">All Courses</span>
+        <h2 class="section-title">More Courses</h2>
+      </div>
+    <% end %>
+    <div class="courses-grid">
+      <% remaining_courses.each do |course| %>
+        <a href="<%= relative_url course.relative_url %>" class="course-card">
+          <span class="course-card-platform"><%= course.data.platform %></span>
+          <h3><%= course.data.title %></h3>
+          <p><%= course.data.summary %></p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="courses-cta-section">
+  <div class="section-inner courses-cta-inner">
+    <div class="courses-cta-logo">
+      <img src="<%= relative_url '/images/logo-academy.png' %>" alt="Atchison Academy" />
+    </div>
+    <div>
+      <span class="section-label">Premium Training</span>
+      <h2 class="section-title" style="color:#ffffff">Atchison Academy</h2>
+      <p style="color:rgba(255,255,255,0.7); margin-bottom:1.5rem;">Access exclusive, in-depth training directly from Lee at Atchison Academy — the dedicated learning platform for software architects and technology leaders.</p>
+      <a href="/academy" class="btn btn-primary" rel="noopener noreferrer">Explore the Academy &rarr;</a>
+    </div>
+  </div>
+</section>
