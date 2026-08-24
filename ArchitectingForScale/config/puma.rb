@@ -7,7 +7,21 @@
 # This port number typically gets overridden by Bridgetown's boot & config loader
 # so you probably don't want to touch the number here
 #
-port ENV.fetch("BRIDGETOWN_PORT") { 4000 }
+# Dev port is derived per git worktree: main gets this site's base port, a
+# spec####/bug#### worktree gets base + the ID. Single source of truth is
+# ../../lib/worktree_env.rb; the table is in ../../Projects/services.md.
+#
+# BRIDGETOWN_PORT (exported by bin/dev) always wins. This fallback keeps a bare
+# `bin/bridgetown start` on the right port too. If the helper isn't reachable
+# (site checked out on its own, outside the monorepo), fall back to 4000.
+port ENV.fetch("BRIDGETOWN_PORT") {
+  begin
+    require File.expand_path("../../lib/worktree_env", __dir__)
+    WorktreeEnv.port_for(File.basename(File.expand_path("..", __dir__)))
+  rescue LoadError
+    4000
+  end
+}
 
 # You can adjust the number of workers (separate processes) and threads
 # (per process) based on your production system
