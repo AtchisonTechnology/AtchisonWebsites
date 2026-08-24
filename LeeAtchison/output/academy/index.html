@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atchison Academy | Lee Atchison</title>
+
+<meta name="description" content="Lee Atchison is a software architect, published author, and cloud computing expert helping organizations modernize their applications and infrastructure." />
+
+<link rel="icon" type="image/png" href="/images/favicon.png" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.BUEXF7QJ.css" />
+<script src="/_bridgetown/static/index.PGKDTE3I.js" defer></script>
+<script type="module">let lastmod = 0
+let reconnectAttempts = 0
+function startLiveReload() {
+  const connection = new EventSource("/_bridgetown/live_reload")
+
+  connection.addEventListener("message", event => {
+    reconnectAttempts = 0
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  })
+
+  connection.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+
+  connection.addEventListener("error", () => {
+    if (connection.readyState === 2) {
+      // reconnect with new object
+      connection.close()
+      reconnectAttempts++
+      if (reconnectAttempts < 25) {
+        console.warn("Live reload: attempting to reconnect in 3 seconds...")
+        setTimeout(() => startLiveReload(), 3000)
+      } else {
+        console.error("Too many live reload connections failed. Refresh the page to try again.")
+      }
+    }
+  })
+}
+
+startLiveReload()
+</script>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->
+
+  </head>
+  <body class="default homepage">
+    <header class="site-header">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Lee Atchison</a>
+    <button class="nav-toggle" type="button" aria-expanded="false"
+            aria-controls="site-nav-menu" aria-label="Open menu">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="site-nav" id="site-nav-menu" aria-label="Main navigation">
+      <ul>
+          <li>
+            <a href="/"
+               class=""
+               >Home</a>
+          </li>
+          <li>
+            <a href="/ainative"
+               class="nav-featured"
+               >AI-Native</a>
+          </li>
+          <li>
+            <a href="/books"
+               class=""
+               >Books</a>
+          </li>
+          <li>
+            <a href="/courses"
+               class=""
+               >Courses</a>
+          </li>
+          <li>
+            <a href="/academy"
+               class="is-active"
+               aria-current="page">Academy</a>
+          </li>
+          <li>
+            <a href="/about"
+               class=""
+               >About</a>
+          </li>
+          <li>
+            <a href="/contact"
+               class=""
+               >Contact</a>
+          </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main>
+      
+<section class="academy-hero">
+  <div class="academy-hero-inner">
+    <div class="academy-hero-logo">
+      <img src="/images/logo-academy.png" alt="Atchison Academy" />
+    </div>
+    <h1>Atchison Academy</h1>
+    <p>Exclusive books, courses, and training directly from Lee Atchison &mdash; for software architects and technology leaders who want to build, scale, and lead with confidence.</p>
+<!--    <a href="https://atchisonacademy.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Visit Atchison Academy &rarr;</a>-->
+  </div>
+</section>
+
+<section class="academy-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">Books</span>
+      <h2 class="section-title">Books at Atchison Academy</h2>
+      <p>Published works available through Atchison Academy.</p>
+    </div>
+    <div class="books-grid">
+        <article class="book-card">
+          <div class="book-cover-wrap">
+            <img src="/images/books/the-software-conductor.png"
+                 alt="The Software Conductor book cover" class="book-cover" />
+          </div>
+          <div class="book-card-body">
+              <span class="book-tag book-tag--new">New Release</span>
+            <h3>The Software Conductor</h3>
+            <p class="book-authors">Lee Atchison</p>
+            <p>A journey of discovery from software developer to architect — designing systems, leading teams, creating harmony.</p>
+            <a href="/books/the-software-conductor/" class="book-link">Learn more &rarr;</a>
+          </div>
+        </article>
+        <article class="book-card">
+          <div class="book-cover-wrap">
+            <img src="/images/books/business-breakthrough-3.jpg"
+                 alt="Business Breakthrough 3.0 book cover" class="book-cover" />
+          </div>
+          <div class="book-card-body">
+              <span class="book-tag book-tag--collab">Co-Authored</span>
+            <h3>Business Breakthrough 3.0</h3>
+            <p class="book-authors">Lee Atchison, Ken Gavranovic</p>
+            <p>A five-step process that fuels engagement, boosts agility, and drives lasting change in your organization.</p>
+            <a href="/books/business-breakthrough-3/" class="book-link">Learn more &rarr;</a>
+          </div>
+        </article>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="/books" class="btn btn-outline">View All Books &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="academy-section academy-section--alt">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">Courses</span>
+      <h2 class="section-title">Courses at Atchison Academy</h2>
+      <p>Training available through Atchison Academy and affiliated learning platforms.</p>
+    </div>
+    <div class="courses-grid">
+        <a href="/courses/cloud-architecture-for-scalable-systems/" class="course-card course-card--featured">
+          <span class="course-card-platform">Coursera</span>
+          <h3>Cloud Architecture for Scalable Systems</h3>
+          <p>Vendor-neutral cloud architecture from the architect&#39;s seat — deployment models, managed services, infrastructure as code, cloud-native design, cost as a first-class constraint, and migration planning.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/scalable-availability-software-architecture/" class="course-card course-card--featured">
+          <span class="course-card-platform">Coursera</span>
+          <h3>Scalable Availability in Software Architecture</h3>
+          <p>Practical techniques for designing modern, high-scale applications that maintain strong availability while managing complexity, risk, and service dependencies.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/software-architecture-developer-to-architect/" class="course-card course-card--featured">
+          <span class="course-card-platform">LinkedIn Learning</span>
+          <h3>Software Architecture: From Developer to Architect</h3>
+          <p>Explore the transition from experienced developer to software architect — what the role requires, how it differs, and how to make the leap successfully.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/cloud-migration-fundamentals/" class="course-card course-card--featured">
+          <span class="course-card-platform">O&#39;Reilly Media</span>
+          <h3>Cloud Migration Fundamentals: Best Practices for Moving to the Cloud</h3>
+          <p>A practical guide to cloud migration — the strategies, patterns, and practices that leading organizations use to move successfully to the cloud.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/avoiding-bad-decisions-cloud-strategy/" class="course-card">
+          <span class="course-card-platform">LinkedIn Learning</span>
+          <h3>Avoiding Bad Decisions in Your Cloud Strategy</h3>
+          <p>How to prepare before migrating to the cloud or building cloud-native applications — avoiding the most common and costly mistakes.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/cloud-architecture-advanced-concepts/" class="course-card">
+          <span class="course-card-platform">LinkedIn Learning</span>
+          <h3>Cloud Architecture: Advanced Concepts</h3>
+          <p>New architectural patterns and concepts for IT professionals designing cloud systems, with particular relevance for modern distributed and hybrid environments.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/framing-cloud-discussions-c-suite/" class="course-card">
+          <span class="course-card-platform">LinkedIn Learning</span>
+          <h3>Framing Cloud Discussions for the C-Suite</h3>
+          <p>How IT teams can communicate cloud benefits, risks, and strategy to executive decision-makers in language that resonates and drives decisions.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+        <a href="/courses/understanding-impact-merger-it-teams/" class="course-card">
+          <span class="course-card-platform">LinkedIn Learning</span>
+          <h3>Understanding the Impact of a Merger for IT Teams</h3>
+          <p>How IT teams navigate post-acquisition mergers — the organizational changes, technical integration challenges, and career positioning strategies that matter most.</p>
+          <span class="course-card-link">Learn more &rarr;</span>
+        </a>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="/courses" class="btn btn-outline">View All Courses &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="academy-cta">
+  <div class="academy-cta-inner">
+    <div class="academy-cta-logo">
+      <img src="/images/logo-academy.png" alt="Atchison Academy" />
+    </div>
+    <div>
+      <span class="section-label">Premium Training</span>
+      <h2 class="section-title" style="color:#ffffff;">Start Learning Today</h2>
+<!--      <p style="color:rgba(255,255,255,0.75); margin-bottom:1.5rem;">Access the full catalog of exclusive courses and training directly from Lee at Atchison Academy.</p>-->
+<!--      <a href="https://atchisonacademy.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Explore the Academy &rarr;</a>-->
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+  <p>&copy; 2026 Atchison Technology LLC &nbsp;&bull;&nbsp;
+    <a href="/contact">Contact</a>
+  </p>
+</footer>
+
+  </body>
+</html>

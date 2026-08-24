@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Architecting for Scale | Lee Atchison</title>
+
+<meta name="description" content="Lee Atchison is a software architect, published author, and cloud computing expert helping organizations modernize their applications and infrastructure." />
+
+<link rel="icon" type="image/png" href="/images/favicon.png" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.BUEXF7QJ.css" />
+<script src="/_bridgetown/static/index.PGKDTE3I.js" defer></script>
+<script type="module">let lastmod = 0
+let reconnectAttempts = 0
+function startLiveReload() {
+  const connection = new EventSource("/_bridgetown/live_reload")
+
+  connection.addEventListener("message", event => {
+    reconnectAttempts = 0
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  })
+
+  connection.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+
+  connection.addEventListener("error", () => {
+    if (connection.readyState === 2) {
+      // reconnect with new object
+      connection.close()
+      reconnectAttempts++
+      if (reconnectAttempts < 25) {
+        console.warn("Live reload: attempting to reconnect in 3 seconds...")
+        setTimeout(() => startLiveReload(), 3000)
+      } else {
+        console.error("Too many live reload connections failed. Refresh the page to try again.")
+      }
+    }
+  })
+}
+
+startLiveReload()
+</script>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->
+
+  </head>
+  <body class="book ">
+    <header class="site-header">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Lee Atchison</a>
+    <button class="nav-toggle" type="button" aria-expanded="false"
+            aria-controls="site-nav-menu" aria-label="Open menu">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="site-nav" id="site-nav-menu" aria-label="Main navigation">
+      <ul>
+          <li>
+            <a href="/"
+               class=""
+               >Home</a>
+          </li>
+          <li>
+            <a href="/ainative"
+               class="nav-featured"
+               >AI-Native</a>
+          </li>
+          <li>
+            <a href="/books"
+               class="is-active"
+               aria-current="page">Books</a>
+          </li>
+          <li>
+            <a href="/courses"
+               class=""
+               >Courses</a>
+          </li>
+          <li>
+            <a href="/academy"
+               class=""
+               >Academy</a>
+          </li>
+          <li>
+            <a href="/about"
+               class=""
+               >About</a>
+          </li>
+          <li>
+            <a href="/contact"
+               class=""
+               >Contact</a>
+          </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main>
+      <section class="book-hero">
+  <div class="book-hero-inner">
+    <div class="book-hero-text">
+      <span class="hero-eyebrow">Published Work</span>
+      <h1>Architecting for Scale</h1>
+        <p class="book-hero-subtitle">How to Maintain High Availability and Manage Risk in the Cloud</p>
+      <div class="btn-group book-hero-btns">
+          <a href="https://architectingforscale.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Learn More &rarr;</a>
+          <a href="https://www.amazon.com/dp/B0859P45K9/?tag=leeatchison-20" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+      </div>
+    </div>
+      <div class="book-hero-cover">
+        <img src="/images/books/architecting-for-scale.jpg" alt="Architecting for Scale cover" />
+      </div>
+  </div>
+</section>
+
+<section class="book-body">
+  <div class="book-body-inner">
+    <h2 id="about-the-book">About the Book</h2>
+
+<p>Every day, companies struggle to scale critical applications. As traffic volume and data demands increase, these applications become more complicated and brittle, exposing risks and compromising availability. With the popularity of software as a service, scaling has never been more important.</p>
+
+<p>Now updated with an expanded focus on modern architecture paradigms such as microservices and cloud computing, this practical guide provides techniques for building systems that can handle huge quantities of traffic, data, and demand — without affecting the quality your customers expect.</p>
+
+<p>Architects, managers, and directors in engineering and operations organizations will learn how to build applications at scale that run more smoothly and reliably to meet the needs of customers.</p>
+
+<h2 id="what-youll-learn">What You’ll Learn</h2>
+
+<ul>
+  <li>How scaling affects the availability of your services, why that matters, and how to improve it</li>
+  <li>A modern, service-based application architecture that ensures high availability and reduces the effects of service failures</li>
+  <li>The Single Team Owned Service Architecture paradigm (STOSA) — a model for scaling your development organization in tandem with your application</li>
+  <li>How to understand, measure, and mitigate risk in your systems</li>
+  <li>How to use the cloud to build highly scalable applications</li>
+</ul>
+
+<h2 id="recognition">Recognition</h2>
+
+<p><em>Architecting for Scale</em> is featured in <strong>50 Books from Thinkers360 Thought Leaders You Should Read in 2021</strong> and ranked <strong>#3 in Network Computing’s 10 Tech Books For Summer Reading</strong>.</p>
+
+<h2 id="free-resource">Free Resource</h2>
+
+<p>Download a free <a href="/Risk%20Matrix%20Template.xlsx">Risk Matrix Template</a> as discussed in “The Risk Matrix” chapter of the book.</p>
+
+  </div>
+</section>
+
+<section class="book-testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">What Readers Say</span>
+      <h2 class="section-title">Reviews &amp; Endorsements</h2>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;Don&#39;t bet against your business. Build as if being successful at scale is a foregone conclusion. Architecting for Scale tells you in a no-nonsense way how to go about it.&rdquo;</p>
+          <span class="testimonial-author-name">Colin Bodell</span>
+          <span class="testimonial-author-title">VP Engineering, Shopify Plus; previously VP Website Applications Platform, Amazon.com</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;A definitive guide for directors, managers, and architects who want an actionable roadmap on operating at scale.&rdquo;</p>
+          <span class="testimonial-author-name">Ken Gavranovic</span>
+          <span class="testimonial-author-title">Former EVP &amp; GM New Relic, CEO/founder of Interland (now Web.com)</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;Building systems with failure in mind is one of the keys to building highly scaled applications that perform. This book helps you learn this and other techniques to keep your applications performing as your customers — and your company — grow.&rdquo;</p>
+          <span class="testimonial-author-name">Patrick Franklin</span>
+          <span class="testimonial-author-title">EVP &amp; CTO at American Express, previously VP of Engineering, Google</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;This book helps show you how to keep your application performing while it — and your company — scale to meet your customer&#39;s growing needs.&rdquo;</p>
+          <span class="testimonial-author-name">Lew Cirne</span>
+          <span class="testimonial-author-title">Former CEO of New Relic</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;An excellent book to understand real-world paradigms for scaling and managing critical applications.&rdquo;</p>
+          <span class="testimonial-author-name">Ekaterina Novoseltseva</span>
+          <span class="testimonial-author-title">Apiumhub</span>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="more-books-section">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:left">
+      <span class="section-label">More from Lee</span>
+      <h2 class="section-title" style="color:#ffffff">Other Books</h2>
+    </div>
+    <div class="more-books-grid">
+        <a href="/books/business-breakthrough-3/" class="more-book-card">
+          <img src="/images/books/business-breakthrough-3.jpg" alt="Business Breakthrough 3.0" />
+          <span>Business Breakthrough 3.0</span>
+        </a>
+        <a href="/books/overcoming-it-complexity/" class="more-book-card">
+          <img src="/images/books/overcoming-it-complexity.png" alt="Overcoming IT Complexity" />
+          <span>Overcoming IT Complexity</span>
+        </a>
+        <a href="/books/the-software-conductor/" class="more-book-card">
+          <img src="/images/books/the-software-conductor.png" alt="The Software Conductor" />
+          <span>The Software Conductor</span>
+        </a>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+  <p>&copy; 2026 Atchison Technology LLC &nbsp;&bull;&nbsp;
+    <a href="/contact">Contact</a>
+  </p>
+</footer>
+
+  </body>
+</html>

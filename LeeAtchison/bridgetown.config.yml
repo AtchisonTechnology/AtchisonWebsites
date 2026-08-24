@@ -1,0 +1,9 @@
+url: https://leeatchison.com
+
+collections:
+  books:
+    output: true
+    permalink: /books/:slug/
+  courses:
+    output: true
+    permalink: /courses/:slug/

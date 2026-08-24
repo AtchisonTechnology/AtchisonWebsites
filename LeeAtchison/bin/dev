@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Start this site's Bridgetown dev server on its worktree-derived port.
+#
+# The port comes from the repo-root helper (../lib/worktree_env.rb), keyed on
+# the name of the checkout directory: plain on main, spec####/bug#### inside a
+# worktree. See ../Projects/services.md for the full table.
+set -euo pipefail
+
+cd "$(cd "$(dirname "$0")/.." && pwd)"
+SITE="$(basename "$PWD")"
+ROOT="$(dirname "$PWD")"
+
+# foreman injects its own PORT (5000) into the first process, which would
+# override the app's derived default. The derivation must win.
+unset PORT
+
+BRIDGETOWN_PORT="$("$ROOT/bin/site-port" "$SITE")"
+export BRIDGETOWN_PORT
+
+echo "==> $SITE [$("$ROOT/bin/site-port" --worktree)] http://localhost:$BRIDGETOWN_PORT"
+exec bin/bridgetown start "$@"

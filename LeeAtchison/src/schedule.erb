@@ -1,0 +1,26 @@
+---
+layout: default
+page_class: homepage
+title: Schedule a Meeting
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <span class="hero-eyebrow">Book Time with Lee</span>
+    <h1>Schedule a Meeting</h1>
+    <p>Schedule a meeting with Lee to discuss consulting, architecture reviews, or any other engagement.</p>
+  </div>
+</section>
+
+<section class="schedule-body">
+  <div id="booking-page"></div>
+</section>
+
+<script>
+  window.SavvyCal=window.SavvyCal||function(){(SavvyCal.q=SavvyCal.q||[]).push(arguments)};
+</script>
+<script async src="https://embed.savvycal.com/v1/embed.js"></script>
+<script>
+  SavvyCal('init');
+  SavvyCal('inline', { link: 'leeatchison/intro', selector: '#booking-page' });
+</script>
