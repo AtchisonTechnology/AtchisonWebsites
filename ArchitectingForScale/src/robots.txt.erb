@@ -1,0 +1,9 @@
+---
+layout: false
+sitemap_exclude: true
+permalink: /robots.txt
+---
+User-agent: *
+Allow: /
+
+Sitemap: <%= site.config.url.to_s.chomp("/") %>/sitemap.xml

@@ -1,0 +1,12 @@
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.metadata.title }}, {{ site.metadata.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.metadata.myvariable }}.
+
+title: "Architecting for Scale"
+tagline: "How to Maintain High Availability and Manage Risk in the Cloud"
+description: "The practical O'Reilly guide to scaling cloud applications, maintaining high availability, and managing risk. 2nd Edition by Lee Atchison."
+author:
+  name: "Lee Atchison"
+  url: "https://leeatchison.com"
