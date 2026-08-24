@@ -1,0 +1,29 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<% resource_title = strip_html(strip_newlines(title)) %>
+<% page_title = resource_title == "Index" ? "#{metadata.title}: #{metadata.tagline}" : resource_title %>
+<title><%= page_title %></title>
+
+<meta name="description" content="<%= metadata.description %>" />
+<meta property="og:title" content="<%= page_title %>" />
+<meta property="og:description" content="<%= metadata.description %>" />
+<meta property="og:image" content="https://thesoftwareconductor.com/images/cover-1000.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://thesoftwareconductor.com" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="stylesheet" href="<%= asset_path :css %>" />
+<script src="<%= asset_path :js %>" defer></script>
+<%= live_reload_dev_js %>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->

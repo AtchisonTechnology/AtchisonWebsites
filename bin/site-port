@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Prints the derived dev port for a site in the current checkout.
+#
+#   bin/site-port LeeAtchison    # 3000 on main, 3012 in .claude/worktrees/spec0012
+#   bin/site-port --all          # table of every site's port in this checkout
+#   bin/site-port --worktree     # the derived worktree name (or "main")
+#
+# Derivation lives in lib/worktree_env.rb. See Projects/services.md.
+
+require_relative "../lib/worktree_env"
+
+arg = ARGV[0]
+
+case arg
+when nil, "-h", "--help"
+  puts File.read(__FILE__).lines[3..8].map { |l| l.sub(/\A#\s?/, "") }.join
+  exit(arg.nil? ? 1 : 0)
+when "--worktree"
+  puts WorktreeEnv.current.to_s
+when "--all"
+  info = WorktreeEnv.current
+  puts "worktree: #{info} (kind: #{info.kind}, id: #{info.id})"
+  WorktreeEnv.ports.each { |site, port| puts format("  %-24s %d", site, port) }
+else
+  begin
+    puts WorktreeEnv.port_for(arg)
+  rescue KeyError => e
+    warn e.message
+    exit 1
+  end
+end

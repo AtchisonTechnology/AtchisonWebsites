@@ -1,0 +1,14 @@
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.metadata.title }}, {{ site.metadata.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.metadata.myvariable }}.
+
+title: "STOSA"
+tagline: "Single Team Oriented Service Architecture"
+email: "lee@leeatchison.com"
+description: "STOSA (Single Team Oriented Service Architecture) is a guiding principle for large organizations managing service-based applications across multiple development teams. Clear ownership. Scalable teams. Reliable systems."
+author:
+  name: "Lee Atchison"
+  email: "lee@leeatchison.com"
+  url: "https://leeatchison.com"

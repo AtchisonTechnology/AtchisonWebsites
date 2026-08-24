@@ -1,0 +1,261 @@
+---
+layout: default
+title: "STOSA -- Single Team Oriented Service Architecture"
+description: "STOSA is a guiding principle for large organizations managing service-based applications across multiple development teams. Clear ownership. Scalable teams. Reliable systems."
+---
+
+<!-- Hero -->
+<section class="stosa-hero">
+  <div class="stosa-hero-inner">
+    <p class="hero-edition">A Framework for Scalable Organizations</p>
+    <h1>Single Team Oriented Service Architecture</h1>
+    <p class="stosa-hero-desc">A guiding principle for large organizations managing service-based applications across multiple development teams. Clear ownership. Scalable teams. Reliable systems.</p>
+    <div class="hero-buttons">
+      <a href="#what-is-stosa" class="btn btn-primary">Learn the Framework</a>
+      <a href="#about" class="btn btn-white">About the Author</a>
+    </div>
+  </div>
+</section>
+
+<!-- Key facts strip -->
+<div class="recognition-strip">
+  <div class="recognition-strip-inner">
+    <div class="recognition-item">
+      <strong>Created by Lee Atchison</strong>
+      Software Architect &amp; Author
+    </div>
+    <div class="recognition-divider"></div>
+    <div class="recognition-item">
+      <strong>Covered in Depth</strong>
+      Architecting for Scale (O'Reilly)
+    </div>
+    <div class="recognition-divider"></div>
+    <div class="recognition-item">
+      <strong>For Growing Teams</strong>
+      3-8 engineers per service team
+    </div>
+  </div>
+</div>
+
+<!-- What is STOSA -->
+<section id="what-is-stosa" class="section alt">
+  <div class="section-inner">
+    <h2>What is STOSA?</h2>
+    <p>STOSA is an important guiding principle for large organizations that have many development teams that own and manage services comprising one or more applications.</p>
+    <p>A STOSA-compliant organization requires the following:</p>
+    <ul class="benefits-list">
+      <li>Service-based or microservice architecture with multiple development teams managing the application</li>
+      <li>Each and every service in your application must be assigned to a development team who owns that service</li>
+      <li>No service is shared between teams; a team may own multiple services</li>
+      <li>Owning teams are responsible for all aspects of their service's management</li>
+      <li>Strong service boundaries with fully documented APIs</li>
+      <li>The service owns its own data; data is accessed by others only through the service's API</li>
+      <li>Services maintain and monitor internal SLAs</li>
+    </ul>
+    <p>Typically, each team should be of a reasonable size (between three and eight engineers).</p>
+  </div>
+</section>
+
+<!-- Diagrams -->
+<section class="section">
+  <div class="section-inner">
+    <h2>STOSA vs. Non-STOSA</h2>
+    <p>The core distinction of STOSA is clear, unambiguous service ownership. Every service belongs to exactly one team.</p>
+    <div class="diagram-grid">
+
+      <div class="diagram-container">
+        <h3>STOSA Organization</h3>
+        <div class="stosa-diagram">
+          <div class="team-group team-alpha">
+            <div class="team-label">Team Alpha</div>
+            <div class="team-services">
+              <div class="service-box">A</div>
+              <div class="service-box">B</div>
+              <div class="service-box">C</div>
+            </div>
+          </div>
+          <div class="team-group team-beta">
+            <div class="team-label">Team Beta</div>
+            <div class="team-services">
+              <div class="service-box">D</div>
+              <div class="service-box">E</div>
+            </div>
+          </div>
+          <div class="team-group team-gamma">
+            <div class="team-label">Team Gamma</div>
+            <div class="team-services">
+              <div class="service-box">F</div>
+              <div class="service-box">G</div>
+              <div class="service-box">H</div>
+            </div>
+          </div>
+          <div class="team-group team-delta">
+            <div class="team-label">Team Delta</div>
+            <div class="team-services">
+              <div class="service-box">I</div>
+              <div class="service-box">J</div>
+              <div class="service-box">K</div>
+              <div class="service-box">L</div>
+            </div>
+          </div>
+        </div>
+        <p class="diagram-caption">Each service belongs to exactly one team. Ownership is clear and unambiguous.</p>
+      </div>
+
+      <div class="diagram-container">
+        <h3>Non-STOSA Organization</h3>
+        <div class="stosa-diagram">
+          <div class="team-group team-alpha">
+            <div class="team-label">Team Alpha</div>
+            <div class="team-services">
+              <div class="service-box">A</div>
+              <div class="service-box">B</div>
+              <div class="service-box svc-conflict">C</div>
+              <div class="service-box svc-conflict">D</div>
+            </div>
+          </div>
+          <div class="team-group team-beta">
+            <div class="team-label">Team Beta</div>
+            <div class="team-services">
+              <div class="service-box svc-conflict">C</div>
+              <div class="service-box svc-conflict">D</div>
+              <div class="service-box">E</div>
+            </div>
+          </div>
+          <div class="team-group team-gamma">
+            <div class="team-label">Team Gamma</div>
+            <div class="team-services">
+              <div class="service-box">F</div>
+              <div class="service-box">G</div>
+              <div class="service-box">H</div>
+            </div>
+          </div>
+          <div class="orphan-group">
+            <div class="service-box svc-orphan">I</div>
+            <div class="orphan-label">No owner</div>
+          </div>
+        </div>
+        <p class="diagram-caption">Shared ownership (C, D) and unowned services (I) create accountability gaps and confusion.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Advantages -->
+<section id="advantages" class="section alt">
+  <div class="section-inner">
+    <h2>Advantages of a STOSA Organization</h2>
+    <p>A STOSA-based application can grow larger and be managed by a larger development team than a non-STOSA-based application. With STOSA, your organization scales while maintaining clear accountability.</p>
+    <ul class="benefits-list">
+      <li>Clear ownership enables faster decision-making and fewer coordination bottlenecks</li>
+      <li>Teams can grow and scale independently without disrupting other teams</li>
+      <li>Incident response is faster and more focused when responsibility is unambiguous</li>
+      <li>Services can evolve at their own pace within clear API contracts</li>
+      <li>Organizational scaling becomes manageable because team boundaries are well-defined</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Service Ownership -->
+<section id="ownership" class="section">
+  <div class="section-inner">
+    <h2>What Does it Mean to Own a Service?</h2>
+    <p>In a STOSA organization, the team that owns a service is ultimately 100% responsible for all aspects of that service.</p>
+    <div class="ownership-grid">
+      <div class="ownership-card">
+        <h3>API Design</h3>
+        <p>The design, implementation, testing, and version management of all APIs, internal and external, that the service exposes.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Service Development</h3>
+        <p>Design, implementation, and testing of the service's business logic and behavior.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Data</h3>
+        <p>Management of owned data, schema, access patterns, and lifecycle. Data is part of the service.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Deployments</h3>
+        <p>Determining update necessity and deployment processes including verification and rollback procedures.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Deployment Windows</h3>
+        <p>Safety determination and enforcement of deployment blackout windows to protect service stability.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Production Infrastructure</h3>
+        <p>Load balancer settings and system tuning for the service's production environment.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Environments</h3>
+        <p>Managing production and all non-production environments for the service.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Service SLAs</h3>
+        <p>Negotiating, setting, and monitoring SLAs, along with the responsibility of keeping the service operating within those SLAs.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Monitoring</h3>
+        <p>Setup, management, and regular review of service monitoring systems and alerts.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Incident Response</h3>
+        <p>Ensuring pager notifications are generated when the system functions out of specification, and responding to those incidents.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Reporting</h3>
+        <p>Internal and management reporting on service health, performance, and reliability.</p>
+      </div>
+      <div class="ownership-card">
+        <h3>Shared Infrastructure</h3>
+        <p>Even when aspects are handled by core teams, the service owner is ultimately responsible for ensuring activities are handled to the required level.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Organization -->
+<section id="organization" class="section alt">
+  <div class="section-inner">
+    <h2>STOSA Organization</h2>
+    <p>Service-owning teams operate as peers, each fully accountable for their services. Core and support teams provide shared infrastructure, but the service-owning team retains ultimate accountability.</p>
+    <p>The service failure is the responsibility of the service-owning team, even when external teams contribute to issues. Teams receive requirements but control implementation details within system-wide compliance constraints. With strong ownership of results also comes strong ownership of decision-making affecting your service.</p>
+
+    <p class="subsection-heading">Often-delegated functions</p>
+    <p>Certain infrastructure functions are often managed by central teams. Even in these cases, the service-owning team remains ultimately responsible for their service meeting its obligations.</p>
+    <div class="delegated-grid">
+      <div class="delegated-card">
+        <h4>Servers / Hardware</h4>
+        <p>Operations teams or cloud providers manage underlying infrastructure, while service teams remain accountable for their service's performance on that infrastructure.</p>
+      </div>
+      <div class="delegated-card">
+        <h4>Tooling</h4>
+        <p>Centrally owned deployment, compilation, monitoring, and incident response tools are shared across teams, though teams may choose alternatives when needed.</p>
+      </div>
+      <div class="delegated-card">
+        <h4>Databases</h4>
+        <p>Central teams manage hardware and database applications. The service-owning team manages schema, access patterns, and data usage.</p>
+      </div>
+    </div>
+    <p>This model provides strong motivation for centralized teams to offer high-quality services, since service teams retain the ability to seek alternatives.</p>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="about-inner">
+    <div class="about-photo">
+      <img src="<%= relative_url '/images/lee-atchison.jpeg' %>" alt="Lee Atchison" />
+    </div>
+    <div class="about-bio">
+      <h2>About Lee Atchison</h2>
+      <p>Lee Atchison is a software architect, author, and recognized voice on cloud computing and engineering leadership. He is the creator of Single Team Oriented Service Architecture (STOSA) and author of <em>Architecting for Scale</em> (O'Reilly), which covers STOSA and high-availability system design in depth. With more than three decades in the industry, including seven years at Amazon and AWS and eight at New Relic, Lee currently writes and consults through his practice, Atchison Technology. He lives in Seattle, Washington.</p>
+      <div class="about-links">
+        <a href="https://leeatchison.com" target="_blank" rel="noopener">leeatchison.com</a>
+        <a href="https://architectingforscale.com" target="_blank" rel="noopener">Architecting for Scale (book)</a>
+        <a href="https://softwarearchitectureinsights.com" target="_blank" rel="noopener">Software Architecture Insights newsletter</a>
+      </div>
+    </div>
+  </div>
+</section>

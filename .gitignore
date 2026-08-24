@@ -1,1 +1,5 @@
 .idea
+.DS_Store
+
+# Spec/Bug worktrees live here (see Projects/services.md, CLAUDE.md)
+.claude/worktrees/
