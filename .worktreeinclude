@@ -1,0 +1,14 @@
+# Gitignored files a fresh worktree needs copied in from the main checkout.
+#
+# Treat this as the authoritative LIST of what to copy when creating a
+# worktree -- no automation acts on it; the copy is a manual creation step.
+#
+# These are Bridgetown static sites with no encrypted credentials, so there is
+# nothing secret to copy (and nothing like a Rails production.key that must
+# never be copied). The list is intentionally empty.
+#
+# A fresh worktree does still need its dependencies installed per site:
+#
+#   for s in LeeAtchison TheSoftwareConductor stosa BusinessBreakthrough30; do
+#     (cd "$s" && bundle install && npm install)
+#   done

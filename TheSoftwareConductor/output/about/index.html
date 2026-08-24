@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About</title>
+
+<meta name="description" content="AI is rewriting what it means to be a software developer. The work that survives is architecture. The Software Conductor shows senior developers how to make the leap." />
+<meta property="og:title" content="About" />
+<meta property="og:description" content="AI is rewriting what it means to be a software developer. The work that survives is architecture. The Software Conductor shows senior developers how to make the leap." />
+<meta property="og:image" content="https://thesoftwareconductor.com/images/cover-1000.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://thesoftwareconductor.com" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.TCTWXVTL.css" />
+<script src="/_bridgetown/static/index.NS2NXCKO.js" defer></script>
+<script type="module">let lastmod = 0
+let reconnectAttempts = 0
+function startLiveReload() {
+  const connection = new EventSource("/_bridgetown/live_reload")
+
+  connection.addEventListener("message", event => {
+    reconnectAttempts = 0
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  })
+
+  connection.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+
+  connection.addEventListener("error", () => {
+    if (connection.readyState === 2) {
+      // reconnect with new object
+      connection.close()
+      reconnectAttempts++
+      if (reconnectAttempts < 25) {
+        console.warn("Live reload: attempting to reconnect in 3 seconds...")
+        setTimeout(() => startLiveReload(), 3000)
+      } else {
+        console.error("Too many live reload connections failed. Refresh the page to try again.")
+      }
+    }
+  })
+}
+
+startLiveReload()
+</script>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->
+
+  </head>
+  <body>
+    <nav class="site-nav">
+  <a href="/" class="nav-brand">The Software Conductor</a>
+  <ul>
+    <li><a href="/#the-book">The Book</a></li>
+    <li><a href="https://softwarearchitectureinsights.com" target="_blank" rel="noopener">Newsletter</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#buy">Buy</a></li>
+  </ul>
+</nav>
+
+
+    <main>
+      <h1>About</h1>
+
+<p>This is the basic Bridgetown site template. You can find out more info about customizing your Bridgetown site, as well as basic Bridgetown usage documentation at <a href="https://bridgetownrb.com/">bridgetownrb.com</a></p>
+
+<p>You can find the source code for Bridgetown at GitHub:
+<a href="https://github.com/bridgetownrb">bridgetownrb</a> /
+<a href="https://github.com/bridgetownrb/bridgetown">bridgetown</a></p>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p>&copy; 2026 Lee Atchison / Atchison Academy &bull; <a href="https://leeatchison.com" target="_blank" rel="noopener">leeatchison.com</a></p>
+</footer>
+
+  </body>
+</html>

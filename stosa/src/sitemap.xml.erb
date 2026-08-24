@@ -1,0 +1,15 @@
+---
+sitemap_exclude: true
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <% site.resources.reject { |r| r.data.sitemap_exclude == true || r.relative_url.to_s.empty? }.sort_by(&:relative_url).each do |resource| %>
+  <url>
+    <loc><%= site.config.url %><%= resource.relative_url %></loc>
+    <% if resource.data.date %>
+    <lastmod><%= resource.data.date.strftime("%Y-%m-%d") %></lastmod>
+    <% end %>
+  </url>
+  <% end %>
+</urlset>

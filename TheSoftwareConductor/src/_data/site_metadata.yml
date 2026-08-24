@@ -1,0 +1,12 @@
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.metadata.title }}, {{ site.metadata.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.metadata.myvariable }}.
+
+title: "The Software Conductor"
+tagline: "How to Lead Software Architecture in the Age of AI"
+description: "AI is rewriting what it means to be a software developer. The work that survives is architecture. The Software Conductor shows senior developers how to make the leap."
+author:
+  name: "Lee Atchison"
+  url: "https://leeatchison.com"
