@@ -30,6 +30,7 @@ module WorktreeEnv
     "TheSoftwareConductor" => 1,
     "stosa" => 2,
     "BusinessBreakthrough30" => 3,
+    "ArchitectingForScale" => 4,
   }.freeze
 
   MAX_SERVICES = 10
