@@ -1,0 +1,22 @@
+---
+layout: false
+sitemap_exclude: true
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<%- base_url = site.config.url.to_s.chomp("/") -%>
+<%- site.collections.each do |_label, collection| -%>
+<%- collection.resources.sort_by { |r| r.relative_url.to_s }.each do |resource| -%>
+<%- next if resource.data.sitemap_exclude == true -%>
+<%- next unless resource.relative_url.to_s.start_with?("/") -%>
+<%- next if resource.relative_url.to_s == "/sitemap.xml" -%>
+  <url>
+    <loc><%= base_url %><%= resource.relative_url %></loc>
+<%- if resource.data.date -%>
+    <lastmod><%= resource.data.date.strftime("%Y-%m-%d") %></lastmod>
+<%- end -%>
+  </url>
+<%- end -%>
+<%- end -%>
+</urlset>
