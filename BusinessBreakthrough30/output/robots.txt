@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://businessbreakthrough30.com/sitemap.xml
