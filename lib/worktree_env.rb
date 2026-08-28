@@ -31,6 +31,7 @@ module WorktreeEnv
     "stosa" => 2,
     "BusinessBreakthrough30" => 3,
     "ArchitectingForScale" => 4,
+    "AtchisonAcademy" => 5,
   }.freeze
 
   MAX_SERVICES = 10

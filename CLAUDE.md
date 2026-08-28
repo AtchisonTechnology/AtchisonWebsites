@@ -4,7 +4,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 ## What this repo is
 
-Five independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
+Six independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
 Spec/Bug process:
 
@@ -15,6 +15,7 @@ Spec/Bug process:
 | `stosa` | STOSA framework | stosa.org |
 | `BusinessBreakthrough30` | Business Breakthrough 30 | businessbreakthrough30.com |
 | `ArchitectingForScale` | Architecting for Scale (book site) | architectingforscale.com |
+| `AtchisonAcademy` | Atchison Academy | atchisonacademy.com |
 
 Each site has its own `CLAUDE.md` with its architecture, layouts, CSS tokens,
 and content conventions. **Read the site's own CLAUDE.md before changing
@@ -27,7 +28,7 @@ esbuild runs inside `bridgetown start`.
 
 ```bash
 make            # list targets
-make dev        # foreman: run all five sites at once, on derived ports
+make dev        # foreman: run all six sites at once, on derived ports
 make ports      # show the dev ports this checkout will use
 make test       # unit-test the port derivation
 make clean      # remove stray .DS_Store files
@@ -45,7 +46,7 @@ Bridgetown). Per-site build/deploy commands live in each site's own CLAUDE.md.
 This project follows the `spec-bug-process` skill (Spec/Bug tracking,
 worktrees, resource isolation). Project parameters:
 
-- **Sites/services:** five, indices 0–4 — see `Projects/services.md`. Indices
+- **Sites/services:** six, indices 0–5 — see `Projects/services.md`. Indices
   are permanent; a new site takes the next unused index.
 - **Worktrees:** `.claude/worktrees/`, named exactly `spec####` / `bug####`
   (gitignored).
@@ -82,6 +83,7 @@ Following the skill's scheme exactly, with `N` = the worktree's numeric ID:
 | 2 | `stosa` | 10000 | 10000 + N | 11000 + N |
 | 3 | `BusinessBreakthrough30` | 12000 | 12000 + N | 13000 + N |
 | 4 | `ArchitectingForScale` | 14000 | 14000 + N | 15000 + N |
+| 5 | `AtchisonAcademy` | 16000 | 16000 + N | 17000 + N |
 
 IDs start at `0001`, so main (N = 0) never collides. IDs above `999` overflow
 into the next block — which shows up immediately as a port-bind failure, not

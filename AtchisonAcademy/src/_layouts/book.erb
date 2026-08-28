@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<section class="book-hero">
+  <div class="book-hero-inner">
+    <div class="book-hero-text">
+      <span class="hero-eyebrow">Published Work</span>
+      <h1><%= data.title %></h1>
+      <% if data.subtitle %>
+        <p class="book-hero-subtitle"><%= data.subtitle %></p>
+      <% end %>
+      <% if data.tagline %>
+        <p class="book-hero-tagline"><%= data.tagline %></p>
+      <% end %>
+      <div class="btn-group book-hero-btns">
+        <% if data.book_url %>
+          <a href="<%= data.book_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Learn More &rarr;</a>
+        <% end %>
+        <% if data.amazon_url %>
+          <a href="<%= data.amazon_url %>" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        <% end %>
+      </div>
+    </div>
+    <% if data.cover_image %>
+      <div class="book-hero-cover">
+        <img src="<%= relative_url data.cover_image %>" alt="<%= data.title %> cover" />
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="book-body">
+  <div class="book-body-inner">
+    <%= yield %>
+  </div>
+</section>
+
+<% if data.testimonials && !data.testimonials.empty? %>
+<section class="book-testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">What Readers Say</span>
+      <h2 class="section-title">Reviews &amp; Endorsements</h2>
+    </div>
+    <div class="testimonials-grid">
+      <% data.testimonials.each do |t| %>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">&ldquo;<%= t.quote %>&rdquo;</p>
+          <span class="testimonial-author-name"><%= t.name %></span>
+          <span class="testimonial-author-title"><%= t.title %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<section class="more-books-section">
+  <div class="section-inner">
+    <div class="section-header" style="text-align:left">
+      <span class="section-label">More from Lee</span>
+      <h2 class="section-title" style="color:#ffffff">Other Books</h2>
+    </div>
+    <div class="more-books-grid">
+      <% site.collections["books"].resources
+           .select { |b| b.data.cover_image && b.relative_url != resource.relative_url }
+           .first(3).each do |book| %>
+        <a href="<%= relative_url book.relative_url %>" class="more-book-card">
+          <img src="<%= relative_url book.data.cover_image %>" alt="<%= book.data.title %>" />
+          <span><%= book.data.title %></span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>

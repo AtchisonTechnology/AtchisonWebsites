@@ -1,0 +1,49 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<% resource_title = strip_html(strip_newlines(title)) %>
+<% page_title = resource_title != "Index" ? "#{resource_title} | #{metadata.title}" : "#{metadata.title}: #{metadata.tagline}" %>
+<title><%= page_title %></title>
+
+<%
+  # Per-page description, falling back to the site-level one.
+  page_description = strip_newlines(defined?(description) && description ? description : metadata.description)
+
+  # Canonical and og:url are absolute and per-page. Only pretty URLs (which end
+  # in a slash) are real pages; 404.html and 500.html must not claim to be one,
+  # so they get neither tag.
+  page_url = if defined?(resource) && resource && resource.relative_url.to_s.end_with?("/")
+    absolute_url(resource.relative_url)
+  end
+
+  og_image_url = absolute_url("/images/og-card.png")
+  og_type = defined?(resource) && resource && resource.collection&.label == "posts" ? "article" : "website"
+%>
+
+<meta name="description" content="<%= page_description %>" />
+<% if page_url %>
+<link rel="canonical" href="<%= page_url %>" />
+<% end %>
+
+<meta property="og:title" content="<%= page_title %>" />
+<meta property="og:description" content="<%= page_description %>" />
+<meta property="og:type" content="<%= og_type %>" />
+<% if page_url %>
+<meta property="og:url" content="<%= page_url %>" />
+<% end %>
+<meta property="og:image" content="<%= og_image_url %>" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="<%= page_title %>" />
+<meta name="twitter:description" content="<%= page_description %>" />
+<meta name="twitter:image" content="<%= og_image_url %>" />
+
+<link rel="icon" type="image/png" href="<%= relative_url '/images/favicon.png' %>" />
+
+<link rel="stylesheet" href="<%= asset_path :css %>" />
+<script src="<%= asset_path :js %>" defer></script>
+<%= live_reload_dev_js %>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->
