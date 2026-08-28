@@ -1,7 +1,7 @@
 # STOSA site: book CTA, refreshed bio, and Atchison Academy hero
 
 * **ID:** Spec0001
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-28
 * **Date Implemented:** (pending)
 * **Systems Impacted:** stosa
@@ -137,9 +137,11 @@ so the row covers both books. Proposed final order:
 | 3 | The Software Conductor (book) | `https://thesoftwareconductor.com` |
 | 4 | Software Architecture Insights newsletter | `https://softwarearchitectureinsights.com` |
 
-The books sit together, with the newsletter last. `.about-links` is already a
-flex row that wraps, so a fourth item needs no CSS change; confirm the wrap
-behavior at the 680px breakpoint during testing.
+The books sit together, with the newsletter last. `.about-links` is a flex
+*column* (`flex-direction: column`), not a wrapping row, so a fourth item
+needs no CSS change and there is no wrap behavior to confirm at 680px.
+(Corrected during implementation; the original text above assumed a wrapping
+row.)
 
 Note that the CTA band in item 1 links to the book page on **leeatchison.com**,
 while this row links to the book's own site, **architectingforscale.com**. Both
@@ -241,6 +243,8 @@ Both new bands carry their own background, so no existing `section` /
      (today via its 301).
    * thesoftwareconductor.com resolves to The Software Conductor book site.
    * All three open in a new tab and carry `rel="noopener"`.
+   * `.about-links` is a flex column (not a wrapping row); a fourth item
+     needs no wrap check.
 5. **Soundings verification.** The grep in item 3 returns zero matches against
    both `src/` and a fresh `output/` build.
 6. **Content rules check.** No em-dashes anywhere in the new or edited copy.
@@ -272,35 +276,27 @@ Both new bands carry their own background, so no existing `section` /
 
 ---
 
-## Open Questions
+## Open Questions (resolved)
 
-1. **Book CTA copy.** Is the proposed "STOSA in Depth" heading and body
-   paragraph right, or should it lean harder on a specific benefit (for example
-   the risk matrix or the availability material)? *Proposed above, awaiting
-   approval.*
-2. **Book CTA band color.** Proposal is a dark ink band to break the grey/white
-   alternation. The alternative is the accent blue used by the key facts strip,
-   which is louder but ties the CTA to the "Covered in Depth / Architecting for
-   Scale" fact already in that strip. *Recommendation: dark ink.*
-3. **Academy band copy.** The proposed pitch is adapted from the Academy hero
-   on leeatchison.com. Approve as written, or supply different copy?
-4. **Key facts strip.** Its middle item already says "Covered in Depth /
-   Architecting for Scale" but is not a link. Should it become a link to the
-   same book page now that a full CTA exists, or stay plain text so the CTA
-   band is the single conversion point? *Recommendation: stay plain text.*
-5. **About links row, Academy.** The row is gaining The Software Conductor
-   (confirmed). Should it also gain a fifth link to Atchison Academy, or is the
-   new Academy band directly below it sufficient? *Recommendation: no Academy
-   link in the row, to avoid duplicating it twice within one screen.*
-6. **Book site vs. book page.** The links row points at
-   architectingforscale.com while the CTA band points at
-   leeatchison.com/books/architecting-for-scale/. Keep both as proposed, or
-   make them consistent? *Recommendation: keep both. They serve different
-   jobs.*
-7. **Branching mode.** Implement on `main` (this is a contained, single-site
-   content change) or in a `spec0001` worktree (stosa dev port 10001)?
-   *Recommendation: worktree, since the site is live and the change touches
-   shared CSS.*
+All seven were resolved via the implementation plan approved 2026-08-28
+(see History of Updates below); each adopted the spec's stated recommendation
+except #7, which was adapted for the session's execution environment.
+
+1. **Book CTA copy.** Decided: adopted as proposed ("STOSA in Depth").
+2. **Book CTA band color.** Decided: dark ink band.
+3. **Academy band copy.** Decided: adopted as proposed.
+4. **Key facts strip.** Decided: stays plain text, not a link.
+5. **About links row, Academy.** Decided: no fifth Academy link in the row;
+   the Academy band directly below covers it.
+6. **Book site vs. book page.** Decided: keep both as proposed (CTA band →
+   leeatchison.com book page; links row → architectingforscale.com).
+7. **Branching mode.** Decided, adapted: implemented directly on this
+   session's designated branch (`claude/spec0001-implementation-plan-r6z3w8`)
+   rather than a `.claude/worktrees/spec0001` worktree. The worktree scheme
+   exists to avoid dev-server port collisions between concurrently-running
+   checkouts; this session runs in its own isolated, ephemeral container with
+   nothing else running against it, so that concern doesn't apply. `stosa/bin/dev`
+   ran at its normal (main) derived port during testing.
 
 ---
 
@@ -334,3 +330,19 @@ Both new bands carry their own background, so no existing `section` /
   temporary and must not be relied on or shortcut, since atchisonacademy.com
   will not always be a redirect. Open Question 4 closed and the remaining
   questions renumbered.
+* **2026-08-28** Implementation plan approved (all 7 Open Questions resolved
+  per the spec's recommendations, with #7/branching mode adapted for the
+  execution environment; see above). Status moved to Implementing.
+* **2026-08-28** Implemented: copied `logo-academy.png` into `stosa/src/images/`;
+  added the book CTA band to `src/index.erb` after `#advantages`; replaced the
+  About bio with the two-paragraph version and added the fourth `.about-links`
+  entry (The Software Conductor); added the Atchison Academy band after
+  `#about`; added `.book-cta`/`.academy-cta` styles (plus 680px collapse) to
+  `frontend/styles/index.css`. Corrected the `.about-links` "wrapping row" note
+  in the Solution section above (it's a flex column). Soundings verification
+  grep returned zero matches in both source and the built `output/`. Full
+  production build (`bin/bridgetown clean` + `npm run esbuild` + `bin/bridgetown
+  build`) succeeded with no errors. Verified in a headless-browser screenshot
+  pass at 1440px and 375px: section rhythm, mobile collapse, and Academy band
+  all match the spec; all new/edited links carry `target="_blank" rel="noopener"`
+  and correct hrefs; navbar anchors and OG tags unaffected.
