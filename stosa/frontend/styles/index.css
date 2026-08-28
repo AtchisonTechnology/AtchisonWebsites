@@ -815,6 +815,75 @@ main {
   line-height: 1.55;
 }
 
+/* ---- Book CTA ---- */
+
+.book-cta {
+  background: var(--color-ink);
+  padding: var(--section-padding);
+}
+
+.book-cta-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.book-cta-cover img {
+  max-width: 220px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.book-cta-copy h2 {
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.book-cta-copy p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.book-cta-copy .hero-buttons {
+  margin-top: 1.5rem;
+}
+
+/* ---- Atchison Academy CTA ---- */
+
+.academy-cta {
+  background: var(--color-bg-alt);
+  padding: var(--section-padding);
+  text-align: center;
+}
+
+.academy-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.academy-cta-logo {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+.academy-cta h2 {
+  color: var(--color-ink);
+  margin: 0 0 1rem;
+}
+
+.academy-cta p {
+  color: var(--color-muted);
+  margin: 0 0 2rem;
+  line-height: 1.7;
+}
+
 /* ---- Responsive additions for STOSA ---- */
 
 @media (max-width: 680px) {
@@ -832,5 +901,23 @@ main {
 
   .delegated-grid {
     grid-template-columns: 1fr;
+  }
+
+  .book-cta-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .book-cta-cover {
+    order: -1;
+  }
+
+  .book-cta-copy .hero-buttons {
+    justify-content: center;
+  }
+
+  .book-cta-copy .btn {
+    flex: 1 1 auto;
+    text-align: center;
   }
 }
