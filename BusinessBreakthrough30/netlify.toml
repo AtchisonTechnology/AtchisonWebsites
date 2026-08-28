@@ -18,6 +18,24 @@
   NODE_ENV = "development"
   BRIDGETOWN_ENV = "production"
 
+# Deploy Previews build exactly like production, so that the preview is
+# representative of what ships. These settings are identical to the [build]
+# ones above, which previews already inherit; they are stated explicitly as
+# the place to look when asking how previews differ here.
+#
+# The site URL itself is made preview aware in config/initializers.rb, not
+# here — Bridgetown does not read the site URL from the environment, so
+# setting URL or DEPLOY_PRIME_URL in this file would be inert. Note also that
+# [[headers]] and [[redirects]] are global in Netlify and cannot be scoped to
+# a deploy context; only command, publish, and environment apply inside a
+# context block. See Spec0004.
+[context.deploy-preview]
+  command = "bin/bridgetown deploy"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
 [build.processing.html]
   pretty_urls = true
 

@@ -1,5 +1,3 @@
-url: https://leeatchison.com
-
 collections:
   books:
     output: true
