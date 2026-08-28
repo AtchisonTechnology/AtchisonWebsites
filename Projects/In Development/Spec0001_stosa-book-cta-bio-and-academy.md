@@ -1,7 +1,7 @@
 # STOSA site: book CTA, refreshed bio, and Atchison Academy hero
 
 * **ID:** Spec0001
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-28
 * **Date Implemented:** (pending)
 * **Systems Impacted:** stosa
@@ -346,3 +346,5 @@ except #7, which was adapted for the session's execution environment.
   pass at 1440px and 375px: section rhythm, mobile collapse, and Academy band
   all match the spec; all new/edited links carry `target="_blank" rel="noopener"`
   and correct hrefs; navbar anchors and OG tags unaffected.
+* **2026-08-28** [PR #1](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/1)
+  opened for this branch. Status moved to Verifying.
