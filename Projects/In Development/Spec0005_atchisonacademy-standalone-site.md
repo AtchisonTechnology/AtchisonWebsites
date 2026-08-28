@@ -8,6 +8,7 @@
   shared infrastructure (`lib/worktree_env.rb`, `test/worktree_env_test.rb`,
   `Procfile`, `Makefile` docs, `CLAUDE.md`, `.worktreeinclude`,
   `Projects/services.md`). **No changes to `LeeAtchison`.**
+* **Pull Request:** [PR #6](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/6)
 
 ---
 
