@@ -5,6 +5,7 @@
 * **Date Created:** 2026-08-28
 * **Date Implemented:** 2026-08-28 (code complete; live/social verification pending deploy)
 * **Systems Impacted:** LeeAtchison, TheSoftwareConductor, stosa, BusinessBreakthrough30, ArchitectingForScale
+* **Pull Request:** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
 
 ---
 
@@ -496,3 +497,4 @@ and is out of scope here. It is worth its own Bug.
   `sitemap.xml.erb` has no `permalink`, so it builds to `/sitemap.xml/index.html`
   and the `Sitemap:` line in that site's `robots.txt` does not resolve. Predates
   this spec; worth its own Bug.
+* **2026-08-28** Pushed to `claude/spec0002-spec0003-md4oq4` and opened as [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2), together with Spec0002 (one branch, one review).

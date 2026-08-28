@@ -5,6 +5,7 @@
 * **Date Created:** 2026-08-28
 * **Date Implemented:** 2026-08-28 (code complete; live verification pending deploy)
 * **Systems Impacted:** LeeAtchison
+* **Pull Request:** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
 
 ---
 
@@ -288,3 +289,4 @@ which is the argument for making the change now rather than at cutover.
   Question 2 stays open for the same reason, with the additional finding that a
   domain-scoped `[[headers]]` rule is not expressible in `netlify.toml` at all,
   since header rules match paths rather than hosts.
+* **2026-08-28** Pushed to `claude/spec0002-spec0003-md4oq4` and opened as [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2), together with Spec0003 (one branch, one review).
