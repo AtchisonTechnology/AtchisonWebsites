@@ -1,10 +1,12 @@
 # Configure Netlify Deploy Previews across all five sites
 
 * **ID:** Spec0004
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-28
-* **Date Implemented:** (pending)
+* **Date Implemented:** 2026-08-28
+* **Date Completed:** 2026-08-28
 * **Systems Impacted:** LeeAtchison, TheSoftwareConductor, stosa, BusinessBreakthrough30, ArchitectingForScale
+* **Pull Request:** [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4)
 
 ---
 
@@ -240,7 +242,38 @@ Test step 3: `bin/site-port --all` reports the unchanged main ports
 `<link rel="canonical" href="https://stosa.org/" />`, unchanged. Test step 6:
 `make test` passes (9,995 port combinations checked).
 
-Test steps 4 and 5 require a deploy and remain outstanding.
+### Results, deploy half (2026-08-28)
+
+[PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4) produced real deploy previews, which answers most of Open Question 1
+without a UI visit. Netlify posted twelve check runs, three each for four
+sites:
+
+| Site | Deploy preview on PR #4 |
+|---|---|
+| `BusinessBreakthrough30` | ready — `https://deploy-preview-4--businessbreakthrough30.netlify.app` |
+| `TheSoftwareConductor` | built |
+| `LeeAtchison` | built |
+| `ArchitectingForScale` | built (still in progress when the PR merged) |
+| `stosa` | **never reported** |
+
+So Deploy Previews are enabled and building on four of the five sites. stosa
+is not confirmed either way: the PR merged twenty seconds after it opened, and
+ArchitectingForScale's checks only started after the merge, so stosa may
+simply have been slower rather than disabled.
+
+**Test steps 4 and 5 were not run, and this spec closes without them.** Step 4
+needs a request to the preview host, and the closing session's environment
+denies outbound connections to `*.netlify.app` — `curl` gets a 403 on the
+CONNECT tunnel, confirmed against the proxy's own status endpoint. The two
+commands are recorded in step 4 above and can be run by hand against the
+preview URL, which outlives the merge.
+
+Step 5 is moot as written. It called for retiring Spec0003's outstanding test
+steps 4, 6, and 7 against a working preview, but Spec0003 was closed before
+this spec was implemented, with those steps resting on Lee's own check of the
+deploy. What this spec delivers for them is standing capability rather than a
+retirement: from now on any PR's preview describes itself, so that class of
+check is runnable when it is next wanted.
 
 ---
 
@@ -248,9 +281,10 @@ Test steps 4 and 5 require a deploy and remain outstanding.
 
 1. ~~Resolve the Open Questions below, particularly 1 and 2.~~ Done 2026-08-28
    for 2 and 3; 1 is outstanding and is Lee's to check (see below).
-2. **Outstanding — Lee.** Confirm Deploy Previews are enabled on all five
-   Netlify sites (UI). Nothing in the repo can establish this, and step 9
-   depends on it.
+2. **Partly answered by [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4), not by a UI visit.** Four of the five sites
+   built a deploy preview on that PR; stosa did not report one. Only stosa is
+   still unconfirmed, and it is carried into `_Projects.md` rather than left
+   here.
 3. ~~Confirm the `bridgetown.config.yml` versus `config/initializers.rb` load
    order for `url` on LeeAtchison.~~ Done 2026-08-28 — the initializer wins,
    confirmed in the gem source and empirically.
@@ -260,9 +294,13 @@ Test steps 4 and 5 require a deploy and remain outstanding.
    Done 2026-08-28
 7. ~~Run the local half of the test plan (steps 1 through 3 and 6).~~ Done
    2026-08-28 — see Results above. All passed.
-8. Request permission to commit; create a PR on request.
-9. Run the deploy half of the test plan (steps 4 and 5) against the preview the
-   PR produces, and close out Spec0003's outstanding verification.
+8. ~~Request permission to commit; create a PR on request.~~ Done 2026-08-28 —
+   committed and pushed to `claude/spec0004-implementation-1o1gfh`; Lee opened
+   [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4) from the Claude Code UI and merged it.
+9. **Not done; see "Results, deploy half" above.** Step 4 was unreachable from
+   the closing session's network, and step 5 was overtaken by Spec0003 closing
+   first. Neither blocks this spec's change, which is verified locally and
+   merged.
 
 ---
 
@@ -274,11 +312,11 @@ Test steps 4 and 5 require a deploy and remain outstanding.
    implementation, since everything else here assumes previews build at all.
    *No recommendation; it is a fact to establish, not a decision.*
 
-   **Still open (2026-08-28).** This cannot be answered from the repo and was
-   not answered during implementation. The code changes do not depend on it —
-   they are inert unless a preview builds — but test steps 4 and 5 do. Lee to
-   check each site's Branches and deploy contexts panel before the PR's preview
-   is relied on.
+   **Mostly answered 2026-08-28, by [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4) rather than by the UI.** Four of the
+   five sites built a preview on that PR. stosa did not report one, which is
+   suggestive but not conclusive given the PR merged twenty seconds after
+   opening. Carried into `_Projects.md` at archival so the one unconfirmed
+   site is not lost.
 
 2. **Is the `[context.deploy-preview]` block worth adding, given it changes
    nothing?** It duplicates the inherited `[build]` settings exactly.
@@ -378,3 +416,20 @@ Test steps 4 and 5 require a deploy and remain outstanding.
   differs, and only in canonical, `og:url`, `og:image`, `twitter:image`,
   `sitemap.xml`, and the `Sitemap:` line of `robots.txt`. Test steps 4 and 5
   still require a deploy and remain outstanding, as does Open Question 1.
+* **2026-08-28** Lee opened [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4) from the Claude Code UI against
+  `claude/spec0004-implementation-1o1gfh` and merged it about twenty seconds
+  later, so the eleven code files are on `main`. Netlify built deploy previews
+  for four of the five sites on that PR, which is the first real evidence for
+  Open Question 1 and the first proof that the change reaches a preview build
+  at all.
+* **2026-08-28** **Closed at Lee's instruction.** Closing honestly: test steps
+  4 and 5 were never run. Step 4 needs a request to the preview host and the
+  closing session's network policy denies `*.netlify.app`; step 5 was
+  overtaken by Spec0003 closing before this spec was implemented. Everything
+  the spec set out to change is implemented and verified locally, including
+  the regression that mattered — production output byte-identical to a build
+  of the pre-change tree on all five sites. Status set to Closed and the file
+  moved to `zArchive/`.
+* **2026-08-28** Carried forward at closing into `Projects/_Projects.md`: the
+  unconfirmed stosa deploy preview. Everything else in Open Question 1 was
+  answered by [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4).
