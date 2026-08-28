@@ -1,9 +1,9 @@
 # Change the atchisonacademy.com alias redirect from permanent to temporary
 
 * **ID:** Spec0002
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-28
-* **Date Implemented:** (pending)
+* **Date Implemented:** 2026-08-28 (code complete; live verification pending deploy)
 * **Systems Impacted:** LeeAtchison
 
 ---
@@ -212,20 +212,43 @@ which is the argument for making the change now rather than at cutover.
    conventional choice for this case. 307 additionally guarantees the request
    method is preserved, which only matters for non-GET requests, and this is a
    static marketing site that receives none. *Recommendation: 302.*
+   **Resolved at implementation, 2026-08-28: 302, per the recommendation.**
 2. **Cache headers on the redirect response.** If test step 5 shows the global
    seven-day `Cache-Control` header being applied to the redirect, should this
    spec also add a scoped short-lived or `no-store` cache header for the alias
-   domain? *Recommendation: yes, if the test shows it is needed. It would make
-   the temporary redirect actually behave temporarily. Deferred until the
-   header behavior is confirmed rather than assumed.*
+   domain? *Recommendation: yes, if the test shows it is needed.*
+   **Still open, 2026-08-28.** It could not be resolved during implementation:
+   the implementation environment has no outbound access to
+   `atchisonacademy.com`, so the live response headers could not be inspected.
+   Two things were established from the file itself, and they change what the
+   fix would look like if the test does show a problem:
+   * The global rule is `[[headers]] for = "*"`, and Netlify header rules match
+     **paths, not hosts**. There is therefore no way to express a
+     header rule scoped to the alias domain in `netlify.toml`. Narrowing the
+     seven-day header, or moving the alias redirect to an edge function, would
+     be the available options.
+   * Netlify's redirect engine generates the 302 response itself rather than
+     serving a file, so whether the `[[headers]]` block reaches it is a
+     question about Netlify's behavior and must be measured, not reasoned
+     about.
+
+   This must be checked against the live deploy (Testing step 5) before the
+   spec is considered verified.
 3. **Timing relative to the standalone site.** Is the Academy site close enough
    that it would be simpler to wait and delete these rules outright? *
    Recommendation: no, make the change now. The cached-301 population grows
    daily and the change is two characters, so there is no benefit to waiting
    and a real cost to it.*
+   **Resolved at implementation, 2026-08-28: changed now, per the
+   recommendation.**
 4. **Branching mode.** Implement on `main` (a two-character config change) or
    in a `spec0002` worktree? *Recommendation: main, given the size, though the
    change cannot be verified end to end until it is deployed.*
+   **Resolved at implementation, 2026-08-28:** neither, as it turned out. The
+   work was done in a Claude Code remote session, which supplies its own branch
+   (`claude/spec0002-spec0003-md4oq4`) rather than a local `.claude/worktrees/`
+   worktree. Spec0003 was implemented on the same branch, since the two share
+   one file tree and one review.
 
 ---
 
@@ -252,3 +275,16 @@ which is the argument for making the change now rather than at cutover.
   for browsers already holding the cached 301, and noted the global seven-day
   `Cache-Control` header as a thing to verify against the redirect response
   (Open Question 2).
+* **2026-08-28** **Implemented.** Both alias rules in `LeeAtchison/netlify.toml`
+  changed from `status = 301` to `status = 302`, and the comment block above
+  them rewritten to record why the status is temporary and that the rules are
+  to be deleted rather than changed at cutover. The note that Netlify defaults
+  to 301 when `status` is omitted was folded into that comment so it survives
+  in the file rather than only in this spec. The two `/ai-native` rules further
+  down the file were left at 301 and verified unchanged.
+* **2026-08-28** Live verification (Testing steps 3 through 5) could not be run
+  from the implementation environment, which has no outbound access to the
+  production domains. Those steps remain to be run against the deploy. Open
+  Question 2 stays open for the same reason, with the additional finding that a
+  domain-scoped `[[headers]]` rule is not expressible in `netlify.toml` at all,
+  since header rules match paths rather than hosts.
