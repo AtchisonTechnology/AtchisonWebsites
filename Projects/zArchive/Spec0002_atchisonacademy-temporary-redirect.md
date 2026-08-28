@@ -309,3 +309,8 @@ which is the argument for making the change now rather than at cutover.
   denies outbound requests to the production domains, so Testing steps 3
   through 6 rest on Lee's own check of the deploy. Status set to Closed and the
   file moved to `zArchive/`.
+* **2026-08-28** Archival recorded in [PR #3](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/3), opened by Lee from the Claude Code
+  UI against `claude/spec0002-spec0003-verify-qd7swm`. That PR carries only the
+  `Projects/` bookkeeping; the **Pull Request** field above still points at
+  PR #2, which is where this spec's actual implementation landed. Netlify
+  canceled all five deploy previews on PR #3, since it changes no site files.

@@ -515,3 +515,8 @@ and is out of scope here. It is worth its own Bug.
   builds to `/sitemap.xml/index.html` and that site's `robots.txt` `Sitemap:`
   line does not resolve) was copied into `Projects/_Projects.md` under "New
   Items Needing Specs/Bugs" so it survives this spec's archival.
+* **2026-08-28** Archival recorded in [PR #3](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/3), opened by Lee from the Claude Code
+  UI against `claude/spec0002-spec0003-verify-qd7swm`. That PR carries only the
+  `Projects/` bookkeeping; the **Pull Request** field above still points at
+  PR #2, which is where this spec's actual implementation landed. Netlify
+  canceled all five deploy previews on PR #3, since it changes no site files.
