@@ -1,10 +1,11 @@
 # Standardize head metadata across all five sites
 
 * **ID:** Spec0003
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-28
-* **Date Implemented:** (pending)
+* **Date Implemented:** 2026-08-28 (code complete; live/social verification pending deploy)
 * **Systems Impacted:** LeeAtchison, TheSoftwareConductor, stosa, BusinessBreakthrough30, ArchitectingForScale
+* **Pull Request:** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
 
 ---
 
@@ -232,6 +233,100 @@ domains all hold at that size.
 
 ---
 
+## What was actually built (2026-08-28)
+
+The contract above was implemented as written. Four details were settled during
+implementation and are recorded here because they are not obvious from the
+contract alone.
+
+### Canonical and og:url are suppressed on 404 and 500
+
+All five sites' `404.html` and `500.html` use `layout: default`, so they render
+the head partial like any other page. A canonical on an error page claims that
+the error page is a real, indexable URL, which is exactly wrong.
+
+The partial therefore emits canonical and `og:url` only when the resource's
+`relative_url` ends in a slash:
+
+```erb
+page_url = if defined?(resource) && resource && resource.relative_url.to_s.end_with?("/")
+  absolute_url(resource.relative_url)
+end
+```
+
+This is the same test `LeeAtchison/src/sitemap.xml.erb` already uses to decide
+what belongs in the sitemap, so the two now agree by construction. It also
+resolves the trailing-slash concern in the contract without a special case:
+Bridgetown's pretty permalinks produce the trailing-slash form, `absolute_url`
+preserves it, and anything that is not a pretty URL (`/404.html`, `/500.html`)
+is excluded rather than guessed at. Every canonical emitted across all five
+built sites was verified to be absolute, on the production domain, and ending
+in a slash.
+
+`og:title`, `og:description`, `og:image`, and the Twitter tags *are* still
+emitted on 404 and 500. They cost nothing and make a mis-shared broken link
+render as the site rather than as nothing.
+
+### og:type is `article` for posts
+
+`og:type` resolves to `article` for resources in a `posts` collection and
+`website` for everything else. The contract listed `og:type` without saying it
+should vary; emitting `website` on a blog post is a small, free inaccuracy, so
+it varies.
+
+LeeAtchison's `books` and `courses` collections stay on `website`. The Open
+Graph `book` type lives in a separate namespace with its own required
+properties, and adopting it properly is more than this spec should carry.
+
+### og:image dimensions are declared
+
+`og:image:width` / `og:image:height` (1200 x 630) are emitted alongside
+`og:image`. Scrapers that have not yet fetched the image use them to reserve
+the correct slot, which avoids a first-share preview rendering at the wrong
+aspect ratio.
+
+### Four sites had per-page descriptions written but ignored
+
+`index.erb` on TheSoftwareConductor, stosa, BusinessBreakthrough30, and
+ArchitectingForScale each already carried a `description` in front matter. The
+old head partials read `metadata.description` unconditionally, so those values
+had never reached the page. Adding the per-page plumbing (Open Question 5)
+means they take effect now. In all four cases the front-matter text is a near
+duplicate of the site-level text, so the visible change is small, but it is a
+real change in output and not merely new plumbing.
+
+### Regression check performed
+
+All five sites were built twice at `BRIDGETOWN_ENV=production` (once from the
+pre-change tree, once after) and the outputs diffed file by file. Results:
+
+* No files added or removed. `robots.txt` and `sitemap.xml` are byte-identical
+  on all five sites.
+* Every `<title>` is unchanged on every page of every site, including
+  leeatchison.com, whose distinct title logic was hoisted into a `page_title`
+  variable without altering what it produces.
+* Favicons, fonts, manifest links, stylesheets, JS, live reload, and the Fathom
+  analytics tag are unchanged on every site.
+* The only differences are the intended ones: the new canonical, Open Graph,
+  and Twitter tags, and the four per-page descriptions noted above.
+
+### Not verified here
+
+Testing steps 4, 6, and 7 (live trailing-slash behavior, social preview
+debuggers, og:image returning 200 at its production URL) require a deploy and
+outbound network access to the production domains. The implementation
+environment has neither, so those remain to be run against the deploy.
+
+### Noticed in passing, not fixed
+
+`BusinessBreakthrough30/src/sitemap.xml.erb` has no `permalink`, so it builds
+to `/sitemap.xml/index.html` rather than `/sitemap.xml`. Its own `robots.txt`
+advertises `https://businessbreakthrough30.com/sitemap.xml`, which therefore
+does not resolve. This predates this spec, is unrelated to the head partials,
+and is out of scope here. It is worth its own Bug.
+
+---
+
 ## Testing
 
 1. **Build all five sites** (`make dev`, or each site's `bin/dev`) and confirm
@@ -286,48 +381,47 @@ domains all hold at that size.
 
 ## Open Questions
 
-1. **Social images. Decided 2026-08-28: built, awaiting approval of the
-   designs.** Five 1200 x 630 cards were produced (see the Social Images
-   section above). Lee to approve the designs, or mark up changes, before they
-   are installed.
+1. **Social images. Decided 2026-08-28: built, approved, installed.** Five
+   1200 x 630 cards were produced (see the Social Images section above), Lee
+   approved the designs, and all five are in the repo as
+   `<Site>/src/images/og-card.png`. Each was re-verified at implementation to
+   be exactly 1200 x 630 and to land in the built `output/images/`.
 2. **Card filenames. Decided 2026-08-28:** `src/images/og-card.png` in every
-   site. Consequence to be aware of: stosa's head partial still points at
-   `stosa-og.png`, so the live 404 persists until that reference is updated.
-   A one-line change to `stosa/src/_partials/_head.erb` would end the live bug
-   immediately, ahead of the rest of this spec. See Open Question 8.
-3. **Keep the generator?** The cards were produced by a Python/Pillow script
-   that composites each site's tokens, cover art, and type. Keeping it in the
-   repo makes regeneration trivial when a cover or tagline changes, but it
-   needs Pillow plus downloaded Inter and Merriweather font files, neither of
-   which the repo currently depends on. *Recommendation: treat the five PNGs as
-   final artifacts and keep the generator out of the repo. It can be re-run on
-   request.*
-4. **Twitter card tags.** Add `twitter:card = summary_large_image` plus
-   `twitter:title` / `twitter:description` / `twitter:image`? Roughly four
-   lines per site, and it controls how links render on X. *Recommendation: yes,
-   while the file is open.*
-5. **Per-page descriptions on the four non-LeeAtchison sites.** Adding the
-   plumbing is cheap, but it only matters if pages actually set a `description`
-   in front matter. Add the support now and populate front matter later, or
-   leave those sites on the site-level description? *Recommendation: add the
-   support now, since the marginal cost while editing the file is near zero.*
-6. **Shared partial versus five copies.** The monorepo deliberately keeps the
-   five sites independent, with no shared asset or template mechanism. This
-   spec produces five near-identical head partials that then need to be kept in
-   sync by hand. Accept that, or introduce a shared partial mechanism? *
-   Recommendation: accept five copies. Introducing a cross-site sharing
-   mechanism is a much larger architectural change than this spec should carry,
-   and the head partials differ per site anyway (fonts, favicons, analytics).*
-7. **Branching mode.** The template and CSS work touches all five sites, so a
-   worktree needs all five booted (ports 3000 + N, 8000 + N, 10000 + N,
-   12000 + N, 14000 + N). *Recommendation: worktree.* The image placement on
-   2026-08-28 was done on `main` as additive new files, which does not
-   constrain this choice.
-8. **Fix the stosa og:image reference early?** stosa's head partial points at
-   `stosa-og.png`; the card was placed as `og-card.png`. Changing that one line
-   now would fix a live bug on the next stosa deploy, without waiting for the
-   rest of this spec. *Recommendation: yes. It is a single line, it is part of
-   this spec's scope anyway, and it ends a defect that is live today.*
+   site. The consequence noted here (stosa's head partial still pointing at
+   `stosa-og.png`) is resolved: that reference now points at `og-card.png`, so
+   the live 404 ends on the next stosa deploy.
+3. **Keep the generator?** *Recommendation: treat the five PNGs as final
+   artifacts and keep the generator out of the repo.*
+   **Resolved at implementation, 2026-08-28: generator not added, per the
+   recommendation.** Nothing in the repo gained a Pillow or font-file
+   dependency.
+4. **Twitter card tags.** *Recommendation: yes, while the file is open.*
+   **Resolved at implementation, 2026-08-28: added, per the recommendation.**
+   `twitter:card = summary_large_image` plus `twitter:title`,
+   `twitter:description`, and `twitter:image` on all five sites.
+5. **Per-page descriptions on the four non-LeeAtchison sites.**
+   *Recommendation: add the support now.*
+   **Resolved at implementation, 2026-08-28: added, per the recommendation.**
+   It turned out not to be speculative plumbing: all four sites' `index.erb`
+   already carried a `description` in front matter that the old partial ignored
+   (see "What was actually built" above), so the support changes real output on
+   day one.
+6. **Shared partial versus five copies.** *Recommendation: accept five copies.*
+   **Resolved at implementation, 2026-08-28: five copies, per the
+   recommendation.** The five metadata blocks are deliberately identical text
+   so a future diff between them is meaningful; everything around them (title
+   logic, fonts, favicons, analytics) still differs per site, as before.
+7. **Branching mode.** *Recommendation: worktree.*
+   **Resolved at implementation, 2026-08-28:** the work was done in a Claude
+   Code remote session, which supplies its own branch
+   (`claude/spec0002-spec0003-md4oq4`) rather than a local
+   `.claude/worktrees/spec0003` worktree, so no derived ports were needed. All
+   five sites were built directly at `BRIDGETOWN_ENV=production` rather than
+   booted as dev servers, which is what the verification actually required.
+   Spec0002 was implemented on the same branch.
+8. **Fix the stosa og:image reference early?** *Recommendation: yes.*
+   **Moot as of 2026-08-28:** the whole spec was implemented in one pass, so
+   the reference was fixed as part of it rather than ahead of it.
 
 ---
 
@@ -373,3 +467,34 @@ domains all hold at that size.
 * **2026-08-28** Note that this spec's Status field still reads In Spec
   Development/Refinement while asset placement has begun. The status has
   deliberately not been changed without Lee's say-so.
+* **2026-08-28** **Implemented across all five sites.** Each `default.erb` now
+  passes `description: data.description, resource: resource` to the head
+  partial, and each `_head.erb` emits the standard contract: per-page
+  description with site-level fallback, absolute per-page canonical, the full
+  Open Graph set (`og:title`, `og:description`, `og:type`, `og:url`,
+  `og:image` plus declared dimensions), and the Twitter card set. All five
+  point at their own `og-card.png`, so stosa's 404ing `stosa-og.png` reference
+  is gone and leeatchison.com has Open Graph tags for the first time. Two files
+  changed per site, as scoped. The 2048 x 2048 author photo was copied to
+  `LeeAtchison/src/images/lee-atchison.jpeg`.
+* **2026-08-28** Two implementation decisions recorded in the new "What was
+  actually built" section: canonical and `og:url` are suppressed on `404.html`
+  and `500.html` (both render through `default.erb` and would otherwise claim
+  to be real URLs), using the same trailing-slash test the LeeAtchison sitemap
+  already uses; and `og:type` resolves to `article` for posts rather than
+  `website` for everything.
+* **2026-08-28** Regression-checked by building all five sites at
+  `BRIDGETOWN_ENV=production` both before and after the change and diffing the
+  output trees. No files added or removed, `robots.txt` and `sitemap.xml`
+  byte-identical, every `<title>` unchanged, and all existing head links
+  (favicons, fonts, manifest, stylesheet, JS, live reload, Fathom) unchanged.
+  Repo `make test` still passes.
+* **2026-08-28** Found that all four non-LeeAtchison `index.erb` files already
+  carried a `description` in front matter that the old head partials ignored,
+  so Open Question 5's plumbing changes live output rather than only enabling
+  future use.
+* **2026-08-28** Noted, out of scope: `BusinessBreakthrough30`'s
+  `sitemap.xml.erb` has no `permalink`, so it builds to `/sitemap.xml/index.html`
+  and the `Sitemap:` line in that site's `robots.txt` does not resolve. Predates
+  this spec; worth its own Bug.
+* **2026-08-28** Pushed to `claude/spec0002-spec0003-md4oq4` and opened as [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2), together with Spec0002 (one branch, one review).

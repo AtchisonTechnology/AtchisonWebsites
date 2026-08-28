@@ -42,16 +42,24 @@
 # atchisonacademy.com is an alias domain on this site. Without these rules it
 # serves the whole leeatchison.com site under a second domain name (duplicate
 # content). Send every path on it to the Academy page instead.
+#
+# These are 302 (temporary), deliberately. Atchison Academy is planned to
+# become its own site at atchisonacademy.com. A 301 would be cached
+# indefinitely by browsers and would deindex the domain in search, both of
+# which would have to be undone by hand at cutover. Keep these temporary until
+# the standalone site exists, at which point these rules are deleted, not
+# changed. Netlify defaults to 301 when `status` is omitted, so the value must
+# stay explicit.
 [[redirects]]
   from = "https://atchisonacademy.com/*"
   to = "https://leeatchison.com/academy/"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
   from = "https://www.atchisonacademy.com/*"
   to = "https://leeatchison.com/academy/"
-  status = 301
+  status = 302
   force = true
 
 [[redirects]]
