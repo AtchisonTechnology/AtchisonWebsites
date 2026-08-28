@@ -190,6 +190,45 @@ there.
 
 ---
 
+## Social Images
+
+Five cards were built on 2026-08-28 and are awaiting design approval. All are
+1200 x 630 PNG, the conventional Open Graph size, and share one visual system
+so the five sites read as a family when their links appear together in a feed:
+
+* A left column carrying an accent eyebrow, the title in Merriweather Bold, a
+  subtitle in Inter, and the bare domain pinned at a consistent baseline.
+* A 7px accent bar down the left edge, in each site's own accent color.
+* A right column carrying that site's distinctive visual.
+* Each site's own tokens. The four Bridgetown sites that share
+  `--color-ink: #1a1a2e` and `--color-accent: #4a90e2` use them; leeatchison.com
+  uses its own navy and teal (`--navy: #0f2942`, `--teal: #06b6d4`), so it reads
+  as the hub rather than as a fifth book site.
+
+| Card | Right-hand visual | Size |
+|---|---|---|
+| stosa.org | Three team groups of service boxes, drawn from the site's own STOSA diagram, captioned "Every service owned by exactly one team" | 64 KB |
+| leeatchison.com | Circular author portrait with a teal ring | 189 KB |
+| thesoftwareconductor.com | Book cover, rounded, drop shadow | 109 KB |
+| architectingforscale.com | Book cover, rounded, drop shadow | 185 KB |
+| businessbreakthrough30.com | Book cover, rounded, drop shadow | 274 KB |
+
+All copy on the cards is taken from each site's existing metadata, book front
+matter, or about page. No claims, statistics, or endorsements were invented, and
+no em-dashes were used.
+
+The portrait used on the leeatchison.com card is
+`stosa/src/images/lee-atchison.jpeg` (2048 x 2048), not
+`LeeAtchison/src/images/lee-atchison.png`, which is only 240 x 240 and too small
+for a 300px circle on a 1200px card. If this spec is implemented, the
+higher-resolution photo should also be copied into the LeeAtchison site.
+
+Legibility was checked by scaling all five to 470px wide, roughly the size a
+link preview renders at in a LinkedIn or Threads feed. Titles, subtitles, and
+domains all hold at that size.
+
+---
+
 ## Testing
 
 1. **Build all five sites** (`make dev`, or each site's `bin/dev`) and confirm
@@ -218,7 +257,7 @@ there.
    title, and description render. Specifically confirm stosa.org now shows an
    image where it previously showed none.
 7. **og:image sanity.** Confirm each og:image URL returns 200 and that its
-   dimensions are close to 1200 x 630.
+   dimensions are exactly 1200 x 630.
 8. **Regression.** Confirm titles, descriptions, favicons, fonts, stylesheets,
    analytics, and live reload are all unchanged on every site. The head partial
    is on every page of every site, so a mistake here is total rather than
@@ -229,7 +268,9 @@ there.
 ## Summary of Steps Needed
 
 1. Resolve the Open Questions below, particularly the social images.
-2. Produce the social images (one per site, 1200 x 630).
+2. Install the five approved social images (built 2026-08-28) into each site's
+   `src/images/`, and copy the 2048 x 2048 author photo into the LeeAtchison
+   site.
 3. For each of the five sites: pass `resource:` (and `description:` where
    missing) from `default.erb` to the head partial.
 4. For each of the five sites: update `_head.erb` to the standard contract.
@@ -242,21 +283,23 @@ there.
 
 ## Open Questions
 
-1. **stosa.org social image.** The referenced `stosa-og.png` never existed.
-   Options: design a proper 1200 x 630 card (STOSA wordmark on the dark ink
-   hero background, matching the site); reuse the existing
-   `stosa/src/images/cover-600.png`, which is the Architecting for Scale cover
-   and is off-brand for a framework site; or use the author photo. *
-   Recommendation: design a proper card. It is the only one of the five that
-   currently shows nothing at all.*
-2. **Social images for the other four.** Replace the portrait book covers with
-   1200 x 630 cards? For the three book sites a card showing the cover against
-   a branded background reads far better than the bare portrait cover.
-   leeatchison.com needs one created from scratch. *Recommendation: yes, five
-   cards, one per site, as part of this spec.*
-3. **Who produces the images.** Are these something you want to design, or
-   should the spec include building them programmatically from existing assets
-   (cover plus background plus wordmark, composited to 1200 x 630)?
+1. **Social images. Decided 2026-08-28: built, awaiting approval of the
+   designs.** Five 1200 x 630 cards were produced (see the Social Images
+   section above). Lee to approve the designs, or mark up changes, before they
+   are installed.
+2. **Card filenames.** Proposal is `src/images/og-card.png` in every site, for
+   consistency. Note this changes the name stosa's head partial currently
+   references (`stosa-og.png`), but that partial is being rewritten by this
+   spec anyway, so the edit is free. Alternative: keep `stosa-og.png` on stosa
+   and accept an inconsistent name across the five. *Recommendation:
+   `og-card.png` everywhere.*
+3. **Keep the generator?** The cards were produced by a Python/Pillow script
+   that composites each site's tokens, cover art, and type. Keeping it in the
+   repo makes regeneration trivial when a cover or tagline changes, but it
+   needs Pillow plus downloaded Inter and Merriweather font files, neither of
+   which the repo currently depends on. *Recommendation: treat the five PNGs as
+   final artifacts and keep the generator out of the repo. It can be re-run on
+   request.*
 4. **Twitter card tags.** Add `twitter:card = summary_large_image` plus
    `twitter:title` / `twitter:description` / `twitter:image`? Roughly four
    lines per site, and it controls how links render on X. *Recommendation: yes,
@@ -305,3 +348,10 @@ there.
 * **2026-08-28** **Decided (Lee):** scope this as a single spec covering all
   five head partials, rather than fixing canonical alone or splitting the
   stosa og:image out as a separate bug.
+* **2026-08-28** **Decided (Lee):** Claude builds the social images rather than
+  Lee designing them. Five 1200 x 630 cards were produced the same day from each
+  site's own color tokens, cover art, and existing copy, sharing one visual
+  system across the five. Delivered for design approval; not written into the
+  repo, since this spec is in Refinement and installing assets is
+  implementation work. Open Questions 1 through 3 collapsed into the design
+  approval, the filename convention, and whether to keep the generator.
