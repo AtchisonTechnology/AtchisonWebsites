@@ -37,6 +37,20 @@ hasn't been created yet.)
   four sites were confirmed to carry the key, so the fix is one line in one
   file.
 
+### Confirm Deploy Previews are enabled for stosa
+- **Type:** Spec
+- **Description:** On [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4), Netlify built deploy previews for
+  `LeeAtchison`, `TheSoftwareConductor`, `BusinessBreakthrough30`, and
+  `ArchitectingForScale` — twelve check runs, three per site — but posted
+  nothing at all for `stosa`. Check that site's Branches and deploy contexts
+  panel and enable Deploy Previews if they are off.
+- **Notes:** Not conclusive. That PR merged about twenty seconds after it
+  opened, and ArchitectingForScale's checks only started after the merge, so
+  stosa may simply have been slower to report rather than disabled. This is
+  the one part of Spec0004's Open Question 1 that its deploy did not settle;
+  carried here at that spec's archival. Cheapest confirmation is to look at
+  the checks on the next PR that touches `stosa/`.
+
 <!--
 ### Item title
 - **Type:** Spec | Bug
