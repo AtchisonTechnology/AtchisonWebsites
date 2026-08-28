@@ -1,7 +1,7 @@
 # Configure Netlify Deploy Previews across all five sites
 
 * **ID:** Spec0004
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-28
 * **Date Implemented:** (pending)
 * **Systems Impacted:** LeeAtchison, TheSoftwareConductor, stosa, BusinessBreakthrough30, ArchitectingForScale
@@ -83,16 +83,27 @@ Replace the literal `url` call in each site's initializer with a form that
 yields the deploy's own hostname on non production builds:
 
 ```ruby
-# On Netlify deploy previews and branch deploys, build against the deploy's own
-# hostname so that canonical, og:url, and the sitemap describe the preview
-# rather than production. CONTEXT is unset locally and "production" on the
-# production build, so both are unaffected.
+# On a Netlify Deploy Preview, build against the deploy's own hostname, so
+# that canonical, og:url, and the sitemap describe the preview rather than
+# production. Everywhere else the literal below is used unconditionally:
+# local builds (CONTEXT unset), the production build (CONTEXT
+# "production"), and branch deploys (CONTEXT "branch-deploy"). ...
 preview_url = ENV["DEPLOY_PRIME_URL"].to_s
-url(ENV["CONTEXT"].to_s != "production" && !preview_url.empty? ? preview_url : "https://leeatchison.com")
+preview_build = ENV["CONTEXT"] == "deploy-preview" && !preview_url.empty?
+url(preview_build ? preview_url : "https://leeatchison.com")
 ```
+
+(The comment is abbreviated here; the shipped version also carries the
+`CONTEXT`-versus-`DEPLOY_PRIME_URL` rationale below and the branch-deploy
+note from Open Question 3.)
 
 with the literal replaced per site (`thesoftwareconductor.com`, `stosa.org`,
 `businessbreakthrough30.com`, `architectingforscale.com`).
+
+The test is `CONTEXT == "deploy-preview"` rather than `CONTEXT != "production"`
+per the decision on Open Question 3: branch deploys do not receive Netlify's
+automatic noindex header, so they keep production canonicals as a
+de-duplication signal.
 
 **Why key on `CONTEXT` rather than just falling back on `DEPLOY_PRIME_URL`.**
 On a production build Netlify sets `DEPLOY_PRIME_URL` equal to `URL`, which is
@@ -139,6 +150,18 @@ sites set it only in the initializer. If the YAML value wins, or wins under some
 load order, Change 1 is silently defeated on the one site with the most metadata
 riding on it. The line should be removed so there is one source of truth, and
 the load order should be confirmed at implementation rather than assumed.
+
+**Load order, confirmed at implementation (2026-08-28).** The initializer wins.
+`Bridgetown::Configuration#run_initializers!` (bridgetown-core 2.1.2,
+`lib/bridgetown-core/configuration.rb:158`) loads `config/initializers.rb`
+*after* the YAML config has been merged, and its only rollback is
+`cached_url = url&.include?("//localhost") ? url : nil`, which restores the URL
+only when the pre-initializer value was a localhost address. A production
+hostname in YAML is therefore overwritten, not preserved. Confirmed empirically
+as well: LeeAtchison's production build output is byte-identical before and
+after removing the YAML line. The redundancy was harmless but is removed
+anyway, since a second source of truth for the one value this spec turns on is
+exactly the thing a future reader would trip over.
 
 ### Scope boundary
 
@@ -187,18 +210,56 @@ a feature of it.
 
 6. **`make test`** still passes at the repo root.
 
+### Results, local half (2026-08-28)
+
+Each of the five sites was built five times with `BRIDGETOWN_ENV=production`
+and the output trees compared:
+
+| Build | Result |
+|---|---|
+| `CONTEXT` unset (baseline) | — |
+| `CONTEXT=production`, `DEPLOY_PRIME_URL` set | byte-identical to baseline, all five sites |
+| `CONTEXT=branch-deploy`, `DEPLOY_PRIME_URL` set | byte-identical to baseline, all five sites |
+| `CONTEXT=deploy-preview`, `DEPLOY_PRIME_URL` empty | byte-identical to baseline, all five sites (empty-string guard) |
+| `CONTEXT=deploy-preview`, `DEPLOY_PRIME_URL` set | differs only in the metadata below |
+
+On the preview build the only differences are `<link rel="canonical">`,
+`og:url`, `og:image`, `twitter:image`, every `<loc>` in `sitemap.xml`, and —
+on LeeAtchison and ArchitectingForScale, the two sites with a `robots.txt` —
+the `Sitemap:` line, which is derived from the same `url` and correctly points
+at the preview's own sitemap. Nothing else differs. No production hostname
+survives anywhere in the preview output.
+
+Stronger than test step 2 as written: the post-change production build was
+also diffed against a build of the pre-change tree (via `git stash`), and is
+byte-identical for all five sites. That covers the LeeAtchison YAML removal,
+which step 2 alone would not have.
+
+Test step 3: `bin/site-port --all` reports the unchanged main ports
+(3000/8000/10000/12000/14000); stosa's dev server booted on 10000 and served
+`<link rel="canonical" href="https://stosa.org/" />`, unchanged. Test step 6:
+`make test` passes (9,995 port combinations checked).
+
+Test steps 4 and 5 require a deploy and remain outstanding.
+
 ---
 
 ## Summary of Steps Needed
 
-1. Resolve the Open Questions below, particularly 1 and 2.
-2. Confirm Deploy Previews are enabled on all five Netlify sites (UI).
-3. Confirm the `bridgetown.config.yml` versus `config/initializers.rb` load
-   order for `url` on LeeAtchison.
-4. Apply Change 1 to five `config/initializers.rb` files.
-5. Apply Change 2 to five `netlify.toml` files.
-6. Remove the redundant `url:` line from `LeeAtchison/bridgetown.config.yml`.
-7. Run the local half of the test plan (steps 1 through 3 and 6).
+1. ~~Resolve the Open Questions below, particularly 1 and 2.~~ Done 2026-08-28
+   for 2 and 3; 1 is outstanding and is Lee's to check (see below).
+2. **Outstanding — Lee.** Confirm Deploy Previews are enabled on all five
+   Netlify sites (UI). Nothing in the repo can establish this, and step 9
+   depends on it.
+3. ~~Confirm the `bridgetown.config.yml` versus `config/initializers.rb` load
+   order for `url` on LeeAtchison.~~ Done 2026-08-28 — the initializer wins,
+   confirmed in the gem source and empirically.
+4. ~~Apply Change 1 to five `config/initializers.rb` files.~~ Done 2026-08-28
+5. ~~Apply Change 2 to five `netlify.toml` files.~~ Done 2026-08-28
+6. ~~Remove the redundant `url:` line from `LeeAtchison/bridgetown.config.yml`.~~
+   Done 2026-08-28
+7. ~~Run the local half of the test plan (steps 1 through 3 and 6).~~ Done
+   2026-08-28 — see Results above. All passed.
 8. Request permission to commit; create a PR on request.
 9. Run the deploy half of the test plan (steps 4 and 5) against the preview the
    PR produces, and close out Spec0003's outstanding verification.
@@ -213,12 +274,23 @@ a feature of it.
    implementation, since everything else here assumes previews build at all.
    *No recommendation; it is a fact to establish, not a decision.*
 
+   **Still open (2026-08-28).** This cannot be answered from the repo and was
+   not answered during implementation. The code changes do not depend on it —
+   they are inert unless a preview builds — but test steps 4 and 5 do. Lee to
+   check each site's Branches and deploy contexts panel before the PR's preview
+   is relied on.
+
 2. **Is the `[context.deploy-preview]` block worth adding, given it changes
    nothing?** It duplicates the inherited `[build]` settings exactly.
    *Recommendation: add it.* The cost is six lines per file and the benefit is
    that the next person asking "what is different about previews here" finds an
    answer in the file they will look in first. The alternative is a comment
    referencing this spec, or nothing.
+
+   **Decided 2026-08-28 (Lee): add it.** Implemented in all five
+   `netlify.toml` files, with the comment carrying the two findings a reader
+   arriving at that file needs — that the URL is set in Ruby, and that headers
+   and redirects cannot be scoped to a context.
 
 3. **Branch deploys.** They are not covered by Netlify's automatic noindex, and
    Change 1 as written treats them like previews (any non production `CONTEXT`
@@ -230,6 +302,13 @@ a feature of it.
    *Recommendation: disable branch deploys in the UI if they are not being used,
    which removes the question entirely. If they are being used, restrict
    Change 1 to `deploy-preview`.*
+
+   **Decided 2026-08-28 (Lee): restrict Change 1 to `deploy-preview`.** Branch
+   deploys keep the production URL, so they stay indexable but emit production
+   canonicals, which is the correct de-duplication signal for an indexable
+   duplicate. This needs no Netlify UI change and is safe whether or not branch
+   deploys are in use. Verified locally: a `CONTEXT=branch-deploy` build is
+   byte-identical to a production build on all five sites.
 
 4. **`NODE_ENV = "development"` in `[build.environment]` on all five sites.**
    Presumably deliberate, so that `npm install` brings in devDependencies that
@@ -280,3 +359,22 @@ a feature of it.
   and that this could silently defeat Change 1. Added its removal to scope.
 * **2026-08-28** Spec written. No code changed; this item is in Refinement and
   the five `netlify.toml` files and five initializers are untouched.
+* **2026-08-28** Lee asked for the spec to be implemented, which moved it from
+  Refinement to Implementing. Open Questions 2 and 3 were put to him first,
+  since 3 changes the code: he chose to add the `[context.deploy-preview]`
+  block, and to restrict Change 1 to `CONTEXT == "deploy-preview"` so that
+  branch deploys keep production canonicals. Both decisions are recorded
+  against their questions above. Open Question 1 is untouched and remains his
+  to check in the Netlify UI; it gates test steps 4 and 5, not the code.
+* **2026-08-28** Implemented. Eleven files changed: five
+  `config/initializers.rb`, five `netlify.toml`, and
+  `LeeAtchison/bridgetown.config.yml`. The load-order question in "Also in
+  scope" was answered before removing the YAML line rather than after: the
+  initializer wins, from the gem source and from a byte-identical build.
+* **2026-08-28** Local half of the test plan run and recorded under Testing.
+  The scope boundary holds: production output is byte-identical to a build of
+  the pre-change tree on all five sites, and branch deploys and an empty
+  `DEPLOY_PRIME_URL` are byte-identical too. Only a deploy-preview build
+  differs, and only in canonical, `og:url`, `og:image`, `twitter:image`,
+  `sitemap.xml`, and the `Sitemap:` line of `robots.txt`. Test steps 4 and 5
+  still require a deploy and remain outstanding, as does Open Question 1.
