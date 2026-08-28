@@ -1,0 +1,80 @@
+---
+layout: default
+page_class: homepage
+title: Books
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <span class="hero-eyebrow">Published Works</span>
+    <h1>Books at Atchison Academy</h1>
+    <p>Practical guides for architects, engineers, and technology leaders navigating the challenges of modern software at scale.</p>
+  </div>
+</section>
+
+<%
+  all_books   = site.collections["books"].resources.sort_by { |b| b.data.order || 99 }
+  featured    = all_books.select { |b| b.data.featured }
+  secondary   = all_books.reject { |b| b.data.featured }
+%>
+
+<section class="featured-books-section">
+  <div class="section-inner">
+    <div class="books-grid">
+      <% featured.each do |book| %>
+        <article class="book-card">
+          <a href="<%= relative_url book.relative_url %>" class="book-card-link-wrap">
+            <div class="book-cover-wrap">
+              <img src="<%= relative_url book.data.cover_image %>"
+                   alt="<%= book.data.title %> book cover" class="book-cover" />
+            </div>
+          </a>
+          <div class="book-card-body">
+            <% if book.data.badge %>
+              <span class="book-tag book-tag--<%= book.data.badge_style || 'new' %>"><%= book.data.badge %></span>
+            <% end %>
+            <h3><a href="<%= relative_url book.relative_url %>"><%= book.data.title %></a></h3>
+            <% if book.data.authors %>
+              <p class="book-authors"><%= book.data.authors.join(", ") %></p>
+            <% end %>
+            <p><%= book.data.summary %></p>
+            <div class="book-card-actions">
+              <a href="<%= relative_url book.relative_url %>" class="book-link">Details &rarr;</a>
+              <% if book.data.amazon_url %>
+                <a href="<%= book.data.amazon_url %>" class="book-link book-link--amazon" target="_blank" rel="noopener noreferrer">Amazon</a>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<% unless secondary.empty? %>
+<section class="secondary-books-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">Additional Publications</span>
+      <h2 class="section-title">More from Lee</h2>
+      <p>Additional books and contributions where Lee shares expertise.</p>
+    </div>
+    <div class="secondary-books-grid">
+      <% secondary.each do |book| %>
+        <a href="<%= relative_url book.relative_url %>" class="secondary-book-card">
+          <div class="secondary-book-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <strong><%= book.data.title %></strong>
+            <% if book.data.authors %>
+              <span class="secondary-book-authors"><%= book.data.authors.join(", ") %></span>
+            <% end %>
+            <span class="secondary-book-desc"><%= book.data.summary %></span>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
