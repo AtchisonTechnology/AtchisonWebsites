@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0004 | Configure Netlify Deploy Previews across all five sites | Make preview builds emit their own hostname in canonical, og:url and the sitemap by reading CONTEXT/DEPLOY_PRIME_URL in each site's config/initializers.rb, so Spec0003's outstanding preview verification can actually be run |
 
 ---
 
