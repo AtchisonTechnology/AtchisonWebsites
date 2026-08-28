@@ -19,6 +19,7 @@ consecutive integers starting at 1.
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
 | 1 | Spec0004 | Configure Netlify Deploy Previews across all five sites | Make preview builds emit their own hostname in canonical, og:url and the sitemap by reading CONTEXT/DEPLOY_PRIME_URL in each site's config/initializers.rb, so Spec0003's outstanding preview verification can actually be run |
+| 2 | Spec0005 | Create the standalone AtchisonAcademy site | Add a sixth Bridgetown site, AtchisonAcademy (site index 5, port 16000), paralleling LeeAtchison's configuration and structure, with the current leeatchison.com/academy page as its home page and the academy-flagged books and courses as its collections — repo work only, no Netlify or DNS changes. Depends on Spec0004 landing first |
 
 ---
 
