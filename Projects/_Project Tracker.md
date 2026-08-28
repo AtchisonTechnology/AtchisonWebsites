@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0001 | STOSA site: book CTA, refreshed bio, and Atchison Academy hero | Add an Architecting for Scale CTA band, update the About bio, verify no Soundings references remain, and add an Atchison Academy hero above the footer on stosa.org — [PR #1](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/1) |
 
 ---
 
