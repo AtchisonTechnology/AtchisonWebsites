@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0005 | Create the standalone AtchisonAcademy site | Add a sixth Bridgetown site, AtchisonAcademy (site index 5, port 16000), paralleling LeeAtchison's configuration and structure, with the current leeatchison.com/academy page as its home page and the academy-flagged books and courses as its collections — repo work only, no Netlify or DNS changes. Depends on Spec0004 landing first |
+| — | — | *(none)* | — |
 
 ---
 
@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0005 | Create the standalone AtchisonAcademy site | Add a sixth Bridgetown site, AtchisonAcademy (site index 5, port 16000), paralleling LeeAtchison's configuration and structure, with the current leeatchison.com/academy page as its home page and the academy-flagged books and courses as its collections — repo work only, no Netlify or DNS changes |
 
 ---
 

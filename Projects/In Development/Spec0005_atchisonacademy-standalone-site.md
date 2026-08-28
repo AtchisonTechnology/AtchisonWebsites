@@ -1,13 +1,14 @@
 # Create the standalone AtchisonAcademy site
 
 * **ID:** Spec0005
-* **Status:** In Development
+* **Status:** Verifying
 * **Date Created:** 2026-08-28
-* **Date Implemented:** TBD
+* **Date Implemented:** 2026-08-28
 * **Systems Impacted:** AtchisonAcademy (new, site index 5), plus repo-root
   shared infrastructure (`lib/worktree_env.rb`, `test/worktree_env_test.rb`,
   `Procfile`, `Makefile` docs, `CLAUDE.md`, `.worktreeinclude`,
   `Projects/services.md`). **No changes to `LeeAtchison`.**
+* **Pull Request:** [PR #6](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/6)
 
 ---
 
@@ -421,6 +422,9 @@ deploy preview and is the one check that cannot be faked locally.
    404 behind a prominent button on the home page is the worse failure, and
    the pages are two files.*
 
+   **Implemented per the recommendation (not yet confirmed by Lee).** Both
+   listing pages exist and both "View All" buttons resolve.
+
 2. **Copy the whole 2,658-line stylesheet, or trim it to what this site
    uses?** A full copy is exact and fast, and carries dead rules for pages this
    site does not have. A trim is smaller but risks removing a rule some copied
@@ -429,6 +433,11 @@ deploy preview and is the one check that cannot be faked locally.
    *Recommendation: copy whole now. Note the divergence risk in the site's
    CLAUDE.md and treat trimming as a possible later cleanup spec, once the
    site's page set has settled.*
+
+   **Implemented per the recommendation (not yet confirmed by Lee).** The file
+   is a byte-identical copy, and `AtchisonAcademy/CLAUDE.md` carries a
+   "CSS divergence" note saying why, and asking that shared rules be kept
+   identical between the two files until a trimming spec exists.
 
 3. **Should the new site be `noindex` until cutover?**
    **Resolved 2026-08-28 (Lee): no.** Ship `robots.txt` as-is, copied from
@@ -467,6 +476,13 @@ deploy preview and is the one check that cannot be faked locally.
    reduced to 32x32. If it does not, a cropped or simplified mark is the fix —
    raise it rather than shipping a muddy favicon.
 
+   **Checked at implementation: it survives.** The shield silhouette and the
+   torch's stem and bowl stay clearly readable at 32x32; only the flame's inner
+   curl softens, which does not cost the mark its identity. No crop or
+   simplification was needed. The logo is trimmed to its alpha bounding box and
+   padded to a square before reduction, so the mark fills the icon rather than
+   inheriting the source file's asymmetric transparent margin.
+
 6. **Site metadata copy.** `site_metadata.yml` needs a `title`, `tagline`, and
    `description` for the Academy. The index hero's existing sentence
    ("Exclusive books, courses, and training directly from Lee Atchison — for
@@ -475,6 +491,24 @@ deploy preview and is the one check that cannot be faked locally.
    *Recommendation: `title: Atchison Academy`; tagline and description drafted
    from the hero copy and approved by Lee before implementation, since this
    text lands in every page title, meta description, and social card.*
+
+   **Drafted, not yet approved — Lee's review needed.** Shipped in
+   `src/_data/site_metadata.yml` as:
+
+   * `title: Atchison Academy`
+   * `tagline: Books, Courses, and Training from Lee Atchison`
+   * `description:` the hero sentence verbatim ("Exclusive books, courses, and
+     training directly from Lee Atchison — for software architects and
+     technology leaders who want to build, scale, and lead with confidence.")
+
+   The tagline is the one piece with no existing source to copy from, and it is
+   also the lowest-stakes: `_head.erb` uses it only for a resource whose title
+   is literally `Index`, and no page here has that title (the home page is
+   `title: Home`, matching `LeeAtchison/src/index.erb`), so it renders on no
+   built page today. The same is true on leeatchison.com. `title` and
+   `description` are the two that matter — they land in every page title and
+   meta description and on the OG card. Changing any of the three later is a
+   one-file edit.
 
 7. **The closing CTA band.** The `.academy-cta` section's button and paragraph
    are currently commented out on leeatchison.com because they pointed at
@@ -485,6 +519,19 @@ deploy preview and is the one check that cannot be faked locally.
    *Recommendation: heading + logo only for this spec, and treat a real CTA
    (signup, catalog, or purchase path) as its own spec once the Academy has
    something to convert to.*
+
+   **Implemented per the recommendation (not yet confirmed by Lee).** The band
+   is heading + logo. The commented-out paragraph and button were removed
+   rather than carried over, so nothing self-referential is left behind for a
+   later reader to uncomment by mistake.
+
+   The same self-reference had to be handled twice more in `courses.erb`, which
+   the spec's Content section did not name: its hero's "Atchison Academy &rarr;"
+   button (which the spec does call out) *and* the whole closing
+   `.courses-cta-section`, an Academy promo band ending in "Explore the Academy
+   &rarr;" pointed at `/academy`. Both are self-referential on this site and
+   both would have failed Testing step 6's "no link to `/academy`" rule, so the
+   button and the entire closing band were removed.
 
 8. **Fathom analytics.**
    **Resolved 2026-08-28 (Lee): one Fathom site ID for all sites.** Copy
@@ -516,6 +563,15 @@ deploy preview and is the one check that cannot be faked locally.
     Spec0002 and Spec0003 used). This is too large for main, and the port
     derivation means a `spec0005` worktree runs the new site on 16005 without
     disturbing anything on 16000.*
+
+    **Implemented on a Claude Code remote session branch**,
+    `claude/spec0005-implementation-m9ylrg`, the second of the two options —
+    same as Spec0002 and Spec0003. Nothing was done on `main`. Because a remote
+    session checkout keeps the repo-root basename, the derivation treats it as
+    `main` and the site runs on 16000 there, not 16005; that is correct
+    behavior for an isolated container with no other checkout in it, and the
+    `spec0005` worktree path is still available for anyone reviewing this
+    locally, where 16005 is what it will use.
 
 ---
 
@@ -594,3 +650,71 @@ deploy preview and is the one check that cannot be faked locally.
   re-checks production after merge. Deliberately not a file diff alone:
   Spec0003's unrun verification steps are the precedent for why "the file looks
   right" is not evidence the build emits the right thing.
+* **2026-08-28** Implemented on branch `claude/spec0005-implementation-m9ylrg`
+  (OQ10). Spec0004 confirmed present on `main` first, and its **implementation**
+  copied rather than its spec text — which matters, because the two differ: the
+  spec sketched `ENV["CONTEXT"].to_s != "production"`, the merged code tests
+  `ENV["CONTEXT"] == "deploy-preview"`. The shipped test is the stricter one,
+  and it changes behavior on branch deploys (they now build against the
+  production URL, which is what Spec0004's own comment says it wants, since
+  branch deploys get no automatic noindex). `AtchisonAcademy/config/initializers.rb`
+  is byte-identical to `LeeAtchison`'s but for the production URL literal, and
+  `netlify.toml` differs only by LeeAtchison's redirect block.
+* **2026-08-28** Part 1 done: index 5 registered in `lib/worktree_env.rb`,
+  `test/worktree_env_test.rb` (SITES, all three port hashes, and the 16999 /
+  17999 block-edge assertions), `Procfile`, `Projects/services.md`, root
+  `CLAUDE.md` (including "five" → "six" and "indices 0–4" → "0–5"), and
+  `.worktreeinclude`, whose install loop was brought to all six sites — it had
+  been missing `ArchitectingForScale`.
+* **2026-08-28** Part 2 done: `AtchisonAcademy/` is 63 tracked files. Two
+  additions the spec's file list did not anticipate, both trivial and both
+  needed for the site to be internally consistent: `package-lock.json` carries
+  the package name in two places and was renamed along with `package.json`, and
+  `src/favicon.ico` — copied per the spec — turns out to be a zero-byte
+  placeholder on every site, existing only so the browser's automatic
+  `/favicon.ico` request does not 404. Also written: `AtchisonAcademy/CLAUDE.md`
+  and `README.md`.
+* **2026-08-28** Testing steps 1 through 9 run and passing:
+  * **1.** `make test` passes with the sixth site and 11,994 unique ports
+    checked. `bin/site-port AtchisonAcademy` → 16000; `--all` → six rows.
+  * **2.** `bundle install` and `npm install` both clean.
+  * **3.** `bin/dev` prints `==> AtchisonAcademy [main] http://localhost:16000`
+    and Puma serves 200 there. Two container quirks surfaced that are **not**
+    this site's: without a UTF-8 locale, `bin/bridgetown start` dies in
+    `load_env_and_determine_port` reading the em-dash in `config/initializers.rb`
+    (`LeeAtchison` fails identically on `main`), and Bridgetown's frontend-watcher
+    aux thread spawns a bare `bridgetown` that is not on PATH. Neither affects
+    the served site. `make dev` was not run — `foreman` is not installed in this
+    container — but `make test` proves the six ports cannot collide.
+  * **4.** `bin/bridgetown deploy` succeeds; 15 HTML pages plus assets.
+  * **5.** `/` renders the hero with `<h1>Atchison Academy</h1>`, 2 book cards,
+    8 course cards (4 featured), and the CTA band. Both listing pages, both book
+    details, all eight course details, `404.html`, and `500.html` all render.
+  * **6.** Link audit clean: no `/about`, `/contact`, `/academy`, `/ainative`,
+    or `/schedule` anywhere in the built HTML, and the only leeatchison.com
+    links are the two deliberate ones (navbar brand-adjacent entry, footer
+    contact). The other absolute links are the books' own `book_url`s
+    (thesoftwareconductor.com, businessbreakthrough30.com), an Amazon link
+    carrying `tag=leeatchison-20`, and the course platform URLs.
+  * **7.** Canonical and `og:url` present on all 13 pretty-URL pages, absolute
+    against `https://atchisonacademy.com`, absent on `404.html` and `500.html`;
+    `og:image` resolves to the new 1200x630 card.
+  * **8.** Sitemap lists all 13 pretty URLs on the right host and excludes
+    itself and `robots.txt`; robots' `Sitemap:` line is correct.
+  * **9.** `make ports` shows the original five unchanged, and `git status`
+    shows no modified file under `LeeAtchison/`.
+* **2026-08-28** Testing step 10's file-level half done (both files diffed, no
+  `url:` key in `bridgetown.config.yml`), and its build behavior reproduced
+  locally by setting the Netlify variables by hand: with
+  `CONTEXT=deploy-preview` and a `DEPLOY_PRIME_URL`, canonical, `og:url`,
+  `og:image`, every sitemap `<loc>`, and robots' `Sitemap:` all carry the
+  preview host; with `CONTEXT=production` **and `DEPLOY_PRIME_URL` still set**,
+  they all pin back to `atchisonacademy.com`, as does `CONTEXT=branch-deploy`.
+  That is the load-bearing half of Spec0004's test confirmed. It is **not** a
+  substitute for step 10 proper: the real preview, the `og:image` fetch, and
+  the `X-Robots-Tag: noindex` header still have to be checked on the PR's own
+  deploy preview, and production re-checked after merge.
+* **2026-08-28** Cutover work filed in `Projects/_Projects.md` as a new Spec
+  item (step 12), carrying OQ4's deferred `leeatchison.com/academy` decision and
+  naming the three places on leeatchison.com that point at `/academy` and would
+  have to follow it.
