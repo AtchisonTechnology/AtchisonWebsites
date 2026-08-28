@@ -205,6 +205,9 @@ so the five sites read as a family when their links appear together in a feed:
   uses its own navy and teal (`--navy: #0f2942`, `--teal: #06b6d4`), so it reads
   as the hub rather than as a fifth book site.
 
+The five cards were placed in the repo on 2026-08-28 as
+`<Site>/src/images/og-card.png`. They are untracked and uncommitted.
+
 | Card | Right-hand visual | Size |
 |---|---|---|
 | stosa.org | Three team groups of service boxes, drawn from the site's own STOSA diagram, captioned "Every service owned by exactly one team" | 64 KB |
@@ -287,12 +290,11 @@ domains all hold at that size.
    designs.** Five 1200 x 630 cards were produced (see the Social Images
    section above). Lee to approve the designs, or mark up changes, before they
    are installed.
-2. **Card filenames.** Proposal is `src/images/og-card.png` in every site, for
-   consistency. Note this changes the name stosa's head partial currently
-   references (`stosa-og.png`), but that partial is being rewritten by this
-   spec anyway, so the edit is free. Alternative: keep `stosa-og.png` on stosa
-   and accept an inconsistent name across the five. *Recommendation:
-   `og-card.png` everywhere.*
+2. **Card filenames. Decided 2026-08-28:** `src/images/og-card.png` in every
+   site. Consequence to be aware of: stosa's head partial still points at
+   `stosa-og.png`, so the live 404 persists until that reference is updated.
+   A one-line change to `stosa/src/_partials/_head.erb` would end the live bug
+   immediately, ahead of the rest of this spec. See Open Question 8.
 3. **Keep the generator?** The cards were produced by a Python/Pillow script
    that composites each site's tokens, cover art, and type. Keeping it in the
    repo makes regeneration trivial when a cover or tagline changes, but it
@@ -316,9 +318,16 @@ domains all hold at that size.
    Recommendation: accept five copies. Introducing a cross-site sharing
    mechanism is a much larger architectural change than this spec should carry,
    and the head partials differ per site anyway (fonts, favicons, analytics).*
-7. **Branching mode.** This touches all five sites, so a worktree needs all
-   five booted (ports 3000 + N, 8000 + N, 10000 + N, 12000 + N, 14000 + N).
-   *Recommendation: worktree.*
+7. **Branching mode.** The template and CSS work touches all five sites, so a
+   worktree needs all five booted (ports 3000 + N, 8000 + N, 10000 + N,
+   12000 + N, 14000 + N). *Recommendation: worktree.* The image placement on
+   2026-08-28 was done on `main` as additive new files, which does not
+   constrain this choice.
+8. **Fix the stosa og:image reference early?** stosa's head partial points at
+   `stosa-og.png`; the card was placed as `og-card.png`. Changing that one line
+   now would fix a live bug on the next stosa deploy, without waiting for the
+   rest of this spec. *Recommendation: yes. It is a single line, it is part of
+   this spec's scope anyway, and it ends a defect that is live today.*
 
 ---
 
@@ -355,3 +364,12 @@ domains all hold at that size.
   repo, since this spec is in Refinement and installing assets is
   implementation work. Open Questions 1 through 3 collapsed into the design
   approval, the filename convention, and whether to keep the generator.
+* **2026-08-28** **Lee approved the card designs** and directed that they be
+  placed in the repo. All five installed as `<Site>/src/images/og-card.png` on
+  `main`, untracked and uncommitted, closing Open Question 2 on the filename
+  convention. Nothing else was changed: no head partial, layout, or CSS edits
+  were made, so the stosa og:image reference is still pointing at the old
+  `stosa-og.png` name and the live 404 persists. Raised as Open Question 8.
+* **2026-08-28** Note that this spec's Status field still reads In Spec
+  Development/Refinement while asset placement has begun. The status has
+  deliberately not been changed without Lee's say-so.
