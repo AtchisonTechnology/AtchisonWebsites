@@ -18,8 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0002 | Change the atchisonacademy.com alias redirect from permanent to temporary | Switch the two atchisonacademy.com rules in LeeAtchison/netlify.toml from 301 to 302, since the domain will become its own site and a permanent redirect is cached indefinitely by browsers — [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2) |
-| 2 | Spec0003 | Standardize head metadata across all five sites | Add canonical and per-page Open Graph tags to all five head partials, fix the stosa og:image 404, add the missing OG set to leeatchison.com, and replace portrait social images — [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2) |
+| — | — | *(none)* | — |
 
 ---
 
@@ -70,3 +69,5 @@ consecutive integers starting at 1.
 | ID | Title | Short Description | Status | Date Completed |
 |---|---|---|---|---|
 | Spec0001 | STOSA site: book CTA, refreshed bio, and Atchison Academy hero | Add an Architecting for Scale CTA band, update the About bio, verify no Soundings references remain, and add an Atchison Academy hero above the footer on stosa.org — [PR #1](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/1) | Closed | 2026-08-28 |
+| Spec0002 | Change the atchisonacademy.com alias redirect from permanent to temporary | Switch the two atchisonacademy.com rules in LeeAtchison/netlify.toml from 301 to 302, since the domain will become its own site and a permanent redirect is cached indefinitely by browsers — [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2) | Closed | 2026-08-28 |
+| Spec0003 | Standardize head metadata across all five sites | Add canonical and per-page Open Graph tags to all five head partials, fix the stosa og:image 404, add the missing OG set to leeatchison.com, and replace portrait social images — [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2) | Closed | 2026-08-28 |

@@ -1,9 +1,10 @@
 # Change the atchisonacademy.com alias redirect from permanent to temporary
 
 * **ID:** Spec0002
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-28
-* **Date Implemented:** 2026-08-28 (code complete; live verification pending deploy)
+* **Date Implemented:** 2026-08-28
+* **Date Completed:** 2026-08-28
 * **Systems Impacted:** LeeAtchison
 * **Pull Request:** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
 
@@ -233,8 +234,15 @@ which is the argument for making the change now rather than at cutover.
      question about Netlify's behavior and must be measured, not reasoned
      about.
 
-   This must be checked against the live deploy (Testing step 5) before the
-   spec is considered verified.
+   **Closed 2026-08-28:** Lee verified the deployed behavior and reported the
+   implementation successful, which closes this question along with the rest of
+   the spec. No cache-header measurement was taken in the closing session
+   either — the environment's network policy denies outbound requests to the
+   production domains — so the two findings above are left on the record
+   verbatim. If a cached 302 ever does turn out to be a problem, they are the
+   starting point: a host-scoped `[[headers]]` rule is not expressible in
+   `netlify.toml`, so narrowing the global seven-day header or moving the alias
+   redirect to an edge function are the available options.
 3. **Timing relative to the standalone site.** Is the Academy site close enough
    that it would be simpler to wait and delete these rules outright? *
    Recommendation: no, make the change now. The cached-301 population grows
@@ -290,3 +298,14 @@ which is the argument for making the change now rather than at cutover.
   domain-scoped `[[headers]]` rule is not expressible in `netlify.toml` at all,
   since header rules match paths rather than hosts.
 * **2026-08-28** Pushed to `claude/spec0002-spec0003-md4oq4` and opened as [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2), together with Spec0003 (one branch, one review).
+* **2026-08-28** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
+  merged to `main`. The two alias rules on `main` read `status = 302` and the
+  two `/ai-native` rules still read `status = 301`, re-confirmed after the
+  merge.
+* **2026-08-28** **Verified by Lee and closed.** Lee confirmed the
+  implementation is successful and verified. Open Question 2 is closed on that
+  verification rather than on a measurement: the closing session could not
+  reach `atchisonacademy.com` either, since the environment's network policy
+  denies outbound requests to the production domains, so Testing steps 3
+  through 6 rest on Lee's own check of the deploy. Status set to Closed and the
+  file moved to `zArchive/`.
