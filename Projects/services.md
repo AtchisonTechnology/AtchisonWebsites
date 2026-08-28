@@ -29,6 +29,7 @@ Maximum 10 sites (indices 0–9). Each block holds IDs up to 999.
 | 2 | `stosa` | stosa.org | Active | 10000 | 10000 + N | 11000 + N |
 | 3 | `BusinessBreakthrough30` | businessbreakthrough30.com | Active | 12000 | 12000 + N | 13000 + N |
 | 4 | `ArchitectingForScale` | architectingforscale.com | Active | 14000 | 14000 + N | 15000 + N |
+| 5 | `AtchisonAcademy` | atchisonacademy.com | Active | 16000 | 16000 + N | 17000 + N |
 
 Derivation lives in `lib/worktree_env.rb` (repo root) and is the single source
 of truth. Every consumer re-derives independently at startup:

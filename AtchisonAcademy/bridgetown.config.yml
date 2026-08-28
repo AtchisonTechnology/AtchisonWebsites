@@ -1,0 +1,7 @@
+collections:
+  books:
+    output: true
+    permalink: /books/:slug/
+  courses:
+    output: true
+    permalink: /courses/:slug/

@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<section class="course-header">
+  <div class="course-header-inner">
+    <span class="course-platform-badge"><%= data.platform || "Course" %></span>
+    <h1><%= data.title %></h1>
+    <% if data.platform_url %>
+      <a href="<%= data.platform_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Take This Course &rarr;</a>
+    <% end %>
+  </div>
+</section>
+
+<section class="course-body">
+  <div class="course-body-inner">
+    <%= yield %>
+  </div>
+</section>
+
+<section class="more-courses-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" style="color:var(--teal)">Keep Learning</span>
+      <h2 class="section-title">More Courses by Lee</h2>
+    </div>
+    <div class="more-courses-grid">
+      <% site.collections["courses"].resources
+           .select { |c| c.relative_url != resource.relative_url }
+           .first(4).each do |course| %>
+        <a href="<%= relative_url course.relative_url %>" class="more-course-card">
+          <span class="more-course-platform"><%= course.data.platform %></span>
+          <span class="more-course-title"><%= course.data.title %></span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>
