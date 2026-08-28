@@ -16,7 +16,20 @@
 
 Bridgetown.configure do |config|
   # The base hostname & protocol for your site, e.g. https://example.com
-  url "https://businessbreakthrough30.com"
+  #
+  # On a Netlify Deploy Preview, build against the deploy's own hostname, so
+  # that canonical, og:url, and the sitemap describe the preview rather than
+  # production. Everywhere else the literal below is used unconditionally:
+  # local builds (CONTEXT unset), the production build (CONTEXT
+  # "production"), and branch deploys (CONTEXT "branch-deploy"). Keying on
+  # CONTEXT rather than falling back on DEPLOY_PRIME_URL is deliberate —
+  # on a production build Netlify sets DEPLOY_PRIME_URL from the site's
+  # domain configuration, and no Netlify UI setting should be able to
+  # rewrite production canonicals. Branch deploys keep the production URL
+  # because they do not get Netlify's automatic noindex header. See Spec0004.
+  preview_url = ENV["DEPLOY_PRIME_URL"].to_s
+  preview_build = ENV["CONTEXT"] == "deploy-preview" && !preview_url.empty?
+  url(preview_build ? preview_url : "https://businessbreakthrough30.com")
 
   # Available options are `erb` (default), `serbea`, or `liquid`
   template_engine "erb"
