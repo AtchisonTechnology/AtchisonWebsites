@@ -1,9 +1,10 @@
 # Standardize head metadata across all five sites
 
 * **ID:** Spec0003
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-28
-* **Date Implemented:** 2026-08-28 (code complete; live/social verification pending deploy)
+* **Date Implemented:** 2026-08-28
+* **Date Completed:** 2026-08-28
 * **Systems Impacted:** LeeAtchison, TheSoftwareConductor, stosa, BusinessBreakthrough30, ArchitectingForScale
 * **Pull Request:** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
 
@@ -498,3 +499,24 @@ and is out of scope here. It is worth its own Bug.
   and the `Sitemap:` line in that site's `robots.txt` does not resolve. Predates
   this spec; worth its own Bug.
 * **2026-08-28** Pushed to `claude/spec0002-spec0003-md4oq4` and opened as [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2), together with Spec0002 (one branch, one review).
+* **2026-08-28** [PR #2](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/2)
+  merged to `main`. All five `default.erb` / `_head.erb` pairs and all five
+  `og-card.png` files are on `main`.
+* **2026-08-28** **Verified by Lee and closed.** Lee confirmed the
+  implementation is successful and verified. Testing steps 4, 6, and 7 (live
+  trailing-slash check, social preview debuggers, and the og:image 200/dimension
+  check) rest on Lee's own check of the deploy: the closing session could not
+  reach the production domains, since the environment's network policy denies
+  outbound requests to them. Steps 1, 2, 3, 5, and 8 were satisfied at
+  implementation by the before/after production build diff already recorded
+  above. Status set to Closed and the file moved to `zArchive/`.
+* **2026-08-28** Carried forward at closing: the out-of-scope
+  `BusinessBreakthrough30/src/sitemap.xml.erb` finding (no `permalink`, so it
+  builds to `/sitemap.xml/index.html` and that site's `robots.txt` `Sitemap:`
+  line does not resolve) was copied into `Projects/_Projects.md` under "New
+  Items Needing Specs/Bugs" so it survives this spec's archival.
+* **2026-08-28** Archival recorded in [PR #3](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/3), opened by Lee from the Claude Code
+  UI against `claude/spec0002-spec0003-verify-qd7swm`. That PR carries only the
+  `Projects/` bookkeeping; the **Pull Request** field above still points at
+  PR #2, which is where this spec's actual implementation landed. Netlify
+  canceled all five deploy previews on PR #3, since it changes no site files.
