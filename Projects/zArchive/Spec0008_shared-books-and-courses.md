@@ -1,10 +1,11 @@
 # Share the books and courses collections between leeatchison.com and atchisonacademy.com
 
 * **ID:** Spec0008
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-29
-* **Date Implemented:** —
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
+* **PR:** [#10](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/10)
 
 ---
 
@@ -399,3 +400,9 @@ Testing results, both sites built locally:
    them. ✅
 
 `make test` (port derivation) still passes.
+
+**2026-08-29 — Deploy previews confirmed; approved and closed.** Netlify built
+both the `leeatchison` and `atchisonacademy` previews on PR #10 from commit
+`60ac2bd`, clearing Testing item 9 — the last outstanding check — and proving
+the symlinks resolve from a fresh CI clone. All nine testing items pass. Lee
+approved the change and directed the spec to Closed.
