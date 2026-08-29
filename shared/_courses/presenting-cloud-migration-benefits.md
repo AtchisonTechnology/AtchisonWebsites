@@ -6,6 +6,9 @@ platform_url: "https://www.linkedin.com/learning/presenting-cloud-migration-bene
 show_leeatchison: true
 order_leeatchison: 10
 canonical_site: leeatchison
+duration: "37m"
+level: "Intermediate"
+updated: "Nov 2021"
 summary: "A structured framework for pitching one specific cloud migration to executives and getting an actual yes."
 ---
 
@@ -18,14 +21,11 @@ Where a general communication course teaches the skill, this one is the framewor
 ## What You'll Learn
 
 - Structuring a cloud migration business case executives can follow without a technical primer first
-- Naming the metrics and outcomes that actually move an executive audience
+- Framing the case through the three lenses executives actually weigh: impact on customers, financial considerations, and impact on operations
 - Answering the objections a migration proposal predictably draws, before they're raised
 - Communicating migration risk honestly without talking the proposal out of approval
-- Managing the room during the actual presentation, beyond the slides that got you there
-- Following up after the meeting to keep the decision from stalling
+- Presenting the migration plan itself and how you'll execute it, once you have the yes
 
 ## Who This Is For
 
 Architects and IT leaders about to present a specific cloud migration proposal to executive stakeholders and needing a structure for that one conversation.
-
-**Platform:** LinkedIn Learning

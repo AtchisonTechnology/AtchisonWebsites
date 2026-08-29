@@ -64,7 +64,7 @@ src/
   _data/
     site_metadata.yml     # title, tagline, description — accessed as site.metadata
   _books/                 # -> ../../shared/_books  (symlink; 2 shown here)
-  _courses/               # -> ../../shared/_courses (symlink; 8 shown here)
+  _courses/               # -> ../../shared/_courses (symlink; 12 shown here)
   images/
     logo-academy.png      # Atchison Academy logo — hero and closing CTA band
     favicon.png           # Favicon (Academy shield logo, 32×32)
@@ -126,7 +126,7 @@ per-site edit.
 
 **Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order_academy || 99 }`.
 
-**Shared collections** (Spec0008): `src/_books` and `src/_courses` are **symlinks** to `../../shared/_books` and `../../shared/_courses` at the repo root — one set of files, read by this site and by `LeeAtchison`. There are 10 books and 12 courses there; this site shows the 2 books and 8 courses marked `show_academy`. Edit the files under `shared/`; never replace the symlinks with real directories, and never edit an item on the assumption it is Academy-only — leeatchison.com reads the same file. Both sites' dev watchers follow the symlink, so an edit under `shared/` live-rebuilds both.
+**Shared collections** (Spec0008): `src/_books` and `src/_courses` are **symlinks** to `../../shared/_books` and `../../shared/_courses` at the repo root — one set of files, read by this site and by `LeeAtchison`. There are 10 books and 16 courses there; this site shows the 2 books and 12 courses marked `show_academy`. Edit the files under `shared/`; never replace the symlinks with real directories, and never edit an item on the assumption it is Academy-only — leeatchison.com reads the same file. Both sites' dev watchers follow the symlink, so an edit under `shared/` live-rebuilds both.
 
 `plugins/builders/shared_content.rb` filters the collections at `:site, :post_read` down to the items carrying `show_academy`, so this site never generates a page or sitemap entry for a non-Academy item. It also raises at build time if an item carries `feature_academy` or `order_academy` without `show_academy`. Templates therefore never filter on membership — only on featuring and order.
 
@@ -173,7 +173,7 @@ Because the files are shared, membership, featuring and ordering are expressed w
 
 `feature_*` and `order_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. This site's `order_academy` values start as a subsequence of `order_leeatchison` and so have gaps — that sorts correctly, and either site can be re-sequenced without touching the other. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
 
-`canonical_site` (Spec0009) is set on **all 22 items**, not only the ten that appear on both
+`canonical_site` (Spec0009) is set on **every book and course**, not only the ten that appear on both
 sites — a key on a single-site item is a true statement of where that page belongs, and
 carrying it everywhere makes the rule uniform rather than a sparse exception list. Today's
 assignment rule is by source: books from O'Reilly Media → `leeatchison`, Independent →

@@ -9,6 +9,9 @@ show_academy: true
 order_academy: 1
 feature_academy: true
 canonical_site: academy
+duration: "~10 hrs · 5 modules · 10 assignments"
+level: "Advanced"
+updated: "Aug 2026"
 summary: "Vendor-neutral cloud architecture from the architect's seat — deployment models, managed services, infrastructure as code, cloud-native design, cost as a first-class constraint, and migration planning."
 ---
 
@@ -16,7 +19,7 @@ summary: "Vendor-neutral cloud architecture from the architect's seat — deploy
 
 Most cloud training teaches you a provider's console. This course teaches the judgment that sits above it — where a workload belongs, what lock-in actually costs, and why the elasticity you're paying for never showed up. Real services get named throughout as examples, but no lesson is built around any single vendor's offering, so the reasoning stays useful as the platforms keep changing.
 
-This is the second course in the *Architecting Scalable Systems Like Meta, Google, and Amazon* specialization, following *Scalable Availability in Software Architecture*. The two work in sequence, but this one stands on its own if the cloud decisions are already on your desk.
+This is the second of two companion courses, best taken in this order, following *Scalable Availability in Software Architecture*. The two work in sequence, but this one stands on its own if the cloud decisions are already on your desk.
 
 ## What You'll Learn
 
@@ -34,6 +37,4 @@ Architects, senior engineers, and the engineering leaders who sign off on their 
 
 ## Course Structure
 
-Five modules covering cloud architecture models, infrastructure as code and automation, cloud-native application design, the economics of the cloud, and migrating to the cloud — 16 video lessons plus readings, discussion prompts, and assignments.
-
-**Level:** Advanced &nbsp;&bull;&nbsp; **Platform:** Coursera &nbsp;&bull;&nbsp; **Certificate:** Shareable
+Five modules of video lessons, readings, and graded assignments — about 10 hours — covering cloud architecture models, infrastructure as code and automation, cloud-native application design, the economics of the cloud, and migrating to the cloud.

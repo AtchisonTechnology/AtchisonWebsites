@@ -2,32 +2,33 @@
 layout: course
 title: "Cloud Architecture: Advanced Concepts"
 platform: LinkedIn Learning
-platform_url: "https://www.linkedin.com/learning/cloud-architecture-advanced-concepts-25626673/orchestrating-your-cloud-architecture-25351358"
+platform_url: "https://www.linkedin.com/learning/cloud-architecture-advanced-concepts-25626673"
 show_leeatchison: true
 order_leeatchison: 6
 show_academy: true
 order_academy: 6
 canonical_site: leeatchison
-summary: "Advanced patterns for cloud systems already past the basics: event-driven design, multi-region resilience, service mesh, and cost at scale."
+duration: "2h 30m"
+level: "Advanced"
+updated: "Apr 2025"
+summary: "Lee's longest and newest LinkedIn Learning course: architecting a cloud infrastructure end to end, from core cloud types through serverless, security, AI, the edge, and sustainability."
 ---
 
 ## About This Course
 
-A foundational cloud course teaches you how to stand a system up. This one teaches what happens after it's running and the traffic, the regions, and the failure modes all start multiplying at once.
+This is Lee's longest and most recent LinkedIn Learning course — ten chapters on what a cloud infrastructure actually needs once you're past picking a provider and spinning up a VM.
 
-It picks up where beginner and intermediate cloud training stops, going deep on the patterns that only matter once a system is complex enough to need them, including designs built for remote-first and hybrid teams.
+It moves from the fundamental cloud types and structures through microservices, data management, and serverless computing, into cloud security and the operational reality of constructing and managing infrastructure at scale — then closes with three subjects most cloud courses skip entirely: where AI fits into cloud architecture, what changes at the edge, and cloud sustainability and green computing.
 
 ## What You'll Learn
 
-- Choosing among advanced microservices patterns instead of defaulting to the first one you read about
-- Designing event-driven systems that stay debuggable as they grow
-- Architecting across multiple regions and availability zones without hand-waving the failure modes
-- Deciding when a service mesh is worth its complexity, and when it isn't
-- Building resiliency with circuit breakers, bulkheads, and deliberate chaos testing
-- Architecting for cost at scale, where provisioning decisions alone stop being enough
+- Choosing the right cloud types and structures for a workload — public, private, hybrid, multi-cloud — and defending the choice
+- Structuring systems as microservices instead of one large deployable
+- Managing data and data flows across a distributed cloud architecture
+- Deciding when serverless computing is the right call, and when it isn't
+- Building cloud security in from the start, then constructing and managing an infrastructure that's built to run, not just launch
+- Where AI actually fits into cloud architecture, what's different at the edge, and what cloud sustainability and green computing means for the decisions you make
 
 ## Who This Is For
 
-Architects and senior engineers who already have foundational cloud architecture experience and are running systems complex enough that the basics no longer cover the failure modes they're seeing.
-
-**Platform:** LinkedIn Learning
+Architects and senior engineers who already have foundational cloud architecture experience and are ready to go deep on the full architecture — from the infrastructure layer through AI, the edge, and sustainability.

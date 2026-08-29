@@ -29,7 +29,7 @@ esbuild runs inside `bridgetown start`.
 ```
 shared/
 ├── _books/     # 10 book resources
-└── _courses/   # 12 course resources
+└── _courses/   # 16 course resources
 ```
 
 These are the canonical Bridgetown collection files for books and courses.
@@ -53,7 +53,7 @@ Ten items are shown on both sites, so each carries one more key —
 in the same site-suffix vocabulary. The same builder resolves it: on the site
 that does *not* own the page it emits a cross-domain `<link rel="canonical">`
 at the other domain and drops the page from that site's sitemap, while
-`og:url` stays self-referential everywhere. The key is set on all 22 items,
+`og:url` stays self-referential everywhere. The key is set on every book and course,
 not just the overlapping ten, and both builders enforce two rules that fail
 the build — an item on more than one site with no `canonical_site`, and a
 `canonical_site` naming a site the item is not shown on. That is what stops a
