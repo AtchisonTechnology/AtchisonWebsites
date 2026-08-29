@@ -13,9 +13,9 @@ title: Books
 </section>
 
 <%
-  all_books   = site.collections["books"].resources.sort_by { |b| b.data.order || 99 }
-  featured    = all_books.select { |b| b.data.featured }
-  secondary   = all_books.reject { |b| b.data.featured }
+  all_books   = site.collections["books"].resources.sort_by { |b| b.data.order_academy || 99 }
+  featured    = all_books.select { |b| b.data.feature_academy }
+  secondary   = all_books.reject { |b| b.data.feature_academy }
 %>
 
 <section class="featured-books-section">

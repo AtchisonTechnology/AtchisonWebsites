@@ -57,9 +57,39 @@ over the initializer and pin previews to the production hostname.
 
 ## Content
 
+> **These files are shared.** `src/_books` and `src/_courses` are symlinks to
+> `shared/_books` and `shared/_courses` at the repo root, which
+> `LeeAtchison` reads too. There are 10 books and 12 courses there; this site
+> shows the 2 books and 8 courses marked `show_academy`. Edit the files under
+> `shared/` — an edit lands on both sites — and never replace the symlinks
+> with real directories.
+
+### Per-site keys
+
+Which site shows an item, features it, and in what order, is set entirely in
+front matter (there is one key per site, and `show_*`/`feature_*` are booleans
+where **absent means false**, so only `true` is ever written):
+
+| Field                 | Description                                          |
+|-----------------------|------------------------------------------------------|
+| `show_academy`        | The item appears on this site                        |
+| `show_leeatchison`    | The item appears on leeatchison.com                  |
+| `feature_academy`     | Highlight on this site's home, books and courses pages |
+| `feature_leeatchison` | Highlight on leeatchison.com                         |
+| `order_academy`       | Sort order on this site (lower = first)              |
+| `order_leeatchison`   | Sort order on leeatchison.com                        |
+
+`plugins/builders/shared_content.rb` drops everything without `show_academy`
+when the collections are read, so a non-Academy item generates no page and no
+sitemap entry here. Writing `feature_academy` or `order_academy` on an item
+without `show_academy` fails the build. This site's `order_academy` values are
+a subsequence of `order_leeatchison` and so have gaps — that sorts correctly,
+and either site can be re-sequenced without touching the other.
+
 ### Books (`src/_books/`)
 
-Each book is a Markdown file with front matter. Key fields:
+Each book is a Markdown file with front matter. Key fields, alongside the
+per-site keys above:
 
 | Field               | Description                                            |
 |---------------------|--------------------------------------------------------|
@@ -68,28 +98,20 @@ Each book is a Markdown file with front matter. Key fields:
 | `amazon_url`        | Amazon link — **must include `?tag=leeatchison-20`**   |
 | `book_url`          | Publisher or canonical URL                             |
 | `badge` / `badge_style` | Optional badge label and CSS style                |
-| `featured`          | `true` to show in the `/books` featured grid           |
-| `academy` / `academy_featured` | Carried over from leeatchison.com; drives the home page's grouping |
-| `order`             | Sort order on listing pages (lower = first)            |
 | `summary`           | Short description                                      |
 | `testimonials[]`    | Array of `{quote, name, title}` objects                |
 
 ### Courses (`src/_courses/`)
 
-Each course is a Markdown file with front matter. Key fields:
+Each course is a Markdown file with front matter. Key fields, alongside the
+per-site keys above:
 
 | Field              | Description                                            |
 |--------------------|--------------------------------------------------------|
 | `title`            | Course title                                           |
 | `platform`         | Platform name (e.g. O'Reilly Media, LinkedIn Learning) |
 | `platform_url`     | Direct link to the course                              |
-| `academy` / `academy_featured` | Carried over from leeatchison.com; drives the home page's grouping |
-| `order`            | Sort order on listing pages (lower = first)            |
 | `summary`          | Short description                                      |
-
-Every item on this site is an Academy item, so `academy` is always `true` here. It is
-kept anyway so the home page reuses `LeeAtchison/src/academy.erb`'s selection logic
-unchanged and the two files stay diff-able.
 
 ### Adding Images
 

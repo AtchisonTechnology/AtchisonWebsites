@@ -342,3 +342,56 @@ folders, so no external coordination is needed. No open questions remain.
 
 **2026-08-29 — Moved to Implementing** at Lee's direction. Spec content is
 frozen from here; changes of scope start a new spec.
+
+**2026-08-29 — Implemented.** All eight steps done. `shared/_books` (10) and
+`shared/_courses` (12) created at the repo root; the four symlinks record as
+mode 120000; front matter rewritten across all 22 files per the migration
+tables; a `SharedContent` builder added to each site; the five templates
+updated; all three `CLAUDE.md` files updated.
+
+Two notes on the code as built, neither a change of scope:
+
+* **Builder class name.** Bridgetown 2.x autoloads `plugins/builders/` under a
+  `Builders` namespace via Zeitwerk, so the class is
+  `class Builders::SharedContent < SiteBuilder`, not the bare
+  `class SharedContent` in Solution §3. Written the spec's way the build dies
+  with `Zeitwerk::NameError`.
+* **The content-error check is in the builder.** Solution §2 asks that a
+  `feature_*` or `order_*` without its `show_*` be surfaced by the build, so
+  each site's builder raises on it before filtering, naming the file and the
+  stray keys. Testing item 8's grep still passes; this makes it a build
+  failure rather than a manual check.
+
+Testing results, both sites built locally:
+
+1. **Symlink resolution** — both build clean, all pages generated. ✅
+2. **Counts** — leeatchison.com 10 books / 12 courses; atchisonacademy.com
+   2 books / 8 courses, and no `/courses/cloud-center-of-excellence/` on the
+   Academy build. ✅
+3. **Sitemaps** — each lists only its own items (Academy: 2 books, 8 courses
+   plus the two index pages). ✅
+4. **Featuring** — verified by diffing the whole `output/` tree against a
+   build of the pre-change commit. leeatchison.com's output is
+   **byte-identical**. The Academy's differs in exactly one file,
+   `/courses/index.html`, which now features the four `feature_academy`
+   courses where it previously featured none — the intended change from Open
+   Question 2. The Academy home page is byte-identical. ✅
+5. **Ordering** — unchanged on both sites (item 4's diff proves it). The
+   independence proof was run: swapping `order_academy` on
+   `cloud-architecture-for-scalable-systems` and
+   `cloud-architecture-advanced-concepts` reordered only the Academy, with
+   leeatchison.com untouched; reverted. ✅
+6. **Related-item strips** — on the Academy build, the course page strip
+   offers only Academy courses and the book strip only the other Academy
+   book. ✅
+7. **Live edit** — **the watcher does follow the symlink.** With
+   `bin/bridgetown build --watch` running for both sites, one edit to
+   `shared/_courses/cloud-architecture-for-scalable-systems.md` regenerated
+   both sites within ~2s. No dev-loop annoyance to note. ✅
+8. **Key hygiene** — the retired-key grep returns nothing, and no item carries
+   a `feature_*` or `order_*` without its `show_*` (now also enforced at build
+   time; verified by deliberately introducing one and watching the Academy
+   build fail). ✅
+9. **Deploy previews** — not runnable locally; still to confirm on Netlify.
+
+`make test` (port derivation) still passes.
