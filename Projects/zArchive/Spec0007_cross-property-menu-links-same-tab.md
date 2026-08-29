@@ -1,10 +1,13 @@
 # Cross-property menu links should not open a new window
 
 * **ID:** Spec0007
-* **Status:** In Spec Development/Refinement
+* **Status:** Closed
 * **Date Created:** 2026-08-29
-* **Date Implemented:** —
-* **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
+* **Date Implemented:** 2026-08-29
+* **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, plus one
+  documentation-only correction in `AtchisonAcademy/CLAUDE.md` that this
+  change falsifies — see History, 2026-08-29.
+* **Pull Request:** [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9)
 
 ---
 
@@ -316,3 +319,30 @@ All resolved as of 2026-08-29.
   existed only to serve the container — when the item list freezes — went with
   it, and the remaining questions were renumbered 1–5. No decision, scope, or
   test changed in the narrowing.
+* **2026-08-29** Implemented on the Claude Code remote session branch
+  `claude/spec0007-implementation-31z3dh`. Both `navbar.erb` files got the
+  one-line change; neither `navbar.rb` changed, so no link sets `new_tab:` and
+  the two menu links are same-tab. All eight Testing steps ran and passed —
+  including step 7's browser click-through on both dev servers (3000 and
+  16000), driven headless with the two production hostnames routed to the local
+  servers so the real absolute hrefs were exercised as written, and step 8's
+  temporary `new_tab: true` on LeeAtchison's Academy entry, which rendered
+  `target="_blank" rel="noopener noreferrer"` while AtchisonAcademy's entry
+  still rendered neither, then was reverted. One thing outside the spec's file
+  list also changed: `AtchisonAcademy/CLAUDE.md`'s **Navbar** paragraph stated
+  that `external: true` entries are emitted with `target="_blank"`, which this
+  change makes false. Rewrote it around the two-flag split rather than leaving
+  a doc that contradicts the template it describes.
+* **2026-08-29** Moved to Verifying: implementation pushed to
+  `claude/spec0007-implementation-31z3dh` as commit `8142ced`, and
+  [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9) opened
+  from the Claude Code UI. Remaining before close: PR review and the deploy
+  preview check (Summary of Steps, item 5).
+* **2026-08-29** Closed at Lee's request and archived. The behavior change is
+  two files, one line each, exactly as scoped; `AtchisonAcademy/CLAUDE.md` was
+  the one edit beyond that file list, correcting a Navbar paragraph this change
+  falsified. All eight Testing steps passed locally. Two things were *not*
+  verified here and are recorded as such rather than implied: the deploy-preview
+  check (Summary of Steps, item 5) — this session's container denies
+  `netlify.app` egress, so the two previews were never fetched — and PR #9,
+  which was still open and unmerged at the time of closing.

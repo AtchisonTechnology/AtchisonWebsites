@@ -14,7 +14,7 @@
             <% if link[:external] %>
               <a href="<%= link[:path] %>"
                  class="<%= link_classes(link) %>"
-                 target="_blank" rel="noopener noreferrer"><%= link[:label] %></a>
+                 <% if link[:new_tab] %>target="_blank" rel="noopener noreferrer"<% end %>><%= link[:label] %></a>
             <% else %>
               <a href="<%= relative_url link[:path] %>"
                  class="<%= link_classes(link) %>"
