@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0006 | Retire leeatchison.com/academy and point all Academy links at atchisonacademy.com | Delete `LeeAtchison/src/academy.erb`, 301 `/academy` to `https://atchisonacademy.com/`, repoint the navbar entry and the two `courses.erb` buttons at the new domain, and remove the now-dead alias redirects — repo work only; the domain move is already done |
 
 ---
 
