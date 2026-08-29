@@ -392,6 +392,10 @@ Testing results, both sites built locally:
    a `feature_*` or `order_*` without its `show_*` (now also enforced at build
    time; verified by deliberately introducing one and watching the Academy
    build fail). ✅
-9. **Deploy previews** — not runnable locally; still to confirm on Netlify.
+9. **Deploy previews** — confirmed on PR #10. Netlify built both
+   `leeatchison` and `atchisonacademy` previews successfully from commit
+   `60ac2bd`, which is the proof the symlinks survive a fresh clone in CI;
+   the other four sites' previews were canceled, as the diff does not touch
+   them. ✅
 
 `make test` (port derivation) still passes.
