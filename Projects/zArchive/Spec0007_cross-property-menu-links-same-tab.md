@@ -1,7 +1,7 @@
 # Cross-property menu links should not open a new window
 
 * **ID:** Spec0007
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, plus one
@@ -338,3 +338,11 @@ All resolved as of 2026-08-29.
   [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9) opened
   from the Claude Code UI. Remaining before close: PR review and the deploy
   preview check (Summary of Steps, item 5).
+* **2026-08-29** Closed at Lee's request and archived. The behavior change is
+  two files, one line each, exactly as scoped; `AtchisonAcademy/CLAUDE.md` was
+  the one edit beyond that file list, correcting a Navbar paragraph this change
+  falsified. All eight Testing steps passed locally. Two things were *not*
+  verified here and are recorded as such rather than implied: the deploy-preview
+  check (Summary of Steps, item 5) — this session's container denies
+  `netlify.app` egress, so the two previews were never fetched — and PR #9,
+  which was still open and unmerged at the time of closing.
