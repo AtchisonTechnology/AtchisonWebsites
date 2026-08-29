@@ -8,22 +8,26 @@ order_leeatchison: 11
 show_academy: true
 order_academy: 11
 canonical_site: leeatchison
-summary: "How IT teams navigate post-acquisition mergers — the organizational changes, technical integration challenges, and career positioning strategies that matter most."
+summary: "Navigating a merger from the IT seat: overlapping systems, competing architectures, and where your job actually stands."
 ---
 
 ## About This Course
 
-Mergers and acquisitions create significant disruption for IT teams — new reporting structures, overlapping technology stacks, competing architectural visions, and uncertainty about roles and careers. This course explores the post-acquisition experience from the IT perspective, giving practitioners the knowledge and strategies to navigate it successfully.
+A merger announcement changes very little about the code and almost everything about the team writing it. New reporting lines, two technology stacks that both claim to be the standard, and a stretch of uncertainty nobody scheduled.
+
+This course walks the post-acquisition experience from the IT side specifically, not the general change-management version aimed at every department. It's about what to expect, what to influence, and how to come out of it with your role and your systems intact.
 
 ## What You'll Learn
 
-- How M&A processes typically unfold from an IT perspective
-- The most common IT integration challenges and how organizations address them
-- How to assess and communicate the state of your systems to acquiring or acquired leadership
-- Career positioning during organizational change
-- How to advocate for your team and your technology during integration
-- Patterns for successful IT merger integration
+- Reading how M&A integration typically unfolds from an IT vantage point
+- Recognizing the integration challenges that come up in nearly every merger, before they surprise you
+- Assessing your own systems clearly enough to represent them to acquiring or acquired leadership
+- Positioning your career through a reorganization instead of just waiting to see where you land
+- Advocating for your team and your technology choices during integration
+- Applying the patterns that make IT mergers go well, drawn from ones that didn't
 
 ## Who This Is For
 
-IT leaders, architects, and engineers in organizations going through or anticipating a merger or acquisition.
+IT managers, architects, and engineers whose organization is going through, or about to go through, a merger or acquisition.
+
+**Platform:** LinkedIn Learning

@@ -1,0 +1,36 @@
+# Platform access facts for the shared `_courses` collection (Spec0010).
+#
+# Keyed by the exact string used in each course's `platform:` field. Reached
+# from LeeAtchison and AtchisonAcademy through the same symlink pattern
+# Spec0008 established for the collections themselves:
+#
+#   AtchisonAcademy/src/_data/platforms.yml -> ../../../shared/_data/platforms.yml
+#   LeeAtchison/src/_data/platforms.yml     -> ../../../shared/_data/platforms.yml
+#
+# Any of the four values may be overridden per course by an optional
+# front-matter key of the same name (access_note:, info_url:, info_label:,
+# cta_label:). A course whose platform: is not a key here falls back to the
+# generic "Take This Course ->" and emits no access note.
+"LinkedIn Learning":
+  access_note: "Available exclusively on LinkedIn Learning, and included with a LinkedIn Learning subscription."
+  info_url:    "https://www.linkedin.com/learning/subscription/products"
+  info_label:  "LinkedIn Learning pricing & free trial"
+  cta_label:   "Get the Course on LinkedIn Learning"
+
+"Coursera":
+  access_note: "Available exclusively on Coursera. Audit the course for free, or enroll for graded assignments and a shareable certificate."
+  info_url:    "https://www.coursera.org/courseraplus"
+  info_label:  "Coursera pricing & Coursera Plus"
+  cta_label:   "Get the Course on Coursera"
+
+"O'Reilly Media":
+  access_note: "Available exclusively on the O'Reilly learning platform, and included with an O'Reilly subscription."
+  info_url:    "https://www.oreilly.com/online-learning/pricing"
+  info_label:  "O'Reilly pricing & free trial"
+  cta_label:   "Get the Course on O'Reilly"
+
+"Atchison Academy":
+  access_note: "Offered directly through Atchison Academy."
+  info_url:    ~
+  info_label:  ~
+  cta_label:   "Get the Course"

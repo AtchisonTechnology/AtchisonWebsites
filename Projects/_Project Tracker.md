@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0010 | Course descriptions, "get the course" links, pre-launch courses, and a hidden flag | Add `shared/_data/platforms.yml` platform access facts, an access note + closing CTA on `course.erb`, a `hidden:` flag, `availability: prelaunch` courses with UTM-tagged links, and rewritten descriptions for all 12 shared courses plus 4 new pre-launch course files |
 
 ---
 
@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0010 | Course descriptions, access links, and pre-launch courses | Rewrite all 12 course descriptions, add platform access notes with hero + closing "Get the Course at X" buttons, support pre-launch "Coming Soon" courses, and add a `hidden:` flag for books and courses |
+| — | — | *(none)* | — |
 
 ---
 

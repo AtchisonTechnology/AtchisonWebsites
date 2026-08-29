@@ -9,22 +9,25 @@ show_academy: true
 order_academy: 4
 feature_academy: true
 canonical_site: leeatchison
-summary: "A practical guide to cloud migration — the strategies, patterns, and practices that leading organizations use to move successfully to the cloud."
+summary: "The strategies and practices that move a migration from a slide deck to a running system, without the outage nobody planned for."
 ---
 
 ## About This Course
 
-Cloud transformation is one of the most significant competitive differentiators for modern organizations. This course provides a comprehensive foundation in cloud migration — covering the strategies, patterns, and operational practices that successful organizations use to migrate effectively.
+A cloud strategy is a plan. A migration is the part where the plan meets a production system that can't go down, and the two rarely line up as cleanly as the deck promised.
+
+This course covers the practices that close that gap: how to sequence a migration, what breaks if you skip a step, and how to keep the business running while the infrastructure underneath it changes. It's about execution, not the strategic decisions that come before it.
 
 ## What You'll Learn
 
-- The 6 R's of cloud migration: rehost, replatform, repurchase, refactor, retire, retain
-- How to assess and prioritize workloads for migration
-- Migration planning and risk management
-- Data migration strategies and challenges
-- How to maintain business continuity during migration
-- Post-migration optimization and operations
+- Choosing the right migration approach for a given workload, from the 6 R's: rehost, replatform, repurchase, refactor, retire, retain
+- Assessing and prioritizing which workloads move first, and why that order matters
+- Planning a migration with the risks named instead of assumed away
+- Migrating data without losing it, corrupting it, or taking the source system down
+- Keeping the business running throughout the migration, start to finish
 
 ## Who This Is For
 
-Technology leaders, architects, and engineers who are planning or executing a cloud migration and want a structured approach based on industry best practices.
+Architects, infrastructure engineers, and IT leaders responsible for actually executing a cloud migration, past the approval stage.
+
+**Platform:** O'Reilly Media
