@@ -3,7 +3,7 @@
 **PR:** [#15](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/15)
 
 * **ID:** Spec0012
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `shared/` (rendered by `AtchisonAcademy`)
@@ -197,3 +197,5 @@ build.
   unchanged at `architecting-systems-with-ai-prelaunch`. The repo-wide grep
   found no stragglers outside the archived Spec0010 and this spec file
   itself. PR created for review.
+- **2026-08-29 — Closed.** [PR #15](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/15)
+  merged into `main`. Archived.
