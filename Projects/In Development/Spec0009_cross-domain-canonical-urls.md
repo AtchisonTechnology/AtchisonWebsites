@@ -1,7 +1,7 @@
 # Cross-domain canonical URLs for shared books and courses
 
 * **ID:** Spec0009
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
@@ -369,4 +369,11 @@ from leeatchison's; 404/500 still emit neither tag; both new validation rules
 confirmed to fail both builds with the file named, then restored. Step 8 of the
 spec's Testing (deploy-preview check on the PR) is the only item outstanding — it
 can only be run once a PR exists.
+
+**2026-08-29 — Moved to Verifying.** PR
+[#11](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/11) opened against
+`main` from `claude/spec0009-implementation-664py7`. Testing steps 1–7 all pass
+locally; step 8 (the deploy-preview check) runs against the PR's Netlify previews and
+is the last item outstanding.
+
 
