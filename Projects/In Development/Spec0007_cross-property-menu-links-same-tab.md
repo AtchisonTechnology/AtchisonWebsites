@@ -1,10 +1,13 @@
 # Cross-property menu links should not open a new window
 
 * **ID:** Spec0007
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-29
-* **Date Implemented:** —
-* **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
+* **Date Implemented:** 2026-08-29
+* **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, plus one
+  documentation-only correction in `AtchisonAcademy/CLAUDE.md` that this
+  change falsifies — see History, 2026-08-29.
+* **Pull Request:** [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9)
 
 ---
 
@@ -330,3 +333,8 @@ All resolved as of 2026-08-29.
   that `external: true` entries are emitted with `target="_blank"`, which this
   change makes false. Rewrote it around the two-flag split rather than leaving
   a doc that contradicts the template it describes.
+* **2026-08-29** Moved to Verifying: implementation pushed to
+  `claude/spec0007-implementation-31z3dh` as commit `8142ced`, and
+  [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9) opened
+  from the Claude Code UI. Remaining before close: PR review and the deploy
+  preview check (Summary of Steps, item 5).
