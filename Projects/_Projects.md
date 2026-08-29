@@ -37,29 +37,6 @@ hasn't been created yet.)
   four sites were confirmed to carry the key, so the fix is one line in one
   file.
 
-### Cut atchisonacademy.com over to the standalone AtchisonAcademy site
-- **Type:** Spec
-- **Description:** Spec0005 created the `AtchisonAcademy/` site in the repo but
-  deliberately stopped at the repo boundary. The cutover is everything at the
-  Netlify and DNS layer, plus the one decision it defers: create the Netlify
-  site pointed at `AtchisonAcademy/` and configure its build settings; move
-  `atchisonacademy.com` (and `www.`) off the leeatchison.com site, where it is
-  currently an alias domain, and onto the new site; **delete** — not change —
-  the two 302 `atchisonacademy.com` redirect rules in
-  `LeeAtchison/netlify.toml`, which the comment block above them says are to be
-  removed once the standalone site exists; and decide what happens to
-  `leeatchison.com/academy`.
-- **Notes:** Carried from Spec0005's Open Question 4, deliberately deferred by
-  Lee on 2026-08-28 rather than forgotten. The realistic options for
-  `leeatchison.com/academy` are: keep it as a promotional page linking out to
-  the Academy; 301 it to `atchisonacademy.com`; or delete it. Whichever is
-  chosen, the `/academy` navbar entry in
-  `LeeAtchison/src/_components/shared/navbar.rb` and the `/academy` hero button
-  and closing CTA in `LeeAtchison/src/courses.erb` all point at it and would
-  have to follow. Until this lands, the Academy content lives at two addresses
-  and the new site is reachable only at its Netlify subdomain — Spec0005's
-  Open Question 3 records why that interim state is safe and short.
-
 ### Confirm Deploy Previews are enabled for stosa
 - **Type:** Spec
 - **Description:** On [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4), Netlify built deploy previews for
