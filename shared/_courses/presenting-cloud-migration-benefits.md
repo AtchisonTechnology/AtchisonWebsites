@@ -6,22 +6,26 @@ platform_url: "https://www.linkedin.com/learning/presenting-cloud-migration-bene
 show_leeatchison: true
 order_leeatchison: 10
 canonical_site: leeatchison
-summary: "A framework for presenting cloud migration proposals to executives — clarifying benefits, risks, and considerations in a way that drives confident decisions."
+summary: "A structured framework for pitching one specific cloud migration to executives and getting an actual yes."
 ---
 
 ## About This Course
 
-You've done the technical work. Now you need to present your cloud migration proposal to leadership and get a yes. This course gives you a structured framework for presenting cloud migration plans to executive audiences — covering how to articulate the business case, address objections, and give executives the confidence to approve significant investments.
+The technical work on a migration plan is done. Now it has to survive a room full of executives who didn't sit through any of it, and who need a reason to approve the spend.
+
+Where a general communication course teaches the skill, this one is the framework for a single moment: presenting a specific migration proposal and getting a decision. It walks through the business case, the objections you'll actually get, and how to run the room.
 
 ## What You'll Learn
 
-- How to structure a compelling cloud migration business case
-- What metrics and outcomes executives want to see
-- How to address the most common executive objections to cloud migration
-- Risk communication: how to be honest about risks without derailing the proposal
-- How to manage the conversation in the room
-- Following up to maintain momentum after the initial presentation
+- Structuring a cloud migration business case executives can follow without a technical primer first
+- Naming the metrics and outcomes that actually move an executive audience
+- Answering the objections a migration proposal predictably draws, before they're raised
+- Communicating migration risk honestly without talking the proposal out of approval
+- Managing the room during the actual presentation, beyond the slides that got you there
+- Following up after the meeting to keep the decision from stalling
 
 ## Who This Is For
 
-Technology leaders and senior architects who are responsible for securing executive approval for cloud migration initiatives.
+Architects and IT leaders about to present a specific cloud migration proposal to executive stakeholders and needing a structure for that one conversation.
+
+**Platform:** LinkedIn Learning

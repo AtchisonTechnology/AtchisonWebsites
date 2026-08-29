@@ -6,21 +6,25 @@ platform_url: "https://www.linkedin.com/learning/cloud-careers-from-developer-to
 show_leeatchison: true
 order_leeatchison: 7
 canonical_site: leeatchison
-summary: "What it means to become a cloud architect — how the role differs from cloud engineering and development, and how to thrive in it."
+summary: "What the cloud architect role actually is, how it differs from cloud engineering, and how to build a career path into it."
 ---
 
 ## About This Course
 
-Cloud architects are among the most in-demand professionals in technology. This course explores what the cloud architect role actually involves, how it differs from cloud developer and cloud engineer positions, and what it takes to build a successful career in this field.
+"Cloud architect" gets used loosely enough that developers eyeing the role often can't tell what it actually involves, or how it differs from the cloud engineer and cloud developer titles sitting next to it on the org chart.
+
+This course draws those lines clearly, then turns to the part that matters more: what it takes to actually get there, from a developer's starting point rather than a generic career-ladder template.
 
 ## What You'll Learn
 
-- The specific responsibilities and skills of a cloud architect
-- How cloud architect differs from cloud developer, cloud engineer, and solutions architect
-- Career pathways into cloud architecture from various backgrounds
-- How to build your reputation and influence as a cloud architect
-- Certifications, experience, and portfolio development for cloud architects
+- Telling apart the cloud architect, cloud engineer, and cloud developer roles by what each is actually accountable for
+- Identifying the skills a developer already has that transfer, and the ones that still need building
+- Building a career path into cloud architecture from wherever you're starting
+- Building the reputation and influence that make the title stick, beyond the certification
+- Evaluating which certifications and portfolio work actually matter for this specific role, and which are noise
 
 ## Who This Is For
 
-Developers, engineers, and IT professionals who want to move into cloud architecture, as well as organizations looking to develop cloud architect talent internally.
+Developers and engineers actively considering a move into cloud architecture, and the managers coaching someone toward it.
+
+**Platform:** LinkedIn Learning

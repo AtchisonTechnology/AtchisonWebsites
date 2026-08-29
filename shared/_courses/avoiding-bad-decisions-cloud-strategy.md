@@ -8,21 +8,25 @@ order_leeatchison: 5
 show_academy: true
 order_academy: 5
 canonical_site: leeatchison
-summary: "How to prepare before migrating to the cloud or building cloud-native applications — avoiding the most common and costly mistakes."
+summary: "The strategic decisions that go wrong before a cloud migration even starts, and how to catch them while they're still cheap to fix."
 ---
 
 ## About This Course
 
-Cloud migrations fail not because of technology, but because of decisions made before a single line of infrastructure code is written. This course gives you the frameworks to prepare properly — whether you're migrating an existing application to the cloud or building cloud-native from the start.
+Most cloud failures trace back to a decision made before any infrastructure was touched. A provider chosen for the wrong reason, a service boundary drawn around an org chart instead of a workload, a cost model nobody stress-tested. By the time the mistake shows up, it's already load-bearing.
+
+This course walks through the specific decisions that go wrong early and are expensive to unwind later. It's the course to take before you commit to a migration plan, not after you've already started building on one.
 
 ## What You'll Learn
 
-- The most common cloud strategy mistakes and how to avoid them
-- How to assess your application's cloud readiness before you begin
-- Decision frameworks for choosing cloud providers, services, and architectures
-- How to build a cloud strategy that aligns with your business objectives
-- Risk management approaches for cloud migrations
+- Spotting a bad cloud decision while it's still a decision, not yet a dependency
+- Assessing whether a workload is actually ready for the cloud, or just scheduled to move
+- Choosing providers, services, and architectures against your own constraints instead of the vendor's pitch
+- Building a cloud strategy that traces back to a business objective, not a mandate
+- Managing the risks specific to a cloud migration instead of generic project risk
 
 ## Who This Is For
 
-Technology leaders, architects, and senior engineers planning a cloud migration or cloud-native initiative who want to avoid costly mistakes before they happen.
+Architects, engineering leads, and IT decision-makers who are shaping a cloud strategy before it's locked in. It assumes you're close enough to the decision to still change it.
+
+**Platform:** LinkedIn Learning

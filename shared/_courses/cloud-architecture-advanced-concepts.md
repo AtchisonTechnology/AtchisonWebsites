@@ -8,22 +8,26 @@ order_leeatchison: 6
 show_academy: true
 order_academy: 6
 canonical_site: leeatchison
-summary: "New architectural patterns and concepts for IT professionals designing cloud systems, with particular relevance for modern distributed and hybrid environments."
+summary: "Advanced patterns for cloud systems already past the basics: event-driven design, multi-region resilience, service mesh, and cost at scale."
 ---
 
 ## About This Course
 
-This advanced course builds on foundational cloud architecture knowledge to explore the patterns and concepts that matter most for complex, modern cloud systems — including those designed for remote-first and hybrid work environments.
+A foundational cloud course teaches you how to stand a system up. This one teaches what happens after it's running and the traffic, the regions, and the failure modes all start multiplying at once.
+
+It picks up where beginner and intermediate cloud training stops, going deep on the patterns that only matter once a system is complex enough to need them, including designs built for remote-first and hybrid teams.
 
 ## What You'll Learn
 
-- Advanced microservices patterns and their trade-offs
-- Event-driven architecture in cloud environments
-- Multi-region and multi-availability-zone design strategies
-- Service mesh concepts and when they're worth the complexity
-- Advanced resiliency patterns: circuit breakers, bulkheads, and chaos engineering
-- Cost optimization architecture at scale
+- Choosing among advanced microservices patterns instead of defaulting to the first one you read about
+- Designing event-driven systems that stay debuggable as they grow
+- Architecting across multiple regions and availability zones without hand-waving the failure modes
+- Deciding when a service mesh is worth its complexity, and when it isn't
+- Building resiliency with circuit breakers, bulkheads, and deliberate chaos testing
+- Architecting for cost at scale, where provisioning decisions alone stop being enough
 
 ## Who This Is For
 
-IT professionals and architects who already have foundational cloud knowledge and want to deepen their expertise with advanced patterns for designing resilient, scalable cloud systems.
+Architects and senior engineers who already have foundational cloud architecture experience and are running systems complex enough that the basics no longer cover the failure modes they're seeing.
+
+**Platform:** LinkedIn Learning
