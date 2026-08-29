@@ -1,7 +1,7 @@
 # Retire leeatchison.com/academy and point all Academy links at atchisonacademy.com
 
 * **ID:** Spec0006
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-28
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, plus two documentation-only corrections
@@ -548,3 +548,20 @@ be tested locally at all.
   — it does not exercise them. And the other four sites' checks came back
   `neutral` (nothing changed for them), which is the expected shape for a
   single-site change.
+* **2026-08-29** Closed at Lee's request.
+  [PR #7](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/7) is
+  merged to `main` (merged by Lee, 2026-08-29): `leeatchison.com/academy` is
+  gone, `/academy` and `/academy/*` 301 to `https://atchisonacademy.com/`, the
+  navbar entry and both `courses.erb` buttons point at the new domain, the dead
+  alias redirects and the 96 orphaned CSS lines are removed, and the
+  `AtchisonAcademy` docs are corrected. No worktree was used (the work ran on a
+  Claude Code remote session branch, `claude/spec0005-spec0006-jxfv1k`), so
+  there is nothing to clean up.
+
+  **Carried out of this spec unverified:** Testing steps 7 and 8. Step 7 (the
+  `/academy` and `/academy/*` 301s, the `/ai-native` regression check) was never
+  run against a live host — the deploy preview was unreachable from the
+  implementation session's proxy — and step 8 (the `www.atchisonacademy.com`
+  hostname question) likewise. Both are now checkable directly against
+  production leeatchison.com and should be spot-checked by hand; anything they
+  turn up is a new Bug, not a reopening of this spec.
