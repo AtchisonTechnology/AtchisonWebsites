@@ -1,6 +1,6 @@
 # The books and courses collections live in the repo-root `shared/` folder and
 # are reached through symlinks at src/_books and src/_courses, so this site
-# reads all 22 items — including the ones that belong only to another site.
+# reads every book and course — including the ones that belong only to another site.
 #
 # Filter at read time, not in the index templates: a resource left in the
 # collection generates its own /books/:slug/ or /courses/:slug/ page and a

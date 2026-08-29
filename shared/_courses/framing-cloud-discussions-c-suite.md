@@ -8,6 +8,9 @@ order_leeatchison: 9
 show_academy: true
 order_academy: 9
 canonical_site: leeatchison
+duration: "1h 1m"
+level: "Intermediate"
+updated: "Jun 2025"
 summary: "Translating cloud decisions into language a C-suite audience will actually engage with, whatever the specific decision is."
 ---
 
@@ -19,14 +22,12 @@ This course is about the translation, not any one proposal. It's a general commu
 
 ## What You'll Learn
 
-- Reading what a given executive audience actually needs to hear before you walk into the room
-- Translating technical concepts into the business language a C-suite conversation runs on
+- Speaking to each executive by role — CFO, CTO, CSO, CIO — instead of pitching "the C-suite" as one audience
+- Translating technical concepts into the business language each of those conversations runs on
 - Framing cloud ROI in terms executives already use to evaluate other investments
-- Handling pointed executive questions about cost, risk, and vendor dependency without getting defensive
-- Building a narrative for cloud investment that holds up across more than one meeting
+- Handling pointed executive questions about cost and risk without getting defensive
+- Practicing a live CFO conversation with the course's AI-powered Role Play simulation — a feature none of Lee's other courses include
 
 ## Who This Is For
 
 Architects, IT leaders, and technical managers who present cloud decisions to executives and want a repeatable way to frame the conversation, not a one-time pitch.
-
-**Platform:** LinkedIn Learning

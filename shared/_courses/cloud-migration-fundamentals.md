@@ -9,6 +9,9 @@ show_academy: true
 order_academy: 4
 feature_academy: true
 canonical_site: leeatchison
+duration: "1h 28m"
+level: "Beginner"
+updated: "Jun 2024"
 summary: "The strategies and practices that move a migration from a slide deck to a running system, without the outage nobody planned for."
 ---
 
@@ -20,14 +23,13 @@ This course covers the practices that close that gap: how to sequence a migratio
 
 ## What You'll Learn
 
-- Choosing the right migration approach for a given workload, from the 6 R's: rehost, replatform, repurchase, refactor, retire, retain
+- Choosing a migration approach along the axes that actually decide it: All-at-Once vs Service-by-Service, and Inside Out vs Outside In
+- Defining, measuring, and baselining the KPIs that tell you whether the migration is actually working
+- Taking on the migration-architect role, and the decisions only that role makes
 - Assessing and prioritizing which workloads move first, and why that order matters
-- Planning a migration with the risks named instead of assumed away
 - Migrating data without losing it, corrupting it, or taking the source system down
-- Keeping the business running throughout the migration, start to finish
+- Managing risk, resource optimization, and cloud costing throughout the migration, not just at the start
 
 ## Who This Is For
 
 Architects, infrastructure engineers, and IT leaders responsible for actually executing a cloud migration, past the approval stage.
-
-**Platform:** O'Reilly Media
