@@ -376,4 +376,22 @@ can only be run once a PR exists.
 locally; step 8 (the deploy-preview check) runs against the PR's Netlify previews and
 is the last item outstanding.
 
+**2026-08-29 — Testing step 8 verified.** The PR's Netlify previews are not
+fetchable from the implementation environment (egress to `netlify.app` is blocked),
+so the preview build was reproduced locally instead — `CONTEXT=deploy-preview`,
+`DEPLOY_PRIME_URL=https://deploy-preview-11--<site>.netlify.app`,
+`BRIDGETOWN_ENV=production`, which is exactly what drives Netlify's preview behavior
+per Spec0004. Both sites show the asymmetry this spec accepts:
+
+- Academy preview, `/courses/cloud-migration-fundamentals/`: canonical
+  `https://leeatchison.com/...` (production, cross-domain), `og:url` the preview host.
+- LeeAtchison preview, `/books/the-software-conductor/`: canonical
+  `https://atchisonacademy.com/...` (production, cross-domain), `og:url` the preview host.
+- Self-canonical items on either preview: both tags on the preview host, unchanged
+  from Spec0004 behavior.
+
+All eight Testing steps now pass. Worth a browser spot-check of the live previews
+before merge, since that is the one thing the local reproduction cannot stand in for.
+
+
 
