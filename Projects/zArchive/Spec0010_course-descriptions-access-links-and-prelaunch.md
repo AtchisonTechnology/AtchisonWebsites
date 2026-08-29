@@ -1,10 +1,11 @@
 # Course descriptions, "get the course" links, pre-launch courses, and a hidden flag
 
 * **ID:** Spec0010
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-29
-* **Date Implemented:** —
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
+* **PR:** [#13](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/13)
 
 > **Program link.** This spec is the repo half of **PW1** in the Atchison Academy
 > `_Program Tracker.md` ("Course descriptions + 'get the course' links"). PW1's two
@@ -563,3 +564,17 @@ website page designs, which are tracked separately in the program tracker.
   expects the pre-launch CTA to retain value after Sept 30, so W7.7 **revises** the CTA
   copy to evergreen wording rather than retiring the block. The URL itself already survives
   via W7.7's existing recording-and-slides swap.
+
+**2026-08-29 (closed) — PR [#13](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/13)
+merged; spec archived.** Lee reviewed the implementation and approved it as-is. The two
+items noted as outstanding in the previous entry remain genuinely outstanding, not
+resolved by closing this spec:
+
+- The Course Structure/Level/Certificate fact check for the 10 non-Coursera courses
+  (§5) still needs a pass with real access to linkedin.com, coursera.org, and
+  oreilly.com — this session's network egress was blocked to all three throughout,
+  including after Lee attempted to grant access, and he chose to skip chasing it
+  further rather than block the merge on it.
+- **PW1's row and next action in the Academy `_Program Tracker.md` still need updating**
+  to match, per the Program link callout at the top of this file — that tracker is
+  outside this repo and nothing in this session could reach it.
