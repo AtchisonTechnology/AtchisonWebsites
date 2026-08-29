@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0010 | Course descriptions, access links, and pre-launch courses | Rewrite all 12 course descriptions, add platform access notes with hero + closing "Get the Course at X" buttons, support pre-launch "Coming Soon" courses, and add a `hidden:` flag for books and courses |
 
 ---
 
