@@ -4,6 +4,7 @@ title: Service Ownership and Criticality at Scale
 show_academy: true
 order_academy: 13
 canonical_site: academy
+platform: Atchison Academy
 availability: prelaunch
 prelaunch_url: "https://softwarearchitectureinsights.com/service-ownership-diagnostic"
 prelaunch_cta: "Take the Service Ownership Diagnostic"

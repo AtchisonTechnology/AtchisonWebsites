@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0011 | Rework the Academy courses hero, and give Academy-native courses a platform | Drop the lone LinkedIn Learning button from the `AtchisonAcademy` courses hero rather than adding Coursera and O'Reilly beside it, and replace the LinkedIn learners badge on both `AtchisonAcademy` and `LeeAtchison` with one neutral, transparent, on-palette `180,000+` badge, correcting the stale learner figure everywhere it appears; add `platform: Atchison Academy` to the four Academy-native courses plus a build-time guard requiring `platform` on every non-prelaunch course; and complete the `LeeAtchison` home-page platform cards to all four destinations — [PR #14](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/14). |
 
 ---
 
@@ -38,8 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0011 | Rework the Academy courses hero, and give Academy-native courses a platform | Drop the lone LinkedIn Learning button from the `AtchisonAcademy` courses hero rather than adding Coursera and O'Reilly beside it, and replace the LinkedIn learners badge on both `AtchisonAcademy` and `LeeAtchison` with one neutral, transparent, on-palette `180,000+` badge, correcting the stale learner figure everywhere it appears; add `platform: Atchison Academy` to the four Academy-native courses plus a build-time guard requiring `platform` on every non-prelaunch course; and complete the `LeeAtchison` home-page platform cards to all four destinations. |
-| 2 | Spec0012 | Point the pre-launch webinar link at the new /architecting-with-ai URL | Change `prelaunch_url` in `shared/_courses/architecting-systems-with-ai.md` from `/webinar-architecting-systems-with-ai` to `/architecting-with-ai` — one line, rendered by both CTAs on the Academy course page; the file name and therefore `utm_campaign` stay put, and the Kit-side redirect is already in place so there is no merge gate. |
+| 1 | Spec0012 | Point the pre-launch webinar link at the new /architecting-with-ai URL | Change `prelaunch_url` in `shared/_courses/architecting-systems-with-ai.md` from `/webinar-architecting-systems-with-ai` to `/architecting-with-ai` — one line, rendered by both CTAs on the Academy course page; the file name and therefore `utm_campaign` stay put, and the Kit-side redirect is already in place so there is no merge gate. |
 
 ---
 

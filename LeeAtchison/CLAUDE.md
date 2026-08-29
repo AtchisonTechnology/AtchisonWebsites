@@ -60,7 +60,7 @@ src/
     logo-academy.png      # Atchison Academy logo
     logo.svg              # Primary logo (SVG)
     favicon.png           # Favicon (Lee's headshot, 32×32)
-    linkedin-learners-badge.png  # LinkedIn Learning badge
+    learners-badge.png     # Neutral reach badge, 180,000+ learners (courses hero; byte-identical to AtchisonAcademy's copy)
     pets404.png           # 404 page illustration
     books/                # Resized book cover images (max 500px)
 frontend/
@@ -112,6 +112,13 @@ Netlify serves previews with an automatic `noindex` header, so it costs nothing 
 there is no way to know the other site's preview URL (see Spec0004).
 
 **Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`.
+
+`shared_content.rb`'s `validate_availability!` requires `platform` on every course whose
+`availability` is not `prelaunch` (Spec0011) — a "Coming Soon" page is exempt since it may
+legitimately not know its platform yet, but a shipped course must always say where it
+lives, so `courses.erb` and `course.erb` never render an empty platform label. Any string
+key in `shared/_data/platforms.yml` is a valid value; `"Atchison Academy"` is the one to
+use for a course offered directly rather than through a third-party platform.
 
 Because the files are shared, membership, featuring and ordering are expressed with one key per site (Spec0008) — `show_*` and `feature_*` are booleans where **absent means false**, so only `true` is ever written:
 

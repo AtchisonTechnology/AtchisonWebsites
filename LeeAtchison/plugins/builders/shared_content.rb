@@ -148,8 +148,9 @@ class Builders::SharedContent < SiteBuilder
   # nobody can actually take the course from yet. A "Coming Soon" page with no
   # destination is the failure this key exists to prevent, so it fails the
   # build rather than rendering a dead end. `availability: available` (the
-  # default when the key is absent) forbids all three `prelaunch_*` keys, so
-  # a shipped course can never accidentally carry stale pre-launch copy.
+  # default when the key is absent) forbids all three `prelaunch_*` keys and
+  # requires `platform`, so a shipped course can never accidentally carry
+  # stale pre-launch copy or render an empty platform label (Spec0011).
   def validate_availability!(resource)
     availability = resource.data[:availability] || "available"
 
@@ -174,6 +175,11 @@ class Builders::SharedContent < SiteBuilder
       unless present.empty?
         raise "#{resource.relative_path}: #{present.join(", ")} set without " \
               "availability: prelaunch"
+      end
+
+      unless resource.data[:platform]
+        raise "#{resource.relative_path}: availability: #{availability} requires " \
+              "platform — a course that isn't prelaunch must say where it lives"
       end
     end
   end
