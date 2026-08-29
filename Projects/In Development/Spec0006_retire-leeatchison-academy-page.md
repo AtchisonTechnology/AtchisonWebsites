@@ -1,13 +1,14 @@
 # Retire leeatchison.com/academy and point all Academy links at atchisonacademy.com
 
 * **ID:** Spec0006
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-28
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, plus two documentation-only corrections
   in `AtchisonAcademy` (`README.md`, `CLAUDE.md`) that this change falsifies —
   see History, 2026-08-29. No other site, and no code or content change to
   `AtchisonAcademy`.
+* **Pull Request:** [PR #7](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/7)
 
 ---
 
@@ -528,3 +529,22 @@ be tested locally at all.
     local build, so the `/academy` 301s, the `/ai-native` regression check, and
     the `www.atchisonacademy.com` question are only answerable on the PR's
     deploy preview and then in production.
+* **2026-08-29** [PR #7](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/7)
+  opened from `claude/spec0005-spec0006-jxfv1k`; moved to Verifying. That PR
+  carries both this spec's implementation and Spec0005's close-out. Testing
+  step 7 is now runnable against the PR's deploy preview — the `/academy` and
+  `/academy/*` 301s, the `/ai-native` regression check, and the
+  `www.atchisonacademy.com` hostname question all wait on it.
+* **2026-08-29** Testing step 7 attempted against the PR's `leeatchison`
+  deploy preview (`https://deploy-preview-7--leeatchison.netlify.app`) and
+  **blocked by the environment, not by anything in the change**: this session's
+  network egress proxy refuses `netlify.app`, so every `curl -sI` returned 403
+  from the proxy rather than reaching Netlify. Step 7 therefore still has to be
+  run by hand, against that preview host, before merge.
+
+  Two partial signals in the meantime, neither a substitute. Netlify's own
+  **"Redirect rules - leeatchison" check passed** on commit `894d7bc`, which
+  means the rewritten `netlify.toml` parses and both `/academy` rules deployed
+  — it does not exercise them. And the other four sites' checks came back
+  `neutral` (nothing changed for them), which is the expected shape for a
+  single-site change.
