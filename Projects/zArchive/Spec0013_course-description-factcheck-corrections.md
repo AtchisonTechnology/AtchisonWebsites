@@ -3,9 +3,9 @@
 **PR:** [#16](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/16)
 
 * **ID:** Spec0013
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-29
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy` (content lives in `shared/_courses/`, read by both)
 
 ---
@@ -458,3 +458,7 @@ work.
 Steps Needed are complete and both sites build cleanly in test and
 production. Lee said "create a PR," which is the process's explicit
 go-ahead to move this item to Verifying.
+
+**2026-08-29 — Closed.** [PR #16](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/16)
+merged. The Coursera specialization restore (§2a/§6) is carried forward in
+`_Projects.md` so it is not lost now that this spec is archived.
