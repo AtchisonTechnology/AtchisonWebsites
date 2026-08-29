@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0008 | Share the books and courses collections between leeatchison.com and atchisonacademy.com | Move `_books` and `_courses` to one canonical `shared/` folder symlinked into both sites, and replace the `academy` / `featured` / `academy_featured` / `order` keys with parallel per-site `show_`, `feature_` and `order_` keys, filtered per site by a `:site, :post_read` builder |
 
 ---
 
@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0007 | Cross-property menu links should not open a new window | Split the navbar's `external:` flag into `external:` plus a new opt-in `new_tab:`, so the **Academy** and **Lee Atchison** menu entries cross between leeatchison.com and atchisonacademy.com in the same tab — two files, one line each; the `courses.erb` buttons and stosa's Academy button deliberately keep `target="_blank"` |
 
 ---
 
