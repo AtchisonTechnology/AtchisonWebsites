@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0011 | Rework the Academy courses hero, and give Academy-native courses a platform | Drop the lone LinkedIn Learning button from the `AtchisonAcademy` courses hero rather than adding Coursera and O'Reilly beside it, and replace the LinkedIn learners badge on both `AtchisonAcademy` and `LeeAtchison` with one neutral, transparent, on-palette `180,000+` badge, correcting the stale learner figure everywhere it appears; add `platform: Atchison Academy` to the four Academy-native courses plus a build-time guard requiring `platform` on every non-prelaunch course; and complete the `LeeAtchison` home-page platform cards to all four destinations. |
 
 ---
 
