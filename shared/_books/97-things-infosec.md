@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 book_url: https://www.oreilly.com/library/view/97-things-every/9781098101381/
 show_leeatchison: true
 order_leeatchison: 8
+canonical_site: leeatchison
 summary: "Expert insights on information security — Lee Atchison contributed to this essential reference for security professionals."
 ---
 

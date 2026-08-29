@@ -8,6 +8,7 @@ order_leeatchison: 2
 show_academy: true
 order_academy: 2
 feature_academy: true
+canonical_site: academy
 summary: "Practical techniques for designing modern, high-scale applications that maintain strong availability while managing complexity, risk, and service dependencies."
 ---
 

@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 book_url: https://www.oreilly.com/library/view/97-things-every/9781492076728/
 show_leeatchison: true
 order_leeatchison: 7
+canonical_site: leeatchison
 summary: "A collection of expert insights on cloud engineering — Lee Atchison contributed to this essential reference for cloud practitioners."
 ---
 

@@ -5,6 +5,7 @@ platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-for-business-developing-a-cloud-center-of-excellence/beginning-your-cloud-center-of-excellence"
 show_leeatchison: true
 order_leeatchison: 8
+canonical_site: leeatchison
 summary: "How to establish a Cloud Center of Excellence (CCoE) — the organizational model that leading enterprises use to accelerate cloud adoption and governance."
 ---
 

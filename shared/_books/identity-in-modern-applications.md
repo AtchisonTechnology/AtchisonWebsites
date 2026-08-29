@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 book_url: https://www.oreilly.com/library/view/identity-in-modern/9781098107789/
 show_leeatchison: true
 order_leeatchison: 9
+canonical_site: leeatchison
 summary: "How to design and implement modern identity management — authentication, authorization, and user management in cloud-native applications."
 ---
 

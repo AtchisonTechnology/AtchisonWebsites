@@ -5,6 +5,7 @@ platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/presenting-cloud-migration-benefits-to-the-c-suite"
 show_leeatchison: true
 order_leeatchison: 10
+canonical_site: leeatchison
 summary: "A framework for presenting cloud migration proposals to executives — clarifying benefits, risks, and considerations in a way that drives confident decisions."
 ---
 
