@@ -1,7 +1,7 @@
 # Create the standalone AtchisonAcademy site
 
 * **ID:** Spec0005
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-28
 * **Date Implemented:** 2026-08-28
 * **Systems Impacted:** AtchisonAcademy (new, site index 5), plus repo-root
@@ -718,3 +718,9 @@ deploy preview and is the one check that cannot be faked locally.
   item (step 12), carrying OQ4's deferred `leeatchison.com/academy` decision and
   naming the three places on leeatchison.com that point at `/academy` and would
   have to follow it.
+* **2026-08-29** Closed at Lee's request. PR #6 is merged; `AtchisonAcademy/`
+  is on `main`, the Netlify site is live, and `atchisonacademy.com` resolves to
+  it. No worktree was used (the work ran on a Claude Code remote session
+  branch), so there is nothing to clean up. The follow-on work — retiring
+  `leeatchison.com/academy` and repointing every Academy link on that site — is
+  Spec0006 and is tracked separately.

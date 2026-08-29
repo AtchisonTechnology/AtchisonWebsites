@@ -125,12 +125,15 @@ per-site edit.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.
 
-## Netlify and the alias redirect
+## Netlify and the retired /academy page
 
-`netlify.toml` here has **no `[[redirects]]` section at all**. That is deliberate: the two
-302 rules sending `atchisonacademy.com` to `leeatchison.com/academy/` still live in
-`LeeAtchison/netlify.toml`, because that domain is still an alias on the leeatchison.com
-Netlify site. Until cutover, this site is reachable only at its Netlify subdomain and in
-local dev, and `leeatchison.com/academy` is unchanged. Creating the Netlify site, moving
-the domain, and deleting those redirect rules are cutover work tracked separately — do
-not do them as a side effect of a change here.
+`netlify.toml` here has **no `[[redirects]]` section at all**, and does not need one.
+The cutover is complete: `atchisonacademy.com` has its own Netlify site and resolves to
+this directory rather than being an alias on the leeatchison.com site, so the two 302
+rules that used to send it to `leeatchison.com/academy/` are gone from
+`LeeAtchison/netlify.toml` (Spec0006).
+
+Traffic now flows the other way. `leeatchison.com/academy` no longer exists — its page
+was deleted, and `/academy` and `/academy/*` 301 to `https://atchisonacademy.com/` from
+`LeeAtchison/netlify.toml`. Those rules live on that site because that is the site the
+requests arrive at; nothing here needs to know about them.

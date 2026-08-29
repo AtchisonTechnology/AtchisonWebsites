@@ -4,7 +4,7 @@ class Shared::Navbar < Bridgetown::Component
     { label: "AI-Native", path: "/ainative", featured: true },
     { label: "Books",     path: "/books" },
     { label: "Courses",   path: "/courses" },
-    { label: "Academy",   path: "/academy" },
+    { label: "Academy",   path: "https://atchisonacademy.com", external: true },
     { label: "About",     path: "/about" },
     { label: "Contact",   path: "/contact" },
   ].freeze
@@ -18,7 +18,8 @@ class Shared::Navbar < Bridgetown::Component
   end
 
   # Current page wins on exact match; section pages (a book or course detail)
-  # highlight their parent nav item via the prefix.
+  # highlight their parent nav item via the prefix. External links never match,
+  # since `relative_url`-shaped resource URLs never equal an absolute URL.
   def active?(path)
     current = @resource&.relative_url.to_s
     return current == "/" if path == "/"
