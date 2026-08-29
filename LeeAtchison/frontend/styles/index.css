@@ -643,8 +643,8 @@ body.homepage main {
 }
 
 .platform-cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -1955,6 +1955,8 @@ hr {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+
+  .platform-cards { grid-template-columns: 1fr; }
 
   .about-photo-block { order: -1; }
   .about-page-photo-block { align-items: center; }

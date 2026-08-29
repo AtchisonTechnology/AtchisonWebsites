@@ -4,6 +4,7 @@ title: Cloud Cost Architecture
 show_academy: true
 order_academy: 14
 canonical_site: academy
+platform: Atchison Academy
 hidden: true
 summary: "Architecting cost into a cloud system as a design constraint, not an afterthought discovered on the monthly bill."
 ---
