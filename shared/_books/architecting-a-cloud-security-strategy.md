@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 xxxbook_url: https://www.uptycs.com/resources/ebooks/architecting-cloud-security-strategy
 show_leeatchison: true
 order_leeatchison: 5
+canonical_site: leeatchison
 summary: "Essential planning for cloud security — how to design and implement a cloud security strategy that protects your organization."
 ---
 

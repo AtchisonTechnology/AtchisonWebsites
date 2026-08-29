@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 xxxbook_url: https://redis.io/resources/caching-at-scale-with-redis/
 show_leeatchison: true
 order_leeatchison: 6
+canonical_site: leeatchison
 summary: "A primer on application caching techniques using Redis — how to design and implement caching strategies that improve performance at scale."
 ---
 

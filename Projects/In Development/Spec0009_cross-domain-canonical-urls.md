@@ -1,9 +1,9 @@
 # Cross-domain canonical URLs for shared books and courses
 
 * **ID:** Spec0009
-* **Status:** In Development
+* **Status:** Implementing
 * **Date Created:** 2026-08-29
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
 
 ---
@@ -342,3 +342,30 @@ centralized in a shared YAML file, matching how Spec0006 and Spec0007 already
 handle cross-property URLs. Both copies carry a sync comment. No open questions
 remain that block implementation; Open Question 2 is a deliberate
 revisit-later note, not a blocker.
+
+**2026-08-29 — Moved to Implementing and implemented.** All six steps done on
+branch `claude/spec0009-implementation-664py7`: `canonical_site` added to all 22
+shared files per the assignment table; both `shared_content.rb` builders rewritten
+around the `SITES` registry + `SITE_KEY` (identical but for that one line, with the
+sync comment from Open Question 1); both `_head.erb` partials split `canonical` from
+`og:url`; both site `CLAUDE.md` files and the repo-root `CLAUDE.md` updated. The
+sitemap templates were unchanged, as the spec predicted.
+
+Two implementation details not spelled out in the spec:
+
+- The builder also raises on a `canonical_site` value that names no known site
+  (a typo). Without that guard the rule-3 check would `NoMethodError` on the
+  registry lookup instead of failing usefully.
+- `feature_*`/`order_*` are derived from `SITE_KEY` by interpolation, while
+  `show_*` comes from the `SITES` entry — that keeps the registry exactly as the
+  spec wrote it without restating the show flag twice.
+
+Testing: both sites build clean; all 22 items verified for canonical/`og:url` on
+every site they appear on; both sitemaps verified to contain only self-canonical
+URLs (25 on leeatchison, 7 on academy) with the six leeatchison-canonical courses
+absent from academy's and the two books + two courses canonical to academy absent
+from leeatchison's; 404/500 still emit neither tag; both new validation rules
+confirmed to fail both builds with the file named, then restored. Step 8 of the
+spec's Testing (deploy-preview check on the PR) is the only item outstanding — it
+can only be run once a PR exists.
+

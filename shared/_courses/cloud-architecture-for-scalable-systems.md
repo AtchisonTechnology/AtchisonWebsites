@@ -8,6 +8,7 @@ order_leeatchison: 1
 show_academy: true
 order_academy: 1
 feature_academy: true
+canonical_site: academy
 summary: "Vendor-neutral cloud architecture from the architect's seat — deployment models, managed services, infrastructure as code, cloud-native design, cost as a first-class constraint, and migration planning."
 ---
 

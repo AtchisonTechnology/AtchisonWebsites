@@ -16,6 +16,7 @@ feature_leeatchison: true
 show_academy: true
 order_academy: 3
 feature_academy: true
+canonical_site: academy
 summary: "A five-step process that fuels engagement, boosts agility, and drives lasting change in your organization."
 testimonials:
   - quote: "Practical insights based on their experience to drive transformations and optimize agility."

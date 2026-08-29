@@ -12,6 +12,7 @@ badge_style: oreilly
 show_leeatchison: true
 order_leeatchison: 4
 feature_leeatchison: true
+canonical_site: leeatchison
 summary: "Simplify operations, enable innovation, and cultivate successful cloud outcomes by taming IT complexity."
 ---
 
