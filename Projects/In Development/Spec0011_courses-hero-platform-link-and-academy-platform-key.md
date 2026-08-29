@@ -1,10 +1,11 @@
 # Rework the Academy courses hero, and give Academy-native courses a platform
 
 * **ID:** Spec0011
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `AtchisonAcademy`, `LeeAtchison`, `shared/`
+* **PR:** [#14](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/14)
 
 ---
 
