@@ -5,16 +5,15 @@ title: Home
 ---
 
 <%
-  all_books   = site.collections["books"].resources
-  all_courses = site.collections["courses"].resources
+  # The collections already hold only this site's items — the SharedContent
+  # builder drops everything without show_academy at read time.
+  academy_books            = site.collections["books"].resources.sort_by { |b| b.data.order_academy || 99 }
+  academy_books_featured   = academy_books.select { |b| b.data.feature_academy }
+  academy_books_other      = academy_books.reject { |b| b.data.feature_academy }
 
-  academy_books            = all_books.select   { |b| b.data.academy }.sort_by { |b| b.data.order || 99 }
-  academy_books_featured   = academy_books.select { |b| b.data.academy_featured }
-  academy_books_other      = academy_books.reject { |b| b.data.academy_featured }
-
-  academy_courses          = all_courses.select  { |c| c.data.academy }.sort_by { |c| c.data.order || 99 }
-  academy_courses_featured = academy_courses.select { |c| c.data.academy_featured }
-  academy_courses_other    = academy_courses.reject { |c| c.data.academy_featured }
+  academy_courses          = site.collections["courses"].resources.sort_by { |c| c.data.order_academy || 99 }
+  academy_courses_featured = academy_courses.select { |c| c.data.feature_academy }
+  academy_courses_other    = academy_courses.reject { |c| c.data.feature_academy }
 %>
 
 <section class="academy-hero">
