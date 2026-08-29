@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0009 | Cross-domain canonical URLs for shared books and courses | Add a `canonical_site` front-matter key to all 22 shared books and courses, resolve it in each site's `shared_content.rb` into a cross-domain `rel=canonical` plus a sitemap exclusion on the non-canonical site, keep `og:url` self-referential, and fail the build when a dual-site item declares no canonical or names a site it is not on |
+| — | — | *(none)* | — |
 
 ---
 
@@ -76,3 +76,4 @@ consecutive integers starting at 1.
 | Spec0006 | Retire leeatchison.com/academy and point all Academy links at atchisonacademy.com | Delete `LeeAtchison/src/academy.erb`, 301 `/academy` to `https://atchisonacademy.com/`, repoint the navbar entry and the two `courses.erb` buttons at the new domain, and remove the now-dead alias redirects — repo work only; the domain move is already done — [PR #7](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/7) | Closed | 2026-08-29 |
 | Spec0007 | Cross-property menu links should not open a new window | Split the navbar's `external:` flag into `external:` plus a new opt-in `new_tab:`, so the **Academy** and **Lee Atchison** menu entries cross between leeatchison.com and atchisonacademy.com in the same tab — two files, one line each; the `courses.erb` buttons and stosa's Academy button deliberately keep `target="_blank"` — [PR #9](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/9) | Closed | 2026-08-29 |
 | Spec0008 | Share the books and courses collections between leeatchison.com and atchisonacademy.com | Move `_books` and `_courses` to one canonical `shared/` folder symlinked into both sites, and replace the `academy` / `featured` / `academy_featured` / `order` keys with parallel per-site `show_`, `feature_` and `order_` keys, filtered per site by a `:site, :post_read` builder — [PR #10](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/10) | Closed | 2026-08-29 |
+| Spec0009 | Cross-domain canonical URLs for shared books and courses | Add a `canonical_site` front-matter key to all 22 shared books and courses, resolve it in each site's `shared_content.rb` into a cross-domain `rel=canonical` plus a sitemap exclusion on the non-canonical site, keep `og:url` self-referential, and fail the build when a dual-site item declares no canonical or names a site it is not on — [PR #11](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/11) | Closed | 2026-08-29 |

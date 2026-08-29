@@ -1,7 +1,7 @@
 # Cross-domain canonical URLs for shared books and courses
 
 * **ID:** Spec0009
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
@@ -392,6 +392,9 @@ per Spec0004. Both sites show the asymmetry this spec accepts:
 
 All eight Testing steps now pass. Worth a browser spot-check of the live previews
 before merge, since that is the one thing the local reproduction cannot stand in for.
+
+**2026-08-29 — Closed.** PR [#11](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/11)
+merged into `main`. Archived.
 
 
 
