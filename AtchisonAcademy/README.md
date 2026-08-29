@@ -4,10 +4,9 @@ Source code for [Atchison Academy](https://atchisonacademy.com) — Lee Atchison
 
 Built with [Bridgetown](https://www.bridgetownrb.com/) (v2.1.2), ERB templates, esbuild, and PostCSS. Deployed on Netlify.
 
-> **Status.** The site builds and is ready to have a Netlify site pointed at it. Until
-> that cutover happens, `atchisonacademy.com` is still an alias domain on the
-> leeatchison.com Netlify site and redirects to `leeatchison.com/academy/`, so this site
-> is reachable only at its Netlify subdomain and in local dev.
+> **Status.** Live. `atchisonacademy.com` has its own Netlify site and resolves here;
+> it is no longer an alias domain on the leeatchison.com site. `leeatchison.com/academy`
+> was retired in Spec0006 and now 301s to this site.
 
 ## Prerequisites
 
