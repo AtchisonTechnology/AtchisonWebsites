@@ -1,7 +1,7 @@
 # Correct the course descriptions against their live platform pages
 
 * **ID:** Spec0013
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-29
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy` (content lives in `shared/_courses/`, read by both)
@@ -447,3 +447,7 @@ unchanged and stays in Spec Development/Refinement** until Lee says to move it.
 **2026-08-29 — Superseded working file removed.** The standalone audit,
 `Projects/_Course_Description_Factcheck_2026-08-29.md`, was deleted; its
 evidence is carried in full by the Problem/Requirement and §1 sections above.
+
+**2026-08-29 — Moved to Implementing.** All Open Questions were already
+resolved; Lee gave the explicit go-ahead to move to Implementing and begin
+work.

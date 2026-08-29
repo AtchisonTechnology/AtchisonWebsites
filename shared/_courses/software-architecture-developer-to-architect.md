@@ -9,6 +9,9 @@ show_academy: true
 order_academy: 3
 feature_academy: true
 canonical_site: leeatchison
+duration: "57m"
+level: "Beginner"
+updated: "Dec 2025"
 summary: "What actually changes when a developer becomes a software architect, and how to make that transition on purpose."
 ---
 
@@ -25,9 +28,9 @@ One of Lee's most popular courses, this one draws that line clearly: what the ar
 - Communicating decisions to audiences a developer role never had to address
 - Evaluating architectural trade-offs and defending the decision you land on
 - Building influence over a system's direction without formal authority over the people building it
+- Working architecture into an agile process, and building the collaboration between dev and ops that architecture depends on
+- Designing for scale and availability, and raising the move to architect with your own manager when you're ready
 
 ## Who This Is For
 
 Senior developers and engineers who want to move into an architecture role, and the managers evaluating them for one.
-
-**Platform:** LinkedIn Learning

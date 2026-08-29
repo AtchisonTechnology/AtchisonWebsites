@@ -134,7 +134,7 @@ Because the files are shared, membership, featuring and ordering are expressed w
 
 `feature_*` and `order_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
 
-`canonical_site` (Spec0009) is set on **all 22 items**, not only the ten that appear on both
+`canonical_site` (Spec0009) is set on **every book and course**, not only the ten that appear on both
 sites — a key on a single-site item is a true statement of where that page belongs, and
 carrying it everywhere makes the rule uniform rather than a sparse exception list. Today's
 assignment rule is by source: books from O'Reilly Media → `leeatchison`, Independent →

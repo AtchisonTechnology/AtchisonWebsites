@@ -22,11 +22,17 @@ layout: default
 
 <section class="course-header">
   <div class="course-header-inner">
-    <% if prelaunch %>
-      <span class="course-platform-badge course-platform-badge--prelaunch">Coming Soon</span>
-    <% else %>
-      <span class="course-platform-badge"><%= data.platform || "Course" %></span>
-    <% end %>
+    <div class="course-badge-row">
+      <% if prelaunch %>
+        <span class="course-platform-badge course-platform-badge--prelaunch">Coming Soon</span>
+      <% else %>
+        <span class="course-platform-badge"><%= data.platform || "Course" %></span>
+        <% stats = [data.duration, data.level, (data.updated ? "Updated #{data.updated}" : nil)].compact %>
+        <% if stats.any? %>
+          <span class="course-stat-line"><%= stats.join(" • ") %></span>
+        <% end %>
+      <% end %>
+    </div>
     <h1><%= data.title %></h1>
     <% if hero_url %>
       <a href="<%= hero_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><%= cta_label %></a>

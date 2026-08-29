@@ -9,6 +9,9 @@ show_academy: true
 order_academy: 2
 feature_academy: true
 canonical_site: academy
+duration: "~8 hrs · 5 modules · 14 assignments"
+level: "Advanced"
+updated: "Apr 2026"
 summary: "Practical techniques for designing modern, high-scale applications that maintain strong availability while managing complexity, risk, and service dependencies."
 ---
 
@@ -16,7 +19,7 @@ summary: "Practical techniques for designing modern, high-scale applications tha
 
 Most availability problems aren't caused by one big failure. They come from small decisions, an unowned dependency, an SLA nobody actually measures, that compound until the system can't stay up under real conditions. This course covers the patterns and decisions that separate resilient systems from fragile ones, drawn from techniques proven in SaaS, e-commerce, and enterprise systems.
 
-This is the first course in the *Architecting Scalable Systems Like Meta, Google, and Amazon* specialization, followed by *Cloud Architecture for Scalable Systems*. It stands on its own if availability is the problem in front of you right now.
+This is the first of two companion courses, best taken in this order, followed by *Cloud Architecture for Scalable Systems*. It stands on its own if availability is the problem in front of you right now.
 
 ## What You'll Learn
 
@@ -34,5 +37,3 @@ Software architects, operations architects, and aspiring architects designing sy
 ## Course Structure
 
 Five modules covering availability fundamentals, SLA measurement, service API design, service tier implementation, and large-scale architecture — approximately 8 hours total.
-
-**Level:** Advanced &nbsp;&bull;&nbsp; **Platform:** Coursera &nbsp;&bull;&nbsp; **Certificate:** Shareable
