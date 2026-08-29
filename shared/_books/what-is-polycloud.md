@@ -7,6 +7,7 @@ publisher: "O'Reilly Media"
 book_url: https://www.oreilly.com/library/view/what-is-polycloud/9781098104634/
 show_leeatchison: true
 order_leeatchison: 10
+canonical_site: leeatchison
 summary: "An exploration of polycloud architecture — using multiple cloud providers strategically to maximize flexibility, resilience, and avoid vendor lock-in."
 ---
 

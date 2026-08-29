@@ -14,6 +14,7 @@ badge_style: oreilly
 show_leeatchison: true
 order_leeatchison: 2
 feature_leeatchison: true
+canonical_site: leeatchison
 summary: "How to maintain high availability and manage risk in the cloud. An essential resource for technical teams worldwide."
 testimonials:
   - quote: "Don't bet against your business. Build as if being successful at scale is a foregone conclusion. Architecting for Scale tells you in a no-nonsense way how to go about it."

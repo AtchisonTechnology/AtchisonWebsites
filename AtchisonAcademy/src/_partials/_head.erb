@@ -15,13 +15,20 @@
     absolute_url(resource.relative_url)
   end
 
+  # Canonical and og:url diverge for a shared book or course whose canonical
+  # page lives on the other site: `shared_content.rb` sets `canonical_url` to
+  # that site's production URL, while og:url stays self-referential so a
+  # shared card sends traffic to the page that was actually shared.
+  # See Spec0009.
+  canonical_url = page_url ? (resource.data.canonical_url || page_url) : nil
+
   og_image_url = absolute_url("/images/og-card.png")
   og_type = defined?(resource) && resource && resource.collection&.label == "posts" ? "article" : "website"
 %>
 
 <meta name="description" content="<%= page_description %>" />
-<% if page_url %>
-<link rel="canonical" href="<%= page_url %>" />
+<% if canonical_url %>
+<link rel="canonical" href="<%= canonical_url %>" />
 <% end %>
 
 <meta property="og:title" content="<%= page_title %>" />

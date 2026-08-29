@@ -8,6 +8,7 @@ order_leeatchison: 3
 show_academy: true
 order_academy: 3
 feature_academy: true
+canonical_site: leeatchison
 summary: "Explore the transition from experienced developer to software architect — what the role requires, how it differs, and how to make the leap successfully."
 ---
 

@@ -130,6 +130,26 @@ per-site edit.
 
 `plugins/builders/shared_content.rb` filters the collections at `:site, :post_read` down to the items carrying `show_academy`, so this site never generates a page or sitemap entry for a non-Academy item. It also raises at build time if an item carries `feature_academy` or `order_academy` without `show_academy`. Templates therefore never filter on membership — only on featuring and order.
 
+The same builder also resolves each item's `canonical_site` into cross-domain SEO
+(Spec0009). It carries a `SITES` registry — site key → `show_` flag and production URL —
+and a single `SITE_KEY`, which is the only line that differs from the `LeeAtchison`
+copy; `show_academy`, `feature_academy` and `order_academy` are all derived from it, so a
+seventh site is one new `SITES` entry in each builder rather than a rewrite. **The `SITES`
+constant is duplicated in both builders and must be kept in sync by hand** — deliberate,
+matching how Spec0006 and Spec0007 already hardcode cross-property URLs in each site's own
+files; a divergence shows up immediately in the canonical tag of the first page you look at.
+
+When an item's `canonical_site` names the *other* site, the builder sets `canonical_url`
+on the resource (that site's production URL plus the same path — both sites publish these
+collections at identical paths) and `sitemap_exclude: true`. `_head.erb` emits
+`canonical_url` as `<link rel="canonical">` when present, while `og:url` stays
+self-referential so a shared card sends traffic to the page that was actually shared; and
+`sitemap.xml.erb` already rejects `sitemap_exclude`, so it needed no change. The page
+itself stays live, linked, and reachable — it simply stops being volunteered for indexing.
+The cross-domain URL is emitted on deploy previews too, always pointing at production:
+Netlify serves previews with an automatic `noindex` header, so it costs nothing there, and
+there is no way to know the other site's preview URL (see Spec0004).
+
 **Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`.
 
 Because the files are shared, membership, featuring and ordering are expressed with one key per site (Spec0008) — `show_*` and `feature_*` are booleans where **absent means false**, so only `true` is ever written:
@@ -142,8 +162,19 @@ Because the files are shared, membership, featuring and ordering are expressed w
 | `feature_leeatchison` | Featured on leeatchison.com |
 | `order_academy` | Sort position on this site |
 | `order_leeatchison` | Sort position on leeatchison.com |
+| `canonical_site` | Which site owns the SEO original of this item's page — `academy` or `leeatchison` |
 
 `feature_*` and `order_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. This site's `order_academy` values start as a subsequence of `order_leeatchison` and so have gaps — that sorts correctly, and either site can be re-sequenced without touching the other. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
+
+`canonical_site` (Spec0009) is set on **all 22 items**, not only the ten that appear on both
+sites — a key on a single-site item is a true statement of where that page belongs, and
+carrying it everywhere makes the rule uniform rather than a sparse exception list. Today's
+assignment rule is by source: books from O'Reilly Media → `leeatchison`, Independent →
+`academy`; courses from LinkedIn Learning or O'Reilly Media → `leeatchison`, Coursera →
+`academy`. Two further build failures come from this key: an item with `show_` true for more
+than one site and no `canonical_site`, and a `canonical_site` naming a site whose `show_`
+flag is not set on that item. Those two rules are what stop a new item, or a flipped `show_`
+flag, from silently re-creating duplicate pages across the two domains.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.
 

@@ -7,6 +7,7 @@ show_leeatchison: true
 order_leeatchison: 9
 show_academy: true
 order_academy: 9
+canonical_site: leeatchison
 summary: "How IT teams can communicate cloud benefits, risks, and strategy to executive decision-makers in language that resonates and drives decisions."
 ---
 

@@ -1,10 +1,11 @@
 # Cross-domain canonical URLs for shared books and courses
 
 * **ID:** Spec0009
-* **Status:** In Development
+* **Status:** Verifying
 * **Date Created:** 2026-08-29
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
+* **Pull Request:** [#11](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/11)
 
 ---
 
@@ -342,3 +343,55 @@ centralized in a shared YAML file, matching how Spec0006 and Spec0007 already
 handle cross-property URLs. Both copies carry a sync comment. No open questions
 remain that block implementation; Open Question 2 is a deliberate
 revisit-later note, not a blocker.
+
+**2026-08-29 — Moved to Implementing and implemented.** All six steps done on
+branch `claude/spec0009-implementation-664py7`: `canonical_site` added to all 22
+shared files per the assignment table; both `shared_content.rb` builders rewritten
+around the `SITES` registry + `SITE_KEY` (identical but for that one line, with the
+sync comment from Open Question 1); both `_head.erb` partials split `canonical` from
+`og:url`; both site `CLAUDE.md` files and the repo-root `CLAUDE.md` updated. The
+sitemap templates were unchanged, as the spec predicted.
+
+Two implementation details not spelled out in the spec:
+
+- The builder also raises on a `canonical_site` value that names no known site
+  (a typo). Without that guard the rule-3 check would `NoMethodError` on the
+  registry lookup instead of failing usefully.
+- `feature_*`/`order_*` are derived from `SITE_KEY` by interpolation, while
+  `show_*` comes from the `SITES` entry — that keeps the registry exactly as the
+  spec wrote it without restating the show flag twice.
+
+Testing: both sites build clean; all 22 items verified for canonical/`og:url` on
+every site they appear on; both sitemaps verified to contain only self-canonical
+URLs (25 on leeatchison, 7 on academy) with the six leeatchison-canonical courses
+absent from academy's and the two books + two courses canonical to academy absent
+from leeatchison's; 404/500 still emit neither tag; both new validation rules
+confirmed to fail both builds with the file named, then restored. Step 8 of the
+spec's Testing (deploy-preview check on the PR) is the only item outstanding — it
+can only be run once a PR exists.
+
+**2026-08-29 — Moved to Verifying.** PR
+[#11](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/11) opened against
+`main` from `claude/spec0009-implementation-664py7`. Testing steps 1–7 all pass
+locally; step 8 (the deploy-preview check) runs against the PR's Netlify previews and
+is the last item outstanding.
+
+**2026-08-29 — Testing step 8 verified.** The PR's Netlify previews are not
+fetchable from the implementation environment (egress to `netlify.app` is blocked),
+so the preview build was reproduced locally instead — `CONTEXT=deploy-preview`,
+`DEPLOY_PRIME_URL=https://deploy-preview-11--<site>.netlify.app`,
+`BRIDGETOWN_ENV=production`, which is exactly what drives Netlify's preview behavior
+per Spec0004. Both sites show the asymmetry this spec accepts:
+
+- Academy preview, `/courses/cloud-migration-fundamentals/`: canonical
+  `https://leeatchison.com/...` (production, cross-domain), `og:url` the preview host.
+- LeeAtchison preview, `/books/the-software-conductor/`: canonical
+  `https://atchisonacademy.com/...` (production, cross-domain), `og:url` the preview host.
+- Self-canonical items on either preview: both tags on the preview host, unchanged
+  from Spec0004 behavior.
+
+All eight Testing steps now pass. Worth a browser spot-check of the live previews
+before merge, since that is the one thing the local reproduction cannot stand in for.
+
+
+

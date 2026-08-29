@@ -5,6 +5,7 @@ platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-careers-from-developer-to-architect"
 show_leeatchison: true
 order_leeatchison: 7
+canonical_site: leeatchison
 summary: "What it means to become a cloud architect — how the role differs from cloud engineering and development, and how to thrive in it."
 ---
 

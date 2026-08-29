@@ -7,6 +7,7 @@ show_leeatchison: true
 order_leeatchison: 5
 show_academy: true
 order_academy: 5
+canonical_site: leeatchison
 summary: "How to prepare before migrating to the cloud or building cloud-native applications — avoiding the most common and costly mistakes."
 ---
 
