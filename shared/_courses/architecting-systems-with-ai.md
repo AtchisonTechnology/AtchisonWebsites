@@ -4,6 +4,7 @@ title: Architecting Systems That Use AI
 show_academy: true
 order_academy: 12
 canonical_site: academy
+platform: Atchison Academy
 availability: prelaunch
 prelaunch_url: "https://softwarearchitectureinsights.com/webinar-architecting-systems-with-ai"
 prelaunch_cta: "Save Your Seat — Free Live Webinar"
