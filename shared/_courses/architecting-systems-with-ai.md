@@ -6,7 +6,7 @@ order_academy: 12
 canonical_site: academy
 platform: Atchison Academy
 availability: prelaunch
-prelaunch_url: "https://softwarearchitectureinsights.com/webinar-architecting-systems-with-ai"
+prelaunch_url: "https://softwarearchitectureinsights.com/architecting-with-ai"
 prelaunch_cta: "Save Your Seat — Free Live Webinar"
 prelaunch_note: "This course is in development. The ideas behind it get their first public airing in a free live webinar on Wednesday, September 30."
 summary: "Architecting around AI components without inheriting their unpredictability as your own production risk."
