@@ -1,9 +1,9 @@
 # Point the pre-launch webinar link at the new /architecting-with-ai URL
 
 * **ID:** Spec0012
-* **Status:** In Development
+* **Status:** Verifying
 * **Date Created:** 2026-08-29
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `shared/` (rendered by `AtchisonAcademy`)
 
 ---
@@ -188,3 +188,10 @@ build.
   are a record of what was decided then, not a live index of current values.
 - **2026-08-29 — Post-webinar cleanup split out** as Open Question 1 rather
   than being absorbed into this change.
+- **2026-08-29 — Implemented.** `prelaunch_url` updated in
+  `shared/_courses/architecting-systems-with-ai.md`. Verified via a clean
+  `AtchisonAcademy` build and inspection of the rendered course page: both the
+  hero and closing CTA hrefs point at the new URL with `utm_campaign`
+  unchanged at `architecting-systems-with-ai-prelaunch`. The repo-wide grep
+  found no stragglers outside the archived Spec0010 and this spec file
+  itself. PR created for review.
