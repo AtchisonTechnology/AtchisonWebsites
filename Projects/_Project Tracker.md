@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0012 | Point the pre-launch webinar link at the new /architecting-with-ai URL | Change `prelaunch_url` in `shared/_courses/architecting-systems-with-ai.md` from `/webinar-architecting-systems-with-ai` to `/architecting-with-ai` — one line, rendered by both CTAs on the Academy course page; the file name and therefore `utm_campaign` stay put, and the Kit-side redirect is already in place so there is no merge gate. |
 
 ---
 
