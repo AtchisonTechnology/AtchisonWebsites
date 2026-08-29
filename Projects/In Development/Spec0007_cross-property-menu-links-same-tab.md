@@ -1,7 +1,7 @@
 # Cross-property menu links should not open a new window
 
 * **ID:** Spec0007
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-29
 * **Date Implemented:** —
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
@@ -316,3 +316,17 @@ All resolved as of 2026-08-29.
   existed only to serve the container — when the item list freezes — went with
   it, and the remaining questions were renumbered 1–5. No decision, scope, or
   test changed in the narrowing.
+* **2026-08-29** Implemented on the Claude Code remote session branch
+  `claude/spec0007-implementation-31z3dh`. Both `navbar.erb` files got the
+  one-line change; neither `navbar.rb` changed, so no link sets `new_tab:` and
+  the two menu links are same-tab. All eight Testing steps ran and passed —
+  including step 7's browser click-through on both dev servers (3000 and
+  16000), driven headless with the two production hostnames routed to the local
+  servers so the real absolute hrefs were exercised as written, and step 8's
+  temporary `new_tab: true` on LeeAtchison's Academy entry, which rendered
+  `target="_blank" rel="noopener noreferrer"` while AtchisonAcademy's entry
+  still rendered neither, then was reverted. One thing outside the spec's file
+  list also changed: `AtchisonAcademy/CLAUDE.md`'s **Navbar** paragraph stated
+  that `external: true` entries are emitted with `target="_blank"`, which this
+  change makes false. Rewrote it around the two-flag split rather than leaving
+  a doc that contradicts the template it describes.
