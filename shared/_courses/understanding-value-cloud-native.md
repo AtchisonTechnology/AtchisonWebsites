@@ -6,22 +6,26 @@ platform_url: "https://www.linkedin.com/learning/understanding-the-value-of-clou
 show_leeatchison: true
 order_leeatchison: 12
 canonical_site: leeatchison
-summary: "Why cloud-native architecture matters and how to make the case for it — for solution architects and IT decision-makers navigating the shift from traditional to cloud-native."
+summary: "What cloud-native actually means, what it costs, and how to make the case for it to a skeptical stakeholder."
 ---
 
 ## About This Course
 
-Gartner projects that more than 85% of enterprises will adopt cloud-native technologies by 2025. But what does that actually mean — and why does it matter enough to justify the significant investment required? This course provides solution architects and IT decision-makers with a clear-eyed understanding of cloud-native architecture's value proposition and the genuine trade-offs involved.
+"Cloud-native" gets applied to almost anything running on a cloud provider, which empties the term of most of its meaning right when organizations are being asked to invest heavily in it.
+
+This course draws the line between cloud-hosted and genuinely cloud-native, then makes the honest case: what the investment actually buys, what it costs in practice, and when it isn't the right call. It's the value conversation, not the implementation patterns covered in Cloud Architecture: Advanced Concepts.
 
 ## What You'll Learn
 
-- What cloud-native architecture actually means and what distinguishes it from "cloud-hosted"
-- The specific business and technical benefits cloud-native provides
-- The real costs and organizational changes cloud-native requires
-- How to evaluate whether cloud-native is the right approach for a given workload
-- How to make the case for cloud-native investment to skeptical stakeholders
-- Patterns for incremental cloud-native adoption
+- Distinguishing cloud-native architecture from software that's simply hosted on the cloud
+- Naming the specific business and technical benefits cloud-native actually delivers
+- Accounting for the real costs and organizational changes cloud-native requires
+- Evaluating whether cloud-native is the right approach for a specific workload, not every workload
+- Making the case for cloud-native investment to a stakeholder who isn't already convinced
+- Sequencing an incremental move toward cloud-native instead of a single big rewrite
 
 ## Who This Is For
 
-Solution architects, enterprise architects, and IT decision-makers who need to understand, evaluate, and advocate for cloud-native architecture in their organizations.
+Solution architects and IT decision-makers evaluating whether cloud-native is worth the investment for their organization, not engineers already sold on it.
+
+**Platform:** LinkedIn Learning

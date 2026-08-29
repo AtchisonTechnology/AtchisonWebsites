@@ -1,10 +1,11 @@
 # Course descriptions, "get the course" links, pre-launch courses, and a hidden flag
 
 * **ID:** Spec0010
-* **Status:** In Spec Development/Refinement
+* **Status:** Closed
 * **Date Created:** 2026-08-29
-* **Date Implemented:** —
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`, `shared/`
+* **PR:** [#13](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/13)
 
 > **Program link.** This spec is the repo half of **PW1** in the Atchison Academy
 > `_Program Tracker.md` ("Course descriptions + 'get the course' links"). PW1's two
@@ -427,6 +428,71 @@ account — this spec cannot do it.**
 
 ## History of Updates
 
+**2026-08-29 (implementation) — Steps 1–9 done; steps 10–11 need Lee.**
+
+All five changes from the Solution section are implemented on both sites:
+
+- `shared/_data/platforms.yml` created and symlinked into both sites at
+  `src/_data/platforms.yml`, exactly as specified. Verified `site.data.platforms`
+  resolves correctly through the symlink in both dev builds.
+- `shared_content.rb` extended in both copies (kept in sync by hand, per the
+  existing convention): `availability`/`prelaunch_*` validation, the `hidden:`
+  filter with the `CONTEXT`-aware production test, and the `prelaunch_cta_url`
+  template helper for UTM tagging (merges into the four params into the stored
+  clean URL at render time, deriving `utm_source` from the builder's own `SITES`
+  entry).
+- `course.erb` updated identically in both sites: hero access note + info link,
+  `cta_label` on both buttons, the closing CTA block, and the pre-launch
+  "Coming Soon" branch (badge, note, both buttons retargeted, no access note).
+  `courses.erb`'s grid cards and the "More Courses" strip also show the
+  "Coming Soon" pill in place of the platform badge.
+- New CSS added identically to both `frontend/styles/index.css` files (the new
+  blocks only — the two files were already non-identical before this spec, per
+  AtchisonAcademy's own CLAUDE.md, so "byte-identical" was read as "the same
+  new rules," not a retroactive merge of the pre-existing divergence).
+- All 12 existing course files rewritten to the target shape. The `hidden:`
+  flag and the four new pre-launch files are implemented per §3–§6.
+
+**All four validation rules, the hidden-flag matrix (dev/production/deploy-preview/
+branch-deploy), the canonical-runs-before-hidden check, both `rake test` builds,
+the UTM merge (including the no-double-`?` case), and the visual rendering on
+both dev servers (desktop and mobile, one course per platform plus a pre-launch
+course) were all verified working exactly as specified — see the Testing
+section for what each check confirmed.**
+
+Two things could not be completed in this implementation session and need
+Lee or a network-enabled session before this ships:
+
+1. **§5's fact check, and the Testing section's link check, were not possible.**
+   This session's network egress is blocked entirely to linkedin.com,
+   coursera.org, and oreilly.com (and to softwarearchitectureinsights.com, so
+   even the two pre-launch destination URLs could not be re-verified here,
+   though the spec already verified them live on 2026-08-29). Per §5's own
+   rule — omit a fact rather than invent it — the rewritten descriptions for
+   the 10 non-Coursera courses carry no Course Structure section and no
+   Level/Certificate line; only **Platform:** (a front-matter fact, not a
+   platform-page fact) appears in their closing line. `scalable-availability-software-architecture.md`
+   keeps its pre-existing Course Structure line untouched, since that content
+   predates this session and this session has no way to re-verify or
+   contradict it. Before the PR: source Course Structure/Level/Certificate
+   facts for the 10 courses from each platform's public page (or confirm they
+   should ship without one), and hand-verify that `platform_url`, `info_url`,
+   and both `prelaunch_url`s resolve 200.
+2. **Step 10 (updating PW1's row in the Academy `_Program Tracker.md`) was not
+   done.** That tracker lives outside this repo and this session has no access
+   to it.
+
+Also worth flagging: the pre-existing `cloud-architecture-for-scalable-systems.md`
+summary is 203 characters (over the 180-character target in §5) and uses an em
+dash. It was left untouched since the spec names it as the in-repo reference
+this rewrite matches everything else to — but if Lee wants it trimmed to be
+consistent with the other 11, that's a one-line fix.
+
+Not yet done, deliberately: the branching-mode question (worktree vs. direct
+branch) wasn't asked, since this implementation ran on the branch this remote
+session was already given rather than a `spec-bug-process` worktree. No commit
+or push has been made — that needs explicit go-ahead per the process rules.
+
 **2026-08-29 — Spec created.** Written from PW1 in the Atchison Academy
 `_Program Tracker.md` ("Course descriptions + 'get the course' links", Lee 2026-08-26),
 whose recorded next action was to settle two scope questions before inventorying the
@@ -498,3 +564,17 @@ website page designs, which are tracked separately in the program tracker.
   expects the pre-launch CTA to retain value after Sept 30, so W7.7 **revises** the CTA
   copy to evergreen wording rather than retiring the block. The URL itself already survives
   via W7.7's existing recording-and-slides swap.
+
+**2026-08-29 (closed) — PR [#13](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/13)
+merged; spec archived.** Lee reviewed the implementation and approved it as-is. The two
+items noted as outstanding in the previous entry remain genuinely outstanding, not
+resolved by closing this spec:
+
+- The Course Structure/Level/Certificate fact check for the 10 non-Coursera courses
+  (§5) still needs a pass with real access to linkedin.com, coursera.org, and
+  oreilly.com — this session's network egress was blocked to all three throughout,
+  including after Lee attempted to grant access, and he chose to skip chasing it
+  further rather than block the merge on it.
+- **PW1's row and next action in the Academy `_Program Tracker.md` still need updating**
+  to match, per the Program link callout at the top of this file — that tracker is
+  outside this repo and nothing in this session could reach it.

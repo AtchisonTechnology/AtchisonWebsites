@@ -14,16 +14,22 @@ summary: "Practical techniques for designing modern, high-scale applications tha
 
 ## About This Course
 
-Designed for software architects, operations architects, and aspiring architects, this advanced course covers practical approaches for building high-scale applications that stay highly available under real-world conditions. It examines the patterns and decisions that separate resilient systems from fragile ones — drawing on techniques proven in SaaS applications, e-commerce platforms, and enterprise systems.
+Most availability problems aren't caused by one big failure. They come from small decisions, an unowned dependency, an SLA nobody actually measures, that compound until the system can't stay up under real conditions. This course covers the patterns and decisions that separate resilient systems from fragile ones, drawn from techniques proven in SaaS, e-commerce, and enterprise systems.
+
+This is the first course in the *Architecting Scalable Systems Like Meta, Google, and Amazon* specialization, followed by *Cloud Architecture for Scalable Systems*. It stands on its own if availability is the problem in front of you right now.
 
 ## What You'll Learn
 
-- Availability vs. reliability — understanding the difference and designing for both
-- Measuring availability and defining meaningful SLAs
-- Managing service APIs, ownership, and dependencies across distributed systems
+- Telling availability and reliability apart, and designing for both instead of assuming one implies the other
+- Measuring availability and defining SLAs that mean something operationally, beyond what a dashboard reports
+- Managing service APIs, ownership, and dependencies across a distributed system
 - Implementing service tiers to control blast radius and isolate failures
 - Architecting for scale using cloud-native patterns
-- Capacity management, incident response, and system monitoring
+- Running capacity management, incident response, and monitoring as one connected practice
+
+## Who This Is For
+
+Software architects, operations architects, and aspiring architects designing systems that need to stay available under real-world load, the kind a demo never produces.
 
 ## Course Structure
 

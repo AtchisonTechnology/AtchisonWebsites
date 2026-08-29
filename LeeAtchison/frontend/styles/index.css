@@ -1132,9 +1132,75 @@ body.course main {
   max-width: 720px;
 }
 
+.course-platform-badge--prelaunch {
+  background: #fef3c7;
+  border-color: #fef3c7;
+  color: #92400e;
+}
+
+/* .more-course-platform and .course-card-platform are plain colored text
+   (no pill chrome) — the modifier only needs to swap the color there. */
+.more-course-platform.course-platform-badge--prelaunch,
+.course-card-platform.course-platform-badge--prelaunch {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #92400e;
+}
+
+.course-access-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  max-width: 560px;
+}
+
+.course-access-link {
+  display: inline-block;
+  margin-left: 0.35rem;
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .course-body {
   background: var(--white);
   padding: 4rem 2rem;
+}
+
+/* Closing CTA — after the course description, before "More Courses" */
+.course-cta-section {
+  background: var(--bg-alt);
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+
+.course-cta-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.course-cta-inner h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.course-cta-inner .course-access-note {
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+}
+
+.course-cta-inner .course-access-link {
+  color: var(--blue);
+}
+
+.course-cta-inner .btn {
+  display: inline-flex;
 }
 
 .course-body-inner {

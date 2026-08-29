@@ -8,21 +8,25 @@ order_leeatchison: 9
 show_academy: true
 order_academy: 9
 canonical_site: leeatchison
-summary: "How IT teams can communicate cloud benefits, risks, and strategy to executive decision-makers in language that resonates and drives decisions."
+summary: "Translating cloud decisions into language a C-suite audience will actually engage with, whatever the specific decision is."
 ---
 
 ## About This Course
 
-The technical case for cloud is rarely the hard part. Getting executive buy-in requires translating cloud concepts into business outcomes — and this course teaches you exactly how to do that. Learn how to frame cloud conversations so that C-suite decision-makers understand what they're approving, what the risks are, and why it matters to the business.
+The technical case for a cloud decision is rarely the hard part. Getting an executive to engage with it is, because most cloud conversations are still handed to the C-suite in engineering language.
+
+This course is about the translation, not any one proposal. It's a general communication skillset for framing cost, risk, and strategy discussions so executives understand what they're actually approving.
 
 ## What You'll Learn
 
-- How executives think about technology investments and what they need to hear
-- Frameworks for translating technical concepts into business language
-- How to present cloud ROI in terms executives care about
-- Handling executive concerns about cost, risk, and vendor dependency
-- Building a compelling narrative for cloud investment
+- Reading what a given executive audience actually needs to hear before you walk into the room
+- Translating technical concepts into the business language a C-suite conversation runs on
+- Framing cloud ROI in terms executives already use to evaluate other investments
+- Handling pointed executive questions about cost, risk, and vendor dependency without getting defensive
+- Building a narrative for cloud investment that holds up across more than one meeting
 
 ## Who This Is For
 
-IT leaders, cloud architects, and senior engineers who need to communicate with executive stakeholders and want to be more effective at securing support for cloud initiatives.
+Architects, IT leaders, and technical managers who present cloud decisions to executives and want a repeatable way to frame the conversation, not a one-time pitch.
+
+**Platform:** LinkedIn Learning
