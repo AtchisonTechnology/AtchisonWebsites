@@ -48,9 +48,22 @@ the full key set. **Edit these files under `shared/`, and remember an edit
 lands on both sites.** Never replace a symlink with a real directory — that
 silently re-creates the duplication this replaced.
 
+Ten items are shown on both sites, so each carries one more key —
+`canonical_site` (Spec0009), naming the site whose page is the SEO original,
+in the same site-suffix vocabulary. The same builder resolves it: on the site
+that does *not* own the page it emits a cross-domain `<link rel="canonical">`
+at the other domain and drops the page from that site's sitemap, while
+`og:url` stays self-referential everywhere. The key is set on all 22 items,
+not just the overlapping ten, and both builders enforce two rules that fail
+the build — an item on more than one site with no `canonical_site`, and a
+`canonical_site` naming a site the item is not shown on. That is what stops a
+new item, or a flipped `show_` flag, from silently re-creating duplicate
+pages. Each builder holds a duplicated `SITES` registry of site key → `show_`
+flag and production URL; **the two copies must be kept in sync by hand.**
+
 No other site defines these collections. A seventh site joins by adding its
-own three keys, its two symlinks and its builder — no change to existing
-content.
+own three keys, its two symlinks and its builder, plus one `SITES` entry in
+each existing builder — no change to existing content.
 
 ## Commands (repo root)
 

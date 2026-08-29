@@ -8,6 +8,7 @@ order_leeatchison: 4
 show_academy: true
 order_academy: 4
 feature_academy: true
+canonical_site: leeatchison
 summary: "A practical guide to cloud migration — the strategies, patterns, and practices that leading organizations use to move successfully to the cloud."
 ---
 

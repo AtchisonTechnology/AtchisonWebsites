@@ -18,6 +18,7 @@ feature_leeatchison: true
 show_academy: true
 order_academy: 1
 feature_academy: true
+canonical_site: academy
 summary: "A journey of discovery from software developer to architect — designing systems, leading teams, creating harmony."
 ---
 

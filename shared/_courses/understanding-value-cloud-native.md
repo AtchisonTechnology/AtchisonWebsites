@@ -5,6 +5,7 @@ platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/understanding-the-value-of-cloud-native-architecture"
 show_leeatchison: true
 order_leeatchison: 12
+canonical_site: leeatchison
 summary: "Why cloud-native architecture matters and how to make the case for it — for solution architects and IT decision-makers navigating the shift from traditional to cloud-native."
 ---
 

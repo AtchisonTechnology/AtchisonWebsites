@@ -7,6 +7,7 @@ show_leeatchison: true
 order_leeatchison: 11
 show_academy: true
 order_academy: 11
+canonical_site: leeatchison
 summary: "How IT teams navigate post-acquisition mergers — the organizational changes, technical integration challenges, and career positioning strategies that matter most."
 ---
 
