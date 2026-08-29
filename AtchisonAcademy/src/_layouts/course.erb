@@ -2,12 +2,42 @@
 layout: default
 ---
 
+<%
+  prelaunch = data.availability == "prelaunch"
+  platform_info = site.data.platforms[data.platform] || {}
+
+  cta_label = if prelaunch
+    data.prelaunch_cta
+  else
+    data.cta_label || platform_info["cta_label"] || "Take This Course &rarr;"
+  end
+
+  access_note = prelaunch ? data.prelaunch_note : (data.access_note || platform_info["access_note"])
+  info_url    = prelaunch ? nil : (data.info_url || platform_info["info_url"])
+  info_label  = prelaunch ? nil : (data.info_label || platform_info["info_label"])
+
+  hero_url   = prelaunch ? prelaunch_cta_url(resource, content: "hero")   : data.platform_url
+  footer_url = prelaunch ? prelaunch_cta_url(resource, content: "footer") : data.platform_url
+%>
+
 <section class="course-header">
   <div class="course-header-inner">
-    <span class="course-platform-badge"><%= data.platform || "Course" %></span>
+    <% if prelaunch %>
+      <span class="course-platform-badge course-platform-badge--prelaunch">Coming Soon</span>
+    <% else %>
+      <span class="course-platform-badge"><%= data.platform || "Course" %></span>
+    <% end %>
     <h1><%= data.title %></h1>
-    <% if data.platform_url %>
-      <a href="<%= data.platform_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Take This Course &rarr;</a>
+    <% if hero_url %>
+      <a href="<%= hero_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><%= cta_label %></a>
+    <% end %>
+    <% if access_note %>
+      <p class="course-access-note">
+        <%= access_note %>
+        <% if info_url %>
+          <a href="<%= info_url %>" class="course-access-link" target="_blank" rel="noopener noreferrer"><%= info_label %></a>
+        <% end %>
+      </p>
     <% end %>
   </div>
 </section>
@@ -15,6 +45,23 @@ layout: default
 <section class="course-body">
   <div class="course-body-inner">
     <%= yield %>
+  </div>
+</section>
+
+<section class="course-cta-section">
+  <div class="course-cta-inner">
+    <h2><%= data.title %></h2>
+    <% if access_note %>
+      <p class="course-access-note">
+        <%= access_note %>
+        <% if info_url %>
+          <a href="<%= info_url %>" class="course-access-link" target="_blank" rel="noopener noreferrer"><%= info_label %></a>
+        <% end %>
+      </p>
+    <% end %>
+    <% if footer_url %>
+      <a href="<%= footer_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><%= cta_label %></a>
+    <% end %>
   </div>
 </section>
 
@@ -29,7 +76,11 @@ layout: default
            .select { |c| c.relative_url != resource.relative_url }
            .first(4).each do |course| %>
         <a href="<%= relative_url course.relative_url %>" class="more-course-card">
-          <span class="more-course-platform"><%= course.data.platform %></span>
+          <% if course.data.availability == "prelaunch" %>
+            <span class="more-course-platform course-platform-badge--prelaunch">Coming Soon</span>
+          <% else %>
+            <span class="more-course-platform"><%= course.data.platform %></span>
+          <% end %>
           <span class="more-course-title"><%= course.data.title %></span>
         </a>
       <% end %>

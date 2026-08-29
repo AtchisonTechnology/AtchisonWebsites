@@ -12,9 +12,16 @@
 # `rel=canonical` and a sitemap exclusion on the site that does not own the
 # page, and fails the build when that key is missing or wrong.
 #
-# See Spec0008 and Spec0009.
+# It also validates each course's `availability`/`prelaunch_*` keys and drops
+# any resource carrying `hidden: true` from production builds (Spec0010).
+#
+# See Spec0008, Spec0009, and Spec0010.
+require "uri"
+
 class Builders::SharedContent < SiteBuilder
   COLLECTIONS = %w[books courses].freeze
+  AVAILABILITIES = %w[available prelaunch].freeze
+  PRELAUNCH_KEYS = %i[prelaunch_url prelaunch_cta prelaunch_note].freeze
 
   # Every site that carries these collections, keyed by the site suffix used
   # in the `show_`/`feature_`/`order_`/`canonical_site` vocabulary.
@@ -46,19 +53,47 @@ class Builders::SharedContent < SiteBuilder
       COLLECTIONS.each do |label|
         resources = site.collections[label].resources
         resources.each do |resource|
-          validate!(resource)
+          validate!(resource, label)
           apply_canonical!(resource)
         end
         resources.select! { |resource| resource.data[SHOW_FLAG] }
+        resources.reject! { |resource| hidden?(resource) }
       end
+    end
+
+    # Template helper for a pre-launch course's two CTA buttons. `prelaunch_url`
+    # in front matter is stored clean (no query string) because it is rendered
+    # by up to two buttons on up to two sites; the UTM parameters are composed
+    # here at render time instead, so `utm_source` and `utm_content` can vary
+    # per site and per button while the stored URL stays unambiguous. Merges
+    # into any query string already present rather than blindly appending "?".
+    # `utm_source` comes from this builder's own `SITES` entry, not a fourth
+    # hardcoded copy of the domain. See Spec0010 §3a.
+    #
+    # @param resource [Bridgetown::Resource::Base] the pre-launch course
+    # @param content [String] "hero" or "footer" — which button was clicked
+    helper :prelaunch_cta_url do |resource, content:|
+      url = resource.data[:prelaunch_url]
+      next nil unless url
+
+      uri = URI.parse(url)
+      params = URI.decode_www_form(uri.query.to_s) + [
+        ["utm_source", host(SITE_KEY)],
+        ["utm_medium", "course-page"],
+        ["utm_campaign", "#{resource.basename_without_ext}-prelaunch"],
+        ["utm_content", content],
+      ]
+      uri.query = URI.encode_www_form(params)
+      uri.to_s
     end
   end
 
   private
 
-  def validate!(resource)
+  def validate!(resource, label)
     validate_stray_site_keys!(resource)
     validate_canonical_site!(resource)
+    validate_availability!(resource) if label == "courses"
   end
 
   # `feature_*` and `order_*` are only meaningful alongside the matching
@@ -104,6 +139,61 @@ class Builders::SharedContent < SiteBuilder
     raise "#{resource.relative_path}: canonical_site: #{canonical_site} but " \
           "#{SITES[canonical_site][:show]} is not set — this item is not on " \
           "#{host(canonical_site)}"
+  end
+
+  # `availability: prelaunch` marks a course that exists but is not yet
+  # purchasable — a "Coming Soon" page. It must always have somewhere to send
+  # a reader (`prelaunch_url` + `prelaunch_cta`), and must never carry
+  # `platform_url`, since that would be a real course's access link on a page
+  # nobody can actually take the course from yet. A "Coming Soon" page with no
+  # destination is the failure this key exists to prevent, so it fails the
+  # build rather than rendering a dead end. `availability: available` (the
+  # default when the key is absent) forbids all three `prelaunch_*` keys, so
+  # a shipped course can never accidentally carry stale pre-launch copy.
+  def validate_availability!(resource)
+    availability = resource.data[:availability] || "available"
+
+    unless AVAILABILITIES.include?(availability)
+      raise "#{resource.relative_path}: availability: #{availability} is not valid — " \
+            "expected one of #{AVAILABILITIES.join(", ")}"
+    end
+
+    if availability == "prelaunch"
+      missing = [:prelaunch_url, :prelaunch_cta].reject { |key| resource.data[key] }
+      unless missing.empty?
+        raise "#{resource.relative_path}: availability: prelaunch requires " \
+              "#{missing.join(" and ")}"
+      end
+
+      if resource.data[:platform_url]
+        raise "#{resource.relative_path}: availability: prelaunch forbids platform_url " \
+              "— a course nobody can take yet must not carry a real access link"
+      end
+    else
+      present = PRELAUNCH_KEYS.select { |key| resource.data.key?(key) }
+      unless present.empty?
+        raise "#{resource.relative_path}: #{present.join(", ")} set without " \
+              "availability: prelaunch"
+      end
+    end
+  end
+
+  # `hidden: true` keeps a resource in the repo, in dev builds (`bin/dev`),
+  # and in test builds (`rake test`), but drops it from a production build —
+  # except on a Netlify Deploy Preview, which is where a hidden item is
+  # actually reviewed before it ships. Spec0004 deliberately made previews
+  # build exactly like production, so a plain `production?` check would hide
+  # a draft from the one URL that exists to review it; Netlify serves
+  # previews with an automatic noindex header, so a hidden item there is
+  # still not indexable. Branch deploys get no such header and stay hidden.
+  #
+  # This runs after `validate!`, so a hidden item's front matter is still
+  # checked on every production build — a draft cannot rot into an invalid
+  # state while nobody is looking at it.
+  def hidden?(resource)
+    return false unless resource.data[:hidden]
+
+    Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
   end
 
   # When the canonical page lives on another site, point this site's copy at

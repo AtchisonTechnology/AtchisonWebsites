@@ -6,22 +6,26 @@ platform_url: "https://www.linkedin.com/learning/cloud-for-business-developing-a
 show_leeatchison: true
 order_leeatchison: 8
 canonical_site: leeatchison
-summary: "How to establish a Cloud Center of Excellence (CCoE) — the organizational model that leading enterprises use to accelerate cloud adoption and governance."
+summary: "Building a Cloud Center of Excellence that accelerates cloud adoption instead of becoming another approval bottleneck."
 ---
 
 ## About This Course
 
-A Cloud Center of Excellence (CCoE) is the organizational construct that enables enterprises to adopt, manage, and optimize cloud at scale. This course explores how to build one, what it should own, and how to make it an accelerator rather than a bottleneck.
+Individual teams can adopt cloud well. What most enterprises can't do on their own is make that adoption consistent, which is the specific problem a Cloud Center of Excellence exists to solve.
+
+Done wrong, a CCoE turns into a gate every project has to clear. This course is about building the version that speeds teams up instead, and knowing which failure mode you're drifting toward before it sets in.
 
 ## What You'll Learn
 
-- What a Cloud Center of Excellence is and why enterprises need one
-- How to structure and staff a CCoE for your organization's size and maturity
-- The relationship between a CCoE and individual product teams
-- Cloud governance frameworks the CCoE should own
-- How to measure the CCoE's impact and demonstrate its value
-- Common CCoE failure modes and how to avoid them
+- Defining what a Cloud Center of Excellence should actually own, and what it shouldn't
+- Structuring and staffing a CCoE that fits your organization's size and cloud maturity
+- Setting the relationship between a CCoE and individual product teams so neither one blocks the other
+- Building governance frameworks the CCoE can actually enforce
+- Measuring a CCoE's impact in terms leadership will accept
+- Recognizing the common ways a CCoE fails, before your own turns into one of them
 
 ## Who This Is For
 
-Enterprise IT leaders, cloud architects, and technology executives responsible for cloud strategy, governance, and adoption at scale.
+IT leaders and cloud program owners responsible for cloud adoption across more than one team, and anyone tasked with standing up a CCoE from scratch.
+
+**Platform:** LinkedIn Learning
