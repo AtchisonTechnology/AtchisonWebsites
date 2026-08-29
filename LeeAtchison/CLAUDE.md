@@ -32,7 +32,6 @@ This is a **Bridgetown 2.1.2** static site. The template engine is ERB (set in `
 src/
   index.erb               # Homepage — full-width layout via page_class: homepage
   about.erb               # About page
-  academy.erb             # Atchison Academy landing page
   books.erb               # Books listing page
   courses.erb             # Courses listing page
   contact.erb             # Contact page
@@ -88,6 +87,6 @@ assets_inbox/             # Staging area for raw assets — NEVER reference dire
 
 **Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. Collection items live in `src/_books/` and `src/_courses/`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order || 99 }`.
 
-**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`, `featured` (boolean, highlights on Academy page). Key course fields: `platform`, `platform_url`, `summary`, `academy` (boolean, shown on Academy page), `academy_featured` (boolean, featured slot on Academy page).
+**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`, `featured` (boolean, highlights the book on `books.erb` and `courses.erb`). Key course fields: `platform`, `platform_url`, `summary`, `academy`, `academy_featured`. The two `academy*` flags are **inert on this site** — `/academy` was retired in Spec0006 and nothing here reads them. They are kept so these files stay diff-able against their counterparts in `AtchisonAcademy/`, whose `src/index.erb` is their only reader.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.

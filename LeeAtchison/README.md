@@ -54,7 +54,7 @@ Each book is a Markdown file with front matter. Key fields:
 | `amazon_url`        | Amazon link — **must include `?tag=leeatchison-20`**   |
 | `book_url`          | Publisher or canonical URL                             |
 | `badge` / `badge_style` | Optional badge label and CSS style                |
-| `featured`          | `true` to highlight on the Academy page                |
+| `featured`          | `true` to highlight on the books and courses pages     |
 | `order`             | Sort order on listing pages (lower = first)            |
 | `summary`           | Short description                                      |
 | `testimonials[]`    | Array of `{quote, attribution}` objects                |
@@ -68,8 +68,8 @@ Each course is a Markdown file with front matter. Key fields:
 | `title`            | Course title                                           |
 | `platform`         | Platform name (e.g. O'Reilly Media, LinkedIn Learning) |
 | `platform_url`     | Direct link to the course                              |
-| `academy`          | `true` to show on the Academy page                     |
-| `academy_featured` | `true` for the featured slot on the Academy page       |
+| `academy`          | Inert here — read only by the `AtchisonAcademy` site   |
+| `academy_featured` | Inert here — read only by the `AtchisonAcademy` site   |
 | `order`            | Sort order on listing pages (lower = first)            |
 | `summary`          | Short description                                      |
 
