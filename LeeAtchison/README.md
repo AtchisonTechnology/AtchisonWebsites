@@ -43,9 +43,35 @@ Output is written to `output/`.
 
 ## Content
 
+> **These files are shared.** `src/_books` and `src/_courses` are symlinks to
+> `shared/_books` and `shared/_courses` at the repo root, which
+> `AtchisonAcademy` reads too. Edit the files under `shared/` — an edit lands
+> on both sites — and never replace the symlinks with real directories.
+
+### Per-site keys
+
+Which site shows an item, features it, and in what order, is set entirely in
+front matter (there is one key per site, and `show_*`/`feature_*` are booleans
+where **absent means false**, so only `true` is ever written):
+
+| Field                 | Description                                          |
+|-----------------------|------------------------------------------------------|
+| `show_leeatchison`    | The item appears on this site                        |
+| `show_academy`        | The item appears on atchisonacademy.com              |
+| `feature_leeatchison` | Highlight on this site's books and courses pages     |
+| `feature_academy`     | Highlight on atchisonacademy.com                     |
+| `order_leeatchison`   | Sort order on this site (lower = first)              |
+| `order_academy`       | Sort order on atchisonacademy.com                    |
+
+`plugins/builders/shared_content.rb` drops everything without
+`show_leeatchison` when the collections are read, so an Academy-only item
+generates no page and no sitemap entry here. Writing `feature_leeatchison` or
+`order_leeatchison` on an item without `show_leeatchison` fails the build.
+
 ### Books (`src/_books/`)
 
-Each book is a Markdown file with front matter. Key fields:
+Each book is a Markdown file with front matter. Key fields, alongside the
+per-site keys above:
 
 | Field               | Description                                            |
 |---------------------|--------------------------------------------------------|
@@ -54,23 +80,19 @@ Each book is a Markdown file with front matter. Key fields:
 | `amazon_url`        | Amazon link — **must include `?tag=leeatchison-20`**   |
 | `book_url`          | Publisher or canonical URL                             |
 | `badge` / `badge_style` | Optional badge label and CSS style                |
-| `featured`          | `true` to highlight on the books and courses pages     |
-| `order`             | Sort order on listing pages (lower = first)            |
 | `summary`           | Short description                                      |
 | `testimonials[]`    | Array of `{quote, attribution}` objects                |
 
 ### Courses (`src/_courses/`)
 
-Each course is a Markdown file with front matter. Key fields:
+Each course is a Markdown file with front matter. Key fields, alongside the
+per-site keys above:
 
 | Field              | Description                                            |
 |--------------------|--------------------------------------------------------|
 | `title`            | Course title                                           |
 | `platform`         | Platform name (e.g. O'Reilly Media, LinkedIn Learning) |
 | `platform_url`     | Direct link to the course                              |
-| `academy`          | Inert here — read only by the `AtchisonAcademy` site   |
-| `academy_featured` | Inert here — read only by the `AtchisonAcademy` site   |
-| `order`            | Sort order on listing pages (lower = first)            |
 | `summary`          | Short description                                      |
 
 ### Adding Images
