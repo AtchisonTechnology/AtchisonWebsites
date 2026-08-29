@@ -165,16 +165,24 @@ wired up.
 
 Four changes. Nothing here alters how any currently-live course renders.
 
-### 1. Remove the outbound button from the Academy courses hero
+### 1. Remove the outbound button from both courses heroes
 
 Delete the `.btn-group` div from `AtchisonAcademy/src/courses.erb` entirely. No
 Coursera button, no O'Reilly button, no LinkedIn Learning button. The asymmetry that
 matters is between *three linked exits and one*, and it disappears when the count
 goes to zero rather than to three.
 
-`LeeAtchison/src/courses.erb` is **not** touched. Its two-button hero is correct for
-that site: it points at the Academy and at LinkedIn Learning, which is where a visitor
-to a personal site would want to be sent.
+**Revised 2026-08-29 (Lee): `LeeAtchison/src/courses.erb` gets the same treatment.**
+Originally scoped as Academy-only, on the reasoning that leeatchison.com's two-button
+hero ("Atchison Academy →" plus "LinkedIn Learning") was navigation between Lee's own
+properties rather than a vendor pick. That reasoning held for the Academy button, but
+not for LinkedIn Learning: leeatchison.com's hero carries the exact same three-platform,
+one-linked asymmetry (Coursera, LinkedIn Learning, O'Reilly all deliver courses there;
+only LinkedIn Learning gets a button) that this spec exists to fix on the Academy. Lee
+caught this in PR review and asked for parity. Both buttons are dropped — "Atchison
+Academy →" included, since it is redundant with the navbar's Academy link and the
+`courses-cta-section` "Explore the Academy →" button already at the foot of the same
+page — leaving the hero on both sites with no outbound button, badge only.
 
 ### 2. Revise the hero paragraph to carry the message the button was carrying
 
@@ -236,11 +244,12 @@ Update the `<img>` in both `courses.erb` files to the new filename with alt text
 matching the badge copy, and delete both copies of
 `src/images/linkedin-learners-badge.png` once nothing references them.
 
-**What does *not* change on `LeeAtchison`.** Its hero keeps both buttons —
-"Atchison Academy →" and "LinkedIn Learning". That pair is correct on a personal
-site: it points at the two places Lee's courses live, and the LinkedIn button there is
-navigation, not a caption for the badge. Only the badge and its alt text change.
-Solution §1 and §2 remain Academy-only.
+**No longer Academy-only (revised 2026-08-29).** Solution §1 originally exempted
+`LeeAtchison` on the theory that its two-button hero was navigation rather than a
+vendor pick; that held for "Atchison Academy →" but not for "LinkedIn Learning", which
+carries the same three-platform asymmetry there as the Academy hero did. Both buttons
+are now dropped on both sites — see §1. Only the badge, its alt text, and the hero
+paragraph change is what's left of the original "not touched" framing.
 
 **Sequencing.** The asset is Lee's to produce and the rest of the spec does not
 depend on it. If it is not ready when the code work is, ship §1, §2, §4 and swap the
@@ -440,9 +449,9 @@ Manual, on the Academy dev server (`AtchisonAcademy/bin/dev`, port 16000 on main
    the build with the new message; restore it. A guard never seen to fail is not a
    guard.
 8. **`LeeAtchison` `/courses/`** — the new badge renders there too, transparent
-   against the same gradient; the hero prose no longer states a figure; and **both**
-   hero buttons ("Atchison Academy →" and "LinkedIn Learning") are still present and
-   unchanged. Confirm the two sites' badges are the same file:
+   against the same gradient; the hero prose no longer states a figure; and, as of the
+   2026-08-29 revision, no `.btn-group` remains in the hero — same treatment as the
+   Academy. Confirm the two sites' badges are the same file:
    `cmp AtchisonAcademy/src/images/learners-badge.png LeeAtchison/src/images/learners-badge.png`
    exits clean.
 9. **`LeeAtchison` home page** — the `.stat-card` in the `#courses` section reads
@@ -473,9 +482,10 @@ Manual, on the Academy dev server (`AtchisonAcademy/bin/dev`, port 16000 on main
    `LeeAtchison/src/images/learners-badge.png` (same file, copied — not exported twice).
 2. `AtchisonAcademy/src/courses.erb` — delete the hero `.btn-group`; revise the hero
    paragraph; point the `<img>` at the new badge with matching alt text.
-3. `LeeAtchison/src/courses.erb` — point the `<img>` at the new badge with matching alt
-   text; replace the hero paragraph with the number-free version in §5.
-   **Leave both hero buttons alone.**
+3. `LeeAtchison/src/courses.erb` — delete the hero `.btn-group` (revised 2026-08-29 —
+   originally "leave both hero buttons alone", see §1); point the `<img>` at the new
+   badge with matching alt text; replace the hero paragraph with the number-free
+   version in §5.
 3a. `LeeAtchison/src/index.erb:146` — `.stat-number` `160,000+` → `180,000+`.
 3b. `LeeAtchison/src/index.erb:156–175` — add Coursera and O'Reilly Media
    `.platform-card` entries with new inline SVG icons, reorder to Academy → Coursera →
@@ -692,3 +702,28 @@ home-page platform cards at desktop and mobile widths — badge transparency aga
 navy→blue gradient, the empty `ATCHISON ACADEMY` labels now filled in, the 2×2 card grid
 balanced against the stat card, and the single-column mobile collapse all confirmed
 visually.
+
+**2026-08-29 — Scope correction during PR #14 review: `LeeAtchison`'s hero button dropped
+too.** Lee caught, in review, that the implementation had left the "LinkedIn Learning"
+button standing on `leeatchison.com`'s courses hero. The original Academy-only scoping
+(§1, §3) reasoned that site's two-button hero was navigation between Lee's own properties
+rather than a platform pick — but that reasoning covered "Atchison Academy →" only.
+"LinkedIn Learning" sits beside it as one of the same three course platforms (Coursera,
+LinkedIn Learning, O'Reilly) this spec exists to stop favoring, and only it had a button —
+the identical asymmetry Problem §1 describes on the Academy, just on the other site. Lee
+asked for parity. Both buttons are now dropped from `LeeAtchison/src/courses.erb`,
+matching the Academy hero exactly (badge only, no `.btn-group`); the "Atchison Academy →"
+button's loss costs nothing functionally since the navbar and the page's own
+`courses-cta-section` "Explore the Academy →" button both still point there. Solution §1,
+§3, and the affected Testing/Summary items were updated to match. Rebuilt and re-verified
+on both sites; screenshot confirms the `LeeAtchison` hero now renders badge-only, same as
+the Academy.
+
+Separately, since neither site's directory had changed in the prior (tracker-only) commit,
+Netlify's per-site ignore-build logic canceled all six deploy previews for that commit. The
+`AtchisonAcademy/frontend/styles/index.css` `.platform-cards` rule (unused on that site
+today, but documented in that site's own CLAUDE.md as intended to stay identical to
+`LeeAtchison`'s copy) was brought into sync with the 2×2 grid + one-column-breakpoint
+change made on `LeeAtchison` in the original implementation pass, both to close a real
+minor divergence and so this commit touches both site directories and both previews
+rebuild.
