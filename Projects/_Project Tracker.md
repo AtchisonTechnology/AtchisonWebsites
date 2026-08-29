@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0013 | Correct the course descriptions against their live platform pages | Fix the four course files whose What You'll Learn lists describe a materially different course from the one that shipped (`cloud-architecture-advanced-concepts`, `cloud-migration-fundamentals`, `avoiding-bad-decisions-cloud-strategy`, `cloud-center-of-excellence`), plus bullet-level corrections to six more, the unverifiable Coursera specialization claim, and the "16 video lessons" count; then surface the verified duration/level/updated facts via new front-matter keys and a stat line in both `course.erb` copies, fix the missing `feature_leeatchison` and the un-badged pre-launch cards on the Academy home page, repoint three lesson-deep-link `platform_url`s at their course roots, and correct the 12-courses/22-items counts in `CLAUDE.md` and both builder headers |
 
 ---
 
