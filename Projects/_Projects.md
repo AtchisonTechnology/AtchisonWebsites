@@ -37,6 +37,22 @@ hasn't been created yet.)
   four sites were confirmed to carry the key, so the fix is one line in one
   file.
 
+### Restore the Coursera specialization framing once approved
+- **Type:** Spec
+- **Description:** `scalable-availability-software-architecture.md` and
+  `cloud-architecture-for-scalable-systems.md` currently describe themselves
+  as "companion courses, best taken in this order" rather than naming a
+  Coursera specialization. Once Coursera approves the *Architecting Scalable
+  Systems Like Meta, Google, and Amazon* specialization (or whatever title it
+  ships under), restore the specialization framing — with the approved title
+  — to both files' `summary:` and About sections.
+- **Notes:** Found and deliberately deferred during Spec0013's fact-check
+  (§2a/§6): as of that spec, the specialization was in review with Coursera,
+  real but unapproved, and naming an unapproved specialization risked being
+  wrong twice if Coursera's approved title differs. Carried here at Spec0013's
+  archival so it is not lost. This is a one-paragraph change to two files
+  once Lee confirms the specialization is live and knows its final title.
+
 ### Confirm Deploy Previews are enabled for stosa
 - **Type:** Spec
 - **Description:** On [PR #4](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/4), Netlify built deploy previews for
