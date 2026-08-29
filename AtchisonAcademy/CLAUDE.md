@@ -86,10 +86,14 @@ assets_inbox/             # Staging area for raw assets — NEVER reference dire
 **Component structure**: Components are a Ruby class + ERB template pair. The class sets instance variables in `initialize`; the template accesses them directly. `render Shared::Navbar.new(metadata: site.metadata, resource: resource)` is the call pattern.
 
 **Navbar**: `LINKS` lists exactly the pages this site has, plus one outbound entry to
-leeatchison.com. Entries carrying `external: true` are emitted as-is with
-`target="_blank"` and `rel="noopener noreferrer"`; every other entry goes through
-`relative_url`, which would mangle an absolute URL. Adding a new outbound link means
-setting that flag, not just pasting a URL into `path`.
+leeatchison.com. Two independent flags, each meaning exactly one thing (Spec0007):
+`external: true` emits `path` as-is, while every other entry goes through
+`relative_url`, which would mangle an absolute URL; `new_tab: true` adds
+`target="_blank" rel="noopener noreferrer"`. Adding a new outbound link means setting
+`external:`, not just pasting a URL into `path`. Same-tab is the default and a new
+window is opt-in — the leeatchison.com entry sets no `new_tab:`, because moving between
+Lee's two properties is navigation within one body of work and should feel continuous.
+Set `new_tab:` only for a genuinely third-party destination.
 
 **Internal links**: Always use the `relative_url` helper (e.g., `relative_url '/images/foo.png'`) for links and asset paths to support potential subdirectory deployments.
 
