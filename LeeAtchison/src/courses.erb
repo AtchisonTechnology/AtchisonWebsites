@@ -24,9 +24,9 @@ title: Courses
 </section>
 
 <%
-  all_courses = site.collections["courses"].resources.sort_by { |c| c.data.order || 99 }
-  featured_courses  = all_courses.select { |c| c.data.featured }
-  remaining_courses = all_courses.reject { |c| c.data.featured }
+  all_courses = site.collections["courses"].resources.sort_by { |c| c.data.order_leeatchison || 99 }
+  featured_courses  = all_courses.select { |c| c.data.feature_leeatchison }
+  remaining_courses = all_courses.reject { |c| c.data.feature_leeatchison }
 %>
 
 <% unless featured_courses.empty? %>

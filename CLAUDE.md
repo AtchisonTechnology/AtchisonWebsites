@@ -24,6 +24,34 @@ anything inside it.** This file covers only the repo-wide process.
 There are no Rails apps, no databases, and no separate Vite dev server here —
 esbuild runs inside `bridgetown start`.
 
+## `shared/` — content two sites read
+
+```
+shared/
+├── _books/     # 10 book resources
+└── _courses/   # 12 course resources
+```
+
+These are the canonical Bridgetown collection files for books and courses.
+`LeeAtchison` and `AtchisonAcademy` reach them through **symlinks** — their
+`src/_books` and `src/_courses` each point at `../../shared/…` — so there is
+one copy of every book and course, not two (Spec0008). Git stores the
+symlinks (mode 120000) and Netlify checks them out with the rest of the repo,
+so dev and deploy both see real files; both sites' dev watchers follow them,
+so one edit live-rebuilds both.
+
+Front matter, not directory placement, decides what each site shows: a
+`show_`/`feature_`/`order_` key per site (`show_leeatchison`, `show_academy`,
+and so on), with a `plugins/builders/shared_content.rb` in each site dropping
+the items it does not carry at read time. Each site's `CLAUDE.md` documents
+the full key set. **Edit these files under `shared/`, and remember an edit
+lands on both sites.** Never replace a symlink with a real directory — that
+silently re-creates the duplication this replaced.
+
+No other site defines these collections. A seventh site joins by adding its
+own three keys, its two symlinks and its builder — no change to existing
+content.
+
 ## Commands (repo root)
 
 ```bash

@@ -34,7 +34,8 @@ This is a **Bridgetown 2.1.2** static site. The template engine is ERB (set in `
 
 It is the standalone site for **Atchison Academy** — Lee Atchison's books, courses,
 and training. Its home page is the page that used to live at `leeatchison.com/academy`,
-and its two collections carry only the academy-flagged books and courses from that site.
+and its two collections carry only the `show_academy` books and courses from the shared
+collections at the repo root (see **Shared collections** below).
 
 ### Source layout
 
@@ -62,8 +63,8 @@ src/
     navbar.rb             # Bridgetown::Component class (receives metadata, resource)
   _data/
     site_metadata.yml     # title, tagline, description — accessed as site.metadata
-  _books/                 # Academy books (2)
-  _courses/               # Academy courses (8)
+  _books/                 # -> ../../shared/_books  (symlink; 2 shown here)
+  _courses/               # -> ../../shared/_courses (symlink; 8 shown here)
   images/
     logo-academy.png      # Atchison Academy logo — hero and closing CTA band
     favicon.png           # Favicon (Academy shield logo, 32×32)
@@ -119,9 +120,26 @@ as every other site in the monorepo. Academy traffic is separated by hostname in
 Fathom, not by site ID, which is what keeps `_head.erb` copyable across sites with no
 per-site edit.
 
-**Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. Collection items live in `src/_books/` and `src/_courses/`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order || 99 }`.
+**Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order_academy || 99 }`.
 
-**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Front matter is copied verbatim from `LeeAtchison`, `academy` and `academy_featured` included. Those two flags are redundant here — every item on this site is an Academy item — but keeping them lets `index.erb` reuse LeeAtchison's `academy.erb` `select` logic unchanged, so the two files stay diff-able. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`, `featured`. Key course fields: `platform`, `platform_url`, `summary`.
+**Shared collections** (Spec0008): `src/_books` and `src/_courses` are **symlinks** to `../../shared/_books` and `../../shared/_courses` at the repo root — one set of files, read by this site and by `LeeAtchison`. There are 10 books and 12 courses there; this site shows the 2 books and 8 courses marked `show_academy`. Edit the files under `shared/`; never replace the symlinks with real directories, and never edit an item on the assumption it is Academy-only — leeatchison.com reads the same file. Both sites' dev watchers follow the symlink, so an edit under `shared/` live-rebuilds both.
+
+`plugins/builders/shared_content.rb` filters the collections at `:site, :post_read` down to the items carrying `show_academy`, so this site never generates a page or sitemap entry for a non-Academy item. It also raises at build time if an item carries `feature_academy` or `order_academy` without `show_academy`. Templates therefore never filter on membership — only on featuring and order.
+
+**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`.
+
+Because the files are shared, membership, featuring and ordering are expressed with one key per site (Spec0008) — `show_*` and `feature_*` are booleans where **absent means false**, so only `true` is ever written:
+
+| Key | Meaning |
+|---|---|
+| `show_academy` | The item appears on this site |
+| `show_leeatchison` | The item appears on leeatchison.com |
+| `feature_academy` | Featured on this site (`index.erb`, `books.erb`, `courses.erb`) |
+| `feature_leeatchison` | Featured on leeatchison.com |
+| `order_academy` | Sort position on this site |
+| `order_leeatchison` | Sort position on leeatchison.com |
+
+`feature_*` and `order_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. This site's `order_academy` values start as a subsequence of `order_leeatchison` and so have gaps — that sorts correctly, and either site can be re-sequenced without touching the other. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.
 
