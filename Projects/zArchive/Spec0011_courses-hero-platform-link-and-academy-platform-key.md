@@ -1,7 +1,7 @@
 # Rework the Academy courses hero, and give Academy-native courses a platform
 
 * **ID:** Spec0011
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-29
 * **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `AtchisonAcademy`, `LeeAtchison`, `shared/`
@@ -727,3 +727,9 @@ today, but documented in that site's own CLAUDE.md as intended to stay identical
 change made on `LeeAtchison` in the original implementation pass, both to close a real
 minor divergence and so this commit touches both site directories and both previews
 rebuild.
+
+**2026-08-29 — Merged and closed.** [PR #14](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/14)
+had picked up a merge conflict against `main` in `Projects/_Project Tracker.md` (Spec0012
+was created and added its own tracker row while this PR was open); merged `main` into the
+branch, resolved it by keeping both entries, rebuilt both sites clean, and pushed. PR
+merged into `main`. Closing.
