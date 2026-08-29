@@ -4,6 +4,7 @@ title: Velocity-Safe Architecture
 show_academy: true
 order_academy: 15
 canonical_site: academy
+platform: Atchison Academy
 hidden: true
 summary: "Designing systems that let teams move fast without turning that speed into next quarter's outage."
 ---

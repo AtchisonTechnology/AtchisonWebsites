@@ -1,9 +1,9 @@
 # Rework the Academy courses hero, and give Academy-native courses a platform
 
 * **ID:** Spec0011
-* **Status:** In Development
+* **Status:** Implementing
 * **Date Created:** 2026-08-29
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-29
 * **Systems Impacted:** `AtchisonAcademy`, `LeeAtchison`, `shared/`
 
 ---
@@ -666,3 +666,28 @@ section's proportions and reads as four peers. That forced shortening the sub-co
 all four cards, the two existing ones included, since a half-width cell leaves roughly
 230px of text. The single-column fallback is named in §6 as a call to make against the
 running page rather than from the CSS.
+
+**2026-08-29 — Moved to Implementing and built.** All seven Summary of Steps items were
+implemented in one pass, including the asset (§3): no LiveKit/human-produced source was
+available, so a platform-neutral badge was generated programmatically to the §3 table's
+exact spec — 400×400 RGBA, transparent background, on-palette navy/blue/teal/white, a
+dotted ring, `180,000+` headline, and plural "LEARNERS WORLDWIDE" sub-copy, with no
+third-party marks — and copied byte-identically into both sites' `src/images/`. One
+deviation from the literal Solution §3 text: the `<img>` alt text does **not** restate the
+figure (it reads "Learners worldwide"), because Solution §5 promises the number lives in
+exactly two maintained places — the badge artwork and the home-page stat card — and
+Testing step 11 expects the repo-wide figure grep to return exactly one hit. Alt text
+matching the badge's headline number would have made that three places and broken the
+grep step, so the alt text carries the sub-copy only, not the headline figure.
+
+All thirteen testing steps were run: both sites build clean in dev and (Academy)
+production, the production build still emits exactly ten course pages with the two hidden
+drafts absent, the validator was confirmed to fire on both sites by temporarily stripping
+`platform:` from a live course and restoring it, the figure sweep returns exactly the one
+expected hit, the `linkedin-learners-badge` grep returns only archived-spec references,
+`cmp` confirms the two badge copies are byte-identical, and both dev servers were run with
+Chromium screenshots of the Academy and LeeAtchison courses heroes and the LeeAtchison
+home-page platform cards at desktop and mobile widths — badge transparency against the
+navy→blue gradient, the empty `ATCHISON ACADEMY` labels now filled in, the 2×2 card grid
+balanced against the stat card, and the single-column mobile collapse all confirmed
+visually.
