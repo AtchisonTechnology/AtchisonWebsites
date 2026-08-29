@@ -1,11 +1,13 @@
 # Retire leeatchison.com/academy and point all Academy links at atchisonacademy.com
 
 * **ID:** Spec0006
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-28
-* **Date Implemented:** YYYY-MM-DD
-* **Systems Impacted:** `LeeAtchison` only. No changes to `AtchisonAcademy` or
-  any other site.
+* **Date Implemented:** 2026-08-29
+* **Systems Impacted:** `LeeAtchison`, plus two documentation-only corrections
+  in `AtchisonAcademy` (`README.md`, `CLAUDE.md`) that this change falsifies —
+  see History, 2026-08-29. No other site, and no code or content change to
+  `AtchisonAcademy`.
 
 ---
 
@@ -72,7 +74,8 @@ step 8 checks both.
 
 ## Solution/Fix/Change
 
-Six files under `LeeAtchison/`, one of them deleted.
+Six files under `LeeAtchison/`, one of them deleted, plus two scope additions
+taken at implementation (sections 7 and 8).
 
 ### 1. Delete `src/academy.erb`
 
@@ -208,6 +211,35 @@ Both describe the Academy page as part of this site.
 `logo-academy.png` **stays**. It is still used by the `index.erb` platform card
 and the `courses.erb` CTA band.
 
+### 7. `frontend/styles/index.css` — delete the dead Academy rules
+
+Added at implementation, 2026-08-29, with Lee's approval.
+
+Deleting `academy.erb` strands its entire stylesheet section — the
+`/* Academy page */` block, 96 lines covering `.academy-hero` (and its
+`::after`, `-inner`, `-logo`, `h1`, `p`), `.academy-section`,
+`.academy-section--alt`, `.academy-cta` (and `-inner`, `-logo`), and the
+`max-width: 640px` media query that reflows the CTA. Every one of those
+selectors was used by `academy.erb` and by nothing else; verified by grepping
+`src/` for each class name individually before deleting.
+
+The block is bounded by its own banner comment and the "Error pages" banner
+that follows, so it comes out whole with no neighbors disturbed. `.courses-cta-section`
+is a different selector and is untouched — the `courses.erb` CTA band stays.
+
+### 8. `AtchisonAcademy/README.md` and `AtchisonAcademy/CLAUDE.md` — stale status
+
+Added at implementation, 2026-08-29.
+
+Both files state as present fact that `atchisonacademy.com` is an alias domain
+on the leeatchison.com site redirecting to `leeatchison.com/academy/`, and that
+deleting those rules is future cutover work. This change is that cutover work,
+so merging it makes both passages false. `AtchisonAcademy/README.md`'s Status
+callout and `AtchisonAcademy/CLAUDE.md`'s "Netlify and the alias redirect"
+section are rewritten to describe the finished state and to name where the
+`/academy` 301s now live. Documentation only — no code, content, config, or
+build change in `AtchisonAcademy`.
+
 ---
 
 ## Testing
@@ -320,6 +352,9 @@ be tested locally at all.
    `AtchisonAcademy`'s navbar. Three sites, one convention for cross-property
    links.*
 
+   **Decided 2026-08-29 (Lee):** new tab, as recommended. All three links carry
+   `target="_blank" rel="noopener noreferrer"`.
+
 2. **The `index.erb` platform card.** The home page's "Training & Education"
    section has an Atchison Academy platform card — logo, name, one line of
    copy — that is a plain `<div>`, not a link. Its sibling LinkedIn Learning
@@ -329,6 +364,9 @@ be tested locally at all.
    menu items and it is not one; making one of two sibling cards clickable is a
    design change, not a link repoint, and it belongs in whatever spec revisits
    that section.*
+
+   **Decided 2026-08-29 (Lee):** leave it alone, as recommended. The card stays
+   a non-clickable `<div>`, matching its LinkedIn Learning sibling.
 
 3. **The `academy` and `academy_featured` front matter on `LeeAtchison`'s two
    books and eight courses.** With `academy.erb` deleted, nothing on this site
@@ -340,6 +378,11 @@ be tested locally at all.
    `LeeAtchison`'s and `AtchisonAcademy`'s copies of the same resource stop
    being diff-able, which is the property Spec0005 deliberately preserved.*
 
+   **Decided 2026-08-29 (Lee):** leave them, as recommended. No book or course
+   file is touched; `LeeAtchison/CLAUDE.md` and `README.md` now say the two
+   `academy*` flags are inert here and name `AtchisonAcademy` as their only
+   reader.
+
 4. **Should `/academy/*` preserve deep paths?** As written, everything under
    `/academy/` lands on the Academy home page. There has never been a page
    under `/academy/`, so no real URL is being flattened.
@@ -347,12 +390,19 @@ be tested locally at all.
    (`to = "https://atchisonacademy.com/:splat"`) would forward garbage paths to
    the new site to 404 there instead of redirecting them somewhere useful.*
 
+   **Decided 2026-08-29 (Lee):** flat target, as recommended. Both rules point
+   at `https://atchisonacademy.com/` with no `:splat`.
+
 5. **Branching mode.** `main`, or a `spec0006` worktree?
    *Recommendation: a Claude Code remote session branch, as Spec0002, Spec0003,
    and Spec0005 used. The change is six files in one site and needs a dev
    server to verify the navbar; a full local worktree is more setup than it
    earns, and `main` is the wrong place for anything that has a deploy preview
    to check.*
+
+   **Decided 2026-08-29 (Lee):** a Claude Code remote session branch, as
+   recommended — `claude/spec0005-spec0006-jxfv1k`. No worktree, so no worktree
+   cleanup at close.
 
 ---
 
@@ -419,3 +469,62 @@ be tested locally at all.
   `leeatchison.com/academy`. Lee has completed the first two by hand; this spec
   is the other two, and its Open Question 4 inheritance from Spec0005 is
   resolved rather than carried forward again.
+* **2026-08-29** All five Open Questions resolved with Lee, each landing on the
+  spec's recommendation: new tab for all three outbound links (OQ1), the
+  `index.erb` platform card left as a non-clickable div (OQ2), the `academy` and
+  `academy_featured` front matter left in place and documented as inert (OQ3),
+  a flat `/academy/*` target with no `:splat` (OQ4), and a Claude Code remote
+  session branch rather than a worktree (OQ5).
+* **2026-08-29** Implemented. `src/academy.erb` deleted; `netlify.toml`'s two
+  dead `atchisonacademy.com` alias 302s and their comment block removed and the
+  two `/academy` 301s added above the `/ai-native` pair; `navbar.rb`'s Academy
+  entry made external; `navbar.erb` replaced wholesale with `AtchisonAcademy`'s
+  copy with only the brand text changed; both `courses.erb` buttons repointed
+  and given `target="_blank"`; `LeeAtchison/CLAUDE.md` and `README.md` updated.
+  One deviation worth naming: the `active?` comment in `navbar.rb` also picked
+  up `AtchisonAcademy`'s extra sentence explaining why external links never
+  highlight, so the two `navbar.rb` files now differ only in their `LINKS`
+  lists. That is a comment, not behavior, and it serves the same
+  don't-let-the-siblings-drift argument section 4 makes for `navbar.erb`.
+* **2026-08-29** Two scope additions taken at implementation, both recorded as
+  Solution sections 7 and 8. **The dead CSS** (section 7): Lee approved
+  removing it rather than shipping 96 orphaned lines, after each selector was
+  grepped individually against `src/` to confirm `academy.erb` was its only
+  user. **The stale `AtchisonAcademy` docs** (section 8): its `README.md` and
+  `CLAUDE.md` both assert as current fact that `atchisonacademy.com` is still an
+  alias redirecting to `leeatchison.com/academy/` and that removing those rules
+  is future work — statements this change makes false at merge. Corrected them
+  under the process rule that documentation tracking the code a spec changes is
+  in scope for that spec, and widened Systems Impacted accordingly. Doc-only;
+  nothing in `AtchisonAcademy` builds differently.
+* **2026-08-29** Testing steps 1–6 and 9 run and passing, on a production
+  build (`bin/bridgetown frontend:build` + `bin/bridgetown build` with
+  `BRIDGETOWN_ENV=production` — `bin/bridgetown deploy` is the same two steps
+  and was unavailable in this session's sandbox).
+  * **1.** Build clean. No `output/academy/` directory; 31 HTML files, one
+    fewer than before. esbuild bundles `index.css` at 44.84KB with no error
+    after the section-7 deletion.
+  * **2.** Zero `href="/academy"` or `href="/academy/"` in any built page.
+  * **3.** `atchisonacademy.com` appears once on every page (the navbar) and
+    three times on `/courses/` (navbar plus the two buttons). No
+    `relative_url`-mangled `/https://atchisonacademy.com` anywhere.
+  * **4.** Navbar checked on `/` (where `relative_url` is a no-op and a
+    regression would hide), `/books/`, and `/books/the-software-conductor/`.
+    On all three the Academy `<a>` has the bare absolute href,
+    `target="_blank"`, `rel="noopener noreferrer"`, and no `aria-current`;
+    every other item still resolves relatively, `/ainative` keeps
+    `nav-featured`, and `Books` still takes `is-active` and `aria-current` on
+    the books pages.
+  * **5.** `diff` of the two `navbar.erb` files shows only the `nav-brand`
+    line, as required.
+  * **6.** `sitemap.xml` has 29 `<loc>` entries, none of them `/academy/`.
+  * **9.** Re-grepped the whole repo: no source file outside `Projects/` refers
+    to `leeatchison.com/academy` any more, and `stosa/src/index.erb`'s "Visit
+    Atchison Academy" button already pointed at `https://atchisonacademy.com`,
+    so `stosa` needed no change. Remaining hits are archived spec text
+    (deliberate historical record) and the corrected past-tense sentences in
+    `AtchisonAcademy`'s docs.
+  * **Not yet run:** steps 7 and 8. Netlify does not apply `[[redirects]]` to a
+    local build, so the `/academy` 301s, the `/ai-native` regression check, and
+    the `www.atchisonacademy.com` question are only answerable on the PR's
+    deploy preview and then in production.

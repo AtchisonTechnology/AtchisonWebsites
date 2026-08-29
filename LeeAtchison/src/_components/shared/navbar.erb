@@ -11,9 +11,15 @@
       <ul>
         <% links.each do |link| %>
           <li>
-            <a href="<%= relative_url link[:path] %>"
-               class="<%= link_classes(link) %>"
-               <% if active?(link[:path]) %>aria-current="page"<% end %>><%= link[:label] %></a>
+            <% if link[:external] %>
+              <a href="<%= link[:path] %>"
+                 class="<%= link_classes(link) %>"
+                 target="_blank" rel="noopener noreferrer"><%= link[:label] %></a>
+            <% else %>
+              <a href="<%= relative_url link[:path] %>"
+                 class="<%= link_classes(link) %>"
+                 <% if active?(link[:path]) %>aria-current="page"<% end %>><%= link[:label] %></a>
+            <% end %>
           </li>
         <% end %>
       </ul>

@@ -54,30 +54,22 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, s-max-age=31536000"
 
-# Domain redirects must come first — netlify.toml rules are evaluated in order,
-# and these should win over any path rule below.
-#
-# atchisonacademy.com is an alias domain on this site. Without these rules it
-# serves the whole leeatchison.com site under a second domain name (duplicate
-# content). Send every path on it to the Academy page instead.
-#
-# These are 302 (temporary), deliberately. Atchison Academy is planned to
-# become its own site at atchisonacademy.com. A 301 would be cached
-# indefinitely by browsers and would deindex the domain in search, both of
-# which would have to be undone by hand at cutover. Keep these temporary until
-# the standalone site exists, at which point these rules are deleted, not
-# changed. Netlify defaults to 301 when `status` is omitted, so the value must
-# stay explicit.
+# /academy was the Atchison Academy landing page until the Academy became its
+# own site at atchisonacademy.com (Spec0005, Spec0006). These are 301 —
+# permanent, deliberately, and the opposite of the 302s Spec0002 used for the
+# alias domain. That destination was going to change; this one is not, and a
+# permanent redirect is what transfers the page's accumulated search ranking
+# to the new domain instead of stranding it.
 [[redirects]]
-  from = "https://atchisonacademy.com/*"
-  to = "https://leeatchison.com/academy/"
-  status = 302
+  from = "/academy"
+  to = "https://atchisonacademy.com/"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "https://www.atchisonacademy.com/*"
-  to = "https://leeatchison.com/academy/"
-  status = 302
+  from = "/academy/*"
+  to = "https://atchisonacademy.com/"
+  status = 301
   force = true
 
 [[redirects]]
