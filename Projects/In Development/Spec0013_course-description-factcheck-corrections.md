@@ -1,5 +1,7 @@
 # Correct the course descriptions against their live platform pages
 
+**PR:** [#16](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/16)
+
 * **ID:** Spec0013
 * **Status:** Verifying
 * **Date Created:** 2026-08-29
