@@ -4,9 +4,9 @@ title: Understanding the Impact of a Merger for IT Teams
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/understanding-the-impact-of-a-merger-for-it-teams"
 show_leeatchison: true
-order_leeatchison: 11
+order_leeatchison: 12
 show_academy: true
-order_academy: 11
+order_academy: 12
 canonical_site: leeatchison
 duration: "35m"
 level: "Intermediate"

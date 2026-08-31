@@ -4,10 +4,9 @@ title: "Cloud Migration Fundamentals: Best Practices for Moving to the Cloud"
 platform: O'Reilly Media
 platform_url: "https://www.oreilly.com/videos/cloud-migration-fundamentals/0790145468215/"
 show_leeatchison: true
-order_leeatchison: 4
+order_leeatchison: 5
 show_academy: true
-order_academy: 4
-feature_academy: true
+order_academy: 5
 canonical_site: leeatchison
 duration: "1h 28m"
 level: "Beginner"

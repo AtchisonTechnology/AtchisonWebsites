@@ -1,9 +1,11 @@
 # Add the Risk Management for Scalable Systems course to both sites
 
+[PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17)
+
 * **ID:** Spec0014
-* **Status:** In Development
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-31
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy` (content lives in `shared/_courses/`, read by both)
 
 ---
@@ -382,3 +384,24 @@ validation rule already cover this course as written.
   launched, which settles two things at once — the framing fix in §4 names no
   specialization, and no specialization page is proposed for either site.
   Both wait for launch.
+
+- **2026-08-31** — Moved to Implementing. §4 cross-reference wording drafted
+  with `lees-voice` and confirmed by Lee before writing:
+
+  - *Scalable Availability in Software Architecture*: "*Cloud Architecture for
+    Scalable Systems* and *Risk Management for Scalable Systems* cover related
+    ground. It stands on its own if availability is the problem in front of
+    you right now."
+  - *Cloud Architecture for Scalable Systems*: "*Scalable Availability in
+    Software Architecture* and *Risk Management for Scalable Systems* cover
+    related ground. It stands on its own if the cloud decisions are already on
+    your desk."
+  - *Risk Management for Scalable Systems* (new): "*Scalable Availability in
+    Software Architecture* and *Cloud Architecture for Scalable Systems* cover
+    related ground. Service tiers and internal SLAs from the availability
+    course show up throughout this one. It stands on its own if the risk
+    conversations are already landing on your desk."
+
+- **2026-08-31** — Moved to Verifying; [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17) opened.
+
+- **2026-08-31** — Closed and archived. PR #17 merged.
