@@ -3,9 +3,9 @@
 [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17)
 
 * **ID:** Spec0014
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-31
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy` (content lives in `shared/_courses/`, read by both)
 
 ---
@@ -403,3 +403,5 @@ validation rule already cover this course as written.
     conversations are already landing on your desk."
 
 - **2026-08-31** — Moved to Verifying; [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17) opened.
+
+- **2026-08-31** — Closed and archived. PR #17 merged.
