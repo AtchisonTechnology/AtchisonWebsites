@@ -6,8 +6,7 @@ platform_url: "https://www.coursera.org/learn/architecting-scalable-applications
 show_leeatchison: true
 order_leeatchison: 3
 show_academy: true
-order_academy: 2
-feature_academy: true
+order_academy: 5
 canonical_site: academy
 duration: "~8 hrs · 5 modules · 14 assignments"
 level: "Advanced"
