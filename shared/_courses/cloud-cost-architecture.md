@@ -2,7 +2,7 @@
 layout: course
 title: Cloud Cost Architecture
 show_academy: true
-order_academy: 14
+order_academy: 15
 canonical_site: academy
 platform: Atchison Academy
 hidden: true

@@ -4,9 +4,9 @@ title: "Scalable Availability in Software Architecture"
 platform: Coursera
 platform_url: "https://www.coursera.org/learn/architecting-scalable-applications-systems-scalability-and-availability"
 show_leeatchison: true
-order_leeatchison: 2
+order_leeatchison: 3
 show_academy: true
-order_academy: 2
+order_academy: 3
 feature_academy: true
 canonical_site: academy
 duration: "~8 hrs · 5 modules · 14 assignments"
@@ -19,7 +19,7 @@ summary: "Practical techniques for designing modern, high-scale applications tha
 
 Most availability problems aren't caused by one big failure. They come from small decisions, an unowned dependency, an SLA nobody actually measures, that compound until the system can't stay up under real conditions. This course covers the patterns and decisions that separate resilient systems from fragile ones, drawn from techniques proven in SaaS, e-commerce, and enterprise systems.
 
-This is the first of two companion courses, best taken in this order, followed by *Cloud Architecture for Scalable Systems*. It stands on its own if availability is the problem in front of you right now.
+*Cloud Architecture for Scalable Systems* and *Risk Management for Scalable Systems* cover related ground. It stands on its own if availability is the problem in front of you right now.
 
 ## What You'll Learn
 

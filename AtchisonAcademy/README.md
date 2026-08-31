@@ -59,8 +59,8 @@ over the initializer and pin previews to the production hostname.
 
 > **These files are shared.** `src/_books` and `src/_courses` are symlinks to
 > `shared/_books` and `shared/_courses` at the repo root, which
-> `LeeAtchison` reads too. There are 10 books and 12 courses there; this site
-> shows the 2 books and 8 courses marked `show_academy`. Edit the files under
+> `LeeAtchison` reads too. There are 10 books and 17 courses there; this site
+> shows the 2 books and 13 courses marked `show_academy`. Edit the files under
 > `shared/` — an edit lands on both sites — and never replace the symlinks
 > with real directories.
 

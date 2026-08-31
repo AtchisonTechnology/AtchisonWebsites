@@ -4,9 +4,9 @@ title: "Cloud Architecture: Advanced Concepts"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-architecture-advanced-concepts-25626673"
 show_leeatchison: true
-order_leeatchison: 6
+order_leeatchison: 7
 show_academy: true
-order_academy: 6
+order_academy: 7
 canonical_site: leeatchison
 duration: "2h 30m"
 level: "Advanced"
