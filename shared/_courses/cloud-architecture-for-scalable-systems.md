@@ -7,8 +7,7 @@ show_leeatchison: true
 order_leeatchison: 2
 feature_leeatchison: true
 show_academy: true
-order_academy: 2
-feature_academy: true
+order_academy: 6
 canonical_site: academy
 duration: "~10 hrs · 5 modules · 10 assignments"
 level: "Advanced"
@@ -20,7 +19,7 @@ summary: "Vendor-neutral cloud architecture from the architect's seat — deploy
 
 Most cloud training teaches you a provider's console. This course teaches the judgment that sits above it — where a workload belongs, what lock-in actually costs, and why the elasticity you're paying for never showed up. Real services get named throughout as examples, but no lesson is built around any single vendor's offering, so the reasoning stays useful as the platforms keep changing.
 
-*Scalable Availability in Software Architecture* and *Risk Management for Scalable Systems* cover related ground. It stands on its own if the cloud decisions are already on your desk.
+*Scalable Availability in Software Architecture* comes before this one, and *Risk Management for Scalable Systems* picks up where it leaves off. The availability course sets the service tiers and internal SLAs that this one spends against. It stands on its own if the cloud decisions are already on your desk.
 
 ## What You'll Learn
 

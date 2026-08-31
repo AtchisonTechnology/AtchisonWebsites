@@ -23,6 +23,12 @@
   info_label:  "Coursera pricing & Coursera Plus"
   cta_label:   "Get the Course on Coursera"
 
+"Coursera Specialization":
+  access_note: "Available exclusively on Coursera. Enroll directly, through Coursera Plus, or start a free trial — financial aid is available if cost is a barrier."
+  info_url:    "https://www.coursera.org/courseraplus"
+  info_label:  "Coursera pricing & Coursera Plus"
+  cta_label:   "Get the Specialization on Coursera"
+
 "O'Reilly Media":
   access_note: "Available exclusively on the O'Reilly learning platform, and included with an O'Reilly subscription."
   info_url:    "https://www.oreilly.com/online-learning/pricing"
