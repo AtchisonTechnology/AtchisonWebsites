@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0014 | Add the Risk Management for Scalable Systems course to both sites | Add the new Coursera course to `shared/_courses/`, sort it first on both sites, feature it on Academy (replacing Cloud Migration Fundamentals) and on leeatchison.com (with Cloud Architecture for Scalable Systems), drop the now-inaccurate "companion course" ordinal framing from all three Coursera courses, and correct the stale course counts in four doc files |
+| — | — | *(none)* | — |
 
 ---
 
@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0014 | Add the Risk Management for Scalable Systems course to both sites | Add the new Coursera course to `shared/_courses/`, sort it first on both sites, feature it on Academy (replacing Cloud Migration Fundamentals) and on leeatchison.com (with Cloud Architecture for Scalable Systems), drop the now-inaccurate "companion course" ordinal framing from all three Coursera courses, and correct the stale course counts in four doc files — [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17) |
 
 ---
 

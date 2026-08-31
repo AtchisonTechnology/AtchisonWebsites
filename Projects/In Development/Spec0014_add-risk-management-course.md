@@ -1,7 +1,9 @@
 # Add the Risk Management for Scalable Systems course to both sites
 
+[PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17)
+
 * **ID:** Spec0014
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy` (content lives in `shared/_courses/`, read by both)
@@ -399,3 +401,5 @@ validation rule already cover this course as written.
     related ground. Service tiers and internal SLAs from the availability
     course show up throughout this one. It stands on its own if the risk
     conversations are already landing on your desk."
+
+- **2026-08-31** — Moved to Verifying; [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17) opened.
