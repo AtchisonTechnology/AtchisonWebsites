@@ -3,9 +3,9 @@
 [PR #18](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/18)
 
 * **ID:** Bug0001
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-31
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
 
 ---
@@ -136,3 +136,7 @@ None — Lee confirmed the fix and asked for it to be made 2026-08-31.
   (`deploy_source: "api"`, commit `1312070`) was a manually triggered
   redeploy of the already-merged commit, not the automatic git-push build —
   consistent with the automatic build having been skipped.
+
+- **2026-08-31** — Moved to Verifying; [PR #18](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/18) opened and merged.
+
+- **2026-08-31** — Closed and archived.
