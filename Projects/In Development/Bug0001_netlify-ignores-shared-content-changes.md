@@ -1,7 +1,7 @@
 # Netlify skips a site's production build when only shared/ content changes
 
 * **ID:** Bug0001
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
