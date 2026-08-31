@@ -18,15 +18,7 @@
   # so a change confined to shared/ never touches a path under this directory
   # and would otherwise be silently skipped (Bug0001). Widen the diff to also
   # cover shared/.
-  #
-  # $CACHED_COMMIT_REF is empty on a branch/context with no prior successful
-  # deploy (e.g. a brand-new PR). Unquoted and empty, it drops out of the
-  # command entirely, collapsing `git diff --quiet $CACHED_COMMIT_REF
-  # $COMMIT_REF -- paths` to a single-ref `git diff --quiet $COMMIT_REF --
-  # paths` — a working-tree-vs-itself diff that is always empty, so the build
-  # skips regardless of actual content. Fall back to git's empty-tree object
-  # so a first build always has real content to compare against and builds.
-  ignore = "git diff --quiet ${CACHED_COMMIT_REF:-4b825dc642cb6eb9a060e54bf8d69288fbee4904} $COMMIT_REF -- AtchisonAcademy shared"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- AtchisonAcademy shared"
 
 [build.environment]
   NODE_ENV = "development"
