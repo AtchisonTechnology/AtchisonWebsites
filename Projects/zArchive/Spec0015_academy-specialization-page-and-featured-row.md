@@ -1,9 +1,11 @@
 # Add the Architecting Scalable Applications and Systems specialization page and rebuild the Academy Featured row
 
+[PR #19](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/19)
+
 * **ID:** Spec0015
-* **Status:** In Development
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-08-31
 * **Systems Impacted:** `AtchisonAcademy` (content lives in `shared/_courses/` and `shared/_data/`, which `LeeAtchison` also reads — see §5 for why that site's rendered output does not change)
 
 ---
@@ -403,3 +405,31 @@ sequencing language from all three Coursera courses because it kept breaking.
 The replacement here re-introduces sequence but names the neighbors instead of
 numbering the course, which is what makes it survive a fourth course — and it
 matches what Spec0014 itself already published on the Course 3 page.
+
+**2026-08-31 — Revised during PR review: Featured row changed from
+"specialization + its three member courses" to "specialization + one course
+per non-Coursera platform."** §4's original plan featured the specialization
+alongside all three individual Coursera courses (Availability, Cloud
+Architecture for Scalable Systems, Risk Management), demoting only
+*Software Architecture: From Developer to Architect*. After seeing it live in
+the Deploy Preview, Lee asked for the opposite emphasis: only the
+specialization card represents the Coursera program in Featured, and the slots
+freed up go to one course per other platform instead —
+*Software Architecture: From Developer to Architect* (LinkedIn Learning),
+*Cloud Architecture: Advanced Concepts* (LinkedIn Learning), and
+*Cloud Migration Fundamentals* (O'Reilly Media), in that order. All three
+individual Coursera courses (Availability, Cloud Architecture for Scalable
+Systems, Risk Management) move to the top of More Courses instead. Final
+`order_academy` (Featured, in display order): specialization (1), Software
+Architecture: From Developer to Architect (2), Cloud Architecture: Advanced
+Concepts (3), Cloud Migration Fundamentals (4); then Scalable Availability
+(5), Cloud Architecture for Scalable Systems (6), Risk Management (7),
+Avoiding Bad Decisions in Your Cloud Strategy (8) leading More Courses. §4's
+table above documents the plan as originally written; this entry is the
+record of what actually shipped.
+
+**2026-08-31 — Closed.** [PR #19](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/19)
+merged. Along the way, PR #19 surfaced that Bug0001's Netlify ignore-build fix
+does not reliably trigger automatic Deploy Preview builds on a new branch —
+tracked separately as Bug0002, not a blocker for this spec (manual "Trigger
+deploy" was used to verify both the initial and revised Featured row live).

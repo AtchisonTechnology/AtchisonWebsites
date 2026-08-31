@@ -6,7 +6,8 @@ platform_url: "https://www.oreilly.com/videos/cloud-migration-fundamentals/07901
 show_leeatchison: true
 order_leeatchison: 5
 show_academy: true
-order_academy: 5
+order_academy: 4
+feature_academy: true
 canonical_site: leeatchison
 duration: "1h 28m"
 level: "Beginner"
