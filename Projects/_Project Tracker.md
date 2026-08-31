@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Bug0001 | Netlify skips a site's production build when only shared/ content changes | Add a custom `[build] ignore` command to `LeeAtchison/netlify.toml` and `AtchisonAcademy/netlify.toml` so Netlify's diff-based build-skip check also considers `shared/`, not just each site's own directory |
 
 ---
 
