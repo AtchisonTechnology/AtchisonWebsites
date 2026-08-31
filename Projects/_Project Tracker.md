@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0014 | Add the Risk Management for Scalable Systems course to both sites | Add `shared/_courses/risk-management-for-scalable-systems.md` (Coursera, `canonical_site: academy`) shown on both sites and sorted first on each, with every existing course bumped down one; feature it on Academy in place of `cloud-migration-fundamentals` (O'Reilly) so that set stays at four, and feature it plus `cloud-architecture-for-scalable-systems` on leeatchison.com, bringing that site's never-rendered Featured block into use (reverses Spec0013 §4a); drop the now-wrong ordinal "companion courses" framing from all three Coursera course descriptions; and correct the 16-courses/12-Academy counts in `CLAUDE.md`, `AtchisonAcademy/CLAUDE.md` and both READMEs |
 
 ---
 
