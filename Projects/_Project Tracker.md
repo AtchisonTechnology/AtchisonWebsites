@@ -38,7 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0015 | Add the Architecting Scalable Applications and Systems specialization page and rebuild the Academy Featured row | Add the Coursera specialization as a new shared course resource with its own `Coursera Specialization` platform entry, reorder the Academy Featured row to specialization-then-take-this-order (dropping *Software Architecture: From Developer to Architect* to More Courses), and rewrite Course 2's sequence paragraph to name its neighbors rather than number itself |
 
 ---
 
