@@ -4,9 +4,9 @@ title: Framing Cloud Discussions for the C-Suite
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/framing-cloud-discussions-for-the-c-suite"
 show_leeatchison: true
-order_leeatchison: 9
+order_leeatchison: 10
 show_academy: true
-order_academy: 9
+order_academy: 10
 canonical_site: leeatchison
 duration: "1h 1m"
 level: "Intermediate"

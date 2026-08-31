@@ -2,7 +2,7 @@
 layout: course
 title: Architecting Systems That Use AI
 show_academy: true
-order_academy: 12
+order_academy: 13
 canonical_site: academy
 platform: Atchison Academy
 availability: prelaunch

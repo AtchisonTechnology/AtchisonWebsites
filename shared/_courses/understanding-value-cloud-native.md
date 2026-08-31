@@ -4,7 +4,7 @@ title: Understanding the Value of Cloud-Native Architecture
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/understanding-the-value-of-cloud-native-architecture"
 show_leeatchison: true
-order_leeatchison: 12
+order_leeatchison: 13
 canonical_site: leeatchison
 duration: "52m"
 level: "Intermediate"

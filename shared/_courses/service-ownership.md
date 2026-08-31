@@ -2,7 +2,7 @@
 layout: course
 title: Service Ownership and Criticality at Scale
 show_academy: true
-order_academy: 13
+order_academy: 14
 canonical_site: academy
 platform: Atchison Academy
 availability: prelaunch

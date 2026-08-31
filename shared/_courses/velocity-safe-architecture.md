@@ -2,7 +2,7 @@
 layout: course
 title: Velocity-Safe Architecture
 show_academy: true
-order_academy: 15
+order_academy: 16
 canonical_site: academy
 platform: Atchison Academy
 hidden: true

@@ -4,9 +4,10 @@ title: "Cloud Architecture for Scalable Systems"
 platform: Coursera
 platform_url: "https://www.coursera.org/learn/cloud-architecture-for-scalable-systems"
 show_leeatchison: true
-order_leeatchison: 1
+order_leeatchison: 2
+feature_leeatchison: true
 show_academy: true
-order_academy: 1
+order_academy: 2
 feature_academy: true
 canonical_site: academy
 duration: "~10 hrs · 5 modules · 10 assignments"
@@ -19,7 +20,7 @@ summary: "Vendor-neutral cloud architecture from the architect's seat — deploy
 
 Most cloud training teaches you a provider's console. This course teaches the judgment that sits above it — where a workload belongs, what lock-in actually costs, and why the elasticity you're paying for never showed up. Real services get named throughout as examples, but no lesson is built around any single vendor's offering, so the reasoning stays useful as the platforms keep changing.
 
-This is the second of two companion courses, best taken in this order, following *Scalable Availability in Software Architecture*. The two work in sequence, but this one stands on its own if the cloud decisions are already on your desk.
+*Scalable Availability in Software Architecture* and *Risk Management for Scalable Systems* cover related ground. It stands on its own if the cloud decisions are already on your desk.
 
 ## What You'll Learn
 
