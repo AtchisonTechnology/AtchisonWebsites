@@ -6,7 +6,7 @@ platform_url: "https://www.linkedin.com/learning/avoiding-bad-decisions-in-your-
 show_leeatchison: true
 order_leeatchison: 6
 show_academy: true
-order_academy: 6
+order_academy: 7
 canonical_site: leeatchison
 duration: "48m"
 level: "Beginner"

@@ -6,8 +6,7 @@ platform_url: "https://www.linkedin.com/learning/software-architecture-from-deve
 show_leeatchison: true
 order_leeatchison: 4
 show_academy: true
-order_academy: 4
-feature_academy: true
+order_academy: 5
 canonical_site: leeatchison
 duration: "57m"
 level: "Beginner"
