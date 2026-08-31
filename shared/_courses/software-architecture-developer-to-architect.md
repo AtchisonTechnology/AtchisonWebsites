@@ -4,9 +4,9 @@ title: "Software Architecture: From Developer to Architect"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/software-architecture-from-developer-to-architect"
 show_leeatchison: true
-order_leeatchison: 3
+order_leeatchison: 4
 show_academy: true
-order_academy: 3
+order_academy: 4
 feature_academy: true
 canonical_site: leeatchison
 duration: "57m"

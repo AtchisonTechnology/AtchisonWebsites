@@ -4,9 +4,9 @@ title: Avoiding Bad Decisions in Your Cloud Strategy
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/avoiding-bad-decisions-in-your-cloud-strategy"
 show_leeatchison: true
-order_leeatchison: 5
+order_leeatchison: 6
 show_academy: true
-order_academy: 5
+order_academy: 6
 canonical_site: leeatchison
 duration: "48m"
 level: "Beginner"

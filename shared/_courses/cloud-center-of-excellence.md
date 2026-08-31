@@ -4,7 +4,7 @@ title: "Cloud for Business: Developing a Cloud Center of Excellence"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-for-business-developing-a-cloud-center-of-excellence"
 show_leeatchison: true
-order_leeatchison: 8
+order_leeatchison: 9
 canonical_site: leeatchison
 duration: "48m"
 level: "Intermediate"

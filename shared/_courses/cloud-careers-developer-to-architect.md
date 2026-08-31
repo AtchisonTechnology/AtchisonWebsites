@@ -4,7 +4,7 @@ title: "Cloud Careers: From Developer to Architect"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-careers-from-developer-to-architect"
 show_leeatchison: true
-order_leeatchison: 7
+order_leeatchison: 8
 canonical_site: leeatchison
 duration: "48m"
 level: "Beginner"
