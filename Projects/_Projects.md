@@ -52,6 +52,14 @@ hasn't been created yet.)
   wrong twice if Coursera's approved title differs. Carried here at Spec0013's
   archival so it is not lost. This is a one-paragraph change to two files
   once Lee confirms the specialization is live and knows its final title.
+  **Overlaps Spec0014 (2026-08-31):** a third Coursera course made "two
+  companion courses" factually wrong, so Spec0014 rewrites these same
+  paragraphs. Lee confirmed 2026-08-31 that the specialization is still
+  unapproved with no final title, so Spec0014 makes the correctness fix only
+  and deliberately does not name it — it drops the ordinal framing entirely
+  across all three Coursera course descriptions. This idea stays queued for
+  the title alone; when it lands, the three paragraphs will already be
+  consistent and only need the specialization named.
 
 ### Confirm Deploy Previews are enabled for stosa
 - **Type:** Spec
