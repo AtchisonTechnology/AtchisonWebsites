@@ -29,7 +29,7 @@ esbuild runs inside `bridgetown start`.
 ```
 shared/
 ├── _books/     # 10 book resources
-└── _courses/   # 17 course resources
+└── _courses/   # 18 course resources
 ```
 
 These are the canonical Bridgetown collection files for books and courses.
