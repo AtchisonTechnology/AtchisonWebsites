@@ -13,6 +13,12 @@
 [build]
   command = "bin/bridgetown deploy"
   publish = "output"
+  # Netlify's default build-skip check only diffs this site's own base
+  # directory. src/_books and src/_courses are symlinks to shared/ (Spec0008),
+  # so a change confined to shared/ never touches a path under this directory
+  # and would otherwise be silently skipped (Bug0001). Widen the diff to also
+  # cover shared/.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- LeeAtchison shared"
 
 [build.environment]
   NODE_ENV = "development"
