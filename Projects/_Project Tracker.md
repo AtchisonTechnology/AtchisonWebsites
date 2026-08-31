@@ -39,6 +39,7 @@ consecutive integers starting at 1.
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
 | 1 | Bug0002 | Netlify deploy-preview ignore command always skips on a new branch | Bug0001's `[build] ignore` diff command reports "no differences" on every automatic Deploy Preview push on a new PR branch for `LeeAtchison`/`AtchisonAcademy` — including a push that edited a site's own `netlify.toml` directly — even after a fallback for an empty `$CACHED_COMMIT_REF` was tried and disproven by the real Netlify deploy log; root cause still unknown, needs live instrumentation before a fix can be written |
+| 2 | Spec0016 | Raise the new courses and the new book on the leeatchison.com home page | Add a data-driven "What's New" band between the hero and the pillars holding *The Software Conductor* and the two featured Coursera courses, and rebuild the home page's Courses section from the shared collection in place of its four hardcoded platform cards (which name the specialization wrongly), keeping the `180,000+` stat card and adding the `/courses` and Academy links the section never had |
 
 ---
 
