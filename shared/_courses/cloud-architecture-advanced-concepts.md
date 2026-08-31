@@ -6,7 +6,8 @@ platform_url: "https://www.linkedin.com/learning/cloud-architecture-advanced-con
 show_leeatchison: true
 order_leeatchison: 7
 show_academy: true
-order_academy: 8
+order_academy: 3
+feature_academy: true
 canonical_site: leeatchison
 duration: "2h 30m"
 level: "Advanced"

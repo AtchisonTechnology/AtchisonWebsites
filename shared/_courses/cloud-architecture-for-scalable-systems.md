@@ -7,8 +7,7 @@ show_leeatchison: true
 order_leeatchison: 2
 feature_leeatchison: true
 show_academy: true
-order_academy: 3
-feature_academy: true
+order_academy: 6
 canonical_site: academy
 duration: "~10 hrs · 5 modules · 10 assignments"
 level: "Advanced"
