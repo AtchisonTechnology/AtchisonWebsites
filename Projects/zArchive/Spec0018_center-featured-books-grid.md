@@ -295,3 +295,6 @@ spec's branch had also edited (adding the 240px correction note). Merged
 Tracker's Refinement table (Spec0017 closed on `main`, Spec0018 moved out on
 this branch) and renumbering the remaining rows. Rebuilt both sites and ran
 `make test` on the merged tree — all clean.
+
+**2026-09-01 — Closed and archived.** PR #23 merged into `main` via squash
+([8670751](https://github.com/AtchisonTechnology/AtchisonWebsites/commit/8670751fe0c44cd3be86e81031602dcecd991781)).
