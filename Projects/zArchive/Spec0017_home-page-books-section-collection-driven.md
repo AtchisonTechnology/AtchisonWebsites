@@ -1,9 +1,11 @@
 # Make the leeatchison.com home page Books section collection-driven
 
+[PR #22](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/22)
+
 * **ID:** Spec0017
-* **Status:** In Development
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` (`src/index.erb`, and `frontend/styles/index.css` only if Open Question 2 lands on capping the grid). No file under `shared/` changes, so `AtchisonAcademy` is untouched.
 
 ---
@@ -352,3 +354,21 @@ no new styling.
 while settling the art questions on Spec0020. The O'Reilly-report books stay in
 the `.secondary-book-card` tier with no `cover_image`, so nothing in this
 spec's featured grid changes on their account.
+
+**2026-09-01 — Marked Implementing and implemented.** `index.erb`'s Books
+section now loops `featured_books` (§1–§2) with the `View All Books →` link
+(§3), on branch `claude/spec0017-implementation-woj4ul`. Open Questions 2 and
+3 were left at their proposed defaults (section-header copy unchanged;
+`.book-link--amazon` reused for the off-site link) since neither blocked
+implementation. Open Question 1 (grid capping) stays superseded by Spec0018,
+which has not shipped yet, so `.books-grid` was left untouched here as the
+spec directs. `bin/bridgetown build` in test mode confirmed the four cards
+render in `order_leeatchison` order (Software Conductor, Architecting for
+Scale, Business Breakthrough 3.0, Overcoming IT Complexity), the BB3.0 author
+line reads "Lee Atchison, Ken Gavranovic", the Software Conductor blurb is
+now the `summary` sentence, every off-site link resolves to `book_url` or
+`amazon_url` with the Amazon Associates tag intact, and `AtchisonAcademy`
+builds green with no file under `shared/` touched.
+
+**2026-09-01 — Closed.** [PR #22](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/22)
+merged.
