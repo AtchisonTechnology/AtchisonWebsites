@@ -1,9 +1,9 @@
 # Netlify deploy-preview builds for LeeAtchison/AtchisonAcademy skip on every automatic push, not just the first
 
 * **ID:** Bug0002
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
 
 ---
@@ -209,6 +209,21 @@ this is considered fixed.
 ---
 
 ## History of Updates
+
+**2026-09-01 — Closed and archived.** Fix is live on `main` for both
+`LeeAtchison` and `AtchisonAcademy`, verified against real push-triggered
+builds in both the production and deploy-preview contexts. Throwaway
+verification PR #20 closed unmerged and its branch deleted.
+
+**2026-09-01 — Fix verified live; all Testing criteria pass.** Lee committed
+the fix to `main` ("Bug0002 fix.", `6ee6ea9`); the push itself was the first
+automatic push-triggered production build to proceed for both sites. Throwaway
+PR #20 (branch `claude/bug0002-live-verification`, closed unmerged) verified
+the remaining cases: a `shared/`-only commit (`6ca5897`) built both sites'
+Deploy Previews automatically with no manual trigger, and a `Projects/`-only
+commit (`7f1a0f3`) skipped both with "Canceled build due to no content change"
+— Bug0001's skip savings preserved. The four non-shared sites correctly
+canceled throughout.
 
 **2026-09-01 — Moved to Implementing (Lee's go-ahead); fix applied on `main`.**
 Both sites' `netlify.toml` ignore commands switched to CWD-independent
