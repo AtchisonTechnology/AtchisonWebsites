@@ -3,6 +3,7 @@ layout: course
 title: "Cloud Migration Fundamentals: Best Practices for Moving to the Cloud"
 platform: O'Reilly Media
 platform_url: "https://www.oreilly.com/videos/cloud-migration-fundamentals/0790145468215/"
+cover_image: /images/courses/cloud-migration-fundamentals.png
 show_leeatchison: true
 order_leeatchison: 5
 show_academy: true

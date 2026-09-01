@@ -3,6 +3,7 @@ layout: course
 title: "Cloud Architecture: Advanced Concepts"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/cloud-architecture-advanced-concepts-25626673"
+cover_image: /images/courses/cloud-architecture-advanced-concepts.png
 show_leeatchison: true
 order_leeatchison: 7
 show_academy: true
