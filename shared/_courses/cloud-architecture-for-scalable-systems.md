@@ -6,6 +6,7 @@ platform_url: "https://www.coursera.org/learn/cloud-architecture-for-scalable-sy
 show_leeatchison: true
 order_leeatchison: 2
 feature_leeatchison: true
+spotlight_leeatchison: true
 show_academy: true
 order_academy: 6
 canonical_site: academy

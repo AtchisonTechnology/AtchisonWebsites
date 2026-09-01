@@ -6,6 +6,7 @@ platform_url: "https://www.coursera.org/learn/risk-management-for-scalable-syste
 show_leeatchison: true
 order_leeatchison: 1
 feature_leeatchison: true
+spotlight_leeatchison: true
 show_academy: true
 order_academy: 7
 canonical_site: academy

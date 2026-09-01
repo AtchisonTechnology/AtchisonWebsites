@@ -45,8 +45,9 @@ class Builders::SharedContent < SiteBuilder
 
   SITE         = SITES.fetch(SITE_KEY)
   SHOW_FLAG    = SITE[:show]
-  FEATURE_FLAG = :"feature_#{SITE_KEY}"
-  ORDER_KEY    = :"order_#{SITE_KEY}"
+  FEATURE_FLAG   = :"feature_#{SITE_KEY}"
+  ORDER_KEY      = :"order_#{SITE_KEY}"
+  SPOTLIGHT_FLAG = :"spotlight_#{SITE_KEY}"
 
   def build
     hook :site, :post_read do |site|
@@ -96,13 +97,14 @@ class Builders::SharedContent < SiteBuilder
     validate_availability!(resource) if label == "courses"
   end
 
-  # `feature_*` and `order_*` are only meaningful alongside the matching
-  # `show_*`. Carrying one without it means the item was edited for a site it
-  # is not on — surface that as a build failure rather than a silent no-op.
+  # `feature_*`, `order_*` and `spotlight_*` are only meaningful alongside the
+  # matching `show_*`. Carrying one without it means the item was edited for a
+  # site it is not on — surface that as a build failure rather than a silent
+  # no-op.
   def validate_stray_site_keys!(resource)
     return if resource.data[SHOW_FLAG]
 
-    stray = [FEATURE_FLAG, ORDER_KEY].select { |key| resource.data.key?(key) }
+    stray = [FEATURE_FLAG, ORDER_KEY, SPOTLIGHT_FLAG].select { |key| resource.data.key?(key) }
     return if stray.empty?
 
     raise "#{resource.relative_path}: #{stray.join(", ")} set without #{SHOW_FLAG} " \

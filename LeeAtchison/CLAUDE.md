@@ -130,9 +130,10 @@ Because the files are shared, membership, featuring and ordering are expressed w
 | `feature_academy` | Featured on atchisonacademy.com |
 | `order_leeatchison` | Sort position on this site |
 | `order_academy` | Sort position on atchisonacademy.com |
+| `spotlight_leeatchison` | In the home page's "What's New" band (Spec0016) — validated but unrendered on `AtchisonAcademy` |
 | `canonical_site` | Which site owns the SEO original of this item's page — `leeatchison` or `academy` |
 
-`feature_*` and `order_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
+`feature_*`, `order_*` and `spotlight_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
 
 `canonical_site` (Spec0009) is set on **every book and course**, not only the ten that appear on both
 sites — a key on a single-site item is a true statement of where that page belongs, and
