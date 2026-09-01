@@ -1,5 +1,7 @@
 # Show a card image on featured courses, as featured books already do
 
+[PR #25](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/25)
+
 * **ID:** Spec0020
 * **Status:** Verifying
 * **Date Created:** 2026-08-31
