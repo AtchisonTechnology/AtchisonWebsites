@@ -371,3 +371,32 @@ valid, permanent-until-supplied state, not a broken one.
 **2026-09-01 — Moved to Verifying; PR opened.** Both sites build clean.
 Three of six featured courses carry `cover_image`; three remain text-only
 per the decision above.
+
+**2026-09-01 — Two pre-existing bugs found and fixed while reviewing the
+preview, out of Spec0020's own scope but on the pages it touches.**
+
+- **Illegible outline buttons.** `.btn-outline` (white text, white border)
+  was designed for the dark hero sections but reused as-is on light section
+  backgrounds by Spec0016 ("View All Courses"), Spec0017 ("View All
+  Books" on the home page), and an earlier "View All Books" on
+  `about.erb` — all three nearly invisible. Added a `.btn-outline--dark`
+  modifier (navy text, visible border) to both stylesheets and applied it
+  at all five call sites across both sites (the two dark-hero uses of
+  `.btn-outline`, on `index.erb` and `ainative.erb`, are untouched and
+  correct as-is).
+- **"What's New" band misalignment.** In `LeeAtchison/src/index.erb`, the
+  band's heading (`span.section-label` + `h2`) lived inside the course-card
+  grid's own column, so it pushed that column's content down relative to
+  the book-card column beside it — the two were never top-aligned, on
+  `main` or in this PR. Confirmed with exact bounding boxes before the fix
+  (book card top: 741px, course cards top: 828px — an 87px gap) and after
+  (both flush at the same top). Adding `cover_image` art made the mismatch
+  more visible by changing which edge overshot, which is what surfaced it,
+  but did not cause it. Fixed by moving the heading into its own
+  `.whats-new-header`, spanning both grid columns via `grid-column: 1 / -1`,
+  so book and course cards now start at the same row.
+
+Verified against the built HTML with Playwright screenshots and measured
+bounding boxes (this sandbox cannot reach the live Netlify preview domain —
+network policy blocks it — so verification used a local `bin/bridgetown
+deploy`-equivalent build served over localhost instead).

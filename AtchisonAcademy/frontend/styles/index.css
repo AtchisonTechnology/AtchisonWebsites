@@ -229,6 +229,20 @@ footer.site-footer p { margin: 0; }
   background: rgba(255,255,255,0.1);
 }
 
+/* .btn-outline is white-on-transparent, built for a dark background (the
+   hero sections). Used against a light section background instead, it is
+   illegible. .btn-outline--dark swaps in navy text and a visible border
+   for those light-background placements. */
+.btn-outline--dark {
+  color: var(--navy) !important;
+  border-color: var(--border);
+}
+
+.btn-outline--dark:hover {
+  border-color: var(--navy);
+  background: var(--bg-alt);
+}
+
 .btn-group {
   display: flex;
   gap: 1rem;
