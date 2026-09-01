@@ -1,11 +1,11 @@
 # Raise the new courses and the new book on the leeatchison.com home page
 
-**PR:** [#21](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/21)
+[PR #21](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/21)
 
 * **ID:** Spec0016
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` (`src/index.erb`, `frontend/styles/index.css`, `plugins/builders/shared_content.rb`), `AtchisonAcademy` (`plugins/builders/shared_content.rb` only — the mandatory matching half of the builder change), and three files under `shared/` that gain one front-matter key each.
 
 ---
@@ -529,3 +529,14 @@ curation choice, while this one cannot.
 **2026-08-31 — Spec fully refined.** All six questions raised during refinement
 are answered and recorded above; the size-cap check is deliberately deferred
 rather than open. No further input needed before implementation.
+
+**2026-09-01 — Implemented, verified, and closed.** Built on
+`claude/spec0016-implementation-0kvkfk`: both `shared_content.rb` builders,
+the three `shared/` front-matter edits, the `index.erb` band and Courses
+rebuild, the CSS additions/removals, and both sites' `CLAUDE.md` key tables.
+Verified against the Testing section: the deliberate-failure check fires the
+expected error; `AtchisonAcademy`'s build output is byte-identical
+before/after; `rake test` passes; no stale specialization name remains; all
+band/course/book links resolve; the band and Courses section collapse
+cleanly at 900px and 540px. [PR #21](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/21)
+merged into `main`.
