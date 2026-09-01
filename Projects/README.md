@@ -12,3 +12,5 @@ Spec/Bug-driven development tracking for the AtchisonWebsites monorepo, per the
 Spec/Bug templates are not kept here; they come from the skill's `assets/`.
 
 Project parameters and overrides are declared in the repo root `CLAUDE.md`.
+
+<!-- Bug0002 live verification: throwaway Projects/-only change; never merged -->
