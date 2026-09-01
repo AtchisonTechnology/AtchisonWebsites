@@ -1,7 +1,7 @@
 # Show a card image on featured courses, as featured books already do
 
 * **ID:** Spec0020
-* **Status:** In Development
+* **Status:** Implementing
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), `AtchisonAcademy` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), and `shared/_courses/` (a new front-matter key on the featured courses) plus `shared/images/courses/` (new art).
@@ -308,3 +308,16 @@ reasoning: a featured course without an image is an undesired display, easily
 fixed in the course configuration — not a state worth failing a build over.
 That also preserves the incremental path in §5, where the six images can land
 one at a time.
+
+**2026-09-01 — Moved to Implementing.** Spec0019 confirmed shipped (both
+`shared/images/{books,courses}/` symlinks live in both sites). Found a fifth
+render site beyond the four in §3's table: Spec0016 shipped in the interim
+and added the "What's New" band on `LeeAtchison/src/index.erb`
+(`spotlight_courses`, lines 61-72), which §3 flagged as a fifth place to edit
+if Spec0016 had already landed by the time this spec was implemented — it had.
+`AtchisonAcademy/src/index.erb` carries no such band (`spotlight_academy` is
+validated but unrendered there, per that site's `CLAUDE.md`), so the total is
+five card sites, not four: `LeeAtchison/src/courses.erb`,
+`LeeAtchison/src/index.erb` (both the Courses section and the What's New
+band), `AtchisonAcademy/src/courses.erb`, and
+`AtchisonAcademy/src/index.erb`.

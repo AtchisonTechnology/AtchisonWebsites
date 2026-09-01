@@ -35,6 +35,12 @@ title: Courses
     <div class="courses-grid">
       <% featured_courses.each do |course| %>
         <a href="<%= relative_url course.relative_url %>" class="course-card course-card--featured">
+          <% if course.data.cover_image %>
+            <div class="course-cover-wrap">
+              <img src="<%= relative_url course.data.cover_image %>"
+                   alt="<%= course.data.title %> course image" class="course-cover" />
+            </div>
+          <% end %>
           <% if course.data.availability == "prelaunch" %>
             <span class="course-card-platform course-platform-badge--prelaunch">Coming Soon</span>
           <% else %>

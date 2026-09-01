@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0020 | Show a card image on featured courses, as featured books already do | Featured books lead with a cover and featured courses lead with small uppercase platform text, because no course carries an image key at all; add `cover_image` to the six courses featured across the two sites, render it in five featured-card render sites (the four templates plus Spec0016's What's New band, which shipped in the interim), and add `aspect-ratio` card CSS to both stylesheets — Spec0019 has shipped, and Lee supplies the art |
 
 ---
 
@@ -38,8 +38,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0020 | Show a card image on featured courses, as featured books already do | Featured books lead with a cover and featured courses lead with small uppercase platform text, because no course carries an image key at all; add `cover_image` to the six courses featured across the two sites, render it in the four featured-card templates plus Spec0016's band, and add `aspect-ratio` card CSS to both stylesheets — depends on Spec0019, and Lee supplies the art |
-| 2 | Spec0021 | Create the AtchisonAcademyCourses site for actual course content at courses.atchisonacademy.com | Add a seventh Bridgetown site (site index 6, port 18000) hosting the published courses' actual content — unlisted by design: no root index page, a random-slug catalog, `/<course-id>/<secret>/` course URLs, no sitemap.xml, and a disallow-all robots.txt — with `courses` and `lessons` collections, a fail-loud validation builder, a standard lesson template rendering video, text, or resource-list content with prev/next and course-outline navigation, a do-not-share notice on every course page paired with a shareable purchase-page link derived from `course_id` onto atchisonacademy.com, full Academy-derived styling, and a placeholder course only; Netlify site and DNS are Lee's by hand, out of scope |
+| 1 | Spec0021 | Create the AtchisonAcademyCourses site for actual course content at courses.atchisonacademy.com | Add a seventh Bridgetown site (site index 6, port 18000) hosting the published courses' actual content — unlisted by design: no root index page, a random-slug catalog, `/<course-id>/<secret>/` course URLs, no sitemap.xml, and a disallow-all robots.txt — with `courses` and `lessons` collections, a fail-loud validation builder, a standard lesson template rendering video, text, or resource-list content with prev/next and course-outline navigation, a do-not-share notice on every course page paired with a shareable purchase-page link derived from `course_id` onto atchisonacademy.com, full Academy-derived styling, and a placeholder course only; Netlify site and DNS are Lee's by hand, out of scope |
 
 ---
 
