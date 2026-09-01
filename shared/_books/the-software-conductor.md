@@ -15,6 +15,7 @@ badge_style: new
 show_leeatchison: true
 order_leeatchison: 1
 feature_leeatchison: true
+spotlight_leeatchison: true
 show_academy: true
 order_academy: 1
 feature_academy: true
