@@ -3,7 +3,7 @@
 **PR:** [#23](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/23)
 
 * **ID:** Spec0018
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
 * **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` — `frontend/styles/index.css` in each. CSS only; no template, no front matter, no content.
@@ -285,3 +285,13 @@ down with no horizontal overflow and no stretched single card; `/about`, the
 secondary books row, and `.courses-grid` render unchanged. `make test` still
 passes (unaffected). Spec0017's Open Question 1 and Testing item 7 updated to
 cite the corrected 240px value.
+
+**2026-09-01 — PR #23 opened, moved to Verifying.**
+
+**2026-09-01 — Merge conflict resolved against `main`.** Spec0017's own PR
+(#22) merged to `main` first and archived its spec file at the path this
+spec's branch had also edited (adding the 240px correction note). Merged
+`main` into this branch; resolved by keeping both removals from the Project
+Tracker's Refinement table (Spec0017 closed on `main`, Spec0018 moved out on
+this branch) and renumbering the remaining rows. Rebuilt both sites and ran
+`make test` on the merged tree — all clean.
