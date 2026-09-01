@@ -3,6 +3,7 @@ layout: course
 title: "Cloud Architecture for Scalable Systems"
 platform: Coursera
 platform_url: "https://www.coursera.org/learn/cloud-architecture-for-scalable-systems"
+cover_image: /images/courses/cloud-architecture-for-scalable-systems.png
 show_leeatchison: true
 order_leeatchison: 2
 feature_leeatchison: true

@@ -37,6 +37,10 @@ title: Home
 <% unless spotlight_books.empty? && spotlight_courses.empty? %>
 <section class="whats-new">
   <div class="whats-new-inner">
+    <div class="whats-new-header">
+      <span class="section-label">What's New</span>
+      <h2 class="section-title">What's New from Lee</h2>
+    </div>
     <% spotlight_books.each do |book| %>
       <article class="book-card">
         <div class="book-cover-wrap">
@@ -55,11 +59,15 @@ title: Home
       </article>
     <% end %>
     <div class="whats-new-content">
-      <span class="section-label">What's New</span>
-      <h2 class="section-title">What's New from Lee</h2>
       <div class="home-courses-grid">
         <% spotlight_courses.each do |course| %>
           <a href="<%= relative_url course.relative_url %>" class="course-card">
+            <% if course.data.cover_image %>
+              <div class="course-cover-wrap">
+                <img src="<%= relative_url course.data.cover_image %>"
+                     alt="<%= course.data.title %> course image" class="course-cover" />
+              </div>
+            <% end %>
             <% if course.data.availability == "prelaunch" %>
               <span class="course-card-platform course-platform-badge--prelaunch">Coming Soon</span>
             <% else %>
@@ -169,7 +177,7 @@ title: Home
       <% end %>
     </div>
     <div style="text-align:center; margin-top:2.5rem;">
-      <a href="<%= relative_url '/books' %>" class="btn btn-outline">View All Books &rarr;</a>
+      <a href="<%= relative_url '/books' %>" class="btn btn-outline btn-outline--dark">View All Books &rarr;</a>
     </div>
   </div>
 </section>
@@ -191,6 +199,12 @@ title: Home
       <div class="home-courses-grid">
         <% featured_courses.each do |course| %>
           <a href="<%= relative_url course.relative_url %>" class="course-card">
+            <% if course.data.cover_image %>
+              <div class="course-cover-wrap">
+                <img src="<%= relative_url course.data.cover_image %>"
+                     alt="<%= course.data.title %> course image" class="course-cover" />
+              </div>
+            <% end %>
             <% if course.data.availability == "prelaunch" %>
               <span class="course-card-platform course-platform-badge--prelaunch">Coming Soon</span>
             <% else %>
@@ -203,7 +217,7 @@ title: Home
         <% end %>
       </div>
       <div class="btn-group ain-btn-group-left">
-        <a href="<%= relative_url '/courses' %>" class="btn btn-outline">View All Courses &rarr;</a>
+        <a href="<%= relative_url '/courses' %>" class="btn btn-outline btn-outline--dark">View All Courses &rarr;</a>
         <a href="https://atchisonacademy.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Explore the Academy &rarr;</a>
       </div>
     </div>

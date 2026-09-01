@@ -116,7 +116,7 @@ depends on, and a trimmed file has to be reconciled by hand against LeeAtchison'
 time either changes. Treat trimming as its own spec once this site's page set has
 settled; until then, prefer keeping shared rules identical between the two files.
 
-**Adding images**: Place raw source files in `assets_inbox/`, then resize (`sips -Z <maxpx> source --out src/images/dest` on macOS) and reference via `relative_url`. `og-card.png` must stay 1200×630 — `_head.erb` declares those exact dimensions.
+**Adding images**: Place raw source files in `assets_inbox/`, then resize (`sips -Z <maxpx> source --out src/images/dest` on macOS) and reference via `relative_url`. `og-card.png` must stay 1200×630 — `_head.erb` declares those exact dimensions. `sips -Z` only scales — it never crops — so it cannot turn an off-ratio source into the 16:9 `600×338` course cards Spec0020 wants; use `sips -Z 600` followed by `sips -c 338 600`, or Pillow's `ImageOps.fit`/ImageMagick's `-gravity center -extent`, to center-crop instead.
 
 **Site metadata**: `src/_data/site_metadata.yml` is the single source for site title, tagline, and description. Access as `site.metadata.title`, etc. in templates.
 
@@ -153,7 +153,7 @@ The cross-domain URL is emitted on deploy previews too, always pointing at produ
 Netlify serves previews with an automatic `noindex` header, so it costs nothing there, and
 there is no way to know the other site's preview URL (see Spec0004).
 
-**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`.
+**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`, `cover_image` (Spec0020) — a `/images/courses/<slug>.<ext>` path shown above the platform badge on **featured** course cards only (`courses.erb`'s featured row and the home page's Courses section — this site's home page carries no "What's New" band); absent means the card renders text-only, which is expected until every featured course has art.
 
 `shared_content.rb`'s `validate_availability!` requires `platform` on every course whose
 `availability` is not `prelaunch` (Spec0011) — a "Coming Soon" page is exempt since it may

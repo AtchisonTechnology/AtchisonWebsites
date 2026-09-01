@@ -3,6 +3,7 @@ layout: course
 title: "Risk Management for Scalable Systems"
 platform: Coursera
 platform_url: "https://www.coursera.org/learn/risk-management-for-scalable-systems"
+cover_image: /images/courses/risk-management-for-scalable-systems.png
 show_leeatchison: true
 order_leeatchison: 1
 feature_leeatchison: true
