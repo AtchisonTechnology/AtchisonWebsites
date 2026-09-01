@@ -1,0 +1,24 @@
+---
+layout: default
+permalink: /dga8c6isac/
+title: Course Catalog
+---
+
+<%
+  # Lee's private bookmark — the only listing of every course on this site.
+  # Its own random slug (Spec0021), same rule as course secrets: generated
+  # once, never regenerated.
+%>
+<div class="catalog-page">
+  <h1>Courses</h1>
+  <ul class="catalog-list">
+    <% site.collections["courses"].resources.sort_by { |c| c.data.title }.each do |course| %>
+      <li class="catalog-item">
+        <a href="<%= relative_url course.relative_url %>" class="catalog-item-title"><%= course.data.title %></a>
+        <% if course.data.description %>
+          <p class="catalog-item-description"><%= course.data.description %></p>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,61 @@
+[dev]
+  command = "bin/bridgetown dev"
+  targetPort = 4000
+  port = 8888
+  autoLaunch = true
+  publish = "output"
+  framework = "#custom"
+
+[context.dev.build.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "development"
+
+[build]
+  command = "bin/bridgetown deploy"
+  publish = "output"
+  # Unlike AtchisonAcademy and LeeAtchison, this site does not read shared/ —
+  # it is deliberately standalone (Spec0021 Open Question 3). Its
+  # course_content.rb builder does a read-only filename check against
+  # shared/_courses to validate a derived purchase_url, but a change confined
+  # to shared/ never needs to trigger a rebuild here, so Netlify's default
+  # build-skip diff (scoped to this site's own base directory) is correct
+  # as-is and no `ignore` override is needed. See Bug0001/Bug0002 for why
+  # AtchisonAcademy and LeeAtchison need one and this site does not.
+
+[build.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+# Deploy Previews build exactly like production, so that the preview is
+# representative of what ships. See Spec0004 for why the site URL itself is
+# made preview aware in config/initializers.rb rather than here.
+[context.deploy-preview]
+  command = "bin/bridgetown deploy"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+[build.processing.html]
+  pretty_urls = true
+
+[[headers]]
+  for = "*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=15552000; includeSubDomains"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Cache-Control = "public, max-age=604800, s-max-age=604800"
+    # This site is deliberately unlisted (Spec0021): robots.txt disallows
+    # everything, but that only stops compliant crawlers from *fetching*
+    # pages, so it never sees a page-level noindex meta tag either. This
+    # header is belt-and-suspenders protection that applies regardless of
+    # whether a page was ever fetched or crawled.
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/*.(png|jpg|js|css|svg|woff|ttf|eot|ico|woff2)"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, s-max-age=31536000"

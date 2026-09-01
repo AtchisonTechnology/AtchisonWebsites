@@ -1,0 +1,101 @@
+---
+layout: default
+---
+
+<%
+  course = site.collections["courses"].resources.find { |c| c.data.course_id == data.course }
+  lessons = course_lessons(site, course)
+  current_index = lessons.find_index { |l| l.relative_path == resource.relative_path }
+  prev_lesson = current_index && current_index > 0 ? lessons[current_index - 1] : nil
+  next_lesson = current_index && current_index < lessons.length - 1 ? lessons[current_index + 1] : nil
+  module_title = (course.data.modules || []).find { |m| m.number == data.module }&.title
+%>
+
+<div class="lesson-page">
+  <aside class="lesson-outline lesson-outline--sidebar" aria-label="Course contents">
+    <a href="<%= relative_url course.relative_url %>" class="outline-course-title"><%= course.data.title %></a>
+    <%= render "lesson_outline", course: course, lessons: lessons, current: resource %>
+  </aside>
+
+  <article class="lesson-content">
+    <header class="lesson-header">
+      <a href="<%= relative_url course.relative_url %>" class="lesson-course-link">&larr; <%= course.data.title %></a>
+      <p class="lesson-eyebrow">Module <%= data.module %> &mdash; <%= module_title %> &middot; Lesson <%= data.module %>x<%= data.lesson %></p>
+      <h1 class="lesson-title"><%= data.title %></h1>
+    </header>
+
+    <nav class="lesson-prevnext lesson-prevnext--top" aria-label="Lesson navigation">
+      <% if prev_lesson %>
+        <a href="<%= relative_url prev_lesson.relative_url %>" class="lesson-prev">&larr; <%= prev_lesson.data.title %></a>
+      <% else %>
+        <a href="<%= relative_url course.relative_url %>" class="lesson-prev">&larr; Course Index</a>
+      <% end %>
+      <% if next_lesson %>
+        <a href="<%= relative_url next_lesson.relative_url %>" class="lesson-next"><%= next_lesson.data.title %> &rarr;</a>
+      <% else %>
+        <a href="<%= relative_url course.relative_url %>" class="lesson-next">Course Index &rarr;</a>
+      <% end %>
+    </nav>
+
+    <div class="lesson-body">
+      <% case data.content_type %>
+      <% when "video" %>
+        <div class="video-embed">
+          <div class="video-embed-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/<%= data.vimeo_id %>?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="<%= data.title %>"
+            ></iframe>
+          </div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+        </div>
+        <div class="lesson-notes">
+          <%= yield %>
+        </div>
+      <% when "text" %>
+        <div class="lesson-document">
+          <%= yield %>
+        </div>
+      <% when "resources" %>
+        <% unless resource.content.to_s.strip.empty? %>
+          <div class="lesson-intro">
+            <%= yield %>
+          </div>
+        <% end %>
+        <ul class="resource-list">
+          <% (data.resources || []).each do |r| %>
+            <li class="resource-card">
+              <a href="<%= r.url %>" class="resource-title" target="_blank" rel="noopener noreferrer"><%= r.title %></a>
+              <% if r.note %>
+                <p class="resource-note"><%= r.note %></p>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+    <nav class="lesson-prevnext lesson-prevnext--bottom" aria-label="Lesson navigation">
+      <% if prev_lesson %>
+        <a href="<%= relative_url prev_lesson.relative_url %>" class="lesson-prev">&larr; <%= prev_lesson.data.title %></a>
+      <% else %>
+        <a href="<%= relative_url course.relative_url %>" class="lesson-prev">&larr; Course Index</a>
+      <% end %>
+      <% if next_lesson %>
+        <a href="<%= relative_url next_lesson.relative_url %>" class="lesson-next"><%= next_lesson.data.title %> &rarr;</a>
+      <% else %>
+        <a href="<%= relative_url course.relative_url %>" class="lesson-next">Course Index &rarr;</a>
+      <% end %>
+    </nav>
+
+    <%= render "sharing_notice", course: course %>
+  </article>
+
+  <details class="lesson-outline lesson-outline--mobile">
+    <summary>Course contents</summary>
+    <%= render "lesson_outline", course: course, lessons: lessons, current: resource %>
+  </details>
+</div>
