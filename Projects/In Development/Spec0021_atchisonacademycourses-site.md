@@ -1,6 +1,6 @@
 # Create the AtchisonAcademyCourses site — unlisted course content at courses.atchisonacademy.com
 
-* **PR:** (added after creation)
+* **PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/27
 * **ID:** Spec0021
 * **Status:** Verifying
 * **Date Created:** 2026-09-01
