@@ -1,7 +1,7 @@
 # Show a card image on featured courses, as featured books already do
 
 * **ID:** Spec0020
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), `AtchisonAcademy` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), and `shared/_courses/` (a new front-matter key on the featured courses) plus `shared/images/courses/` (new art).
@@ -365,3 +365,7 @@ six featured courses carrying art and three staying text-only, and add the
 rest later from a session that has image generation. This is exactly the
 incremental path §5 was designed for — a featured course without art is a
 valid, permanent-until-supplied state, not a broken one.
+
+**2026-09-01 — Moved to Verifying; PR opened.** Both sites build clean.
+Three of six featured courses carry `cover_image`; three remain text-only
+per the decision above.
