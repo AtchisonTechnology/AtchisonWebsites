@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Bug0002 | Netlify deploy-preview ignore command always skips on a new branch | Bug0001's `[build] ignore` command runs from each site's base directory, where its repo-root-relative pathspecs match nothing — so the diff is always empty and every automatic build in every context (Deploy Previews *and* production) skips; fix: `:(top)` pathspecs in `LeeAtchison/netlify.toml` and `AtchisonAcademy/netlify.toml` |
+| — | — | *(none)* | — |
 
 ---
 
@@ -84,3 +84,4 @@ consecutive integers starting at 1.
 | Spec0014 | Add the Risk Management for Scalable Systems course to both sites | Add the new Coursera course to `shared/_courses/`, sort it first on both sites, feature it on Academy (replacing Cloud Migration Fundamentals) and on leeatchison.com (with Cloud Architecture for Scalable Systems), drop the now-inaccurate "companion course" ordinal framing from all three Coursera courses, and correct the stale course counts in four doc files — [PR #17](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/17) | Closed | 2026-08-31 |
 | Bug0001 | Netlify skips a site's production build when only shared/ content changes | Add a custom `[build] ignore` command to `LeeAtchison/netlify.toml` and `AtchisonAcademy/netlify.toml` so Netlify's diff-based build-skip check also considers `shared/`, not just each site's own directory — [PR #18](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/18) | Closed | 2026-08-31 |
 | Spec0015 | Add the Architecting Scalable Applications and Systems specialization page and rebuild the Academy Featured row | Add the Coursera specialization as a new shared course resource with its own `Coursera Specialization` platform entry, feature it alongside one course per non-Coursera platform (revised during review), rewrite Course 2's sequence paragraph to name its neighbors rather than number itself, and correct the shared-course counts — [PR #19](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/19) | Closed | 2026-08-31 |
+| Bug0002 | Netlify deploy-preview ignore command always skips on a new branch | Bug0001's `[build] ignore` command ran from each site's base directory, where its repo-root-relative pathspecs matched nothing — so the diff was always empty and every automatic build in every context (Deploy Previews *and* production) skipped, which is why the earlier `$CACHED_COMMIT_REF` theory and its fix explained nothing; fixed by anchoring the pathspecs with git's `:(top)` magic in `LeeAtchison/netlify.toml` and `AtchisonAcademy/netlify.toml`, verified live on real push-triggered builds in both contexts | Closed | 2026-09-01 |
