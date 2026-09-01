@@ -318,6 +318,29 @@ body.homepage main {
 }
 
 /* ============================================
+   What's New
+   ============================================ */
+.whats-new {
+  background: var(--bg-alt);
+  padding: 3.5rem 2rem;
+}
+
+.whats-new-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.home-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* ============================================
    Pillars
    ============================================ */
 .pillars {
@@ -640,72 +663,6 @@ body.homepage main {
   color: var(--text-muted);
   margin: 0.75rem 0 1.5rem;
   line-height: 1.7;
-}
-
-.platform-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.platform-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1.1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.platform-icon-wrap {
-  width: 40px;
-  height: 40px;
-  background: var(--bg-alt);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.platform-icon-wrap svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--blue);
-}
-
-.platform-logo-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.platform-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
-}
-
-.platform-card strong {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 0.15rem;
-}
-
-.platform-card span {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.4;
 }
 
 /* ============================================
@@ -1968,12 +1925,12 @@ hr {
   .courses-inner,
   .contact-inner,
   .contact-page-inner,
-  .about-page-bio-inner {
+  .about-page-bio-inner,
+  .whats-new-inner,
+  .home-courses-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-
-  .platform-cards { grid-template-columns: 1fr; }
 
   .about-photo-block { order: -1; }
   .about-page-photo-block { align-items: center; }
@@ -1992,6 +1949,7 @@ hr {
   nav.site-nav ul { gap: 1.25rem; }
   nav.site-nav a { font-size: 0.82rem; }
 
+  .whats-new,
   .pillars,
   .about,
   .books,
