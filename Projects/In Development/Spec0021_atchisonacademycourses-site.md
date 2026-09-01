@@ -152,6 +152,7 @@ course_id: sample-course
 secret: woid9w8d99          # random, generated once, then never changes
 title: Sample Course
 description: One-paragraph description shown on the course index.
+cover_image: /images/courses/sample-course/cover.png   # optional cover artwork
 permalink: /sample-course/woid9w8d99/
 modules:
   - number: 1
@@ -165,6 +166,13 @@ Optional welcome prose for the course index page.
 The `permalink` is written out explicitly in front matter (course-id + secret)
 rather than derived, so a URL can never silently change out from under a
 purchaser. Module numbers/titles live once, on the course file.
+
+**Cover artwork** — `cover_image` is **optional**: the path to the course's
+cover art, kept in this repo under `src/images/courses/<course-id>/` alongside
+the course's other images. When present, the course index page displays it
+(see Part 4); when absent, the page simply renders without artwork — nothing
+else changes and no placeholder is shown. Cover art is a small static image,
+so unlike lesson video (Open Question 2) it lives in the repo.
 
 **Purchase-link derivation** — the marketing site publishes every course at
 `https://atchisonacademy.com/courses/<slug>/`, where `<slug>` is the shared
@@ -220,6 +228,9 @@ the house style of the shared-content builders. The build fails when:
 * a course is missing `course_id`, `secret` (≥ 8 chars), `title`, or
   `permalink`, or its permalink disagrees with `/<course_id>/<secret>/`;
 * two courses share a `course_id` or a `secret`;
+* a course sets `cover_image` but no matching file exists under `src/` —
+  otherwise a typo'd path would silently ship a broken image (a course with
+  no `cover_image` passes; the key is optional);
 * a lesson names a `course` that doesn't exist, duplicates another lesson's
   `<module>x<lesson>` pair, has a `module` number not declared on its course,
   has an invalid `content_type`, is `video` without `video_url`, or is
@@ -237,7 +248,10 @@ URL or orphaning it from its course navigation.
 
 Layouts (extending a shared `default.erb`, as the other sites do):
 
-* **`course.erb`** — course index: title, description, welcome prose, then
+* **`course.erb`** — course index: title and description, with the cover
+  artwork displayed in the header area when `cover_image` is set (a
+  constrained, responsive image; when the key is absent the header simply
+  renders text-only), then welcome prose, then
   the outline grouped by module: each module's title with its lessons listed
   in order, each row showing the lesson number, title, and a small type
   marker (video / text / resources). Every row links to the lesson page.
@@ -283,7 +297,9 @@ Question 5 — not these documentation examples):
 * Module 2 — Going Deeper: **2x1** text, **2x2** resources (3–4 fake
   entries).
 
-The placeholder course sets `purchase_url:` explicitly (a fake course has no
+The placeholder course sets `cover_image:` with a clearly-fake cover
+(`src/images/courses/sample-course/cover.png`), so the artwork path is
+exercised end to end. It also sets `purchase_url:` explicitly (a fake course has no
 marketing page — pointing at `https://atchisonacademy.com/courses/` is fine),
 which exercises the override path; the sharing notice renders on all five of
 its pages.
@@ -305,7 +321,10 @@ AtchisonAcademyCourses`; 18000 on main).
 3. `/robots.txt` serves the disallow-all file with no `Sitemap:` line;
    `/sitemap.xml` 404s; built `output/` contains no sitemap file.
 4. Catalog page at its random slug lists the placeholder course; the course
-   index shows both modules and all four lessons in order.
+   index shows the cover artwork plus both modules and all four lessons in
+   order. Temporarily remove `cover_image` from the placeholder course and
+   confirm the index renders cleanly with no artwork and no broken image;
+   restore.
 5. Each `content_type` renders correctly (video embed, text document with
    image, resources list).
 6. Prev/next walks 1x1 → 1x2 → 2x1 → 2x2 and back; ends link to the course
@@ -317,7 +336,8 @@ AtchisonAcademyCourses`; 18000 on main).
    confirm the derived URL; then remove the placeholder's `purchase_url`
    override and confirm the builder fails the build; restore.
 8. Validation builder: temporarily break each rule (missing secret, dup
-   secret, orphan lesson, bad content_type, video without URL) and confirm
+   secret, orphan lesson, bad content_type, video without URL, `cover_image`
+   pointing at a nonexistent file) and confirm
    each fails the build with a clear message; restore.
 9. On the eventual deploy preview (Netlify-side work is Lee's): confirm the
    `X-Robots-Tag` header is present and — if a `[build] ignore` command is
@@ -404,6 +424,12 @@ tracker's final state. No content changes.
   video / text / resources content types; full layout and styles; placeholder
   course only for now. Open Questions 1–7 recorded; recommendations proposed
   but nothing decided.
+* **2026-09-01** — Per Lee: course files gain an optional `cover_image`
+  front-matter key for course cover artwork; when provided, the course index
+  page displays it. Added the key to the course content model (art lives in
+  the repo under `src/images/courses/<course-id>/`), the `course.erb` header
+  rendering with graceful text-only fallback, a builder check that a declared
+  cover file exists, placeholder-course coverage, and testing items.
 * **2026-09-01** — Per Lee: every course page must carry a do-not-share
   notice paired with a shareable link to the course's purchase page on
   atchisonacademy.com, with the purchase URL derived from `course_id`. Added
