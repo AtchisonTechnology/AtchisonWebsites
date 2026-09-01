@@ -2,9 +2,9 @@
 
 * **PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/27
 * **ID:** Spec0021
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-09-01
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** AtchisonAcademyCourses (new, site index 6), plus
   repo-root shared infrastructure (`lib/worktree_env.rb`,
   `test/worktree_env_test.rb`, `Procfile`, `CLAUDE.md`,
@@ -401,6 +401,10 @@ All resolved 2026-09-01 (Lee's go-ahead to move to Implementing):
 ---
 
 ## History of Updates
+
+**2026-09-01 — Closed.** Per Lee: PR #27 approved for merge. Status set to
+**Closed**, Date Implemented set to 2026-09-01, and this file moved to
+`Projects/zArchive/`.
 
 **2026-09-01 — Tracker migration.** `_Project Tracker.md` was retired; this
 file's Status field is now the sole source of truth. Status normalized from
