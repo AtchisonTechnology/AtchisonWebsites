@@ -440,3 +440,12 @@ continuation of already-scoped, already-documented work, not new scope.
   slack-absorbing mechanism the book card already used, one level deeper.
   Verified: book card and both course cards measured exactly
   478.609375px tall after the fix, down from a few pixels apart before.
+
+**2026-09-01 — Sixth and final image landed: all featured courses now
+have art.** Lee supplied O'Reilly Media's own marketing thumbnail for
+`cloud-migration-fundamentals` (2400×1350, center-fit to 600×338, title
+baked in — same call as the two Coursera courses above, for the same
+reason: it's the only version that exists). All six of the six courses
+this spec set out to cover now carry `cover_image`. Verified on
+`AtchisonAcademy`'s featured row (the only site this course is featured
+on) — all four Academy cards now show art.
