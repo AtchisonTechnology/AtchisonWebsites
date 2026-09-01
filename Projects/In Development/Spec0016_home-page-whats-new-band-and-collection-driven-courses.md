@@ -4,7 +4,7 @@
 * **Status:** In Development
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
-* **Systems Impacted:** `LeeAtchison` (`src/index.erb` and `frontend/styles/index.css`). Content is read from `shared/_courses/`, which `AtchisonAcademy` also reads — but §2 changes only how `LeeAtchison` renders it, and §5 explains why nothing about the Academy site moves.
+* **Systems Impacted:** `LeeAtchison` (`src/index.erb`, `frontend/styles/index.css`, `plugins/builders/shared_content.rb`), `AtchisonAcademy` (`plugins/builders/shared_content.rb` only — the mandatory matching half of the builder change), and three files under `shared/` that gain one front-matter key each.
 
 ---
 
@@ -42,7 +42,7 @@ scope here; see Open Question 3.
 
 ### Decided at request time (2026-08-31)
 
-Lee answered three scoping questions before this spec was written:
+Lee answered four scoping questions before and during the writing of this spec:
 
 - **"My new book" is *The Software Conductor*** — already on the page, so this
   spec raises its prominence rather than adding content.
@@ -52,68 +52,151 @@ Lee answered three scoping questions before this spec was written:
 - **The Courses section should be driven from the shared collection**, the way
   `AtchisonAcademy/src/index.erb` and `LeeAtchison/src/courses.erb` already
   are, instead of hardcoded platform cards.
+- **The band's membership is an explicit `spotlight_leeatchison` key**, not
+  inferred from the existing sort order. See §1 and History of Updates.
 
 ---
 
 ## Solution/Fix/Change
 
-### 1. New "What's New" band, between the hero and the pillars
+### 1. A new per-site key: `spotlight_leeatchison`
+
+**What goes in the What's New band is stated, not inferred.** A boolean
+front-matter key, `spotlight_leeatchison`, marks an item as belonging in the
+band. Like every other per-site key in this repo (Spec0008), **absent means
+false**, so only `true` is ever written.
+
+**Why a fourth key rather than reusing `order_leeatchison`.** Taking the
+first-sorted featured items would produce exactly the right band today — slot 1
+is the book, slots 1–2 are the two Aug 2026 Coursera courses — but only by
+coincidence. Those lists are re-sorted for unrelated reasons (Spec0014 put Risk
+Management at slot 1; Spec0015 re-sorted the Academy row into take-this-order),
+and the day a 2024 course is promoted to slot 1 for a good reason, the home
+page silently starts advertising it as new. The failure is invisible: nothing
+in the repo objects, and nobody edited the home page. A section headed
+"What's New" should say which items it believes are new.
+
+**The two concepts stay separate:**
+
+| Key | Question it answers | Read by |
+|---|---|---|
+| `feature_leeatchison` | Does this item get the prominent treatment within its own section? | `books.erb`, `courses.erb`, the rebuilt home Courses section (§3) |
+| `spotlight_leeatchison` | Is this item new enough to sit above the fold on the home page? | The What's New band (§2) only |
+
+An item can carry either, both, or neither. `order_leeatchison` continues to
+do all sorting, including within the band.
+
+#### 1a. Builder support
+
+**Files:** `LeeAtchison/plugins/builders/shared_content.rb` **and**
+`AtchisonAcademy/plugins/builders/shared_content.rb`.
+
+Two edits per file, identical in both — the copies differ only in `SITE_KEY`
+(line 44), and that property must survive this change:
+
+```ruby
+FEATURE_FLAG   = :"feature_#{SITE_KEY}"
+ORDER_KEY      = :"order_#{SITE_KEY}"
+SPOTLIGHT_FLAG = :"spotlight_#{SITE_KEY}"     # new, after line 49
+```
+
+and in `validate_stray_site_keys!` (line 105):
+
+```ruby
+stray = [FEATURE_FLAG, ORDER_KEY, SPOTLIGHT_FLAG].select { |key| resource.data.key?(key) }
+```
+
+That is the whole builder change. It buys the same guarantee the other two
+keys have: `spotlight_leeatchison` on an item without `show_leeatchison` fails
+the build with the existing message rather than silently doing nothing.
+
+Update the method's comment above line 99 — it currently reads *"`feature_*`
+and `order_*` are only meaningful alongside the matching `show_*`"* — to name
+all three keys.
+
+**`spotlight_academy` will exist as a consequence, and nothing renders it.**
+The Academy builder derives its flag from its own `SITE_KEY`, so the symmetric
+edit gives that site a validated-but-unused key. That is the correct trade:
+keeping the two builders line-for-line identical apart from `SITE_KEY` is what
+makes them reviewable, and the alternative — a key that exists on one site and
+not the other — is the kind of asymmetry that CLAUDE.md warns about. If Lee
+ever wants a What's New band on atchisonacademy.com, the key and its validation
+are already there.
+
+#### 1b. Front-matter edits — the band's membership today
+
+Add `spotlight_leeatchison: true` to exactly three files under `shared/`, each
+directly below its existing `feature_leeatchison: true` line:
+
+| File | Why it's in the band |
+|---|---|
+| `_books/the-software-conductor.md` | `release_date: May 2026`, `badge: New Release` — the new book |
+| `_courses/risk-management-for-scalable-systems.md` | `updated: Aug 2026`, newest course, added by Spec0014 |
+| `_courses/cloud-architecture-for-scalable-systems.md` | `updated: Aug 2026` |
+
+All three already carry `show_leeatchison: true`, so the new validation passes.
+Nothing else changes in those files.
+
+**Deliberately not spotlighted:** *Scalable Availability in Software
+Architecture* (`Apr 2026`) — real, but it makes the band a five-card strip and
+it is the oldest of the three Coursera courses. It is one line away if the band
+looks thin (Testing step 4).
+
+**Maintenance note for the spec's own record:** the band now has to be curated
+by hand, which is the point — and the cost. Whoever ships the next course adds
+one line and removes one. Open Question 2 asks whether the build should enforce
+a cap so the band cannot quietly grow to seven cards.
+
+### 2. The What's New band, between the hero and the pillars
 
 Insert one `<section class="whats-new">` after the hero section closes
-(`src/index.erb` line 18), before `<section class="pillars">`. It holds three
-things, left to right on desktop:
+(`src/index.erb` line 18), before `<section class="pillars">`.
 
-- **The new book** — cover, "New Release" tag, title, one-line summary, link.
-- **Two new-course cards** — the featured courses, newest first.
-- **A single "See everything new" style link** into `/courses`.
-
-**Data source, not hardcoded markup.** Read the collections at the top of
-`index.erb` the way `AtchisonAcademy/src/index.erb` already does, and take the
-top of each ordered list:
+**Data source.** Read the collections at the top of `index.erb` the way
+`AtchisonAcademy/src/index.erb` already does. The builder has already dropped
+everything without `show_leeatchison` at `:site, :post_read`, so no membership
+filter is needed — only spotlight and order, per the site's CLAUDE.md:
 
 ```erb
 <%
-  featured_books   = site.collections["books"].resources
-                       .select { |b| b.data.feature_leeatchison }
-                       .sort_by { |b| b.data.order_leeatchison || 99 }
-  featured_courses = site.collections["courses"].resources
-                       .select { |c| c.data.feature_leeatchison }
-                       .sort_by { |c| c.data.order_leeatchison || 99 }
+  spotlight_books   = site.collections["books"].resources
+                        .select { |b| b.data.spotlight_leeatchison }
+                        .sort_by { |b| b.data.order_leeatchison || 99 }
+  spotlight_courses = site.collections["courses"].resources
+                        .select { |c| c.data.spotlight_leeatchison }
+                        .sort_by { |c| c.data.order_leeatchison || 99 }
 
-  spotlight_book    = featured_books.first
-  spotlight_courses = featured_courses.first(2)
+  featured_courses  = site.collections["courses"].resources
+                        .select { |c| c.data.feature_leeatchison }
+                        .sort_by { |c| c.data.order_leeatchison || 99 }
 %>
 ```
 
-The builder has already dropped everything without `show_leeatchison` at
-`:site, :post_read`, so no membership filter is needed — only featuring and
-order, per the site's CLAUDE.md.
+`featured_courses` is for §3 and is derived here so the file reads the
+collections once.
 
-**Why reuse `order_leeatchison` rather than add a `spotlight_*` key.** Slot 1
-is *The Software Conductor* and slots 1–2 are the two Aug 2026 Coursera
-courses, so the existing keys already produce exactly the right band today,
-and Lee re-sorts these lists whenever something new ships (Spec0014,
-Spec0015). Adding a third per-site key means a third thing to keep in sync and
-a fourth builder validation. The cost is that "new" is expressed as "sorted
-first" rather than stated. See Open Question 2.
+**Wrap the whole band in `<% unless spotlight_books.empty? && spotlight_courses.empty? %>`**,
+matching the guard `AtchisonAcademy/src/index.erb` puts on its own sections. A
+band with nothing in it should not render an empty strip — and once membership
+is explicit rather than "whatever sorted first", empty is a state that can
+actually happen.
 
-**Render the band with the existing card classes** — `.book-card` for the book
-and `.course-card` for the courses — so it inherits the site's card styling
-and the platform badge. New CSS is limited to the band's own wrapper (§3).
+**Render with the existing card classes** — `.book-card` for the book,
+`.course-card` for the courses, including `courses.erb`'s `prelaunch` branch —
+so the band inherits the site's card styling and platform badge. New CSS is
+limited to the band's own wrapper (§4).
 
-**Link targets.** The course cards link to their local pages
+**Link targets.** Course cards link to their local pages
 (`relative_url course.relative_url`), matching `courses.erb`. The book card
-links to `spotlight_book.relative_url` — the local `/books/the-software-conductor/`
-page — **not** `https://thesoftwareconductor.com` as the hardcoded Books
-section does. That is a deliberate difference from the section below it: the
-band is a data-driven card and the collection's own `book_url` is available on
-the book's page. See Open Question 4.
+links to `book.relative_url` — the local `/books/the-software-conductor/` page
+— **not** `https://thesoftwareconductor.com` as the hardcoded Books section
+does. A deliberate difference from the section below it; see Open Question 4.
 
 **Copy.** Section label "What's New", section title to be confirmed with Lee
-(proposed: *"Just Released"*). Do not write a paragraph of intro copy — the
-band's job is to be scanned in under two seconds on the way past.
+(proposed: *"Just Released"*). No intro paragraph — the band's job is to be
+scanned in under two seconds on the way past.
 
-### 2. Rebuild the Courses section from the shared collection
+### 3. Rebuild the Courses section from the shared collection
 
 **File:** `src/index.erb`, the `<section class="courses" id="courses">` block,
 lines 142–196.
@@ -127,10 +210,9 @@ Keep:
 - The `.section-label`, `.section-title` and `.courses-desc` in the right
   column.
 
-Replace the `<div class="platform-cards">` block (lines 156–193) with a grid
-of real course cards, rendered from `featured_courses` — the same list §1
-derives — in `order_leeatchison` order, using the `.course-card` markup from
-`courses.erb` lines 37–46 including the `prelaunch` branch:
+Replace the `<div class="platform-cards">` block (lines 156–193) with a grid of
+real course cards, rendered from `featured_courses` in `order_leeatchison`
+order, using the `.course-card` markup from `courses.erb` lines 37–46:
 
 ```erb
 <div class="home-courses-grid">
@@ -153,32 +235,32 @@ Then add, below the grid, the two links the section has never had:
 
 - `View All Courses →` to `/courses` (`.btn.btn-outline`).
 - `Explore the Academy →` to `https://atchisonacademy.com`
-  (`target="_blank" rel="noopener noreferrer"`, matching `courses.erb`
-  line 87 and Spec0007's rule that only the navbar entry stays same-tab).
+  (`target="_blank" rel="noopener noreferrer"`, matching `courses.erb` line 87
+  and Spec0007's rule that only the navbar entry stays same-tab).
 
 **Three things this fixes for free.** The wrong specialization name (§4 of the
-problem) disappears with the block that held it; the O'Reilly card's
-hardcoded course title goes with it; and the section stops being able to drift
-from the data at all.
+problem) disappears with the block that held it; the O'Reilly card's hardcoded
+course title goes with it; and the section stops being able to drift from the
+data at all.
 
 **Two things it costs, and why that is acceptable.** The four platform
 destinations Spec0011 completed stop being listed as such, and the Atchison
-Academy logo leaves the home page. The per-course `.course-card-platform`
-badge names the platform on every card, so the platform information survives
-at the level a visitor actually acts on, and the explicit Academy button above
-replaces the Academy platform card's job with a link that Spec0011's card
-never had. Recorded here because it partially reverses a Spec0011 decision on
-purpose. See Open Question 1 for the "keep both" alternative.
+Academy logo leaves the home page. The per-course `.course-card-platform` badge
+names the platform on every card, so the platform information survives at the
+level a visitor acts on, and the explicit Academy button above replaces the
+Academy platform card's job with a link that Spec0011's card never had.
+Recorded here because it partially reverses a Spec0011 decision on purpose.
+See Open Question 1 for the "keep both" alternative.
 
-**Only two cards render today.** `feature_leeatchison` is set on exactly two
-courses. A two-card grid in a `1.6fr` column reads fine, but it is a thinner
-section than the four platform cards it replaces. Options if it looks sparse:
-add `feature_leeatchison: true` to *Scalable Availability in Software
-Architecture* (`order_leeatchison: 3`) for a three-card row, or take
-`.first(4)` of all courses in order rather than the featured subset. This is a
-look-at-it decision — Testing step 4.
+**The band and this section will overlap.** Both currently render *Risk
+Management* and *Cloud Architecture* — spotlight and feature are set on the
+same two courses today. Two cards repeated four screens apart is acceptable and
+arguably reinforcing, but it is a real consequence of keeping the two keys
+independent, and worth looking at once it is on screen (Testing step 4). The
+lever if it reads badly is `feature_leeatchison`, not the band: featuring a
+different pair changes the lower section without touching what is "new".
 
-### 3. CSS
+### 4. CSS
 
 **File:** `frontend/styles/index.css`.
 
@@ -191,7 +273,7 @@ New rules:
   `padding: 3.5rem 2rem` — shorter than the 5rem sections, since it is a strip
   rather than a full section.
 - `.whats-new-inner` — `max-width: var(--max-w); margin: 0 auto;` and a grid.
-  Proposed `grid-template-columns: 1fr 2fr` (book, then the two course cards).
+  Proposed `grid-template-columns: 1fr 2fr` (book, then the course cards).
 - `.home-courses-grid` — `display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;`
   matching `.courses-grid` (line 1468) without reusing that class, whose
   `max-width: var(--max-w); margin: 0 auto` is wrong inside the right-hand
@@ -224,36 +306,39 @@ featured cards on `/courses` already render identically to the rest. Do not
 reach for `--featured` here expecting it to do something. Pre-existing and out
 of scope.
 
-### 4. The specialization is not on leeatchison.com
+### 5. The specialization is not on leeatchison.com
 
-*Architecting Scalable Applications and Systems* has no `show_leeatchison`
-key, so `shared_content.rb` drops it from this site entirely — no page, no
-card, no possible link target. Spec0015 decided this deliberately ("Academy
-only", 2026-08-31), on the grounds that its three member courses are already
-listed here.
+*Architecting Scalable Applications and Systems* has no `show_leeatchison` key,
+so `shared_content.rb` drops it from this site entirely — no page, no card, no
+possible link target, and no legal place for a `spotlight_leeatchison` key
+(the new validation in §1a would fail the build). Spec0015 decided this
+deliberately ("Academy only", 2026-08-31), on the grounds that its three member
+courses are already listed here.
 
-That decision was made three days before Lee asked for the new courses to be
-raised, and the band in §1 is exactly the place a program-level card belongs.
-**This spec does not change it** — the band renders the two featured courses
-and nothing else — but it is the largest open decision on the page. Open
-Question 1 carries the options.
+That decision was made days before Lee asked for the new courses to be raised,
+and the band in §2 is exactly the place a program-level card belongs. **This
+spec does not change it** — the band renders the three spotlighted items and
+nothing else — but it is the largest open decision on the page. Open Question 1
+carries the options.
 
-### 5. What this does *not* change
+### 6. What this does *not* change
 
-- **`AtchisonAcademy` renders identically.** No file under `shared/` is
-  touched — no front matter, no `platforms.yml`, no course body. This is a
-  template and stylesheet change confined to `LeeAtchison/src/index.erb` and
-  `LeeAtchison/frontend/styles/index.css`.
-- **No new front-matter keys**, so `shared_content.rb`'s three validations
-  (`validate_site_keys!`, `validate_availability!`, the `canonical_site`
-  rules) are unaffected and no builder edit is needed.
+- **`AtchisonAcademy` renders identically.** Its builder gains a constant and
+  one array element (§1a), and `spotlight_academy` is set on nothing, so its
+  own validation passes trivially and no template reads the key. The three
+  `shared/` files gain `spotlight_leeatchison`, which that site's builder never
+  looks at. Verify this rather than assume it — Testing step 9.
+- **No `canonical_site`, `show_*`, `feature_*`, `order_*` or `availability`
+  value changes**, so the other three validations behave exactly as before.
 - **The Books section stays hardcoded** and keeps its external
   `thesoftwareconductor.com` / `businessbreakthrough30.com` /
   `architectingforscale.com` links. Open Question 3.
 - **The About, Insights and Contact sections and the hero do not move.** The
-  hero's `Explore Resources` button still points at `/#insights`; the band
-  does not take an anchor.
+  hero's `Explore Resources` button still points at `/#insights`; the band does
+  not take an anchor.
 - **No documentation counts change.** No book or course is added or removed.
+  `CLAUDE.md`'s key table for `LeeAtchison` **does** need the new row — see
+  step 7 of the Summary.
 
 ---
 
@@ -262,30 +347,37 @@ Question 1 carries the options.
 Run the site locally — `bin/site-port LeeAtchison` for this checkout's port —
 and check:
 
-1. **The build runs.** `shared_content.rb` raises on bad front matter; nothing
-   here changes front matter, so a red build means a template error.
-2. **`/` renders the What's New band** directly below the hero, above the
+1. **The build runs.** With the §1a change in place, a green build already
+   proves the three new keys are on items that carry `show_leeatchison`.
+2. **The validation actually fires.** Temporarily add `spotlight_leeatchison: true`
+   to an Academy-only course (`architecting-scalable-applications-and-systems.md`
+   is the natural one) and confirm the build fails naming that file and key,
+   then remove it. A new build failure that has never been seen to fail is not
+   yet a guarantee.
+3. **`/` renders the What's New band** directly below the hero, above the
    pillars, with *The Software Conductor* (cover, "New Release" tag) and the
    two Coursera cards, *Risk Management for Scalable Systems* first.
-3. **Every card in the band links somewhere real** — no 404s, and confirm the
-   book card's destination is whichever Open Question 4 settles on.
-4. **The Courses section** shows two course cards with `COURSERA` badges
-   instead of the four platform cards, with the `180,000+` stat card intact
-   beside them, and both new buttons below. **Judge whether two cards is
-   enough** (§2) at this step.
-5. **No stale specialization name anywhere on `/`.**
+4. **Judge the band and the Courses section on screen.** Is three cards enough
+   in the band, or does *Scalable Availability* belong there too (§1b)? Do two
+   cards fill the Courses section's `1.6fr` column, or does it read thin next
+   to the stat card? Does the repeat of the same two courses in both places
+   read as reinforcement or as duplication (§3)?
+5. **Every card links somewhere real** — no 404s, and confirm the book card's
+   destination is whichever Open Question 4 settles on.
+6. **No stale specialization name anywhere on `/`.**
    `grep -ri "Architecting Scalable Systems" LeeAtchison/src/` should return
    nothing (note the shipped name has "Applications and" in the middle).
-6. **Responsive.** At 900px the band and the course grid both collapse to one
+7. **Responsive.** At 900px the band and the course grid both collapse to one
    column; at 768px the band's padding drops with its neighbors; at 540px
-   nothing overflows. The `COURSERA SPECIALIZATION` badge width problem
-   Spec0015 flagged does not apply here — no specialization card renders on
-   this site.
-7. **Dead CSS.** `grep -rn "platform-card" LeeAtchison/` returns nothing after
-   the removal, and `AtchisonAcademy` still builds and renders unchanged.
-8. **`/courses` and `/books` are untouched.** Same cards, same order.
-9. **`AtchisonAcademy` builds green** and its home page is byte-identical.
-   (Fast check: `git status` should show no file under `shared/` modified.)
+   nothing overflows.
+8. **Dead CSS.** `grep -rn "platform-card" LeeAtchison/` returns nothing after
+   the removal.
+9. **`AtchisonAcademy` builds green and its output is unchanged.** Build it
+   before and after and diff `output/` — the builder edit and the three
+   `shared/` keys must produce a byte-identical site. This is the one claim in
+   §6 worth proving rather than reasoning about.
+10. **`/courses` and `/books` on both sites are untouched.** Same cards, same
+    order.
 
 `rake test` (port derivation) is unaffected but should still pass.
 
@@ -293,17 +385,23 @@ and check:
 
 ## Summary of Steps Needed
 
-1. Add the collection-reading ERB preamble to `LeeAtchison/src/index.erb` (§1).
-2. Insert the `.whats-new` band between the hero and the pillars (§1).
-3. Replace the `.platform-cards` block in the Courses section with a
-   collection-driven `.home-courses-grid`, plus the two links below it (§2).
-4. Add `.whats-new`, `.whats-new-inner` and `.home-courses-grid` to
-   `frontend/styles/index.css`, and add both to the existing 900px and 768px
-   media blocks (§3).
-5. Delete the seven dead `.platform-*` rules and the `.platform-cards`
-   responsive line (§3).
-6. Work through Testing on `LeeAtchison`, and confirm `AtchisonAcademy` is
-   untouched.
+1. Add `SPOTLIGHT_FLAG` and extend `validate_stray_site_keys!` in **both**
+   copies of `shared_content.rb`, and update the method comment (§1a).
+2. Add `spotlight_leeatchison: true` to the three `shared/` files in §1b.
+3. Add the collection-reading ERB preamble to `LeeAtchison/src/index.erb` (§2).
+4. Insert the `.whats-new` band, with its empty guard, between the hero and the
+   pillars (§2).
+5. Replace the `.platform-cards` block in the Courses section with a
+   collection-driven `.home-courses-grid`, plus the two links below it (§3).
+6. Add `.whats-new`, `.whats-new-inner` and `.home-courses-grid` to
+   `frontend/styles/index.css`, add both to the existing 900px and 768px media
+   blocks, and delete the seven dead `.platform-*` rules and the
+   `.platform-cards` responsive line (§4).
+7. Add `spotlight_leeatchison` / `spotlight_academy` to the key table in
+   `LeeAtchison/CLAUDE.md` and `AtchisonAcademy/CLAUDE.md`, noting that the
+   Academy key is validated but unrendered.
+8. Work through Testing on both sites, including the deliberate-failure check
+   (step 2) and the Academy output diff (step 9).
 
 ---
 
@@ -312,40 +410,48 @@ and check:
 1. **Should the *Architecting Scalable Applications and Systems* specialization
    come to leeatchison.com?** Spec0015 said Academy-only, before this request
    existed. Three options: (a) leave it — the band shows the two member
-   courses, nothing changes; (b) add `show_leeatchison`, `order_leeatchison: 1`
-   and `feature_leeatchison: true` to the specialization file, which gives this
-   site its own `/courses/architecting-scalable-applications-and-systems/` page,
-   puts the program card at the head of the band, and requires renumbering
-   `order_leeatchison` on every course below it — a `shared/` change, so §5's
-   "Academy renders identically" claim would need re-checking; (c) a
-   hand-written cross-site card in the band linking to
+   courses, nothing changes; (b) add `show_leeatchison`, `order_leeatchison: 1`,
+   `feature_leeatchison: true` and `spotlight_leeatchison: true` to the
+   specialization file, which gives this site its own
+   `/courses/architecting-scalable-applications-and-systems/` page, puts the
+   program card at the head of the band, and requires renumbering
+   `order_leeatchison` on every course below it; (c) a hand-written cross-site
+   card in the band linking to
    `atchisonacademy.com/courses/architecting-scalable-applications-and-systems/`,
-   which is one card of markup but reintroduces exactly the hardcoding §2
+   which is one card of markup but reintroduces exactly the hardcoding §3
    removes. **Proposed: (b)**, as the thing Lee actually asked for — but it is
-   a real reversal of a three-day-old decision and doubles the spec's blast
-   radius, so it needs an explicit yes.
-2. **Reuse `order_leeatchison`, or add an explicit `spotlight_leeatchison` key?**
-   Reuse is proposed (§1) and is correct today with zero new machinery. The
-   risk is silent: a future re-sort that puts an older course at slot 1 changes
-   the "What's New" band without anyone noticing they did it. **Proposed:
-   reuse, and revisit if it ever misfires.**
+   a real reversal of a recent decision and widens the spec's blast radius, so
+   it needs an explicit yes.
+2. **Should the build cap the band's size?** The explicit key removes the
+   "silently wrong" failure but not the "silently grows" one: nothing stops
+   `spotlight_leeatchison` accumulating on six items until the band is a wall.
+   A count check would have to live in the `:site, :post_read` hook after the
+   per-resource loop, not in `validate!`, since it is a property of the set
+   rather than of any one item — perhaps a dozen lines. **Proposed: not yet.**
+   The band is curated by hand by one person; a cap is a guard against a
+   problem that has not happened, and this repo's build failures have so far
+   all been for states that actually occurred. Revisit if the band ever grows
+   past four.
 3. **Should the Books section also become collection-driven?** It has the same
-   hardcoding as the Courses section did, plus an order that already disagrees
-   with `order_leeatchison` (page shows 1, 3, 2, 4). Doing it here would make
-   the whole home page data-driven in one pass; leaving it keeps this spec to
-   one section. **Proposed: leave it, and raise it as its own spec** — the
-   Books cards link to three standalone book *sites*, not to the local
-   collection pages, so converting them is a link-destination decision rather
-   than a template swap.
+   hardcoding the Courses section did, plus an order that already disagrees
+   with `order_leeatchison` (page shows 1, 3, 2, 4). **Proposed: leave it, and
+   raise it as its own spec** — the Books cards link to three standalone book
+   *sites*, not to the local collection pages, so converting them is a
+   link-destination decision rather than a template swap.
 4. **Where should the band's book card link — the local
    `/books/the-software-conductor/` page, or `thesoftwareconductor.com`?**
-   §1 proposes local, for consistency with the course cards and with
+   §2 proposes local, for consistency with the course cards and with
    `AtchisonAcademy/src/index.erb`. The Books section directly below will then
    link the same book off-site, which is visibly inconsistent on one page.
    **Proposed: local in the band**, and fold the Books section into the same
    rule whenever Open Question 3 is settled.
 5. **Section title for the band.** Proposed *"Just Released"* under a
    `What's New` label. Lee's call.
+
+**Answered 2026-08-31:**
+
+- **An explicit `spotlight_leeatchison` key**, not the existing sort order,
+  decides what appears in the band.
 
 ---
 
@@ -360,21 +466,32 @@ confirmed it is not a book missing from `shared/_books/`, so this spec adds no
 content — only placement.
 
 **2026-08-31 — Decided: a new band under the hero, not a section reorder.**
-The alternative offered was moving Books and Courses above About. Lee chose
-the band. It leaves every existing section's order, content and anchor intact,
+The alternative offered was moving Books and Courses above About. Lee chose the
+band. It leaves every existing section's order, content and anchor intact,
 which keeps the diff to one insertion plus one replacement.
 
 **2026-08-31 — Decided: the Courses section becomes collection-driven.** Lee
-chose this over the narrower option of correcting the stale specialization
-name in the hardcoded platform cards. That narrower fix is now unnecessary —
-the block holding the wrong name is being deleted.
+chose this over the narrower option of correcting the stale specialization name
+in the hardcoded platform cards. That narrower fix is now unnecessary — the
+block holding the wrong name is being deleted.
+
+**2026-08-31 — Decided: an explicit `spotlight_leeatchison` key.** The spec
+originally derived the band from `feature_leeatchison` + `order_leeatchison`,
+taking the first-sorted items, on the grounds that it produced the right answer
+today with no new machinery. Lee asked for the explicit key instead, and it is
+the better call: the derived version was correct only by coincidence and would
+have failed silently the first time those lists were re-sorted for an unrelated
+reason — a "What's New" band advertising a 2024 course, with nobody having
+edited the home page. The cost is one more per-site key, one more build
+validation, and hand-curation of the band. §1 records the trade; Open Question 2
+records what the key still does not protect against.
 
 **2026-08-31 — Noted: this partially reverses Spec0011.** That spec
-deliberately completed the home page's platform cards to all four
-destinations. Replacing them is a considered trade, not an oversight: the
-per-card platform badge keeps the platform information, and the section gains
-the `/courses` and Academy links it never had. Recorded so the reversal is
-findable from either spec.
+deliberately completed the home page's platform cards to all four destinations.
+Replacing them is a considered trade, not an oversight: the per-card platform
+badge keeps the platform information, and the section gains the `/courses` and
+Academy links it never had. Recorded so the reversal is findable from either
+spec.
 
 **2026-08-31 — Noted: Spec0015's "Academy only" decision is the page's biggest
 open question.** It was made on 2026-08-31, before this request, and on
