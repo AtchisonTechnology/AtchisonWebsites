@@ -3,9 +3,9 @@
 [PR #25](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/25)
 
 * **ID:** Spec0020
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), `AtchisonAcademy` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), and `shared/_courses/` (a new front-matter key on the featured courses) plus `shared/images/courses/` (new art).
 
 ---
@@ -400,3 +400,17 @@ Verified against the built HTML with Playwright screenshots and measured
 bounding boxes (this sandbox cannot reach the live Netlify preview domain —
 network policy blocks it — so verification used a local `bin/bridgetown
 deploy`-equivalent build served over localhost instead).
+
+**2026-09-01 — Closed and archived.** Lee confirmed the spec complete. Both
+Netlify deploy previews (leeatchison, atchisonacademy) came back green on
+the final commit, with the "What's New" alignment fix and the
+outline-button contrast fix both verified live in the previews.
+[PR #25](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/25)
+merged into `main`. Three of six featured courses carry `cover_image`
+(Cloud Architecture for Scalable Systems, Risk Management for Scalable
+Systems, the Architecting Scalable Applications and Systems specialization);
+the remaining three (`cloud-architecture-advanced-concepts`,
+`software-architecture-developer-to-architect`,
+`cloud-migration-fundamentals`) stay text-only until Lee can supply art from
+a session with image generation — a valid permanent-until-supplied state
+per §5, not follow-up work this closure is waiting on. Moved to `zArchive/`.
