@@ -3,6 +3,7 @@ layout: course
 title: "Software Architecture: From Developer to Architect"
 platform: LinkedIn Learning
 platform_url: "https://www.linkedin.com/learning/software-architecture-from-developer-to-architect"
+cover_image: /images/courses/software-architecture-developer-to-architect.png
 show_leeatchison: true
 order_leeatchison: 4
 show_academy: true

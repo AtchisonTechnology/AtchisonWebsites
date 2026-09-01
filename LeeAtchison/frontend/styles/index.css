@@ -345,7 +345,6 @@ body.homepage main {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 2.5rem;
-  align-items: start;
 }
 
 /* Spans both columns so the book card and the course-card grid below it
@@ -354,6 +353,21 @@ body.homepage main {
    otherwise — see Spec0020). */
 .whats-new-header {
   grid-column: 1 / -1;
+}
+
+/* .whats-new-inner's default (stretch) align-items makes .book-card and
+   .whats-new-content match height; this flex column carries that height
+   down into .home-courses-grid so the course cards stretch to match the
+   book card too, rather than leaving blank space below the grid. The
+   course cards' own flex:1 paragraph (like the book card's) absorbs the
+   difference — same mechanism, one level deeper. */
+.whats-new-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.whats-new-content .home-courses-grid {
+  flex: 1;
 }
 
 .home-courses-grid {
