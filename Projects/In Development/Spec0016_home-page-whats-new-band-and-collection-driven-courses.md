@@ -1,7 +1,9 @@
 # Raise the new courses and the new book on the leeatchison.com home page
 
+**PR:** [#21](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/21)
+
 * **ID:** Spec0016
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` (`src/index.erb`, `frontend/styles/index.css`, `plugins/builders/shared_content.rb`), `AtchisonAcademy` (`plugins/builders/shared_content.rb` only — the mandatory matching half of the builder change), and three files under `shared/` that gain one front-matter key each.

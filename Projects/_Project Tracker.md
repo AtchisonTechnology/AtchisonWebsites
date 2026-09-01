@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0016 | Raise the new courses and the new book on the leeatchison.com home page | Add a new `spotlight_leeatchison` front-matter key (validated in both builders) that decides membership of a new "What's New" band between the hero and the pillars — today *The Software Conductor* and the two Aug 2026 Coursera courses — and rebuild the home page's Courses section from the shared collection in place of its four hardcoded platform cards, which name the specialization wrongly, keeping the `180,000+` stat card and adding the `/courses` and Academy links the section never had |
+| — | — | *(none)* | — |
 
 ---
 
@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0016 | Raise the new courses and the new book on the leeatchison.com home page | Add a new `spotlight_leeatchison` front-matter key (validated in both builders) that decides membership of a new "What's New" band between the hero and the pillars — today *The Software Conductor* and the two Aug 2026 Coursera courses — and rebuild the home page's Courses section from the shared collection in place of its four hardcoded platform cards, which name the specialization wrongly, keeping the `180,000+` stat card and adding the `/courses` and Academy links the section never had — [PR #21](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/21) |
 
 ---
 
