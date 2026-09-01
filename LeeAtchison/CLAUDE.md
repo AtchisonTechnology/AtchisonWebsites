@@ -62,7 +62,8 @@ src/
     favicon.png           # Favicon (Lee's headshot, 32×32)
     learners-badge.png     # Neutral reach badge, 180,000+ learners (courses hero; byte-identical to AtchisonAcademy's copy)
     pets404.png           # 404 page illustration
-    books/                # Resized book cover images (max 500px)
+    books/                # -> ../../../shared/images/books (symlink; Spec0019)
+    courses/              # -> ../../../shared/images/courses (symlink; empty until Spec0020)
 frontend/
   styles/index.css              # All CSS — design tokens, component styles, responsive
   styles/syntax-highlighting.css  # Code syntax highlighting styles
@@ -88,6 +89,8 @@ assets_inbox/             # Staging area for raw assets — NEVER reference dire
 **Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order_leeatchison || 99 }`.
 
 **The books and courses collections are shared** (Spec0008). `src/_books` and `src/_courses` are **symlinks** to `../../shared/_books` and `../../shared/_courses` at the repo root — one set of files, read by this site and by `AtchisonAcademy`. Edit the files under `shared/`; never replace the symlinks with real directories. Both sites' dev watchers follow the symlink, so an edit under `shared/` live-rebuilds both.
+
+**Book and course cover art is shared too** (Spec0019). `src/images/books` and `src/images/courses` are **symlinks** to `../../../shared/images/books` and `../../../shared/images/courses` — three levels up, not two, since these sit one directory deeper than the collection symlinks. `cover_image` stays a plain `/images/books/<slug>.<ext>` path in every book's front matter; the symlink preserves it, so this site's rendered `<img src>` is unchanged. Never replace either symlink with a real directory.
 
 `plugins/builders/shared_content.rb` filters the collections at `:site, :post_read` down to the items carrying `show_leeatchison`, so this site never generates a page or sitemap entry for an Academy-only item. It also raises at build time if an item carries `feature_leeatchison` or `order_leeatchison` without `show_leeatchison`. Templates therefore never filter on membership — only on featuring and order.
 
