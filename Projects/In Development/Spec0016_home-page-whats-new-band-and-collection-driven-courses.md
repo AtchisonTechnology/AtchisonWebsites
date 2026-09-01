@@ -137,10 +137,11 @@ directly below its existing `feature_leeatchison: true` line:
 All three already carry `show_leeatchison: true`, so the new validation passes.
 Nothing else changes in those files.
 
-**Deliberately not spotlighted:** *Scalable Availability in Software
-Architecture* (`Apr 2026`) — real, but it makes the band a five-card strip and
-it is the oldest of the three Coursera courses. It is one line away if the band
-looks thin (Testing step 4).
+**Deliberately not spotlighted** (decided 2026-08-31): *Scalable Availability
+in Software Architecture* (`Apr 2026`). It is the oldest of the three Coursera
+courses, and holding the band to three cards is what lets its headline claim
+newness honestly. One line adds it if the band reads thin on screen
+(Testing step 4).
 
 **Maintenance note for the spec's own record:** the band now has to be curated
 by hand, which is the point — and the cost. Whoever ships the next course adds
@@ -186,15 +187,22 @@ actually happen.
 so the band inherits the site's card styling and platform badge. New CSS is
 limited to the band's own wrapper (§4).
 
-**Link targets.** Course cards link to their local pages
+**Link targets** (decided 2026-08-31). Course cards link to their local pages
 (`relative_url course.relative_url`), matching `courses.erb`. The book card
 links to `book.relative_url` — the local `/books/the-software-conductor/` page
 — **not** `https://thesoftwareconductor.com` as the hardcoded Books section
-does. A deliberate difference from the section below it; see Open Question 4.
+does. That is a visible inconsistency on one page, accepted deliberately: the
+band should behave like the rest of the collection-driven page, and the book's
+own page carries `book_url` to thesoftwareconductor.com one click later. It
+resolves when the Books section gets its own spec.
 
-**Copy.** Section label "What's New", section title to be confirmed with Lee
-(proposed: *"Just Released"*). No intro paragraph — the band's job is to be
-scanned in under two seconds on the way past.
+**Copy** (decided 2026-08-31). Section label `What's New`, section title
+**"What's New from Lee"**, in the site's existing `.section-label` /
+`.section-title` pair. The label and the title deliberately say nearly the same
+thing — the redundancy is the point, since the title has to hold up as the
+band's contents rotate and a dated claim like "New This Year" would not. No
+intro paragraph: the band's job is to be scanned in under two seconds on the
+way past.
 
 ### 3. Rebuild the Courses section from the shared collection
 
@@ -315,11 +323,17 @@ possible link target, and no legal place for a `spotlight_leeatchison` key
 deliberately ("Academy only", 2026-08-31), on the grounds that its three member
 courses are already listed here.
 
-That decision was made days before Lee asked for the new courses to be raised,
-and the band in §2 is exactly the place a program-level card belongs. **This
-spec does not change it** — the band renders the three spotlighted items and
-nothing else — but it is the largest open decision on the page. Open Question 1
-carries the options.
+**Confirmed 2026-08-31: it stays Academy-only.** The question was put to Lee
+directly, with a recommendation to bring it over — the band in §2 is exactly
+the place a program-level card belongs, and Spec0015's reasoning ("the member
+courses are already listed here") is weakened by a band whose whole job is to
+name new things. He chose to leave that decision standing.
+
+This is the single biggest simplification to this spec. No `order_leeatchison`
+renumbering across the course collection, no new page on leeatchison.com, no
+`show_*` flag touched anywhere, and §6's "Academy renders identically" claim
+survives intact. The band's newness is carried by the two member Coursera
+courses; the specialization page stays an atchisonacademy.com asset.
 
 ### 6. What this does *not* change
 
@@ -332,7 +346,8 @@ carries the options.
   value changes**, so the other three validations behave exactly as before.
 - **The Books section stays hardcoded** and keeps its external
   `thesoftwareconductor.com` / `businessbreakthrough30.com` /
-  `architectingforscale.com` links. Open Question 3.
+  `architectingforscale.com` links. Converting it is its own spec (decided
+  2026-08-31); the item is queued in `Projects/_Projects.md`.
 - **The About, Insights and Contact sections and the hero do not move.** The
   hero's `Explore Resources` button still points at `/#insights`; the band does
   not take an anchor.
@@ -357,13 +372,14 @@ and check:
 3. **`/` renders the What's New band** directly below the hero, above the
    pillars, with *The Software Conductor* (cover, "New Release" tag) and the
    two Coursera cards, *Risk Management for Scalable Systems* first.
-4. **Judge the band and the Courses section on screen.** Is three cards enough
-   in the band, or does *Scalable Availability* belong there too (§1b)? Do two
-   cards fill the Courses section's `1.6fr` column, or does it read thin next
-   to the stat card? Does the repeat of the same two courses in both places
-   read as reinforcement or as duplication (§3)?
-5. **Every card links somewhere real** — no 404s, and confirm the book card's
-   destination is whichever Open Question 4 settles on.
+4. **Judge the band and the Courses section on screen.** Three cards in the
+   band is the decided default (§1b) — confirm it does not read thin, and add
+   *Scalable Availability* only if it does. Do two cards fill the Courses
+   section's `1.6fr` column next to the stat card? Does the repeat of the same
+   two courses in both places read as reinforcement or as duplication (§3)?
+5. **Every card links somewhere real** — no 404s, and the book card lands on
+   the local `/books/the-software-conductor/` page, not
+   thesoftwareconductor.com.
 6. **No stale specialization name anywhere on `/`.**
    `grep -ri "Architecting Scalable Systems" LeeAtchison/src/` should return
    nothing (note the shipped name has "Applications and" in the middle).
@@ -407,51 +423,31 @@ and check:
 
 ## Open Questions
 
-1. **Should the *Architecting Scalable Applications and Systems* specialization
-   come to leeatchison.com?** Spec0015 said Academy-only, before this request
-   existed. Three options: (a) leave it — the band shows the two member
-   courses, nothing changes; (b) add `show_leeatchison`, `order_leeatchison: 1`,
-   `feature_leeatchison: true` and `spotlight_leeatchison: true` to the
-   specialization file, which gives this site its own
-   `/courses/architecting-scalable-applications-and-systems/` page, puts the
-   program card at the head of the band, and requires renumbering
-   `order_leeatchison` on every course below it; (c) a hand-written cross-site
-   card in the band linking to
-   `atchisonacademy.com/courses/architecting-scalable-applications-and-systems/`,
-   which is one card of markup but reintroduces exactly the hardcoding §3
-   removes. **Proposed: (b)**, as the thing Lee actually asked for — but it is
-   a real reversal of a recent decision and widens the spec's blast radius, so
-   it needs an explicit yes.
-2. **Should the build cap the band's size?** The explicit key removes the
-   "silently wrong" failure but not the "silently grows" one: nothing stops
-   `spotlight_leeatchison` accumulating on six items until the band is a wall.
-   A count check would have to live in the `:site, :post_read` hook after the
-   per-resource loop, not in `validate!`, since it is a property of the set
-   rather than of any one item — perhaps a dozen lines. **Proposed: not yet.**
-   The band is curated by hand by one person; a cap is a guard against a
-   problem that has not happened, and this repo's build failures have so far
-   all been for states that actually occurred. Revisit if the band ever grows
-   past four.
-3. **Should the Books section also become collection-driven?** It has the same
-   hardcoding the Courses section did, plus an order that already disagrees
-   with `order_leeatchison` (page shows 1, 3, 2, 4). **Proposed: leave it, and
-   raise it as its own spec** — the Books cards link to three standalone book
-   *sites*, not to the local collection pages, so converting them is a
-   link-destination decision rather than a template swap.
-4. **Where should the band's book card link — the local
-   `/books/the-software-conductor/` page, or `thesoftwareconductor.com`?**
-   §2 proposes local, for consistency with the course cards and with
-   `AtchisonAcademy/src/index.erb`. The Books section directly below will then
-   link the same book off-site, which is visibly inconsistent on one page.
-   **Proposed: local in the band**, and fold the Books section into the same
-   rule whenever Open Question 3 is settled.
-5. **Section title for the band.** Proposed *"Just Released"* under a
-   `What's New` label. Lee's call.
+**None. Every question raised during refinement is answered below.**
+
+1. **Should the build cap the band's size?** *(Deferred 2026-08-31, not open —
+   recorded here so it stays findable.)* The explicit key removes the "silently
+   wrong" failure but not the "silently grows" one: nothing stops
+   `spotlight_leeatchison` accumulating until the band is a wall. A count check
+   would live in the `:site, :post_read` hook after the per-resource loop, not
+   in `validate!`, since it is a property of the set rather than of any one
+   item — perhaps a dozen lines. Revisit if the band ever grows past four.
 
 **Answered 2026-08-31:**
 
 - **An explicit `spotlight_leeatchison` key**, not the existing sort order,
   decides what appears in the band.
+- **The band's title is "What's New from Lee"**, under the `What's New` label.
+- **The specialization stays Academy-only.** No `show_leeatchison`, no
+  `order_leeatchison` renumbering, no `shared/` change beyond the three
+  spotlight keys.
+- **No build-time cap on the band's size**, for now.
+- **The Books section is not converted here** — it gets its own spec, queued in
+  `_Projects.md`.
+- **The band's book card links to the local book page**, not
+  `thesoftwareconductor.com`.
+- **Three cards in the band, not four:** *Scalable Availability in Software
+  Architecture* is not spotlighted.
 
 ---
 
@@ -497,3 +493,37 @@ spec.
 open question.** It was made on 2026-08-31, before this request, and on
 reasoning ("the member courses are already listed there") that a What's New
 band changes. Carried as Open Question 1 rather than assumed either way.
+
+**2026-08-31 — Decided: the specialization stays Academy-only.** Put to Lee
+with a recommendation to bring it over; he chose to leave Spec0015's decision
+standing. Removes the course renumbering, the new page, and the only risk to
+§6's "Academy renders identically" claim. See §5.
+
+**2026-08-31 — Decided: no build-time cap on the band, for now.** The explicit
+key fixes the failure that would have been silent and wrong; a size cap guards
+a failure that would be visible and merely ugly. Deferred rather than refused —
+Open Question 2 records where the check would go.
+
+**2026-08-31 — Decided: the Books section gets its own spec.** Converting it is
+a link-destination question (three standalone book sites versus local
+collection pages), not the template swap the Courses section was. Queued in
+`Projects/_Projects.md` so it is not lost when this spec archives.
+
+**2026-08-31 — Decided: the band's book card links locally**, accepting a
+visible inconsistency with the Books section below until that section is
+converted.
+
+**2026-08-31 — Decided: three cards, not four.** *Scalable Availability in
+Software Architecture* (Apr 2026) stays out of the band. Keeping the oldest
+Coursera course out is what lets the headline claim newness honestly.
+
+**2026-08-31 — Decided: the band is titled "What's New from Lee."** Three
+options were offered and all three declined before Lee chose this one on a
+second pass. It repeats the section label almost exactly, which is the reason
+it works: the band's contents rotate by hand, so a title making a dated claim
+(*New This Year*) or a release claim (*Just Released*) can be falsified by a
+curation choice, while this one cannot.
+
+**2026-08-31 — Spec fully refined.** All six questions raised during refinement
+are answered and recorded above; the size-cap check is deliberately deferred
+rather than open. No further input needed before implementation.
