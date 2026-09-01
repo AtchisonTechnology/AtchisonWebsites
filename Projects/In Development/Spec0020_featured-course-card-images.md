@@ -268,6 +268,14 @@ Both sites — `bin/site-port LeeAtchison`, `bin/site-port AtchisonAcademy`:
 
 ## History of Updates
 
+**2026-09-01 — Tracker migration.** `_Project Tracker.md` was retired; this
+file's Status field is now the sole source of truth. This spec's implementation
+session had already moved Status to **Implementing** on its own branch before
+the tracker was retired on `main`, so that is the status carried forward here
+— not the `In Spec Development/Refinement` placeholder `main` still showed at
+retirement time, which predates that move. No content changes beyond the
+Status field.
+
 **2026-08-31 — Spec created**, from Lee's request to show an image for featured
 books *and* courses on both sites. Written against commit `bd0d672`.
 

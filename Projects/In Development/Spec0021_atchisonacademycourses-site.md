@@ -1,7 +1,7 @@
 # Create the AtchisonAcademyCourses site — unlisted course content at courses.atchisonacademy.com
 
 * **ID:** Spec0021
-* **Status:** In Development
+* **Status:** In Spec Development/Refinement
 * **Date Created:** 2026-09-01
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademyCourses (new, site index 6), plus
@@ -391,6 +391,11 @@ AtchisonAcademyCourses`; 18000 on main).
 ---
 
 ## History of Updates
+
+**2026-09-01 — Tracker migration.** `_Project Tracker.md` was retired; this
+file's Status field is now the sole source of truth. Status normalized from
+the template placeholder to **In Spec Development/Refinement**, matching the
+tracker's final state. No content changes.
 
 * **2026-09-01** — Spec created from Lee's request: seventh site at
   courses.atchisonacademy.com for actual course content; unlisted by design
