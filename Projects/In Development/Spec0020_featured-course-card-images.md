@@ -108,11 +108,15 @@ source still renders as a correct-looking card — it just loses more of its
 edges than the author intended and carries bytes the page never shows.
 Normalize for predictable crops and file size, not for correctness.
 
-**Image only — no baked-in text** (decided 2026-08-31). The course title must
-not appear in the art: it would duplicate the `<h3>` rendered directly beneath
-it, and a title that is wrong or restyled later cannot be corrected without
-re-exporting the file. The platform is already named by the badge on the same
-card. Art carries the visual; the card carries the words.
+**Baked-in titles, reversing the earlier decision** (decided 2026-08-31,
+reversed 2026-09-01). The original decision was image-only art, with the
+title left to the `<h3>` beneath it. In practice, the marketing art Lee
+supplies from the Coursera campaign assets has the title baked in as part of
+the graphic, and no textless version exists — Lee confirmed on 2026-09-01
+that these are shipped as-is rather than blocked on art that doesn't exist.
+The duplication this creates (title in the image, title in the `<h3>` right
+below it) is accepted as a byproduct of reusing existing marketing art rather
+than commissioning card-specific art.
 
 Six files needed, named for the slugs in the table above.
 
@@ -329,3 +333,14 @@ five card sites, not four: `LeeAtchison/src/courses.erb`,
 `LeeAtchison/src/index.erb` (both the Courses section and the What's New
 band), `AtchisonAcademy/src/courses.erb`, and
 `AtchisonAcademy/src/index.erb`.
+
+**2026-09-01 — First two of six images landed.** Lee supplied Coursera
+marketing art for `cloud-architecture-for-scalable-systems` and
+`risk-management-for-scalable-systems` via `LeeAtchison/assets_inbox/`.
+Normalized both from their 1000×1000 source to 600×338 with `ImageOps.fit`
+(center-crop trims top/bottom evenly, full width preserved, nothing
+cut off) and set `cover_image` on both course files. Both courses' art has
+the title baked in (see the reversed decision above) — still four to go:
+`architecting-scalable-applications-and-systems` (the specialization),
+`cloud-architecture-advanced-concepts`, `cloud-migration-fundamentals`, and
+`software-architecture-developer-to-architect`.
