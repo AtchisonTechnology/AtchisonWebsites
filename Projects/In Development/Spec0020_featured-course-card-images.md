@@ -1,7 +1,7 @@
 # Show a card image on featured courses, as featured books already do
 
 * **ID:** Spec0020
-* **Status:** In Development
+* **Status:** In Spec Development/Refinement
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), `AtchisonAcademy` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), and `shared/_courses/` (a new front-matter key on the featured courses) plus `shared/images/courses/` (new art).
@@ -267,6 +267,11 @@ Both sites — `bin/site-port LeeAtchison`, `bin/site-port AtchisonAcademy`:
 ---
 
 ## History of Updates
+
+**2026-09-01 — Tracker migration.** `_Project Tracker.md` was retired; this
+file's Status field is now the sole source of truth. Status normalized from
+the template placeholder to **In Spec Development/Refinement**, matching the
+tracker's final state. No content changes.
 
 **2026-08-31 — Spec created**, from Lee's request to show an image for featured
 books *and* courses on both sites. Written against commit `bd0d672`.
