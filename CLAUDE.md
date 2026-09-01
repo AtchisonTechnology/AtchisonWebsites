@@ -155,10 +155,9 @@ Everything tracked lives in `Projects/`:
 
 | File | Purpose |
 |---|---|
-| `_Project Tracker.md` | Status of every Spec/Bug — the source of truth |
 | `_Projects.md` | Ideas not yet turned into a Spec/Bug |
 | `services.md` | Site registry + port table |
-| `In Development/` | Active Spec/Bug files |
+| `In Development/` | Active Spec/Bug files — each file's Status field is the source of truth |
 | `zArchive/` | Closed and Cancelled files |
 
 Spec/Bug files are created from the skill's bundled templates (not copied into
@@ -166,9 +165,15 @@ this repo). A Spec/Bug's **Systems Impacted** field must name the specific
 site(s) it touches, using the directory names above — that is what determines
 which sites a worktree needs booted and rebuilt.
 
+There is no central tracker file: each Spec/Bug file's own **Status** field is
+the sole source of truth for its state (the old `_Project Tracker.md` was
+retired 2026-09-01 because every branch touched it, causing constant merge
+conflicts). To see the status of everything, grep `Status:` across
+`Projects/In Development/`.
+
 Reminders that matter most here: never change a Spec/Bug's workflow status
 without being asked; never commit, push, or open a PR without explicit
-permission; keep the tracker in sync with every Spec/Bug change automatically.
+permission.
 
 ## File deletion permission
 
