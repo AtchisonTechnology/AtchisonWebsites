@@ -18,7 +18,15 @@
   # so a change confined to shared/ never touches a path under this directory
   # and would otherwise be silently skipped (Bug0001). Widen the diff to also
   # cover shared/.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- LeeAtchison shared"
+  #
+  # Netlify runs this command from the site's base directory, not the repo
+  # root, and git pathspecs are CWD-relative — plain "LeeAtchison shared"
+  # matched nothing from here, so the diff was always empty and every
+  # automatic build in every context skipped (Bug0002). The :(top) pathspec
+  # magic anchors the paths to the repo root regardless of working directory,
+  # which also makes local simulation behave identically to Netlify's
+  # environment.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ':(top)LeeAtchison' ':(top)shared'"
 
 [build.environment]
   NODE_ENV = "development"

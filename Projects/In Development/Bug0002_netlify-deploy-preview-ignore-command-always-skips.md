@@ -1,7 +1,7 @@
 # Netlify deploy-preview builds for LeeAtchison/AtchisonAcademy skip on every automatic push, not just the first
 
 * **ID:** Bug0002
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison`, `AtchisonAcademy`
@@ -73,51 +73,88 @@ whatever real value it does have. That rules the original hypothesis out as the
 
 ### What's still unknown
 
-- What does `$CACHED_COMMIT_REF` actually resolve to for a Deploy Preview build in
-  this Netlify account/plan, on a branch with no prior *automatic* successful
-  build? (Does a manual trigger's success count toward it for the *next* automatic
-  build? Evidence says no — the second automatic push still skipped after the
-  first manual trigger had already succeeded.)
-- Is this specific to the Deploy Preview context, or does the same failure mode
-  risk production builds on `main` too? Bug0001 was only verified against
-  historical commits, never against a live push-triggered build, so this may have
-  been silently true there as well.
-- The deploy log's first line — `Waiting for other deploys from your team to
-  complete` — shows this Netlify team is on a concurrency-limited plan (builds
-  queue rather than running in parallel). Not obviously related to the skip
-  itself, but noted in case queuing interacts with how `$CACHED_COMMIT_REF` gets
-  populated for a context.
+*(2026-09-01: all three items below are now moot or answered — see the root
+cause in Solution. With pathspecs that match no files, the diff was empty for
+every possible value of `$CACHED_COMMIT_REF`, so none of the observed skips
+carried any information about that variable at all.)*
+
+- `$CACHED_COMMIT_REF`'s actual Deploy-Preview value: never directly observed,
+  but irrelevant to this bug — the broken pathspecs made the command exit 0
+  regardless. After the fix it only needs to be *a* valid commit; live
+  verification (Testing below) will confirm.
+- Production on `main`: **yes, affected identically.** The same ignore command
+  runs in every deploy context, so no automatic push-triggered build
+  (production, branch deploy, or Deploy Preview) can proceed for either site
+  while the current command is in place. See Open Questions.
+- The build-queue/concurrency observation: unrelated — the skip is fully
+  explained without it.
 
 ---
 
 ## Solution/Fix/Change
 
-Not yet determined — this needs the unknowns above answered before a real fix can
-be written with confidence, per the lesson from the disproven first attempt.
+**Root cause identified 2026-09-01** (fix below is *proposed*, not yet
+implemented or decided):
 
-Candidate directions for the next investigation pass:
+Netlify runs a custom `ignore` command **from the site's base directory, not
+the repo root**. This is documented — Netlify's ignore-builds docs state that
+all paths in the ignore command are resolved relative to the base directory —
+and both sites' base directories are their own site folders (that is also why
+each site's `netlify.toml` gets picked up at all; there is none at the repo
+root). Git resolves command-line pathspecs relative to the current working
+directory, so run from inside `AtchisonAcademy/`:
 
-1. **Instrument, don't guess.** Temporarily change the `ignore` command to `echo`
-   `$CACHED_COMMIT_REF` and `$COMMIT_REF` (or write them to a file Netlify's build
-   log would surface) on a throwaway branch, push, and read the actual values from
-   a real deploy log before writing any fix.
-2. **Stop depending on `$CACHED_COMMIT_REF` for correctness.** Deploy Previews
-   also get `$BASE_REF` (documented as the PR's target branch name, e.g. `main`)
-   and `$PULL_REQUEST`/`$REVIEW_ID`. A command that diffs against
-   `origin/$BASE_REF` (or its merge-base with `$COMMIT_REF`) when in a
-   pull-request context, and only falls back to `$CACHED_COMMIT_REF` for
-   production/branch-deploy contexts, would not depend on a cache value whose
-   actual Deploy-Preview semantics are apparently not what Netlify's docs
-   describe (or not what they're commonly assumed to describe). Needs confirming
-   the base branch's history is actually available in Netlify's checkout for a PR
-   build (Bug0001's original design already assumes arbitrary two-SHA diffs work,
-   which implies enough history is present).
-3. Any fix must be verified against a **live** push-triggered build before being
-   trusted, not just simulated locally — the first attempt passed local
-   simulation and still failed live, because the local simulation couldn't
-   reproduce Netlify's actual environment-variable behavior.
+- pathspec `AtchisonAcademy` means `AtchisonAcademy/AtchisonAcademy` — matches nothing;
+- pathspec `shared` means `AtchisonAcademy/shared` — matches nothing (the
+  symlinks live at `src/_books` and `src/_courses`).
 
----
+`git diff --quiet` with pathspecs matching no files reports an empty diff and
+exits 0, **for every commit pair and every value of `$CACHED_COMMIT_REF`**. So
+the command skips every automatic build unconditionally. This explains all the
+observed symptoms at once:
+
+- skips even when the site's own `netlify.toml` changed (pathspec never matched it);
+- the empty-tree fallback fix changed nothing (`$CACHED_COMMIT_REF`'s value was
+  never the problem);
+- local simulation passed while live builds failed (local tests were run from
+  the repo root, where the pathspecs resolve correctly);
+- manual "Trigger deploy" works (it bypasses the ignore command entirely).
+
+**Reproduced locally (2026-09-01)** using commit `aff3b5c` (which edited both
+sites' `netlify.toml` files directly):
+
+```
+# from repo root:
+git diff --quiet aff3b5c~1 aff3b5c -- AtchisonAcademy shared   # exit 1 (build) — the local-simulation trap
+# from AtchisonAcademy/ (how Netlify actually runs it):
+git diff --quiet aff3b5c~1 aff3b5c -- AtchisonAcademy shared   # exit 0 (skip) — reproduces the live failure
+```
+
+**Proposed fix:** use git's `:(top)` pathspec magic, which resolves pathspecs
+against the repo root regardless of the working directory:
+
+```
+# LeeAtchison/netlify.toml
+ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ':(top)LeeAtchison' ':(top)shared'"
+# AtchisonAcademy/netlify.toml
+ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ':(top)AtchisonAcademy' ':(top)shared'"
+```
+
+Verified locally from inside `AtchisonAcademy/`: exit 1 (build) on `aff3b5c`
+(real change under the site dir), and exit 0 (correctly skips) on `1567642`, a
+commit touching only `LeeAtchison/` — so Bug0001's build-skip savings are
+preserved. Because `:(top)` is CWD-independent, the same command now behaves
+identically in local simulation and in Netlify's environment, closing the gap
+that let the first fix pass locally and fail live.
+
+Optional belt-and-braces (worth considering, not required by any observed
+evidence): re-add the empty-tree fallback
+`${CACHED_COMMIT_REF:-4b825dc642cb6eb9a060e54bf8d69288fbee4904}` — the deploy
+log proved the variable *was* set in the one context inspected, but Netlify's
+docs don't guarantee it in all contexts, and the fallback is harmless.
+
+Live verification per the Testing section below is still mandatory before
+this is considered fixed.
 
 ## Testing
 
@@ -155,14 +192,46 @@ Candidate directions for the next investigation pass:
    Previews? If the same failure mode applies there, a `shared/`-only merge could
    silently fail to redeploy production again — the exact Bug0001 symptom,
    recurring through a different mechanism.
+   *(2026-09-01: the factual half is answered — production **is** affected
+   identically, since the same ignore command runs in every context; every
+   automatic push-triggered production build has been skipping since Bug0001's
+   command landed. Both sites' current production deploys (2026-08-31) show the
+   post-merge content, which is consistent with Lee having triggered them
+   manually from the dashboard — Lee to confirm. Whether the fix's live
+   verification should explicitly include a `main` push remains open.)*
 2. **Is the team's concurrency-limited build queue worth raising with Netlify
    support directly**, in case they can state authoritatively what
    `$CACHED_COMMIT_REF` actually contains for this account's Deploy Preview
    builds, rather than reverse-engineering it from log output.
+   *(2026-09-01: likely unnecessary now — the root cause turned out not to
+   involve `$CACHED_COMMIT_REF` or the queue at all.)*
 
 ---
 
 ## History of Updates
+
+**2026-09-01 — Moved to Implementing (Lee's go-ahead); fix applied on `main`.**
+Both sites' `netlify.toml` ignore commands switched to CWD-independent
+`:(top)` pathspecs, with the base-directory gotcha documented in a comment
+beside each. Working-tree change only — not yet committed or pushed; live
+verification per the Testing section still pending.
+
+**2026-09-01 — Root cause identified.** Netlify runs the custom `ignore`
+command from the site's **base directory**, not the repo root (documented in
+Netlify's ignore-builds docs; the same failure is the subject of the Netlify
+forum thread "Ignore in monorepo always ignores"). Git pathspecs are
+CWD-relative, so `-- LeeAtchison shared` / `-- AtchisonAcademy shared` match
+no files from inside the base directories; `git diff --quiet` with unmatched
+pathspecs exits 0, so every automatic build skips, for any commit pair and
+any `$CACHED_COMMIT_REF` value — which is why the empty-tree fallback changed
+nothing and why local simulation from the repo root passed while live builds
+failed. Reproduced locally: the exact command exits 1 from the repo root and
+0 from `AtchisonAcademy/` on the same commit pair. Proposed fix (not yet
+implemented): top-relative pathspecs `':(top)<SiteDir>' ':(top)shared'`,
+verified locally to build on a real change and still skip on a
+LeeAtchison-only commit. Also established that production on `main` is
+affected identically. Updated Solution, unknowns, and Open Questions
+accordingly.
 
 **2026-08-31 — Bug created.** Found while driving [PR #19](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/19)
 (Spec0015) to a testable state. Every automatic Deploy Preview build for
