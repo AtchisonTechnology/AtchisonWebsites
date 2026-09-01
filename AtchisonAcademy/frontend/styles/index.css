@@ -483,7 +483,8 @@ body.homepage main {
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
+  justify-content: center;
   gap: 1.5rem;
 }
 
@@ -1827,11 +1828,6 @@ hr {
   background: var(--white);
 }
 
-.academy-section .books-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
-  justify-content: center;
-}
-
 .academy-section--alt {
   background: var(--off-white);
 }
@@ -2053,10 +2049,6 @@ hr {
 /* ============================================
    Responsive
    ============================================ */
-@media (max-width: 1024px) {
-  .books-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 900px) {
   .pillars-grid { grid-template-columns: 1fr; gap: 1rem; }
 
@@ -2080,7 +2072,7 @@ hr {
 }
 
 @media (max-width: 600px) {
-  .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .books-grid { gap: 1rem; }
 }
 
 @media (max-width: 768px) {
