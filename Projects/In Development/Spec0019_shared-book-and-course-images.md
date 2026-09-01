@@ -1,7 +1,7 @@
 # Move book and course card images into `shared/` so both sites read one copy
 
 * **ID:** Spec0019
-* **Status:** In Development
+* **Status:** Implementing
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` (`src/images/books`, `src/images/courses` become symlinks), plus a new `shared/images/` tree at the repo root. No template, no stylesheet, and no front-matter value changes.
@@ -255,3 +255,17 @@ already exists.
 **2026-08-31 — Spec fully refined.** No open questions remain; ready for
 implementation whenever Lee moves it. Ordering constraint stands: this ships
 before Spec0020.
+
+**2026-09-01 — Moved to Implementing.** Hashes re-verified at implementation
+time (identical to the 2026-08-31 values), so the two Academy duplicates were
+deleted with no "which copy wins" decision needed. Both `netlify.toml` ignore
+rules were already confirmed to cover `shared`. Implemented on branch
+`claude/spec0019-implementation-kmca2u`: the four covers moved into
+`shared/images/books/` via `git mv`, `shared/images/courses/.gitkeep` added,
+and all four symlinks created. Both sites rebuilt clean and the built
+`output/` HTML diffed byte-for-byte against a pre-change build — zero
+differences on leeatchison.com, and on atchisonacademy.com the only
+difference is the two extra covers landing in `output/images/books/` as
+expected (§4). Relative-symlink resolution from a different absolute path
+was verified directly rather than via a full fresh-worktree bundle/npm
+install. `CLAUDE.md` updated at the repo root and in both sites.

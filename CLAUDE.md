@@ -28,8 +28,11 @@ esbuild runs inside `bridgetown start`.
 
 ```
 shared/
-├── _books/     # 10 book resources
-└── _courses/   # 18 course resources
+├── _books/         # 10 book resources
+├── _courses/       # 18 course resources
+└── images/
+    ├── books/      # Book cover images, one copy for both sites
+    └── courses/    # Course card images (empty until Spec0020)
 ```
 
 These are the canonical Bridgetown collection files for books and courses.
@@ -39,6 +42,17 @@ one copy of every book and course, not two (Spec0008). Git stores the
 symlinks (mode 120000) and Netlify checks them out with the rest of the repo,
 so dev and deploy both see real files; both sites' dev watchers follow them,
 so one edit live-rebuilds both.
+
+The card art those files point at is shared the same way (Spec0019).
+`cover_image` is a site-relative `/images/books/<slug>.<ext>` path, so each
+site's `src/images/books` and `src/images/courses` are also **symlinks** —
+`../../../shared/images/books` and `../../../shared/images/courses`, one
+directory deeper than the collection symlinks above, so three `../` instead
+of two. Same rule applies: edit the files under `shared/images/`, never
+replace a symlink with a real directory. Both sites publish all four book
+covers today, including the two only leeatchison.com links to — accepted in
+Spec0019 as unreferenced-but-harmless CDN files rather than building a
+per-site filter for ~190KB.
 
 Front matter, not directory placement, decides what each site shows: a
 `show_`/`feature_`/`order_` key per site (`show_leeatchison`, `show_academy`,

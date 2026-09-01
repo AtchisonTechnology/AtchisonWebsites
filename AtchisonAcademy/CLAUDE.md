@@ -71,7 +71,8 @@ src/
     og-card.png           # Open Graph / Twitter card (1200×630)
     learners-badge.png     # Neutral reach badge, 180,000+ learners (courses hero; byte-identical to LeeAtchison's copy)
     pets404.png           # 404/500 page illustration
-    books/                # Book cover images
+    books/                # -> ../../../shared/images/books (symlink; Spec0019)
+    courses/              # -> ../../../shared/images/courses (symlink; empty until Spec0020)
 frontend/
   styles/index.css              # All CSS — design tokens, component styles, responsive
   styles/syntax-highlighting.css  # Code syntax highlighting styles
@@ -127,6 +128,8 @@ per-site edit.
 **Collections**: Defined in `bridgetown.config.yml` (not in `config/initializers.rb` — the Ruby DSL doesn't support collection registration). Access in ERB as `site.collections["books"].resources`. In collection index pages or layouts, iterate with `.sort_by { |b| b.data.order_academy || 99 }`.
 
 **Shared collections** (Spec0008): `src/_books` and `src/_courses` are **symlinks** to `../../shared/_books` and `../../shared/_courses` at the repo root — one set of files, read by this site and by `LeeAtchison`. There are 10 books and 18 courses there; this site shows the 2 books and 14 courses marked `show_academy`. Edit the files under `shared/`; never replace the symlinks with real directories, and never edit an item on the assumption it is Academy-only — leeatchison.com reads the same file. Both sites' dev watchers follow the symlink, so an edit under `shared/` live-rebuilds both.
+
+**Shared cover art** (Spec0019): `src/images/books` and `src/images/courses` are **symlinks** to `../../../shared/images/books` and `../../../shared/images/courses` — three levels up, since these sit one directory deeper than the collection symlinks above. `cover_image` stays a plain `/images/books/<slug>.<ext>` path in front matter; the symlink preserves it. This site publishes all four book covers (not just its own 2 shown books) because the shared tree is not filtered per site — the two unused covers are unreferenced CDN files, not a bug. Never replace either symlink with a real directory.
 
 `plugins/builders/shared_content.rb` filters the collections at `:site, :post_read` down to the items carrying `show_academy`, so this site never generates a page or sitemap entry for a non-Academy item. It also raises at build time if an item carries `feature_academy` or `order_academy` without `show_academy`. Templates therefore never filter on membership — only on featuring and order.
 
