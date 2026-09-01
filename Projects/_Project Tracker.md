@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0019 | Move book and course card images into `shared/` so both sites read one copy | Spec0008 shared the books and courses collections but not the art they point at, so two covers are maintained twice today; create `shared/images/{books,courses}/` and symlink both into each site the way `_books`/`_courses` already are — no `cover_image` value changes and no rendered HTML changes, and it must land before Spec0020 adds six course images |
+| — | — | *(none)* | — |
 
 ---
 
@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0019 | Move book and course card images into `shared/` so both sites read one copy | Spec0008 shared the books and courses collections but not the art they point at, so two covers are maintained twice today; create `shared/images/{books,courses}/` and symlink both into each site the way `_books`/`_courses` already are — no `cover_image` value changes and no rendered HTML changes, and it must land before Spec0020 adds six course images — [PR #24](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/24) |
 
 ---
 

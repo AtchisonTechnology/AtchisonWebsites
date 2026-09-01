@@ -1,7 +1,9 @@
 # Move book and course card images into `shared/` so both sites read one copy
 
+**PR:** [#24](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/24)
+
 * **ID:** Spec0019
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` (`src/images/books`, `src/images/courses` become symlinks), plus a new `shared/images/` tree at the repo root. No template, no stylesheet, and no front-matter value changes.
@@ -269,3 +271,8 @@ difference is the two extra covers landing in `output/images/books/` as
 expected (§4). Relative-symlink resolution from a different absolute path
 was verified directly rather than via a full fresh-worktree bundle/npm
 install. `CLAUDE.md` updated at the repo root and in both sites.
+
+**2026-09-01 — Moved to Verifying.** Lee said "create a PR" —
+[PR #24](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/24)
+opened against `main`. Subscribed to PR activity to track CI and Netlify
+deploy previews.
