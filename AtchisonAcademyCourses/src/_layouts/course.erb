@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+<%
+  lessons = course_lessons(site, resource)
+%>
+
+<article class="course-page">
+  <header class="course-header">
+    <% if data.cover_image %>
+      <img src="<%= relative_url data.cover_image %>" alt="<%= data.title %> cover art" class="course-cover" />
+    <% end %>
+    <h1><%= data.title %></h1>
+    <% if data.description %>
+      <p class="course-description"><%= data.description %></p>
+    <% end %>
+  </header>
+
+  <% unless resource.content.to_s.strip.empty? %>
+    <div class="course-welcome">
+      <%= yield %>
+    </div>
+  <% end %>
+
+  <nav class="course-outline" aria-label="Course contents">
+    <% (data.modules || []).sort_by(&:number).each do |mod| %>
+      <section class="course-module">
+        <h2 class="course-module-title">Module <%= mod.number %> &mdash; <%= mod.title %></h2>
+        <ol class="course-lesson-list">
+          <% lessons.select { |l| l.data.module == mod.number }.sort_by { |l| l.data.lesson }.each do |lesson| %>
+            <li>
+              <a href="<%= relative_url lesson.relative_url %>" class="course-lesson-row">
+                <span class="lesson-number"><%= mod.number %>x<%= lesson.data.lesson %></span>
+                <span class="lesson-title"><%= lesson.data.title %></span>
+                <span class="lesson-type lesson-type--<%= lesson.data.content_type %>"><%= lesson.data.content_type %></span>
+              </a>
+            </li>
+          <% end %>
+        </ol>
+      </section>
+    <% end %>
+  </nav>
+
+  <%= render "sharing_notice", course: resource %>
+</article>

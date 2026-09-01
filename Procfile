@@ -8,3 +8,4 @@ stosa: stosa/bin/dev
 bb30: BusinessBreakthrough30/bin/dev
 afs: ArchitectingForScale/bin/dev
 academy: AtchisonAcademy/bin/dev
+courses: AtchisonAcademyCourses/bin/dev

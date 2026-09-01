@@ -1,0 +1,12 @@
+<%
+  # Rendered on the course index and every lesson page (Spec0021 Part 4).
+  # `course` is the course resource, passed in by the caller.
+  purchase_url = course_purchase_url(course)
+%>
+<div class="sharing-notice">
+  <p>
+    This content is part of a purchased course &mdash; please don&rsquo;t share these pages.
+    Know someone who&rsquo;d enjoy this course? Share this link instead:
+  </p>
+  <a href="<%= purchase_url %>" class="sharing-notice-link"><%= purchase_url %></a>
+</div>

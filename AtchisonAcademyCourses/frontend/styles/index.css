@@ -1,0 +1,386 @@
+/* ============================================
+   Design Tokens
+   ============================================
+   Starting point is AtchisonAcademy's palette/type-scale/spacing so this
+   site is recognizably the Academy's, but this file is purpose-built for
+   reading and watching a purchased course, not marketing — no hero bands,
+   no CTA sections. See CLAUDE.md. */
+:root {
+  --navy:        #0f2942;
+  --navy-mid:    #1a3f6b;
+  --blue:        #1e5fa8;
+  --teal:        #06b6d4;
+  --teal-light:  #cffafe;
+  --bg:          #f8fafc;
+  --bg-alt:      #eef4fb;
+  --white:       #ffffff;
+  --text:        #1e293b;
+  --text-muted:  #64748b;
+  --border:      #e2e8f0;
+  --shadow-sm:   0 1px 3px rgba(15,41,66,0.08), 0 1px 2px rgba(15,41,66,0.04);
+  --shadow-md:   0 4px 20px rgba(15,41,66,0.12), 0 2px 8px rgba(15,41,66,0.06);
+  --radius-sm:   8px;
+  --radius:      12px;
+  --radius-lg:   20px;
+  --content-w:   70ch;
+  --page-w:      1100px;
+  --font:        system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 { margin: 0 0 0.5em; line-height: 1.25; color: var(--navy); }
+p { margin: 0 0 1rem; }
+
+main {
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.site-footer a { color: var(--text-muted); text-decoration: underline; }
+
+/* ============================================
+   Root page (says nothing about courses)
+   ============================================ */
+.root-page {
+  max-width: 40rem;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary {
+  background: var(--blue);
+  color: var(--white) !important;
+}
+.btn-primary:hover { background: var(--navy-mid); }
+
+/* ============================================
+   Catalog page (Lee's private bookmark)
+   ============================================ */
+.catalog-page { max-width: 42rem; margin: 0 auto; }
+.catalog-list { list-style: none; margin: 0; padding: 0; }
+.catalog-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.catalog-item:last-child { border-bottom: none; }
+.catalog-item-title { font-size: 1.15rem; font-weight: 700; }
+.catalog-item-description { color: var(--text-muted); margin: 0.35rem 0 0; }
+
+/* ============================================
+   Course index page
+   ============================================ */
+.course-page { max-width: 46rem; margin: 0 auto; }
+
+.course-header { text-align: center; margin-bottom: 2rem; }
+.course-cover {
+  max-width: 320px;
+  margin: 0 auto 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+.course-header h1 { font-size: 1.9rem; }
+.course-description { color: var(--text-muted); font-size: 1.05rem; }
+
+.course-welcome {
+  max-width: var(--content-w);
+  margin: 0 auto 2.5rem;
+}
+
+.course-outline { margin-top: 2rem; }
+.course-module { margin-bottom: 2rem; }
+.course-module-title {
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--teal);
+}
+.course-lesson-list { list-style: none; margin: 0.75rem 0 0; padding: 0; }
+
+.course-lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 0.6rem;
+}
+.course-lesson-row:hover {
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+}
+.lesson-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-width: 2.6rem;
+}
+.lesson-title { flex: 1; font-weight: 600; }
+.lesson-type {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--navy-mid);
+}
+.lesson-type--video   { background: var(--teal-light); color: #0e7490; }
+.lesson-type--text    { background: var(--bg-alt);     color: var(--navy-mid); }
+.lesson-type--resources { background: #fef3c7; color: #92400e; }
+
+/* ============================================
+   Sharing notice — compact band above the footer,
+   on the course index and every lesson page
+   ============================================ */
+.sharing-notice {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.sharing-notice p { margin: 0 0 0.4rem; }
+.sharing-notice-link {
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* ============================================
+   Lesson page — content column + outline sidebar
+   ============================================ */
+.lesson-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.lesson-content { min-width: 0; }
+
+.lesson-header { margin-bottom: 1.5rem; }
+.lesson-course-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.lesson-eyebrow {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.35rem;
+}
+.lesson-title { font-size: 1.6rem; margin-bottom: 0; }
+
+.lesson-prevnext {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.lesson-prevnext--top { margin-bottom: 2rem; }
+.lesson-prevnext--bottom { margin: 2.5rem 0; }
+.lesson-next { text-align: right; margin-left: auto; }
+
+.lesson-body { margin-bottom: 1rem; }
+
+/* Video lessons: responsive 16:9 Vimeo embed, full content width */
+.video-embed-wrap {
+  position: relative;
+  padding: 56.25% 0 0 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.video-embed-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.lesson-notes {
+  max-width: var(--content-w);
+  margin: 1.75rem auto 0;
+}
+
+/* Text lessons: comfortable reading measure */
+.lesson-document {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+.lesson-document img {
+  border-radius: var(--radius-sm);
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.lesson-document figcaption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Resource lessons: styled cards */
+.lesson-intro { max-width: var(--content-w); margin: 0 auto 1.5rem; }
+.resource-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--content-w);
+  margin-inline: auto;
+}
+.resource-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+}
+.resource-title { font-weight: 700; font-size: 1.05rem; }
+.resource-note { color: var(--text-muted); margin: 0.35rem 0 0; }
+
+/* Course outline — sidebar on wide screens, <details> on mobile */
+.lesson-outline--sidebar { display: none; }
+.lesson-outline--mobile {
+  margin-top: 2.5rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+.lesson-outline--mobile summary {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.outline-course-title {
+  display: block;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+.outline-module { margin-bottom: 1.1rem; }
+.outline-module-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  margin: 0 0 0.4rem;
+}
+.outline-lesson-list { list-style: none; margin: 0; padding: 0; }
+.outline-lesson-list li { margin-bottom: 0.25rem; }
+.outline-lesson-list a {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--text);
+}
+.outline-lesson-list a:hover { background: var(--bg-alt); text-decoration: none; }
+.outline-lesson-list li.is-current a {
+  background: var(--teal-light);
+  color: var(--navy);
+  font-weight: 700;
+}
+.outline-lesson-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+@media (min-width: 900px) {
+  .lesson-page {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: start;
+  }
+  .lesson-outline--sidebar {
+    display: block;
+    position: sticky;
+    top: 1.5rem;
+  }
+  .lesson-outline--mobile { display: none; }
+}
+
+/* ============================================
+   Error pages (404 / 500)
+   ============================================ */
+.error-page {
+  max-width: 32rem;
+  margin: 3rem auto;
+  text-align: center;
+}
+.error-page-image {
+  max-width: 220px;
+  margin: 0 auto 1.5rem;
+}
+.error-page-code {
+  font-size: 3rem;
+  color: var(--teal);
+  margin-bottom: 0;
+}
+.error-page-desc { color: var(--text-muted); }
+
+/* ============================================
+   Print
+   ============================================ */
+@media print {
+  .lesson-outline, .lesson-prevnext, .sharing-notice, .site-footer, .video-embed {
+    display: none !important;
+  }
+  body { background: var(--white); }
+}

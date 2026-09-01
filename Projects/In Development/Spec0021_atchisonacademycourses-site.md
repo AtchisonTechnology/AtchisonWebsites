@@ -1,7 +1,8 @@
 # Create the AtchisonAcademyCourses site — unlisted course content at courses.atchisonacademy.com
 
+* **PR:** (added after creation)
 * **ID:** Spec0021
-* **Status:** In Spec Development/Refinement
+* **Status:** Verifying
 * **Date Created:** 2026-09-01
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademyCourses (new, site index 6), plus
@@ -202,7 +203,7 @@ module: 1
 lesson: 2
 title: Title of this lesson
 content_type: video        # video | text | resources
-video_url: https://...     # video lessons only
+vimeo_id: 800363806        # video lessons only — numeric Vimeo video ID
 resources:                 # resources lessons only
   - title: Resource name
     url: https://...
@@ -233,8 +234,8 @@ the house style of the shared-content builders. The build fails when:
   no `cover_image` passes; the key is optional);
 * a lesson names a `course` that doesn't exist, duplicates another lesson's
   `<module>x<lesson>` pair, has a `module` number not declared on its course,
-  has an invalid `content_type`, is `video` without `video_url`, or is
-  `resources` without a non-empty `resources` list;
+  has an invalid `content_type`, is `video` without a numeric `vimeo_id`, or
+  is `resources` without a non-empty `resources` list;
 * a lesson's permalink disagrees with `<course permalink> + <m>x<l>/`;
 * a course has no `purchase_url` override and no
   `shared/_courses/<course_id>.md` file exists — meaning the derived purchase
@@ -260,8 +261,10 @@ Layouts (extending a shared `default.erb`, as the other sites do):
   * Header: course title (linked back to the course index) and
     "Module N — Module Title · Lesson NxM".
   * Content area, switched on `content_type`:
-    * `video` — responsive 16:9 embed of `video_url`, full content width,
-      with the body rendered as notes below it;
+    * `video` — Vimeo's standard responsive embed built from `vimeo_id`
+      (padding-box wrapper, iframe at `https://player.vimeo.com/video/<id>`,
+      `player.js`), full content width, with the body rendered as notes
+      below it;
     * `text` — the body as a readable document (comfortable measure
       ~70ch, generous line height, styled images with captions);
     * `resources` — the `resources` list as styled cards/rows (title
@@ -366,47 +369,34 @@ AtchisonAcademyCourses`; 18000 on main).
 
 ## Open Questions
 
-1. **Root URL (`/`) behavior.** Options: (a) serve the 404 page; (b) a
+All resolved 2026-09-01 (Lee's go-ahead to move to Implementing):
+
+1. **Root URL (`/`) behavior.** ~~Options: (a) serve the 404 page; (b) a
    minimal page that says nothing about courses and links to
-   atchisonacademy.com. **Recommendation: (b)** — a stray visitor (or a
-   purchaser who trims the URL) gets somewhere useful, and it looks
-   intentional rather than broken.
-2. **Where do lesson videos live?** The repo should not hold `.mp4`s (the
-   production pipeline's finals are large, and repo weight is already a
-   watched concern). Candidates: the existing Descript publish/share URLs,
-   unlisted YouTube/Vimeo embeds, or an external bucket/CDN. The placeholder
-   course just needs any embeddable URL; the real answer shapes the `video`
-   rendering (native `<video>` tag vs iframe embed) so it should be settled
-   before the first real course.
-3. **Confirm: this site does not consume `shared/_courses`.** Its course
-   files are content, not marketing metadata; keeping it out of the shared
-   system means no symlinks, no `show_`/`canonical_site` keys, and no edits
-   to the two existing builders' `SITES` registries. Cost: a course's title/
-   description are typed here independently of its marketing page. (The
-   purchase-link check in Part 3 reads `shared/_courses` file names at build
-   time, but that is read-only validation — the collections stay separate.)
-   **Recommendation: keep it standalone.**
-4. **Analytics.** Include the Fathom snippet like the other sites, or omit
-   it? Course-consumption stats seem genuinely useful.
-   **Recommendation: include Fathom.**
-5. **Secret slug format.** Recommendation: 10 lowercase letters+digits,
-   generated once per course (e.g. `ruby -rsecurerandom -e 'puts
-   SecureRandom.alphanumeric(10).downcase'`), written into front matter, and
-   never regenerated — changing a secret is a deliberate re-key that breaks
-   every purchaser's bookmark. Same for the catalog slug.
-6. **Directory/site name.** `AtchisonAcademyCourses` as specified — confirm,
-   since the index-6 registration makes it permanent.
-7. **Netlify/DNS state.** Has any of the Netlify side been done already —
-   site created, `courses.atchisonacademy.com` DNS/subdomain configured?
-   This only affects how soon a deploy preview can verify item 9 under
-   Testing; there is no merge gate either way.
-8. **Sharing-notice wording and placement.** Proposed placement: one compact
-   band above the footer on every course page (index and lessons). Proposed
-   wording, to be tuned: *"This content is part of a purchased course —
-   please don't share these pages. Know someone who'd enjoy this course?
-   Share this link instead:"* followed by the purchase URL. Firm-but-friendly
-   seems right for paying customers; confirm tone and whether the lesson
-   pages should also repeat it anywhere else (e.g. under the video).
+   atchisonacademy.com.~~ **Decided: (b)** — a minimal page, says nothing
+   about courses, links to atchisonacademy.com.
+2. **Where do lesson videos live?** ~~The repo should not hold `.mp4`s...~~
+   **Decided (placeholder only; the general-purpose answer for real courses
+   remains open for a future spec):** Vimeo iframe embed, standardized as a
+   layout concern. A `video` lesson's front matter carries only `vimeo_id`
+   (the numeric Vimeo video ID, e.g. `800363806`) — not a URL. `lesson.erb`
+   builds Vimeo's standard responsive embed (padding-box wrapper,
+   absolutely-positioned iframe pointed at
+   `https://player.vimeo.com/video/<vimeo_id>`, `player.js`) from that ID, so
+   a course author never touches embed markup. The placeholder's 1x1 video
+   lesson uses Lee's Vimeo video 800363806 ("Seattle is Cloud Central").
+3. **Confirm: this site does not consume `shared/_courses`.**
+   **Decided: keep it standalone**, as recommended.
+4. **Analytics.** **Decided: include Fathom**, as recommended.
+5. **Secret slug format.** **Decided:** 10 lowercase letters+digits,
+   generated once per course, as recommended.
+6. **Directory/site name.** **Decided: `AtchisonAcademyCourses`**, as
+   specified.
+7. **Netlify/DNS state.** **Answered:** nothing done yet on the Netlify/DNS
+   side — Lee will do that later. No deploy-preview verification (Testing
+   item 9) until then; not a merge gate.
+8. **Sharing-notice wording and placement.** **Decided:** proposed wording
+   and placement as written, not repeated elsewhere on the lesson page.
 
 ---
 
@@ -438,3 +428,41 @@ tracker's final state. No content changes.
   domain), the builder check that the derived link cannot 404, the
   `_sharing_notice.erb` partial, testing items, and Open Question 8
   (notice wording/placement).
+* **2026-09-01 — Implementation complete, pending review.** Built per the
+  plan above: repo-root registration (Part 1), the `AtchisonAcademyCourses/`
+  scaffold (Part 2), the `courses`/`lessons` content model and
+  `course_content.rb` validation builder (Part 3), `default.erb`/
+  `course.erb`/`lesson.erb` layouts plus `_sharing_notice.erb`,
+  `_lesson_outline.erb`, and a fresh `frontend/styles/index.css` (Part 4),
+  and the placeholder `sample-course` (secret `0f8fjulw2i`) with all four
+  lessons plus the catalog page (secret slug `dga8c6isac`) (Part 5). Local
+  testing per the Testing section passed: `make test` (seven sites, 18999/
+  19999 edges included), `bundle install`/`npm install`, a full
+  `bin/bridgetown build` and a production build (`npm run esbuild` +
+  `BRIDGETOWN_ENV=production bin/bridgetown build`) both clean, `/robots.txt`
+  disallow-all with no Sitemap line and no sitemap file in `output/`,
+  catalog/course/lesson pages all render correctly (cover art present and,
+  temporarily removed, absent-cleanly), all three content types, prev/next
+  crossing the module 1→2 boundary, outline current-lesson highlighting, and
+  the sharing notice with a working purchase link on every course page. Every
+  validation-builder rule was exercised by temporarily breaking it (missing/
+  short secret, duplicate secret, orphan lesson, bad content_type, video
+  without vimeo_id, broken cover_image, missing purchase_url with no
+  matching shared/_courses file) and confirmed to fail the build, then
+  restored. Deploy-preview verification (Testing item 9: X-Robots-Tag
+  header, build-ignore pathspecs) is deferred to Lee's Netlify/DNS setup, as
+  scoped.
+* **2026-09-01 — Moved to Implementing.** Per Lee's go-ahead, Status set to
+  **Implementing**. All eight Open Questions resolved this session: root URL
+  gets a minimal friendly page (not 404); placeholder video lesson uses
+  Lee's Vimeo video 800363806 via Vimeo's standard responsive iframe embed
+  (real-course video hosting remains open for later); site stays standalone
+  from `shared/`; Fathom analytics included; secret format as recommended;
+  site name confirmed as `AtchisonAcademyCourses`; no Netlify/DNS work done
+  yet (Lee will do it later); sharing-notice wording/placement used as
+  proposed. Implementation proceeds directly on this session's dedicated
+  branch (`claude/spec0021-implementation-4nci9r`), which serves the
+  isolation role a `.claude/worktrees/spec0021` worktree would on a local
+  checkout — this remote session's repo root basename is not `spec0021`, so
+  `lib/worktree_env.rb` derives `main` port defaults here regardless; that is
+  harmless since this container runs no concurrent site.
