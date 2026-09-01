@@ -18,7 +18,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| 1 | Spec0018 | Center the featured-books grid when fewer than four books are featured | `.books-grid` is `repeat(4, 1fr)` in both stylesheets — correct only because leeatchison.com happens to feature exactly four books, while atchisonacademy.com's two hug the left edge on `/books`; replace the base rule with `auto-fit`/`minmax` plus `justify-content: center`, delete the Academy home page's duplicate override and the two responsive column overrides that specificity has always beaten — a visual no-op on leeatchison.com |
+| — | — | *(none)* | — |
 
 ---
 
@@ -28,7 +28,7 @@ consecutive integers starting at 1.
 
 | Priority | ID | Title | Short Description |
 |---|---|---|---|
-| — | — | *(none)* | — |
+| 1 | Spec0018 | Center the featured-books grid when fewer than four books are featured | `.books-grid` is `repeat(4, 1fr)` in both stylesheets — correct only because leeatchison.com happens to feature exactly four books, while atchisonacademy.com's two hug the left edge on `/books`; replace the base rule with `auto-fit`/`minmax` plus `justify-content: center`, delete the Academy home page's duplicate override and the two responsive column overrides that specificity has always beaten — cap corrected to 240px during implementation after testing showed 260px would have broken leeatchison.com's four-across row |
 
 ---
 

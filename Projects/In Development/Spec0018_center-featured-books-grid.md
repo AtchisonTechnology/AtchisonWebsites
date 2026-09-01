@@ -1,7 +1,9 @@
 # Center the featured-books grid when fewer than four books are featured
 
+**PR:** [#23](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/23)
+
 * **ID:** Spec0018
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-08-31
 * **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` — `frontend/styles/index.css` in each. CSS only; no template, no front matter, no content.
