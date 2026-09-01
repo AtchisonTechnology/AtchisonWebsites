@@ -28,6 +28,10 @@ title: Home
   featured_courses  = site.collections["courses"].resources
                         .select { |c| c.data.feature_leeatchison }
                         .sort_by { |c| c.data.order_leeatchison || 99 }
+
+  featured_books    = site.collections["books"].resources
+                        .select { |b| b.data.feature_leeatchison }
+                        .sort_by { |b| b.data.order_leeatchison || 99 }
 %>
 
 <% unless spotlight_books.empty? && spotlight_courses.empty? %>
@@ -133,63 +137,39 @@ title: Home
       <p>Practical guides for architects and technology leaders navigating modern software challenges.</p>
     </div>
     <div class="books-grid">
-
-      <article class="book-card">
-        <div class="book-cover-wrap">
-          <img src="<%= relative_url '/images/books/the-software-conductor.png' %>"
-               alt="The Software Conductor book cover" class="book-cover" />
-        </div>
-        <div class="book-card-body">
-          <span class="book-tag book-tag--new">New Release</span>
-          <h3>The Software Conductor</h3>
-          <p class="book-authors">Lee Atchison</p>
-          <p>A journey of discovery from software developer to architect. Designing systems. Leading teams. Creating harmony.</p>
-          <a href="https://thesoftwareconductor.com" class="book-link" target="_blank" rel="noopener noreferrer">Learn more &rarr;</a>
-        </div>
-      </article>
-
-      <article class="book-card">
-        <div class="book-cover-wrap">
-          <img src="<%= relative_url '/images/books/business-breakthrough-3.jpg' %>"
-               alt="Business Breakthrough 3.0 book cover" class="book-cover" />
-        </div>
-        <div class="book-card-body">
-          <span class="book-tag book-tag--collab">Co-Authored</span>
-          <h3>Business Breakthrough 3.0</h3>
-          <p class="book-authors">with Ken Gavranovic</p>
-          <p>A five-step process that fuels engagement, boosts agility, and drives lasting change in your organization.</p>
-          <a href="https://businessbreakthrough30.com" class="book-link" target="_blank" rel="noopener noreferrer">Learn more &rarr;</a>
-        </div>
-      </article>
-
-      <article class="book-card">
-        <div class="book-cover-wrap">
-          <img src="<%= relative_url '/images/books/architecting-for-scale.jpg' %>"
-               alt="Architecting for Scale book cover" class="book-cover" />
-        </div>
-        <div class="book-card-body">
-          <span class="book-tag book-tag--oreilly">O&rsquo;Reilly Media</span>
-          <h3>Architecting for Scale</h3>
-          <p class="book-authors">Lee Atchison</p>
-          <p>How to maintain high availability and manage risk in the cloud. An essential resource for technical teams worldwide.</p>
-          <a href="https://architectingforscale.com" class="book-link" target="_blank" rel="noopener noreferrer">Learn more &rarr;</a>
-        </div>
-      </article>
-
-      <article class="book-card">
-        <div class="book-cover-wrap">
-          <img src="<%= relative_url '/images/books/overcoming-it-complexity.png' %>"
-               alt="Overcoming IT Complexity book cover" class="book-cover" />
-        </div>
-        <div class="book-card-body">
-          <span class="book-tag book-tag--oreilly">O&rsquo;Reilly Media</span>
-          <h3>Overcoming IT Complexity</h3>
-          <p class="book-authors">Lee Atchison</p>
-          <p>Simplify operations, enable innovation, and cultivate successful cloud outcomes by taming IT complexity.</p>
-          <a href="https://www.amazon.com/Overcoming-Complexity-Lee-Atchison-ebook/dp/B0BPN73PKN?tag=leeatchison-20" class="book-link" target="_blank" rel="noopener noreferrer">Learn more &rarr;</a>
-        </div>
-      </article>
-
+      <% featured_books.each do |book| %>
+        <article class="book-card">
+          <a href="<%= relative_url book.relative_url %>" class="book-card-link-wrap">
+            <div class="book-cover-wrap">
+              <img src="<%= relative_url book.data.cover_image %>"
+                   alt="<%= book.data.title %> book cover" class="book-cover" />
+            </div>
+          </a>
+          <div class="book-card-body">
+            <% if book.data.badge %>
+              <span class="book-tag book-tag--<%= book.data.badge_style || 'new' %>"><%= book.data.badge %></span>
+            <% end %>
+            <h3><a href="<%= relative_url book.relative_url %>"><%= book.data.title %></a></h3>
+            <% if book.data.authors %>
+              <p class="book-authors"><%= book.data.authors.join(", ") %></p>
+            <% end %>
+            <p><%= book.data.summary %></p>
+            <div class="book-card-actions">
+              <a href="<%= relative_url book.relative_url %>" class="book-link">Details &rarr;</a>
+              <% if book.data.book_url %>
+                <a href="<%= book.data.book_url %>" class="book-link book-link--amazon"
+                   target="_blank" rel="noopener noreferrer">Visit the book site</a>
+              <% elsif book.data.amazon_url %>
+                <a href="<%= book.data.amazon_url %>" class="book-link book-link--amazon"
+                   target="_blank" rel="noopener noreferrer">Amazon</a>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="<%= relative_url '/books' %>" class="btn btn-outline">View All Books &rarr;</a>
     </div>
   </div>
 </section>
