@@ -414,3 +414,38 @@ the remaining three (`cloud-architecture-advanced-concepts`,
 `cloud-migration-fundamentals`) stay text-only until Lee can supply art from
 a session with image generation — a valid permanent-until-supplied state
 per §5, not follow-up work this closure is waiting on. Moved to `zArchive/`.
+
+**2026-09-01 — Post-closure follow-up: two more images landed, one more
+bug found.** Filed here rather than as a new Spec/Bug since it is a direct
+continuation of already-scoped, already-documented work, not new scope.
+
+- Lee supplied LinkedIn Learning's own official thumbnails for
+  `cloud-architecture-advanced-concepts` and
+  `software-architecture-developer-to-architect` (1200×675 already, no
+  cropping needed beyond the standard center-fit to 600×338). This is the
+  platform-thumbnail reuse rejected twice before (2026-08-31's original
+  decision, and again earlier today) — reversed a third time, this time for
+  keeps, since Lee is now supplying these images himself for exactly this
+  purpose rather than it being suggested as a shortcut. Five of six
+  featured courses now carry `cover_image`; only
+  `cloud-migration-fundamentals` (O'Reilly Media) remains text-only, since
+  no art exists for it and this session still has no image-generation tool.
+- **Found: the "What's New" band's book and course cards were a few pixels
+  uneven in height**, a natural consequence of `align-items: start` on
+  `.whats-new-inner` letting each column take its own content height
+  rather than stretching to match. Fixed by removing that override (back
+  to Grid's default `stretch`) and giving `.whats-new-content` a flex
+  column with `.home-courses-grid { flex: 1 }`, so the extra height flows
+  down into the course cards' own `flex: 1` paragraph — the same
+  slack-absorbing mechanism the book card already used, one level deeper.
+  Verified: book card and both course cards measured exactly
+  478.609375px tall after the fix, down from a few pixels apart before.
+
+**2026-09-01 — Sixth and final image landed: all featured courses now
+have art.** Lee supplied O'Reilly Media's own marketing thumbnail for
+`cloud-migration-fundamentals` (2400×1350, center-fit to 600×338, title
+baked in — same call as the two Coursera courses above, for the same
+reason: it's the only version that exists). All six of the six courses
+this spec set out to cover now carry `cover_image`. Verified on
+`AtchisonAcademy`'s featured row (the only site this course is featured
+on) — all four Academy cards now show art.
