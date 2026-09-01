@@ -155,3 +155,13 @@ which sites a worktree needs booted and rebuilt.
 Reminders that matter most here: never change a Spec/Bug's workflow status
 without being asked; never commit, push, or open a PR without explicit
 permission; keep the tracker in sync with every Spec/Bug change automatically.
+
+## File deletion permission
+
+Claude's shell on this machine cannot delete files until Lee approves a
+per-session delete-permission request. It is OK to ask Lee for that
+permission whenever a task needs it — but only when he is at the computer
+and paying attention. Never fire the permission prompt from an unattended,
+scheduled, or headless run; for a long-running task that might need
+deletion later, ask for the permission up front, before Lee steps away.
+If permission isn't available, fall back to `mv` into `_to_delete/`.
