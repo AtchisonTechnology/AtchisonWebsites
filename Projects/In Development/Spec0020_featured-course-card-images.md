@@ -344,3 +344,24 @@ the title baked in (see the reversed decision above) — still four to go:
 `architecting-scalable-applications-and-systems` (the specialization),
 `cloud-architecture-advanced-concepts`, `cloud-migration-fundamentals`, and
 `software-architecture-developer-to-architect`.
+
+**2026-09-01 — Third image landed: the specialization.** Lee supplied the
+specialization's icon-only marketing art (785×785, no baked-in text) via
+`LeeAtchison/assets_inbox/`. Normalized to 600×338 and set `cover_image` on
+`architecting-scalable-applications-and-systems`. Verified on
+`AtchisonAcademy` (the only site this one is featured on). Three of six
+done.
+
+**2026-09-01 — Remaining three deferred; ships without them.** The last
+three (`cloud-architecture-advanced-concepts`,
+`software-architecture-developer-to-architect`,
+`cloud-migration-fundamentals` — the two LinkedIn Learning courses and the
+O'Reilly course) have no source art. Reusing the platforms' own thumbnails
+was reconsidered and rejected again for the same reason as the original
+2026-08-31 decision (not Lee's asset, inconsistent branding across four
+platforms); generating fresh art was also considered, but this session has
+no image-generation tool available. Lee's call: ship this spec with three of
+six featured courses carrying art and three staying text-only, and add the
+rest later from a session that has image generation. This is exactly the
+incremental path §5 was designed for — a featured course without art is a
+valid, permanent-until-supplied state, not a broken one.
