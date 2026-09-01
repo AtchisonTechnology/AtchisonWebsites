@@ -32,6 +32,7 @@ module WorktreeEnv
     "BusinessBreakthrough30" => 3,
     "ArchitectingForScale" => 4,
     "AtchisonAcademy" => 5,
+    "AtchisonAcademyCourses" => 6,
   }.freeze
 
   MAX_SERVICES = 10

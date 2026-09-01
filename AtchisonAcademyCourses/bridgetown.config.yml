@@ -1,0 +1,7 @@
+collections:
+  courses:
+    output: true
+    permalink: /:path/
+  lessons:
+    output: true
+    permalink: /:path/

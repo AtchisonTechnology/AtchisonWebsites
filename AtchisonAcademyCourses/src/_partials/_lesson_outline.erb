@@ -1,0 +1,20 @@
+<%
+  # Shared between lesson.erb's sidebar (wide screens) and its <details>
+  # "Course contents" block (mobile). Locals: course, lessons (already this
+  # course's lessons, any order), current (the lesson resource being shown).
+%>
+<% (course.data.modules || []).sort_by(&:number).each do |mod| %>
+  <div class="outline-module">
+    <p class="outline-module-title">Module <%= mod.number %> &mdash; <%= mod.title %></p>
+    <ol class="outline-lesson-list">
+      <% lessons.select { |l| l.data.module == mod.number }.sort_by { |l| l.data.lesson }.each do |l| %>
+        <li class="<%= "is-current" if l.relative_path == current.relative_path %>">
+          <a href="<%= relative_url l.relative_url %>">
+            <span class="outline-lesson-number"><%= mod.number %>x<%= l.data.lesson %></span>
+            <span class="outline-lesson-title"><%= l.data.title %></span>
+          </a>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>

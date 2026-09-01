@@ -1,0 +1,25 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<%
+  resource_title = strip_html(strip_newlines(title))
+  page_title = resource_title != "Index" ? "#{resource_title} | #{metadata.title}" : metadata.title
+%>
+<title><%= page_title %></title>
+
+<%
+  # This site is deliberately unlisted (Spec0021): no canonical tag, no Open
+  # Graph / Twitter card, nothing that makes a link attractive to unfurl or
+  # share-preview. `robots.txt` disallows everything, but that only stops a
+  # compliant crawler from *fetching* a page - it never sees this meta tag -
+  # so netlify.toml also sends an X-Robots-Tag header as belt-and-suspenders.
+%>
+<meta name="robots" content="noindex, nofollow" />
+
+<link rel="icon" type="image/png" href="<%= relative_url '/images/favicon.png' %>" />
+
+<link rel="stylesheet" href="<%= asset_path :css %>" />
+<script src="<%= asset_path :js %>" defer></script>
+<%= live_reload_dev_js %>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="QZJQFDMY" defer></script>
+<!-- / Fathom -->
