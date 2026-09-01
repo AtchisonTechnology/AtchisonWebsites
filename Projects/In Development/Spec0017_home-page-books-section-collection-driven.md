@@ -252,9 +252,10 @@ Run the site locally — `bin/site-port LeeAtchison` for this checkout's port:
    books in the same order in its featured row.
 6. **The What's New band and the Books section agree**, or disagree
    deliberately per Open Question 1. Look at both on one screen-scroll.
-7. **Responsive.** `.books-grid` is `repeat(4, 1fr)`, dropping to 2 at 1024px
-   and 600px. Nothing here changes that, but confirm the cards still fill it
-   evenly now that the author lines are longer.
+7. **Responsive.** Since Spec0018, `.books-grid` is
+   `repeat(auto-fit, minmax(220px, 240px))`, stepping down continuously rather
+   than at fixed breakpoints. Confirm the cards still fill it evenly now that
+   the author lines are longer.
 8. **Add a fifth featured book temporarily** — set `feature_leeatchison: true`
    on any book, rebuild, and look at the row. This is the Open Question 2
    evidence; remove it afterward.
@@ -279,16 +280,17 @@ Run the site locally — `bin/site-port LeeAtchison` for this checkout's port:
 
 ## Open Questions
 
-1. **Should the featured-books grid be capped or made to wrap?**
-   *(Superseded by Spec0018, 2026-08-31 — recorded so the reasoning stays
-   findable.)* `.books-grid` is `repeat(4, 1fr)` and there are exactly four
-   featured books, so today's page is correct by coincidence. Spec0018 replaces
-   that base rule in both stylesheets with
-   `repeat(auto-fit, minmax(220px, 260px))` plus `justify-content: center`, to
-   fix the left-hugging two-card row on atchisonacademy.com/books. This page's
-   grid uses the same class and inherits the fix. Whichever spec ships second
-   should confirm the rule is already in place rather than write it twice; if
-   Spec0018 is cancelled, this reopens as originally posed.
+1. ~~Should the featured-books grid be capped or made to wrap?~~
+   **Resolved by Spec0018 (implemented 2026-09-01).** `.books-grid` is
+   `repeat(4, 1fr)` and there are exactly four featured books, so today's page
+   is correct by coincidence. Spec0018 replaced that base rule in both
+   stylesheets with `repeat(auto-fit, minmax(220px, 240px))` plus
+   `justify-content: center`, to fix the left-hugging two-card row on
+   atchisonacademy.com/books. This page's grid uses the same class and
+   inherits the fix — no separate change needed here. (Spec0018's first pass
+   used 260px; testing found that cap actually wrapped this page's fourth card
+   to its own row, so it was corrected to 240px, which keeps all four cards on
+   one line.)
 
 2. **Should the section's `.section-header` copy change?** It currently reads
    *"Practical guides for architects and technology leaders navigating modern

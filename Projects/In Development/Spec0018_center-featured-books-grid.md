@@ -1,9 +1,9 @@
 # Center the featured-books grid when fewer than four books are featured
 
 * **ID:** Spec0018
-* **Status:** In Development
+* **Status:** Implementing
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` — `frontend/styles/index.css` in each. CSS only; no template, no front matter, no content.
 
 ---
@@ -60,11 +60,28 @@ waiting to be written the next time a `.books-grid` appears somewhere new.
 The base rule is the defect. `repeat(4, 1fr)` encodes "there are exactly four
 featured books" into a stylesheet that has no way to know that.
 
-**The change is visually a no-op on leeatchison.com.** In a 1100px
-(`--max-w`) container with a 1.5rem gap, four `1fr` columns compute to 257px
-each. `repeat(auto-fit, minmax(220px, 260px))` in the same container also
-yields four tracks, at 257px. The four-book row on leeatchison.com renders
-pixel-for-pixel as it does today; only grids with a different card count move.
+**The change is visually a near-no-op on leeatchison.com — but only at the
+right cap.** `.books-grid` sits inside `.section-inner`, whose 32px
+side padding narrows the real container to **1036px**, not the full 1100px
+`--max-w` the original math in this section assumed. Today's actual card
+width is `(1036 − 3×24) / 4 = 241px`, not 257px.
+
+That distinction matters because of how `auto-fit` counts tracks: for
+`minmax(min, <fixed-max>)`, the browser decides how many tracks fit using the
+**fixed max value**, not a value it's free to shrink further. At a 260px cap,
+`4 × 260 + 3×24 = 1112px` doesn't fit in 1036px, so it drops to 3 tracks and
+the 4th book wraps to its own centered row — confirmed by loading both
+`/books` and `/` locally and reading the computed
+`grid-template-columns` off `.books-grid` (`"260px 260px 260px"`, 4
+children). That is a real, visible layout change on leeatchison.com, not a
+no-op, and it fails Testing item 3 below.
+
+**Corrected: the cap is 240px, not 260px.** Verified empirically (overriding
+`grid-template-columns` in a live page and reading the computed value back)
+that 241px is the largest max that still yields 4 tracks at this container
+width, and 240px leaves a safe margin. At 240px, leeatchison.com's four-book
+row renders at 240px cards — 1px narrower than today's actual 241px,
+imperceptible — and keeps all 4 books on one row.
 
 ---
 
@@ -82,7 +99,7 @@ convention CLAUDE.md sets for the duplicated `SITES` registry.
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
   justify-content: center;
   gap: 1.5rem;
 }
@@ -199,24 +216,20 @@ Run both sites locally — `bin/site-port LeeAtchison` and
 
 ## Open Questions
 
-1. **Is 260px the right maximum card width?** It was chosen to reproduce
-   today's leeatchison.com row (257px computed), which is what makes the change
-   a no-op there. A larger cap would make a two-card Academy row feel less
-   sparse; it would also make the four-card row wider than it is today.
-   **Proposed: keep 260px** — matching the existing look is worth more than
-   filling space on a page that will have more books eventually.
+1. ~~Is 260px the right maximum card width?~~ **Superseded during
+   implementation (2026-09-01).** Testing found the 260px cap Lee confirmed
+   was based on a container-width miscalculation and actually broke the
+   no-op on leeatchison.com (wraps the 4th book to its own row — see
+   Problem/Requirement above). Re-confirmed with Lee: **use 240px**, the
+   value that actually keeps leeatchison.com's four-book row on one line.
 
-2. **Should `.courses-grid` get the same treatment preemptively?**
-   `repeat(2, 1fr)` cannot strand a card the way four columns can — a lone odd
-   card sits at the left of its own row, which is normal for a two-column grid.
-   **Proposed: no.** It is not misbehaving; changing it would be a redesign
-   rather than a fix, and Spec0020 may change these cards anyway.
+2. ~~Should `.courses-grid` get the same treatment preemptively?~~ **Decided
+   (2026-09-01, Lee): no.** It is not misbehaving; changing it would be a
+   redesign rather than a fix, and Spec0020 may change these cards anyway.
 
-3. **Is the two-copies-of-the-stylesheet arrangement worth revisiting?** This
-   spec edits the same three places in two files, and the Academy patch it
-   deletes is exactly the kind of drift that arrangement produces. Consolidating
-   is far beyond this spec. **Proposed: note it and move on** — but if it
-   happens a third time, it is worth its own spec.
+3. ~~Is the two-copies-of-the-stylesheet arrangement worth revisiting?~~
+   **Decided (2026-09-01, Lee): note it and move on** — but if it happens a
+   third time, it is worth its own spec.
 
 ---
 
@@ -241,3 +254,32 @@ four `1fr` columns do today.
 to the Academy home page.** `.academy-section .books-grid` outranks them on
 specificity regardless of source order. They are deleted here rather than left
 as a rule that reads as active and is not.
+
+**2026-09-01 — All Open Questions decided; moved to Implementing.** Lee
+confirmed all three proposed answers as-is: keep the 260px cap, leave
+`.courses-grid` untouched, and note the stylesheet-duplication concern rather
+than act on it.
+
+**2026-09-01 — Found during implementation: 260px was wrong, breaks the
+no-op.** Testing on the running dev server (per Testing item 3) showed
+leeatchison.com's four-book row wrapping to 3+1 instead of staying on one
+line. Root cause: `.books-grid`'s real container is 1036px (inside
+`.section-inner`'s padding), not the 1100px `--max-w` the original estimate
+used, and `auto-fit` counts tracks using the `minmax()` max value as fixed —
+4×260px+3×24px gap (1112px) doesn't fit 1036px. Re-confirmed with Lee: use
+240px instead of 260px. Both stylesheets and the Solution section above are
+updated to 240px.
+
+**2026-09-01 — Implemented and tested; Spec0017 cross-reference updated.**
+Both stylesheets carry the §1–§3 changes at the corrected 240px cap. Verified
+against every Testing item on locally running dev servers (`bin/dev`,
+Playwright): atchisonacademy.com's two-card `/books` and home-page rows both
+center under their already-centered surroundings; leeatchison.com's four-book
+row (both `/books` and `/`) stays on one line, matching today's site;
+temporarily featuring a 5th book wrapped it to a centered second row and
+temporarily dropping to 3 produced a centered three-card row (both reverted
+after, `git status` under `shared/` clean); 1024/900/768/600/375px all step
+down with no horizontal overflow and no stretched single card; `/about`, the
+secondary books row, and `.courses-grid` render unchanged. `make test` still
+passes (unaffected). Spec0017's Open Question 1 and Testing item 7 updated to
+cite the corrected 240px value.
