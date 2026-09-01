@@ -3,9 +3,9 @@
 **PR:** [#24](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/24)
 
 * **ID:** Spec0019
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` and `AtchisonAcademy` (`src/images/books`, `src/images/courses` become symlinks), plus a new `shared/images/` tree at the repo root. No template, no stylesheet, and no front-matter value changes.
 
 ---
@@ -276,3 +276,14 @@ install. `CLAUDE.md` updated at the repo root and in both sites.
 [PR #24](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/24)
 opened against `main`. Subscribed to PR activity to track CI and Netlify
 deploy previews.
+
+**2026-09-01 — Merge conflict resolved.** While this PR was open, PR #22
+(Spec0017) merged to `main`, closing Spec0017 and editing the same
+Refinement table in `Projects/_Project Tracker.md`. Merged `main` into this
+branch and combined both edits by hand: Refinement keeps Spec0018,
+Spec0020, and Spec0021, renumbered 1–3. Both sites rebuilt clean afterward
+and `make test` passed.
+
+**2026-09-01 — Closed and archived.** Lee confirmed the spec complete.
+Both Netlify deploy previews (leeatchison, atchisonacademy) came back
+green with no unexpected diffs. Moved to `zArchive/`.
