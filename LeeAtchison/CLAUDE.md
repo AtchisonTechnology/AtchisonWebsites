@@ -82,7 +82,7 @@ assets_inbox/             # Staging area for raw assets — NEVER reference dire
 
 **CSS**: A single `frontend/styles/index.css` file with CSS custom properties at `:root`. PostCSS compiles it; esbuild bundles it with a content-hash filename. Non-homepage page styles are under `body:not(.homepage)`.
 
-**Adding images**: Place raw source files in `assets_inbox/`, then resize with `sips -Z <maxpx> source --out src/images/dest` and reference via `relative_url`.
+**Adding images**: Place raw source files in `assets_inbox/`, then resize with `sips -Z <maxpx> source --out src/images/dest` and reference via `relative_url`. `sips -Z` only scales — it never crops — so it cannot turn an off-ratio source into the 16:9 `600×338` course cards Spec0020 wants; use `sips -Z 600` followed by `sips -c 338 600`, or Pillow's `ImageOps.fit`/ImageMagick's `-gravity center -extent`, to center-crop instead.
 
 **Site metadata**: `src/_data/site_metadata.yml` is the single source for site title, tagline, email, and description. Access as `site.metadata.title`, etc. in templates.
 
@@ -114,7 +114,7 @@ The cross-domain URL is emitted on deploy previews too, always pointing at produ
 Netlify serves previews with an automatic `noindex` header, so it costs nothing there, and
 there is no way to know the other site's preview URL (see Spec0004).
 
-**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`.
+**Collection front matter**: Books use `layout: book`; courses use `layout: course`. Both layouts extend `default` and produce full-width pages via the `body.book` / `body.course` CSS selectors. Key book fields: `cover_image`, `amazon_url`, `book_url`, `badge`, `badge_style`, `summary`, `testimonials[]`. Key course fields: `platform`, `platform_url`, `summary`, `cover_image` (Spec0020) — a `/images/courses/<slug>.<ext>` path shown above the platform badge on **featured** course cards only (`courses.erb`'s featured row, the home page's Courses section, and the home page's "What's New" band); absent means the card renders text-only, which is expected until every featured course has art.
 
 `shared_content.rb`'s `validate_availability!` requires `platform` on every course whose
 `availability` is not `prelaunch` (Spec0011) — a "Coming Soon" page is exempt since it may

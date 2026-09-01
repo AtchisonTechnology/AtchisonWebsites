@@ -1,9 +1,11 @@
 # Show a card image on featured courses, as featured books already do
 
+[PR #25](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/25)
+
 * **ID:** Spec0020
-* **Status:** In Spec Development/Refinement
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), `AtchisonAcademy` (`src/courses.erb`, `src/index.erb`, `frontend/styles/index.css`), and `shared/_courses/` (a new front-matter key on the featured courses) plus `shared/images/courses/` (new art).
 
 ---
@@ -108,11 +110,15 @@ source still renders as a correct-looking card — it just loses more of its
 edges than the author intended and carries bytes the page never shows.
 Normalize for predictable crops and file size, not for correctness.
 
-**Image only — no baked-in text** (decided 2026-08-31). The course title must
-not appear in the art: it would duplicate the `<h3>` rendered directly beneath
-it, and a title that is wrong or restyled later cannot be corrected without
-re-exporting the file. The platform is already named by the badge on the same
-card. Art carries the visual; the card carries the words.
+**Baked-in titles, reversing the earlier decision** (decided 2026-08-31,
+reversed 2026-09-01). The original decision was image-only art, with the
+title left to the `<h3>` beneath it. In practice, the marketing art Lee
+supplies from the Coursera campaign assets has the title baked in as part of
+the graphic, and no textless version exists — Lee confirmed on 2026-09-01
+that these are shipped as-is rather than blocked on art that doesn't exist.
+The duplication this creates (title in the image, title in the `<h3>` right
+below it) is accepted as a byproduct of reusing existing marketing art rather
+than commissioning card-specific art.
 
 Six files needed, named for the slugs in the table above.
 
@@ -269,9 +275,12 @@ Both sites — `bin/site-port LeeAtchison`, `bin/site-port AtchisonAcademy`:
 ## History of Updates
 
 **2026-09-01 — Tracker migration.** `_Project Tracker.md` was retired; this
-file's Status field is now the sole source of truth. Status normalized from
-the template placeholder to **In Spec Development/Refinement**, matching the
-tracker's final state. No content changes.
+file's Status field is now the sole source of truth. This spec's implementation
+session had already moved Status to **Implementing** on its own branch before
+the tracker was retired on `main`, so that is the status carried forward here
+— not the `In Spec Development/Refinement` placeholder `main` still showed at
+retirement time, which predates that move. No content changes beyond the
+Status field.
 
 **2026-08-31 — Spec created**, from Lee's request to show an image for featured
 books *and* courses on both sites. Written against commit `bd0d672`.
@@ -313,3 +322,95 @@ reasoning: a featured course without an image is an undesired display, easily
 fixed in the course configuration — not a state worth failing a build over.
 That also preserves the incremental path in §5, where the six images can land
 one at a time.
+
+**2026-09-01 — Moved to Implementing.** Spec0019 confirmed shipped (both
+`shared/images/{books,courses}/` symlinks live in both sites). Found a fifth
+render site beyond the four in §3's table: Spec0016 shipped in the interim
+and added the "What's New" band on `LeeAtchison/src/index.erb`
+(`spotlight_courses`, lines 61-72), which §3 flagged as a fifth place to edit
+if Spec0016 had already landed by the time this spec was implemented — it had.
+`AtchisonAcademy/src/index.erb` carries no such band (`spotlight_academy` is
+validated but unrendered there, per that site's `CLAUDE.md`), so the total is
+five card sites, not four: `LeeAtchison/src/courses.erb`,
+`LeeAtchison/src/index.erb` (both the Courses section and the What's New
+band), `AtchisonAcademy/src/courses.erb`, and
+`AtchisonAcademy/src/index.erb`.
+
+**2026-09-01 — First two of six images landed.** Lee supplied Coursera
+marketing art for `cloud-architecture-for-scalable-systems` and
+`risk-management-for-scalable-systems` via `LeeAtchison/assets_inbox/`.
+Normalized both from their 1000×1000 source to 600×338 with `ImageOps.fit`
+(center-crop trims top/bottom evenly, full width preserved, nothing
+cut off) and set `cover_image` on both course files. Both courses' art has
+the title baked in (see the reversed decision above) — still four to go:
+`architecting-scalable-applications-and-systems` (the specialization),
+`cloud-architecture-advanced-concepts`, `cloud-migration-fundamentals`, and
+`software-architecture-developer-to-architect`.
+
+**2026-09-01 — Third image landed: the specialization.** Lee supplied the
+specialization's icon-only marketing art (785×785, no baked-in text) via
+`LeeAtchison/assets_inbox/`. Normalized to 600×338 and set `cover_image` on
+`architecting-scalable-applications-and-systems`. Verified on
+`AtchisonAcademy` (the only site this one is featured on). Three of six
+done.
+
+**2026-09-01 — Remaining three deferred; ships without them.** The last
+three (`cloud-architecture-advanced-concepts`,
+`software-architecture-developer-to-architect`,
+`cloud-migration-fundamentals` — the two LinkedIn Learning courses and the
+O'Reilly course) have no source art. Reusing the platforms' own thumbnails
+was reconsidered and rejected again for the same reason as the original
+2026-08-31 decision (not Lee's asset, inconsistent branding across four
+platforms); generating fresh art was also considered, but this session has
+no image-generation tool available. Lee's call: ship this spec with three of
+six featured courses carrying art and three staying text-only, and add the
+rest later from a session that has image generation. This is exactly the
+incremental path §5 was designed for — a featured course without art is a
+valid, permanent-until-supplied state, not a broken one.
+
+**2026-09-01 — Moved to Verifying; PR opened.** Both sites build clean.
+Three of six featured courses carry `cover_image`; three remain text-only
+per the decision above.
+
+**2026-09-01 — Two pre-existing bugs found and fixed while reviewing the
+preview, out of Spec0020's own scope but on the pages it touches.**
+
+- **Illegible outline buttons.** `.btn-outline` (white text, white border)
+  was designed for the dark hero sections but reused as-is on light section
+  backgrounds by Spec0016 ("View All Courses"), Spec0017 ("View All
+  Books" on the home page), and an earlier "View All Books" on
+  `about.erb` — all three nearly invisible. Added a `.btn-outline--dark`
+  modifier (navy text, visible border) to both stylesheets and applied it
+  at all five call sites across both sites (the two dark-hero uses of
+  `.btn-outline`, on `index.erb` and `ainative.erb`, are untouched and
+  correct as-is).
+- **"What's New" band misalignment.** In `LeeAtchison/src/index.erb`, the
+  band's heading (`span.section-label` + `h2`) lived inside the course-card
+  grid's own column, so it pushed that column's content down relative to
+  the book-card column beside it — the two were never top-aligned, on
+  `main` or in this PR. Confirmed with exact bounding boxes before the fix
+  (book card top: 741px, course cards top: 828px — an 87px gap) and after
+  (both flush at the same top). Adding `cover_image` art made the mismatch
+  more visible by changing which edge overshot, which is what surfaced it,
+  but did not cause it. Fixed by moving the heading into its own
+  `.whats-new-header`, spanning both grid columns via `grid-column: 1 / -1`,
+  so book and course cards now start at the same row.
+
+Verified against the built HTML with Playwright screenshots and measured
+bounding boxes (this sandbox cannot reach the live Netlify preview domain —
+network policy blocks it — so verification used a local `bin/bridgetown
+deploy`-equivalent build served over localhost instead).
+
+**2026-09-01 — Closed and archived.** Lee confirmed the spec complete. Both
+Netlify deploy previews (leeatchison, atchisonacademy) came back green on
+the final commit, with the "What's New" alignment fix and the
+outline-button contrast fix both verified live in the previews.
+[PR #25](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/25)
+merged into `main`. Three of six featured courses carry `cover_image`
+(Cloud Architecture for Scalable Systems, Risk Management for Scalable
+Systems, the Architecting Scalable Applications and Systems specialization);
+the remaining three (`cloud-architecture-advanced-concepts`,
+`software-architecture-developer-to-architect`,
+`cloud-migration-fundamentals`) stay text-only until Lee can supply art from
+a session with image generation — a valid permanent-until-supplied state
+per §5, not follow-up work this closure is waiting on. Moved to `zArchive/`.

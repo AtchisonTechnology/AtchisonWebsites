@@ -3,6 +3,7 @@ layout: course
 title: "Architecting Scalable Applications and Systems"
 platform: Coursera Specialization
 platform_url: "https://www.coursera.org/specializations/architecting-scalable-applications-systems/"
+cover_image: /images/courses/architecting-scalable-applications-and-systems.png
 show_academy: true
 order_academy: 1
 feature_academy: true
