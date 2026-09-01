@@ -1,9 +1,11 @@
 # Make the leeatchison.com home page Books section collection-driven
 
+[PR #22](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/22)
+
 * **ID:** Spec0017
-* **Status:** In Development
+* **Status:** Closed
 * **Date Created:** 2026-08-31
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-01
 * **Systems Impacted:** `LeeAtchison` (`src/index.erb`, and `frontend/styles/index.css` only if Open Question 2 lands on capping the grid). No file under `shared/` changes, so `AtchisonAcademy` is untouched.
 
 ---
@@ -365,3 +367,6 @@ line reads "Lee Atchison, Ken Gavranovic", the Software Conductor blurb is
 now the `summary` sentence, every off-site link resolves to `book_url` or
 `amazon_url` with the Amazon Associates tag intact, and `AtchisonAcademy`
 builds green with no file under `shared/` touched.
+
+**2026-09-01 — Closed.** [PR #22](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/22)
+merged.
