@@ -52,3 +52,5 @@ The course assumes you have a system with real risk in it and a manager to bring
 Six modules, about 12 hours total. Eighteen video lessons, eighteen companion readings, and a practice and a graded assignment in every module.
 
 The modules move in order. Risk as an architectural responsibility, building the risk matrix, keeping the matrix alive, acting on risk, risk as a leadership tool, and risk in AI-enabled systems.
+
+<!-- Bug0002 live verification: throwaway shared/-only change; this branch is never merged -->
