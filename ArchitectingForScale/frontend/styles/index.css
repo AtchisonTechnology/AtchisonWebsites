@@ -378,6 +378,56 @@ main {
   border-color: rgba(255, 255, 255, 0.88);
 }
 
+/* ---- Free resource callout ---- */
+
+/* Deliberately not a .section / .section alt band. The page alternates white
+   and grey; this one sits between two of those and interrupts the rhythm on
+   purpose, the same way .newsletter-callout does, so the free download reads
+   as an offer rather than as more body copy. Tinted with the brand accent and
+   ruled top and bottom, rather than dark, so it stays distinct from the
+   newsletter band further down the page (Spec0023). */
+.resource-callout {
+  background: rgba(74, 144, 226, 0.06);
+  border-top: 1px solid rgba(74, 144, 226, 0.25);
+  border-bottom: 1px solid rgba(74, 144, 226, 0.25);
+  padding: 3.5rem 1.5rem;
+}
+
+.resource-callout-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resource-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  margin: 0 0 0.75rem;
+}
+
+.resource-callout-inner h2 {
+  font-size: 2rem;
+  color: var(--color-ink);
+  margin: 0 0 1rem;
+}
+
+.resource-lede {
+  max-width: 640px;
+  margin: 0 auto 1.75rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.resource-note {
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
 /* ---- Buy cards ---- */
 
 .buy-cards {
