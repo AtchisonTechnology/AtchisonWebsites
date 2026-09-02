@@ -56,4 +56,4 @@ Architects, managers, and directors in engineering and operations organizations 
 
 ## Free Resource
 
-Download a free [Risk Matrix Template](/Risk%20Matrix%20Template.xlsx) as discussed in "The Risk Matrix" chapter of the book.
+Download a free [Risk Matrix Template](https://architectingforscale.com/downloads/risk-matrix-template.xlsx) as discussed in "The Risk Matrix" chapter of the book.
