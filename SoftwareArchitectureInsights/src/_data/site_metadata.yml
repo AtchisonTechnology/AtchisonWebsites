@@ -11,7 +11,7 @@ description: >-
   practical thinking you can actually use.
 
 # Hand-maintained; Lee bumps it when it moves (Spec0024 Open Question 13).
-subscriber_count: "1,700+"
+subscriber_count: "1,000+"
 
 # Kit account details this site depends on but does not own. Both are
 # Kit-side setup Lee does by hand (Spec0024's Netlify/DNS boundary) — this
