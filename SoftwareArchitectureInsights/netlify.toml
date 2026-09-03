@@ -103,3 +103,24 @@
   to = "/"
   status = 301
   force = true
+
+# TEMPORARY (added 2026-09-03, Lee's request) — this site's own
+# /service-ownership-diagnostic/ page embeds a dead Kit form (Open
+# Question 14 follow-on: that uid is a hosted landing page, not an
+# embeddable one). Until that's fixed, forward to Kit's still-working
+# hosted version instead of serving our broken embed. 302/temporary,
+# not 301, because this is not meant to be cached or to transfer SEO
+# weight — it's a stopgap. force = true because our own real page exists
+# at this path and would otherwise win. REMOVE this rule once the embed
+# is fixed or replaced.
+[[redirects]]
+  from = "/service-ownership-diagnostic"
+  to = "https://softwarearchitectureinsights.kit.com/2e2d7fc0c1"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/service-ownership-diagnostic/"
+  to = "https://softwarearchitectureinsights.kit.com/2e2d7fc0c1"
+  status = 302
+  force = true
