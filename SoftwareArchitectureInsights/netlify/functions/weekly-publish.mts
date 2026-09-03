@@ -2,12 +2,12 @@ import type { Config } from "@netlify/functions"
 
 // Fires the production build hook every Tuesday, so that week's article
 // (already sitting in src/_articles/ with a Tuesday date, copied at the
-// article's 🚀 Ready per Spec0024 Part 7) goes live just after the Kit
-// send. Netlify's own native "scheduled builds" UI feature is what
-// Spec0024 originally specified for this (Open Question 17); Lee asked
-// 2026-09-03 to switch to this build-hook + scheduled-function pattern
-// instead, so this function and the build hook it calls are now the
-// mechanism.
+// article's 🚀 Ready per Spec0024 Part 7) goes live *before* the Kit send
+// (7:00 am Pacific) rather than after it — Lee's explicit preference
+// (2026-09-03), reversing this function's original after-the-send design.
+// Netlify's own native "scheduled builds" UI feature is what Spec0024
+// originally specified before that (Open Question 17); this build-hook +
+// scheduled-function pattern replaced it the same day.
 //
 // Setup this function depends on (Lee's side, Netlify UI — see the repo's
 // CLAUDE.md Netlify/DNS boundary):
@@ -19,14 +19,17 @@ import type { Config } from "@netlify/functions"
 //   3. Confirm the Netlify plan on this team supports Scheduled Functions.
 //
 // Cron is UTC and fixed, so it cannot itself track Pacific's DST switch.
-// 15:05 UTC is exact for PST (winter) and runs ~1 hour late, 8:05 am, during
-// PDT (spring through fall) -- deliberately biased late rather than early:
-// the future-date filter in plugins/builders/sai_content.rb is what
-// actually gates an article from appearing before its date, so a late
-// trigger just delays that week's publish by up to an hour; an early one
-// risks the article (and the site picking it up) appearing before the Kit
-// send it's timed to follow. Swap to "5 14 * * 2" instead if the reverse
-// trade-off (on-time in summer, an hour early in winter) is preferred.
+// 13:00 UTC is exactly 6:00 am PDT (spring through fall, the more common
+// state) -- one hour before the 7:00 am send, at the top of Lee's stated
+// "a few minutes to an hour before" window. During PST (winter) the same
+// 13:00 UTC lands at 5:00 am PST, two hours before the send: more lead time
+// than requested, but deliberately kept on the early side of the window
+// rather than drifting past it into "after," which is the one outcome Lee
+// ruled out. The future-date filter in plugins/builders/sai_content.rb
+// compares dates, not clock times, so any build that runs after midnight
+// Pacific on the article's Tuesday already shows it — there's no risk of
+// "too early" from the filter's side, only from how far ahead of the send
+// this fires.
 export default async (req: Request) => {
   const { next_run } = await req.json()
 
@@ -41,5 +44,5 @@ export default async (req: Request) => {
 }
 
 export const config: Config = {
-  schedule: "5 15 * * 2",
+  schedule: "0 13 * * 2",
 }
