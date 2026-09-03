@@ -60,12 +60,12 @@ def noindex_page?(dir, url_path)
   file = File.join(dir, url_path, "index.html")
   return false unless File.exist?(file)
 
-  File.read(file).include?('name="robots" content="noindex"')
+  File.read(file, encoding: "UTF-8").include?('name="robots" content="noindex"')
 end
 
 sitemap_path = File.join(options[:dir], "sitemap.xml")
 if File.exist?(sitemap_path)
-  doc = REXML::Document.new(File.read(sitemap_path))
+  doc = REXML::Document.new(File.read(sitemap_path, encoding: "UTF-8"))
   base_url = nil
   sitemap_urls = []
   doc.elements.each("urlset/url/loc") do |loc|
@@ -77,7 +77,12 @@ if File.exist?(sitemap_path)
 
   local_paths = read_local_paths(options[:dir])
   # 404/500 and other non-"/"-suffixed pages are not real pages for this check.
-  indexable_local_paths = local_paths.reject { |p| noindex_page?(options[:dir], p) }
+  # Pagination pages 2+ (page/2/, page/3/, ...) are deliberately left out of
+  # the sitemap by sitemap.xml.erb itself -- only page 1 of a paginated
+  # listing (its canonical URL, e.g. /posts/) is included, the common
+  # practice for paginated archives. Excluded here to match, not because
+  # they're noindexed.
+  indexable_local_paths = local_paths.reject { |p| noindex_page?(options[:dir], p) || p =~ %r{/page/\d+/\z} }
 
   missing_from_output = sitemap_urls - local_paths
   missing_from_output.each { |p| failures << "sitemap.xml lists #{p} but output/#{p}index.html does not exist" }
@@ -96,7 +101,7 @@ end
 # ---------------------------------------------------------------------
 
 def netlify_redirect_rules(dir_root)
-  toml = File.read(File.join(dir_root, "netlify.toml"))
+  toml = File.read(File.join(dir_root, "netlify.toml"), encoding: "UTF-8")
   rules = []
   toml.scan(/\[\[redirects\]\]\s*\n\s*from\s*=\s*"([^"]+)"\s*\n\s*to\s*=\s*"([^"]+)"/m) do |from, to|
     rules << [from, to]
@@ -118,12 +123,12 @@ def redirected?(path, rules, redirects_file_lines)
 end
 
 if options[:kit_inventory]
-  inventory = JSON.parse(File.read(options[:kit_inventory]))
+  inventory = JSON.parse(File.read(options[:kit_inventory], encoding: "UTF-8"))
   live_urls = inventory.select { |e| e["status"] == 200 }.map { |e| URI.parse(e["public_url"]).path }
 
   rules = netlify_redirect_rules(File.expand_path("..", __dir__))
   redirects_file = File.join(options[:dir], "_redirects")
-  redirects_lines = File.exist?(redirects_file) ? File.readlines(redirects_file) : []
+  redirects_lines = File.exist?(redirects_file) ? File.readlines(redirects_file, encoding: "UTF-8") : []
 
   misses = live_urls.reject do |path|
     if options[:base]
