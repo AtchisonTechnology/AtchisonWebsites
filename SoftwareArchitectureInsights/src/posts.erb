@@ -17,8 +17,19 @@ pagination:
       <% if article.data.hero_image %>
         <img src="<%= relative_url "/images/posts/#{article.data.hero_image}" %>" alt="" class="article-list-thumb" />
       <% end %>
-      <a href="<%= relative_url article.relative_url %>"><%= article.data.title %></a>
+      <div class="article-list-meta">
+        <% Array(article.data.categories).each do |label| %>
+          <% cat = site.data.categories.find { |c| c["label"] == label } %>
+          <% next unless cat %>
+          <a href="<%= relative_url "/categories/#{cat['key']}/" %>" class="article-list-category"><%= cat["label"] %></a>
+        <% end %>
+        <% if article.data.date %>
+          <time class="article-list-date" datetime="<%= article.data.date.strftime('%Y-%m-%d') %>"><%= article.data.date.strftime('%B %-d, %Y') %></time>
+        <% end %>
+      </div>
+      <a href="<%= relative_url article.relative_url %>" class="article-list-title"><%= article.data.title %></a>
       <p class="article-list-description"><%= article.data.description %></p>
+      <a href="<%= relative_url article.relative_url %>" class="article-list-readmore">Read more &rarr;</a>
     </li>
   <% end %>
 </ul>
