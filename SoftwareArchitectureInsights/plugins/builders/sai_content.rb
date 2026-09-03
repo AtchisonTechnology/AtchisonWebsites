@@ -130,7 +130,16 @@ class Builders::SaiContent < SiteBuilder
   end
 
   def validate_date!(resource)
-    return if resource.data.date
+    # Not resource.data.date: by the time this hook runs, Bridgetown has
+    # already defaulted a missing date to the current build time as a side
+    # effect of something reading resource.date (the accessor method, which
+    # does `data["date"] ||= site.time`) before this hook fires -- so
+    # data.date is never actually nil here even when the front matter never
+    # set one. model.data_attributes is the original parsed front matter,
+    # untouched by that fallback, so it's the only reliable way to detect a
+    # genuinely missing date (verified empirically -- see git history for
+    # this line if the mechanism ever needs re-diagnosing).
+    return if resource.model.data_attributes["date"]
 
     raise "#{resource.relative_path}: missing required date: — Bridgetown sorts the " \
           "archive on it and the future-date filter depends on it"
