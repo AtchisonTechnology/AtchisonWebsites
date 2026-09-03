@@ -24,6 +24,15 @@
   NODE_ENV = "development"
   BRIDGETOWN_ENV = "production"
 
+# The weekly-publish scheduled function (netlify/functions/weekly-publish.mts)
+# hits a build hook every Tuesday so that week's article goes live just after
+# the Kit send — see that file for the full mechanism and the Netlify-side
+# setup (build hook + BUILD_HOOK_URL env var) it depends on. Scheduled
+# functions only run on published (production) deploys, never on deploy
+# previews or branch deploys.
+[functions]
+  directory = "netlify/functions"
+
 # Deploy Previews build exactly like production, so that the preview is
 # representative of what ships. These settings are identical to the [build]
 # ones above, which previews already inherit; they are stated explicitly as
