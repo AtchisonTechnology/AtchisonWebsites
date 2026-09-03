@@ -20,9 +20,10 @@ subscriber_count: "1,700+"
 # kit_inline_form_uid: the uid of the (new, or un-archived) Kit inline
 # subscribe form (Open Question 14). Blank until Lee creates it.
 kit_inline_form_uid: ""
-# Fathom site ID for this domain (Open Question 14) — the Fathom site
-# already exists; Lee supplies the ID here.
-fathom_site_id: ""
+# Fathom site ID for this domain (Open Question 14) — the same ID every
+# other site in this repo uses (one Fathom property covers all of Lee's
+# sites; confirmed 2026-09-03).
+fathom_site_id: "QZJQFDMY"
 
 # Kit-hosted landing-page form uids these two pages embed (Spec0024 Part 4 —
 # the pages themselves are real Bridgetown pages now, but the lead-capture
