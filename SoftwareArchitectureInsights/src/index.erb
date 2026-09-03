@@ -32,8 +32,26 @@ description: >-
 
 <section class="home-latest">
   <h2>Latest articles</h2>
+
+  <% latest = site.collections.articles.resources.first(9)
+     featured = latest.first
+     rest = latest.drop(1) %>
+
+  <% if featured %>
+    <a href="<%= relative_url featured.relative_url %>" class="featured-article">
+      <% if featured.data.hero_image %>
+        <img src="<%= relative_url "/images/posts/#{featured.data.hero_image}" %>" alt="" class="featured-article-thumb" />
+      <% end %>
+      <div class="featured-article-body">
+        <span class="featured-article-label">Latest</span>
+        <h3 class="featured-article-title"><%= featured.data.title %></h3>
+        <p class="featured-article-description"><%= featured.data.description %></p>
+      </div>
+    </a>
+  <% end %>
+
   <ul class="article-list">
-    <% site.collections.articles.resources.first(9).each do |article| %>
+    <% rest.each do |article| %>
       <li class="article-list-item">
         <% if article.data.hero_image %>
           <img src="<%= relative_url "/images/posts/#{article.data.hero_image}" %>" alt="" class="article-list-thumb" />

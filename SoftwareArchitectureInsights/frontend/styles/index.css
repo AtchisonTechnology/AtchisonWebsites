@@ -311,7 +311,7 @@ body.article main {
 .home-hero-banner {
   display: block;
   width: 100%;
-  max-width: 46rem;
+  max-width: 54rem;
   height: auto;
   margin: 0 auto 1.5rem;
 }
@@ -374,6 +374,74 @@ body.article main {
 .category-shelf a:hover {
   border-color: var(--brand-blue);
   color: var(--brand-blue);
+}
+
+/* ---------------------------------------------------------------- */
+/* Featured article (home page, most recent issue)                    */
+/* ---------------------------------------------------------------- */
+
+.featured-article {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.featured-article-thumb {
+  flex: 1 1 55%;
+  width: 55%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.featured-article-body {
+  flex: 1 1 45%;
+}
+
+.featured-article-label {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.featured-article-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+
+.featured-article:hover .featured-article-title {
+  color: var(--brand-blue);
+}
+
+.featured-article-description {
+  color: var(--stone-600);
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .featured-article {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .featured-article-thumb {
+    width: 100%;
+  }
 }
 
 /* ---------------------------------------------------------------- */
