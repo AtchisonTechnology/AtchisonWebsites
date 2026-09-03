@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { Config } from "@netlify/functions"
 
 // Fires the production build hook every Tuesday, so that week's article
@@ -33,6 +34,7 @@ import type { Config } from "@netlify/functions"
 export default async (req: Request) => {
   const { next_run } = await req.json()
 
+  // @ts-ignore
   const hookUrl = Netlify.env.get("BUILD_HOOK_URL")
   if (!hookUrl) {
     console.error("weekly-publish: BUILD_HOOK_URL is not set — see this file's header for setup.")
