@@ -10,6 +10,7 @@
 # A fresh worktree does still need its dependencies installed per site:
 #
 #   for s in LeeAtchison TheSoftwareConductor stosa BusinessBreakthrough30 \
-#            ArchitectingForScale AtchisonAcademy AtchisonAcademyCourses; do
+#            ArchitectingForScale AtchisonAcademy AtchisonAcademyCourses \
+#            SoftwareArchitectureInsights; do
 #     (cd "$s" && bundle install && npm install)
 #   done

@@ -4,7 +4,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 ## What this repo is
 
-Seven independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
+Eight independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
 Spec/Bug process:
 
@@ -17,6 +17,7 @@ Spec/Bug process:
 | `ArchitectingForScale` | Architecting for Scale (book site) | architectingforscale.com |
 | `AtchisonAcademy` | Atchison Academy | atchisonacademy.com |
 | `AtchisonAcademyCourses` | Atchison Academy Courses (unlisted course content; does not join `shared/`) | courses.atchisonacademy.com |
+| `SoftwareArchitectureInsights` | Software Architecture Insights (weekly newsletter site; email stays on Kit; does not join `shared/`) | softwarearchitectureinsights.com |
 
 Each site has its own `CLAUDE.md` with its architecture, layouts, CSS tokens,
 and content conventions. **Read the site's own CLAUDE.md before changing
@@ -109,7 +110,7 @@ Bridgetown). Per-site build/deploy commands live in each site's own CLAUDE.md.
 This project follows the `spec-bug-process` skill (Spec/Bug tracking,
 worktrees, resource isolation). Project parameters:
 
-- **Sites/services:** seven, indices 0–6 — see `Projects/services.md`. Indices
+- **Sites/services:** eight, indices 0–7 — see `Projects/services.md`. Indices
   are permanent; a new site takes the next unused index.
 - **Worktrees:** `.claude/worktrees/`, named exactly `spec####` / `bug####`
   (gitignored).
@@ -148,6 +149,7 @@ Following the skill's scheme exactly, with `N` = the worktree's numeric ID:
 | 4 | `ArchitectingForScale` | 14000 | 14000 + N | 15000 + N |
 | 5 | `AtchisonAcademy` | 16000 | 16000 + N | 17000 + N |
 | 6 | `AtchisonAcademyCourses` | 18000 | 18000 + N | 19000 + N |
+| 7 | `SoftwareArchitectureInsights` | 20000 | 20000 + N | 21000 + N |
 
 IDs start at `0001`, so main (N = 0) never collides. IDs above `999` overflow
 into the next block — which shows up immediately as a port-bind failure, not

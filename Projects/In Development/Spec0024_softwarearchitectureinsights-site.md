@@ -1,7 +1,7 @@
 # Create the SoftwareArchitectureInsights site — move softwarearchitectureinsights.com from Kit to Bridgetown
 
 * **ID:** Spec0024
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-09-03
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** SoftwareArchitectureInsights (new, site index 7), plus
@@ -15,8 +15,11 @@
 > Later the same day Lee resolved Open Questions 1–16 in one sitting, and —
 > on learning that Kit's site serves no `sitemap.xml` at all — said he now
 > wants this done sooner rather than later. Question 17 (the scheduled-build
-> mechanism) was decided the same evening. **No Open Questions remain**; the
-> spec moves to Implementing only on Lee's say-so.
+> mechanism) was decided the same evening. **No Open Questions remain.**
+> Lee moved the spec to Implementing the same day, directing that — because
+> this fundamentally changes how Netlify serves this domain — implementation
+> happen directly on `main`, with no worktree and no PR, an explicit
+> exception to this repo's usual worktree/PR process for this spec only.
 
 ---
 
@@ -793,3 +796,11 @@ its decision and the section it changed. Question 17 is new and open.
 * **2026-09-03 (evening, later)** — Open Question 17 decided: the Tuesday
   scheduled build uses Netlify's own scheduled-build feature, configured by
   Lee. No Open Questions remain.
+* **2026-09-03 (night)** — Lee moved the spec to Implementing, directing
+  that this spec be built directly on `main` with no worktree and no PR
+  (an explicit, one-time exception to the repo's usual process, made because
+  this is the first change to how Netlify serves a domain in this repo and
+  is easier to land without a worktree in the way). Part 1 (registering
+  site index 7 across `lib/worktree_env.rb`, `test/worktree_env_test.rb`,
+  `Procfile`, root `CLAUDE.md`, `Projects/services.md`, `.worktreeinclude`)
+  implemented and `make test` passing.

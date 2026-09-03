@@ -33,6 +33,7 @@ module WorktreeEnv
     "ArchitectingForScale" => 4,
     "AtchisonAcademy" => 5,
     "AtchisonAcademyCourses" => 6,
+    "SoftwareArchitectureInsights" => 7,
   }.freeze
 
   MAX_SERVICES = 10
