@@ -330,15 +330,6 @@ body.article main {
   border-radius: 8px;
 }
 
-/* Kit's embed injects its own form markup at runtime -- give it the full
-   width of the card rather than whatever intrinsic width it defaults to,
-   so a side-by-side email+button layout has room and doesn't wrap or look
-   cramped against our padding. */
-.home-subscribe > * {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .home-subscriber-count {
   color: var(--stone-600);
   font-size: 0.9rem;
