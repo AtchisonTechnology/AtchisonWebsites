@@ -460,8 +460,15 @@ body.homepage .article-list,
 .home-subscribe,
 .subscribe-form,
 .diagnostic-form,
-.webinar-form {
+.webinar-form,
+.article-subscribe {
   margin: 1.5rem 0;
+}
+
+.article-subscribe {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
 }
 
 .kit-form-pending {
