@@ -327,17 +327,13 @@ body.article main {
      <form> (not a live media query); its own CSS only turns on the
      side-by-side field+button layout at min-width="700" or "800". Below
      that it applies flex: 1 0 100% to both the field and the button,
-     which stacks them regardless of anything we do here. Padding eats
-     into the width Kit actually measures (it sees the form's rendered
-     width, inside this padding, not the box's outer width), so this
-     needs real margin above 700px, not just past it -- 50rem with
-     1.5rem padding each side still clears 700 with room to spare. */
+     which stacks them regardless of anything we do here -- 50rem clears
+     that threshold with real margin to spare. No card treatment here
+     (background/border/padding) -- it read as a mismatched box against
+     the otherwise plain hero; Kit's own field border and button color
+     are already matched to the site palette on Kit's side. */
   max-width: 50rem;
   margin: 0 auto;
-  padding: 1.5rem;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
 }
 
 .home-subscriber-count {
@@ -514,6 +510,25 @@ body.homepage .article-list,
 .subscribe-form,
 .article-subscribe {
   margin: 1.5rem 0;
+}
+
+/* Lives inside main's 42rem reading column -- narrower than the 700px
+   Kit's embed script needs to measure before it enables its
+   side-by-side field+button layout (see .home-subscribe above for the
+   full explanation). Break out to the viewport, centered, capped at
+   the same 50rem, gutters matching main's own padding so it doesn't
+   run edge-to-edge on mobile.
+   .article-subscribe isn't fixed the same way here: its border-top
+   would break out full-bleed along with it, which needs a separate
+   inner wrapper in article.erb rather than applying to the bordered
+   container itself -- it still stacks on article pages for now. */
+.subscribe-form {
+  width: 100vw;
+  max-width: 50rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  padding: 0 1.25rem;
+  box-sizing: border-box;
 }
 
 .article-subscribe {
