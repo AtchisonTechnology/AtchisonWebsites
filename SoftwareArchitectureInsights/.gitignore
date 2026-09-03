@@ -14,6 +14,7 @@ node_modules
 .sass-cache
 .npm
 .node_repl_history
+__pycache__
 
 # Ignore bundler config.
 /.bundle

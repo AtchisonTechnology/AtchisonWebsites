@@ -931,3 +931,28 @@ its decision and the section it changed. Question 17 is new and open.
   0 misses, the sitemap no longer lists either page, and both paths return
   the redirect. Real pages here again need matching embed-type Kit forms
   first.
+* **2026-09-03 (night, later still)** — Started Part 5 (back-catalog
+  export). Two sandbox limits surfaced that the original design didn't
+  anticipate: `script/export_kit.rb`'s live API/HTTP approach can't run
+  here at all (egress to `api.kit.com` and to Kit's image CDN
+  `embed.filekitcdn.com` is blocked), and the planned live-page category
+  scrape can't run either (egress to softwarearchitectureinsights.com is
+  also blocked). Worked around both — content comes in one post at a time
+  via the Kit_SAI MCP connection (which proxies server-side) instead of a
+  single script run, and categories are hand-assigned from each article's
+  own content against `src/_data/categories.yml` instead of scraped,
+  meaning **all** ~52 Kit-HTML-sourced articles need manual category
+  assignment now, not just the 24 the spec anticipated — flagged for
+  Lee's review, not silently decided. Built and tested
+  `script/import_post.py` (HTML chrome-stripping via BeautifulSoup +
+  pandoc-to-Markdown + front-matter formatting) against real Kit HTML,
+  including a heavily ad-laden post, to replace the mechanical half of
+  `export_kit.rb`'s job; hand-exported and build-verified the first 4
+  articles. Dispatched a background agent to complete the remaining 52
+  (fetch, clean, categorize, write, then a full `bin/bridgetown build`
+  check) with instructions not to commit — results pending review.
+  Hero images are out of scope for this pass: downloading Kit's thumbnail
+  URLs is blocked the same way; every article ships with `hero_image:`
+  unset for now (the site's existing fallback), and thumbnail URLs are
+  being collected in a manifest for a later download pass outside this
+  sandbox.
