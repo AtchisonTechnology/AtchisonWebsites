@@ -563,9 +563,10 @@ Mechanics:
    `check_urls.rb` locally — zero misses.
 3. Lee creates the Netlify site pointed at `SoftwareArchitectureInsights/`
    (base directory, `bin/bridgetown deploy`, `output`), gets a
-   `*.netlify.app` URL, configures Netlify's scheduled build for Tuesdays
-   at 7:05 am Pacific (Open Question 17), and creates the Kit inline form.
-   The Fathom site already exists.
+   `*.netlify.app` URL, creates a build hook and sets it as the
+   `BUILD_HOOK_URL` environment variable so `netlify/functions/weekly-publish.mts`
+   can fire it every Tuesday (Open Question 17), and creates the Kit inline
+   form. The Fathom site already exists.
 4. Run `check_urls.rb` against the Netlify URL. Spot-check `og:image`,
    `og:description`, and canonical on five articles with a link-card
    debugger; confirm the `content-social` skill's `og:image` read works
@@ -604,8 +605,9 @@ skill must state:
   the article reaches Ready, a slipped send means moving `date` (and
   `published_on` when it ships), which is already the workflow's rule.
 * **The scheduled build is what makes it appear on time.** Without it, the
-  article would appear on the next push after Tuesday. It is Netlify's own
-  scheduled-build feature, configured by Lee (Open Question 17).
+  article would appear on the next push after Tuesday. It is a Netlify
+  Scheduled Function (`netlify/functions/weekly-publish.mts`) firing a
+  build hook Lee configures (Open Question 17).
 * **Lee alone publishes.** As with Kit, Claude prepares; Lee copies, commits,
   and pushes (or explicitly tells Claude to). The repo-wide rule that
   nothing is committed or pushed without permission applies unchanged.
@@ -657,7 +659,8 @@ skill must state:
    (checks, future-date filter, H1/bio strip, UTM rewrite, category and
    series pages), listing pages, about/links/subscribe, the diagnostic and
    webinar pages with their Kit forms, feed, sitemap/robots, 404. (The
-   Tuesday scheduled build is Netlify configuration, not repo code.)
+   Tuesday trigger is `netlify/functions/weekly-publish.mts` firing a
+   build hook Lee configures in Netlify — see Open Question 17.)
 6. Write and run `script/export_kit.rb`; draft categories for the 24 and
    `meta_description` for the ~50 for Lee's approval; the 17 without a hero
    ship without one.
@@ -739,16 +742,29 @@ its decision and the section it changed. Question 17 is new and open.
     per-kind defaults stand; back-port to the other seven sites in a
     follow-on**, parked in `_Projects.md` at implementation.
 17. **Mechanism for the Tuesday 7:05 am scheduled build** (raised by the
-    answer to Q3). **Decided 2026-09-03: Netlify's own scheduled-build
-    feature.** Lee configures it in Netlify — his side of the Netlify
-    boundary — for Tuesdays at 7:05 am Pacific. Nothing for it lives in the
-    repo: no GitHub Actions workflow, no Netlify Function, no build-hook
-    secret. The builder's future-date filter is what makes an early copy
-    safe; the scheduled build is only what makes the article *appear* on
-    time. A push on any other day also rebuilds and, correctly, still hides
-    a future-dated article. (Alternatives considered and not taken: a GitHub
-    Actions cron hitting a build hook, a Netlify Scheduled Function, a
-    Claude scheduled task.)
+    answer to Q3). ~~Decided 2026-09-03: Netlify's own scheduled-build
+    feature.~~ **Superseded 2026-09-03 (night): a Netlify build hook plus a
+    Netlify Scheduled Function**, at Lee's direction — Netlify's native
+    scheduled-builds UI feature is the one this spec originally chose, and
+    is no longer how Netlify recommends doing this. The repo now carries
+    `SoftwareArchitectureInsights/netlify/functions/weekly-publish.mts`, a
+    Scheduled Function (cron `5 15 * * 2`, UTC) that `fetch`s a Netlify
+    build hook URL read from the `BUILD_HOOK_URL` environment variable.
+    Creating the build hook and setting that env var are Lee's side of the
+    Netlify boundary, same as before; nothing else about the mechanism
+    changes — the builder's future-date filter is still what makes an early
+    copy safe, the scheduled trigger is still only what makes the article
+    *appear* on time, and a push on any other day still rebuilds and,
+    correctly, still hides a future-dated article. The cron is UTC and
+    fixed, so it cannot track Pacific's DST switch on its own; `5 15 * * 2`
+    is exact for PST and runs about an hour late (8:05 am) during PDT,
+    deliberately biased toward late rather than early since the future-date
+    filter is what actually prevents an early appearance regardless. See
+    the function file's header comment for the full reasoning and the
+    Netlify-side setup steps. (Alternatives considered at the original
+    2026-09-03 decision and not taken then: a GitHub Actions cron hitting a
+    build hook, a Netlify Scheduled Function — the option superseding this
+    entry ended up choosing — and a Claude scheduled task.)
 
 ---
 
@@ -850,3 +866,16 @@ its decision and the section it changed. Question 17 is new and open.
   remaining checks (metadata-on-populated-articles, redirect-return-codes
   against a live preview, `/feed.xml` validation) that need real content or
   a live deploy to check meaningfully.
+* **2026-09-03 (night, later still)** — Fathom site ID set to `QZJQFDMY`,
+  the same property every other site in this repo uses (confirmed by Lee;
+  he began Netlify site creation the same session). Separately, Lee asked
+  to switch the Tuesday scheduled-build mechanism from Netlify's native
+  scheduled-builds UI feature to a build hook fired by a Netlify Scheduled
+  Function, since that is now Netlify's recommended pattern — **Open
+  Question 17 superseded** (see that entry for the full reasoning). Added
+  `netlify/functions/weekly-publish.mts` (cron `5 15 * * 2` UTC, reads
+  `BUILD_HOOK_URL`), `[functions]` in `netlify.toml`, `.netlify` to
+  `.gitignore`, and `@netlify/functions` as a devDependency; bundle-checked
+  the function with esbuild and re-verified the Bridgetown build is
+  unaffected. Creating the build hook and setting `BUILD_HOOK_URL` in
+  Netlify are Lee's side, same boundary as before.

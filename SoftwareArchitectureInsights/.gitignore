@@ -4,6 +4,9 @@ output
 .bridgetown-metadata
 .routes.json
 
+# Netlify CLI / local functions bundling (not user code)
+.netlify
+
 # Dependency folders
 node_modules
 
