@@ -733,11 +733,26 @@ its decision and the section it changed. Question 17 is new and open.
     hand-maintained** as a value in `site_metadata.yml`. Lee bumps it when
     it moves.
 14. **What already exists outside the repo.** **Answered 2026-09-03: a
-    Fathom site for this domain already exists.** Not yet done: the
-    Netlify site, the Kit inline subscribe form, and the www → apex
+    Fathom site for this domain already exists.** The Netlify site and the
+    Kit inline subscribe form ("Basic Form", uid `c448363077`) were both
+    created by Lee later the same night — `site.metadata.fathom_site_id`
+    and `kit_inline_form_uid` are both set. Still open: the www → apex
     decision (Lee did not select it; treat as *not yet decided* and
-    confirm at cutover rather than assume). The Fathom site ID goes in
-    `_head.erb` at implementation.
+    confirm at cutover rather than assume).
+
+    **Follow-on found while wiring this in:** the diagnostic and webinar
+    pages' `service_ownership_diagnostic_form_uid`/`architecting_with_ai_form_uid`
+    (`2e2d7fc0c1`/`4cad4660e5`) are Kit *hosted landing pages*
+    (`type: "hosted"`, `embed_js: null`), not embeddable forms — confirmed
+    via Kit's API. Unlike the inline subscribe form, a hosted page's form
+    is baked into that page's own design and has no standalone script-tag
+    embed. `subscribe.erb` was switched to embed `kit_inline_form_uid`
+    instead, which works. `service-ownership-diagnostic.erb` and
+    `architecting-with-ai.erb` still point at the two non-embeddable uids
+    and will render dead embeds until Lee decides: build matching
+    embed-type Kit forms reproducing each page's custom fields (job title/
+    company/tag dropdown for the webinar), or link out to the Kit-hosted
+    page instead of embedding inline.
 15. **Series pages.** **Decided 2026-09-03: include them now.** Part 4
     gains `/series/<key>/` pages generated from `series` front matter.
 16. **Sitemap/robots key set.** **Decided 2026-09-03: the six keys and the
