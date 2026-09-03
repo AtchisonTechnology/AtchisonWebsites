@@ -322,7 +322,17 @@ body.article main {
 }
 
 .home-subscribe {
-  max-width: 34rem;
+  /* Kit's embed script measures its container's rendered width once at
+     load and writes the result as a `min-width="..."` attribute on the
+     <form> (not a live media query); its own CSS only turns on the
+     side-by-side field+button layout at min-width="700" or "800". Below
+     that it applies flex: 1 0 100% to both the field and the button,
+     which stacks them regardless of anything we do here. Padding eats
+     into the width Kit actually measures (it sees the form's rendered
+     width, inside this padding, not the box's outer width), so this
+     needs real margin above 700px, not just past it -- 50rem with
+     1.5rem padding each side still clears 700 with room to spare. */
+  max-width: 50rem;
   margin: 0 auto;
   padding: 1.5rem;
   background: var(--card);
