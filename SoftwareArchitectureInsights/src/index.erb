@@ -8,7 +8,12 @@ description: >-
 ---
 
 <section class="home-hero">
-  <h1><%= site.metadata.title %></h1>
+  <img
+    src="<%= relative_url '/images/brand/sai-banner-conductor.svg' %>"
+    alt="<%= site.metadata.title %> with Lee Atchison"
+    class="home-hero-banner"
+  />
+  <h1 class="sr-only"><%= site.metadata.title %></h1>
   <p class="home-tagline"><%= site.metadata.tagline %></p>
   <div class="home-subscribe">
     <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>

@@ -22,7 +22,7 @@ Bridgetown.configure do |config|
   # production. Everywhere else the literal below is used unconditionally:
   # local builds (CONTEXT unset), the production build (CONTEXT
   # "production"), and branch deploys (CONTEXT "branch-deploy"). Keying on
-  # CONTEXT rather than falling back on DEPLOY_PRIME_URL is deliberate —
+  # CONTEXT rather than falling back on DEPLOY_PRIME_URL is deliberate -
   # on a production build Netlify sets DEPLOY_PRIME_URL from the site's
   # domain configuration, and no Netlify UI setting should be able to
   # rewrite production canonicals. Branch deploys keep the production URL
