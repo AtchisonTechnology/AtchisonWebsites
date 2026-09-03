@@ -104,15 +104,18 @@
   status = 301
   force = true
 
-# TEMPORARY (added 2026-09-03, Lee's request) — this site's own
-# /service-ownership-diagnostic/ and /architecting-with-ai/ pages each
-# embed a dead Kit form (Open Question 14 follow-on: both uids are hosted
-# landing pages, not embeddable ones). Until that's fixed, forward both to
-# Kit's still-working hosted versions instead of serving our broken
-# embeds. 302/temporary, not 301, because this is not meant to be cached
-# or to transfer SEO weight — it's a stopgap. force = true because our own
-# real pages exist at these paths and would otherwise win. REMOVE these
-# four rules once both embeds are fixed or replaced.
+# TEMPORARY (added 2026-09-03, Lee's request) — /service-ownership-diagnostic/
+# and /architecting-with-ai/ each had a real Bridgetown page here that
+# embedded a dead Kit form (Open Question 14 follow-on: both uids are
+# hosted landing pages, not embeddable ones). Rather than ship a broken
+# embed, Lee had both .erb source files removed; these two paths are now
+# served entirely by redirecting to Kit's still-working hosted versions.
+# 302/temporary, not 301, because this is not meant to be cached or to
+# transfer SEO weight. force = true is belt-and-suspenders now that no
+# Bridgetown page exists at either path, but kept in case one is rebuilt
+# later without remembering to touch these rules. REMOVE these four rules
+# (and force = true stops mattering) if/when real pages are rebuilt here
+# with working embed-type Kit forms.
 [[redirects]]
   from = "/service-ownership-diagnostic"
   to = "https://softwarearchitectureinsights.kit.com/2e2d7fc0c1"
