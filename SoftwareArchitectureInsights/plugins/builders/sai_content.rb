@@ -246,7 +246,18 @@ class Builders::SaiContent < SiteBuilder
   # ---------------------------------------------------------------------
 
   def rewrite_web_utm(html)
-    html.gsub(/href="([^"]+)"/) { %(href="#{rewrite_href(Regexp.last_match(1))}") }
+    # Scoped to <body> only. Applied to the whole page, this rewrite was
+    # also mangling <head> tags with an href to this site -- notably
+    # <link rel="canonical">, which it stripped down to a relative path
+    # the same way it correctly relativizes a self-link in article prose.
+    # Canonical (and anything else in <head>) needs to stay exactly as
+    # the template rendered it.
+    body_start = html.index("<body")
+    return html unless body_start
+
+    html[0...body_start] + html[body_start..].gsub(/href="([^"]+)"/) do
+      %(href="#{rewrite_href(Regexp.last_match(1))}")
+    end
   end
 
   def rewrite_href(href)
