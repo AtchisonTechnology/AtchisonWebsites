@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-lesson-at-the-heart-
 email_sent: 2026-07-21
 linkedin_url:
 
-hero_image: 
+hero_image: the-lesson-at-the-heart-of-the-software-conductor.png
 
 internal_note:
 meta_description: A conductor who grabs a violin makes the music worse. Why the Hero Trap — architects jumping in to fix things themselves — is the lesson at the book's core.

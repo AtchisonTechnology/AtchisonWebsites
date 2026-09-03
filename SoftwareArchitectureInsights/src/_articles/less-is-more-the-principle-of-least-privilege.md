@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/less-is-more-the-princip
 email_sent: 2025-06-03
 linkedin_url:
 
-hero_image: 
+hero_image: less-is-more-the-principle-of-least-privilege.png
 
 internal_note:
 meta_description: "The Principle of Least Privilege: grant each service only the permissions it needs, nothing more, to keep its blast radius as small as possible."

@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/7-essential-tips-for-set
 email_sent: 2024-06-25
 linkedin_url:
 
-hero_image: 
+hero_image: 7-essential-tips-for-setting-up-effective-monitoring.png
 
 internal_note:
 meta_description: Seven practical tips for building an effective, multi-layered monitoring strategy for modern Kubernetes and cloud-native applications.

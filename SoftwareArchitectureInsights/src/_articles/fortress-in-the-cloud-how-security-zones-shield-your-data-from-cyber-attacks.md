@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/fortress-in-the-cloud-ho
 email_sent: 2025-04-16
 linkedin_url:
 
-hero_image: 
+hero_image: fortress-in-the-cloud-how-security-zones-shield-your-data-from-cyber-attacks.png
 
 internal_note:
 meta_description: A flat security model means one breach reaches everything. Isolation zones — public, private, and DMZ — contain a breach before it becomes a catastrophe.

@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/it-passed-the-test-that-
 email_sent: 2026-09-01
 linkedin_url:
 
-hero_image: 
+hero_image: it-passed-the-test-that-doesn-t-mean-it-works.png
 
 internal_note:
 meta_description: Your test suite assumes same input, same output. An LLM removes that. What replaces it is evaluation, thresholds, and verification somebody owns.

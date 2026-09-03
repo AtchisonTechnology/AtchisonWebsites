@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-hidden-performance-t
 email_sent: 2025-11-04
 linkedin_url:
 
-hero_image: 
+hero_image: the-hidden-performance-tax-of-media-files-with-igor-debatur-ceo-of-uploadcare.png
 
 internal_note:
 meta_description: Uploadcare CEO Igor Debatur on the hidden complexity of file uploads — security, compliance, and scalability — on the Software Architecture Insights podcast.

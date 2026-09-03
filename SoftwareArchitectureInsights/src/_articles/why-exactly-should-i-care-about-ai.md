@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/why-exactly-should-i-car
 email_sent: 2025-10-15
 linkedin_url:
 
-hero_image: 
+hero_image: why-exactly-should-i-care-about-ai.png
 
 internal_note:
 meta_description: AI isn't new, but it's now unavoidable for architects. Why data pipelines, model lifecycle, probabilistic behavior, and ethics all become architectural concerns.

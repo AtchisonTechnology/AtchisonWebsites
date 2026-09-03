@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/your-architectural-style
 email_sent: 2026-06-30
 linkedin_url:
 
-hero_image: 
+hero_image: your-architectural-style-is-part-of-your-architecture.png
 
 internal_note:
 meta_description: "Conway's Law applies one level up: how an architect leads shapes the kind of system that gets built. Coupling and cohesion apply to your practice too."

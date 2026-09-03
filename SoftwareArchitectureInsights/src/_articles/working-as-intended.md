@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/working-as-intended
 email_sent: 2026-05-18
 linkedin_url:
 
-hero_image: 
+hero_image: working-as-intended.png
 
 internal_note:
 meta_description: "Five AI systems that caused real harm without a single bug: Amazon's biased hiring tool, a healthcare algorithm, COMPAS, facial recognition, and Apple Card."

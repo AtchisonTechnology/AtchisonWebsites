@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/navigating-ai-developmen
 email_sent: 2025-12-09
 linkedin_url:
 
-hero_image: 
+hero_image: navigating-ai-development-with-inworld-s-kylan-gibbs.png
 
 internal_note:
 meta_description: InWorld AI CEO Kylan Gibbs joins the Software Architecture Insights podcast to discuss conversational AI and the role of AI in modern applications.

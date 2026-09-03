@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/who-s-responsible-unders
 email_sent: 2025-03-27
 linkedin_url:
 
-hero_image: 
+hero_image: who-s-responsible-understanding-the-principle-of-shared-responsibility.png
 
 internal_note:
 meta_description: The Principle of Shared Responsibility splits security duties between cloud provider and customer — and the dividing line moves depending on the service.

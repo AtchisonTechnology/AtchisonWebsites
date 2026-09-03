@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-difference-between-a
 email_sent: 2026-08-13
 linkedin_url:
 
-hero_image: 
+hero_image: the-difference-between-ai-safety-ai-ethics-and-ai-governance.png
 
 internal_note:
 meta_description: AI safety, AI ethics, and AI governance get treated as synonyms, but they're three distinct questions requiring different expertise and different owners.

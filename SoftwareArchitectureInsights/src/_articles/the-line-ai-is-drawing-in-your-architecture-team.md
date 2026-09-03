@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-line-ai-is-drawing-i
 email_sent: 2026-06-16
 linkedin_url:
 
-hero_image: 
+hero_image: the-line-ai-is-drawing-in-your-architecture-team.png
 
 internal_note:
 meta_description: AI is good at execution, not origination. What that asymmetry means for how architecture teams should be structured and staffed going forward.

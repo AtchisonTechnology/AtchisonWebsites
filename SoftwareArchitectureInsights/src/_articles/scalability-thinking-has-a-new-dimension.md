@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/scalability-thinking-has
 email_sent: 2026-08-18
 linkedin_url:
 
-hero_image: 
+hero_image: scalability-thinking-has-a-new-dimension.png
 
 internal_note:
 meta_description: "Scalability used to mean throughput. AI-augmented teams add a second dimension: can this system be safely evolved at AI velocity?"

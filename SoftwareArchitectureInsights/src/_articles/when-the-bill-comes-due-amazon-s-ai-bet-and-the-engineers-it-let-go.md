@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/when-the-bill-comes-due-
 email_sent: 2026-03-17
 linkedin_url:
 
-hero_image: 
+hero_image: when-the-bill-comes-due-amazon-s-ai-bet-and-the-engineers-it-let-go.png
 
 internal_note:
 meta_description: Amazon cut 30,000 jobs citing AI efficiency gains, then convened an internal review of high-severity outages tied to AI-assisted code. A pattern worth questioning.

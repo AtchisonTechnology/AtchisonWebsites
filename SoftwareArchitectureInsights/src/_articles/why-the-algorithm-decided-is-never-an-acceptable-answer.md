@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/why-the-algorithm-decide
 email_sent: 2026-07-30
 linkedin_url:
 
-hero_image: 
+hero_image: why-the-algorithm-decided-is-never-an-acceptable-answer.png
 
 internal_note:
 meta_description: "\"The algorithm decided\" shifts responsibility from a person to a system. What real accountability architecture requires: explanation, human authority, logs, escalation."

@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/managed-file-transfer-in
 email_sent: 2025-11-11
 linkedin_url:
 
-hero_image: 
+hero_image: managed-file-transfer-in-the-modern-era.png
 
 internal_note:
 meta_description: A GoAnywhere CVE sat unpatched for weeks on customer servers while attackers exploited it. Why patch latency makes SaaS the safer architecture for MFT.

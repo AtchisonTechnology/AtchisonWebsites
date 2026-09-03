@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/ai-closes-the-ticket-but
 email_sent: 2026-07-07
 linkedin_url:
 
-hero_image: 
+hero_image: ai-closes-the-ticket-but-who-builds-the-system.png
 
 internal_note:
 meta_description: GitClear's 623-million-change study finds AI-assisted teams ship faster while refactoring falls 70% and duplicated code climbs 81%. What that costs you.

@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/ai-is-advancing-yet-stil
 email_sent: 2024-05-21
 linkedin_url:
 
-hero_image: 
+hero_image: ai-is-advancing-yet-still-falls-short-of-human-intelligence.png
 
 internal_note:
 meta_description: Stanford's 2024 AI Index shows AI still trails humans on advanced math and visual commonsense reasoning. Why AI augments intelligence rather than replacing it.
