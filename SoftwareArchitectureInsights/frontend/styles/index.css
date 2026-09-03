@@ -476,7 +476,8 @@ body.homepage .article-list,
   margin-bottom: 0.75rem;
 }
 
-.article-list-item a {
+.article-list-title {
+  display: block;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.05rem;
@@ -484,12 +485,55 @@ body.homepage .article-list,
   color: var(--ink);
 }
 
-.article-list-item a:hover { color: var(--brand-blue); }
+.article-list-title:hover { color: var(--brand-blue); }
+
+.article-list-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+}
+
+.article-list-category {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: var(--muted-cyan);
+  text-decoration: none;
+}
+
+a.article-list-category:hover { color: var(--brand-blue); }
+
+.article-list-date {
+  color: var(--stone-600);
+}
+
+.article-list-meta .article-list-date {
+  margin-left: auto;
+}
 
 .article-list-description {
   color: var(--stone-600);
   font-size: 0.92rem;
   margin: 0.4rem 0 0;
+}
+
+.article-list-readmore {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--steel);
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+.article-list-readmore:hover {
+  color: var(--brand-blue);
+  text-decoration: underline;
 }
 
 .article-list-series-position {
@@ -612,17 +656,15 @@ body.homepage .article-list,
   margin: 1.5rem 0;
 }
 
-/* Lives inside main's 42rem reading column -- narrower than the 700px
-   Kit's embed script needs to measure before it enables its
-   side-by-side field+button layout (see .home-subscribe above for the
-   full explanation). Break out to the viewport, centered, capped at
-   the same 50rem, gutters matching main's own padding so it doesn't
-   run edge-to-edge on mobile.
-   .article-subscribe isn't fixed the same way here: its border-top
-   would break out full-bleed along with it, which needs a separate
-   inner wrapper in article.erb rather than applying to the bordered
-   container itself -- it still stacks on article pages for now. */
-.subscribe-form {
+/* Both live inside a reading column narrower than the 700px Kit's
+   embed script needs to measure before it enables its side-by-side
+   field+button layout (see .home-subscribe above for the full
+   explanation) -- main's 42rem for .subscribe-form, the article
+   layout's 38rem for .article-subscribe-inner. Break out to the
+   viewport, centered, capped at 50rem, gutters matching main's own
+   padding so neither runs edge-to-edge on mobile. */
+.subscribe-form,
+.article-subscribe-inner {
   width: 100vw;
   max-width: 50rem;
   margin-left: 50%;
@@ -631,6 +673,10 @@ body.homepage .article-list,
   box-sizing: border-box;
 }
 
+/* .article-subscribe itself stays at the article's own column width --
+   only its child .article-subscribe-inner (the actual Kit embed)
+   breaks out, so this border-top spans the article text measure like
+   every other rule on the page, not the full viewport. */
 .article-subscribe {
   margin-top: 2rem;
   padding-top: 1.5rem;
