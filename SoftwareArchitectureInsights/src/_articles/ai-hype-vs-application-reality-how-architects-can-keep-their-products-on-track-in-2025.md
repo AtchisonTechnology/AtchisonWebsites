@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/ai-hype-vs-application-r
 email_sent: 2025-08-13
 linkedin_url:
 
-hero_image: 
+hero_image: ai-hype-vs-application-reality-how-architects-can-keep-their-products-on-track-in-2025.png
 
 internal_note:
 meta_description: AI is a tool, not a product strategy. A practical checklist for architects translating "We need AI!" into a realistic, sustainable decision.
