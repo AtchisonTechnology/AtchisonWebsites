@@ -102,7 +102,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.25rem; margin: 0 0 0.75rem; }
-h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; }
+/* clear: both so a heading always starts below a floated image (the
+   about page's photo/logo) rather than squeezing in beside it. */
+h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; clear: both; }
 h3 { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
 
 p { margin: 0 0 1.2rem; }
@@ -503,6 +505,36 @@ body.homepage .article-list,
 }
 
 /* ---------------------------------------------------------------- */
+/* About page                                                         */
+/* ---------------------------------------------------------------- */
+
+.about-photo {
+  float: left;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 1.5rem 1rem 0;
+}
+
+.about-academy-logo {
+  float: right;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  margin: 0 0 1rem 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .about-photo,
+  .about-academy-logo {
+    float: none;
+    display: block;
+    margin: 0 auto 1rem;
+  }
+}
+
+/* ---------------------------------------------------------------- */
 /* Forms (Kit embeds render their own markup; these style the wrapper
    and the pending-uid placeholder) */
 /* ---------------------------------------------------------------- */
@@ -554,6 +586,15 @@ body.homepage .article-list,
 /* Links / About list pages                                          */
 /* ---------------------------------------------------------------- */
 
+.links-photo {
+  display: block;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+}
+
 .links-list {
   list-style: none;
   padding: 0;
@@ -567,6 +608,46 @@ body.homepage .article-list,
 
 .links-list a { text-decoration: none; }
 .links-list a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- */
+/* Subscribe page                                                     */
+/* ---------------------------------------------------------------- */
+
+/* The conductor mark as a tall accent alongside the page's content --
+   only where there's genuinely room for it beside the 42rem reading
+   column without crowding it (roughly 1400px+). Positioned against
+   main itself (spans its full height, scrolls with the page) rather
+   than the viewport, so it never overlaps the footer on a short page
+   or floats free on a long one. */
+.subscribe-page main {
+  position: relative;
+}
+
+.subscribe-visual {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .subscribe-visual {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 3rem;
+    width: 14rem;
+    height: 100%;
+    min-height: 24rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .subscribe-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
 
 /* ---------------------------------------------------------------- */
 /* Buttons                                                            */
