@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-single-architect-ava
 email_sent: 2026-07-28
 linkedin_url:
 
-hero_image: 
+hero_image: the-single-architect-availability-problem.png
 
 internal_note:
 meta_description: Apply the single-point-of-failure test to your architecture practice, not just your systems. Concentrated architectural knowledge is a reliability risk.

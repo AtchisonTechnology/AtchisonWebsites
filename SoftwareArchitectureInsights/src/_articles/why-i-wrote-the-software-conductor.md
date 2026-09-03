@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/why-i-wrote-the-software
 email_sent: 2026-06-02
 linkedin_url:
 
-hero_image: 
+hero_image: why-i-wrote-the-software-conductor.png
 
 internal_note:
 meta_description: Why Lee Atchison scrapped two lifeless drafts and wrote The Software Conductor as a story instead of a framework-driven architecture book.

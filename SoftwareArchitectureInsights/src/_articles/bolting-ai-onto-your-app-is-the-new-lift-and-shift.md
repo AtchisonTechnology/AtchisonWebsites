@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/bolting-ai-onto-your-app
 email_sent: 2026-08-11
 linkedin_url:
 
-hero_image: 
+hero_image: bolting-ai-onto-your-app-is-the-new-lift-and-shift.png
 
 internal_note:
 meta_description: Bolting an LLM call onto an existing app is the new lift-and-shift. The four-properties test for what actually makes an architecture AI-native.

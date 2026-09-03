@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/what-the-eu-ai-act-actua
 email_sent: 2026-08-20
 linkedin_url:
 
-hero_image: 
+hero_image: what-the-eu-ai-act-actually-requires-and-what-it-doesn-t.png
 
 internal_note:
 meta_description: The EU AI Act applies based on output use, not company location. A plain-language breakdown of the four risk tiers and what high-risk systems must do.

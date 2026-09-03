@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/we-need-an-ai-strategy-w
 email_sent: 2026-01-06
 linkedin_url:
 
-hero_image: 
+hero_image: we-need-an-ai-strategy-what-your-boss-really-means.png
 
 internal_note:
 meta_description: "\"We need an AI strategy\" usually means \"make sense of this for us.\" How architects turn that directive into real questions about goals, data, and cost."

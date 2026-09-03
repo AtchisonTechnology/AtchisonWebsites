@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-move-from-execution-
 email_sent: 2026-06-23
 linkedin_url:
 
-hero_image: 
+hero_image: the-move-from-execution-to-origination.png
 
 internal_note:
 meta_description: Programmer employment fell 27% in two years while design-oriented roles grow. The real dividing line for your career is execution vs. origination.

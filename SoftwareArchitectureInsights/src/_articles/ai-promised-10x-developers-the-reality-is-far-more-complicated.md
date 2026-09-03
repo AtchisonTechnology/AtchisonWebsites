@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/ai-promised-10x-develope
 email_sent: 2026-02-24
 linkedin_url:
 
-hero_image: 
+hero_image: ai-promised-10x-developers-the-reality-is-far-more-complicated.png
 
 internal_note:
 meta_description: GitClear's 2,000-developer-week study finds AI gives a real but modest ~25% boost, mostly to already-strong engineers — and 10x more code churn.

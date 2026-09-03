@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/when-your-ai-can-t-say-n
 email_sent: 2025-11-25
 linkedin_url:
 
-hero_image: 
+hero_image: when-your-ai-can-t-say-no.png
 
 internal_note:
 meta_description: AI is trained to sound confident, not to be right. Real cases — Air Canada, sanctioned lawyers, Google's AI Overview — where sycophancy caused real damage.

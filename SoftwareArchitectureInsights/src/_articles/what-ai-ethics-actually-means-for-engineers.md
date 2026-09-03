@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/what-ai-ethics-actually-
 email_sent: 2026-07-14
 linkedin_url:
 
-hero_image: 
+hero_image: what-ai-ethics-actually-means-for-engineers.png
 
 internal_note:
 meta_description: AI ethics isn't philosophy or compliance for engineers — it's an engineering discipline with measurable properties. The three zones you operate in.

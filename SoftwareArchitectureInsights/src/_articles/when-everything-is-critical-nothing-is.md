@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/when-everything-is-criti
 email_sent: 2026-08-25
 linkedin_url:
 
-hero_image: 
+hero_image: when-everything-is-critical-nothing-is.png
 
 internal_note:
 meta_description: Most reliability failures are ownership failures. Two decisions sit underneath every reliable system. Which services matter, and who is accountable.

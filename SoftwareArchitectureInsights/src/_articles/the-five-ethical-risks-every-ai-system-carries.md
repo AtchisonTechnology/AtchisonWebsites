@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-five-ethical-risks-e
 email_sent: 2026-07-22
 linkedin_url:
 
-hero_image: 
+hero_image: the-five-ethical-risks-every-ai-system-carries.png
 
 internal_note:
 meta_description: Bias, opacity, accountability gaps, privacy exposure, and harm potential — every AI system carries all five, even a simple product recommendation engine.

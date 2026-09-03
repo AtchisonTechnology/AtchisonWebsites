@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/the-hidden-costs-of-vibe
 email_sent: 2026-02-10
 linkedin_url:
 
-hero_image: 
+hero_image: the-hidden-costs-of-vibe-programming-why-ai-generated-code-isn-t-the-shortcut-you-think-it-is.png
 
 internal_note:
 meta_description: "Vibe programming doesn't reduce your need for developers. It multiplies the burden: security risk, unmaintainable code, and a vicious cycle of dependency."

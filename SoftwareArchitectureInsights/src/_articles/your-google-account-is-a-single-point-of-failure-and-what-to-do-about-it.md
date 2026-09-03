@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/your-google-account-is-a
 email_sent: 2026-01-20
 linkedin_url:
 
-hero_image: 
+hero_image: your-google-account-is-a-single-point-of-failure-and-what-to-do-about-it.png
 
 internal_note:
 meta_description: "\"Sign In with Google\" turns your Google account into a single point of failure for every linked service. Password managers and passkeys avoid that risk."

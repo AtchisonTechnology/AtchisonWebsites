@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/is-ai-code-automation-co
 email_sent: 2024-03-05
 linkedin_url:
 
-hero_image: 
+hero_image: is-ai-code-automation-contributing-to-code-complexity.png
 
 internal_note:
 meta_description: GitClear's 153-million-line study finds AI code assistants write faster, but code churn and copy/pasted (non-DRY) code are both climbing sharply.

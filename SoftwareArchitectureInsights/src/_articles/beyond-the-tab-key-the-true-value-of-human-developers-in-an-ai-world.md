@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/beyond-the-tab-key-the-t
 email_sent: 2025-03-11
 linkedin_url:
 
-hero_image: 
+hero_image: beyond-the-tab-key-the-true-value-of-human-developers-in-an-ai-world.png
 
 internal_note:
 meta_description: "GitClear's 2025 report: copy/pasted code now exceeds refactored (moved) code for the first time ever. Why humans still own refactoring and system thinking."

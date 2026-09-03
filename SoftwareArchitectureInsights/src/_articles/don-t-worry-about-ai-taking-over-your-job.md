@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/don-t-worry-about-ai-tak
 email_sent: 2024-06-11
 linkedin_url:
 
-hero_image: 
+hero_image: don-t-worry-about-ai-taking-over-your-job.png
 
 internal_note:
 meta_description: AI won't replace human-centric jobs like writing, acting, and law. Why creativity, empathy, and judgment keep these roles thriving in the age of AI.

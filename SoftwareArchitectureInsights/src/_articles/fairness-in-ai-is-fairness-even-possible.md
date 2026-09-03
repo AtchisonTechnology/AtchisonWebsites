@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/fairness-in-ai-is-fairne
 email_sent: 2026-08-06
 linkedin_url:
 
-hero_image: 
+hero_image: fairness-in-ai-is-fairness-even-possible.png
 
 internal_note:
 meta_description: Six definitions of AI fairness exist, and several are mathematically proven incompatible. Every system that makes decisions has already chosen one.

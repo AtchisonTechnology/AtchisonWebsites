@@ -11,7 +11,7 @@ sai_url: https://softwarearchitectureinsights.com/posts/prompt-injection-isn-t-a
 email_sent: 2026-04-22
 linkedin_url:
 
-hero_image: 
+hero_image: prompt-injection-isn-t-a-bug-it-s-a-property.png
 
 internal_note:
 meta_description: "Unlike SQL injection, prompt injection has no prepared-statement fix. The architectural answer is blast radius: least privilege for every AI agent."
