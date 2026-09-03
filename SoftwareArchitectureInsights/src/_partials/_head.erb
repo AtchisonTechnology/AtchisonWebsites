@@ -1,0 +1,65 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<% resource_title = strip_html(strip_newlines(title)) %>
+<% page_title = resource_title != "Index" ? "#{resource_title} | #{metadata.title}" : "#{metadata.title}: #{metadata.tagline}" %>
+<title><%= page_title %></title>
+
+<%
+  page_description = strip_newlines(defined?(description) && description ? description : metadata.description)
+
+  page_url = if defined?(resource) && resource && resource.relative_url.to_s.end_with?("/")
+    absolute_url(resource.relative_url)
+  end
+
+  canonical_url = page_url
+
+  is_article = defined?(resource) && resource && resource.respond_to?(:collection) &&
+    resource.collection&.label == "articles"
+  og_type = is_article ? "article" : "website"
+
+  og_image_url = if is_article && resource.data.hero_image
+    absolute_url("/images/posts/#{resource.data.hero_image}")
+  else
+    absolute_url("/images/og-card.png")
+  end
+%>
+
+<meta name="description" content="<%= page_description %>" />
+<% if canonical_url %>
+<link rel="canonical" href="<%= canonical_url %>" />
+<% end %>
+<% if defined?(resource) && resource && resource.data.noindex %>
+<meta name="robots" content="noindex" />
+<% end %>
+
+<meta property="og:title" content="<%= page_title %>" />
+<meta property="og:description" content="<%= page_description %>" />
+<meta property="og:type" content="<%= og_type %>" />
+<% if page_url %>
+<meta property="og:url" content="<%= page_url %>" />
+<% end %>
+<meta property="og:image" content="<%= og_image_url %>" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="<%= page_title %>" />
+<meta name="twitter:description" content="<%= page_description %>" />
+<meta name="twitter:image" content="<%= og_image_url %>" />
+
+<link rel="icon" href="<%= relative_url '/favicon.ico' %>" />
+<link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32x32.png' %>" />
+<link rel="apple-touch-icon" href="<%= relative_url '/apple-touch-icon.png' %>" />
+
+<link rel="alternate" type="application/atom+xml" title="<%= metadata.title %>" href="<%= relative_url '/feed.xml' %>" />
+
+<link rel="preload" href="<%= relative_url '/fonts/lora-latin-700.woff2' %>" as="font" type="font/woff2" crossorigin />
+
+<link rel="stylesheet" href="<%= asset_path :css %>" />
+<script src="<%= asset_path :js %>" defer></script>
+<%= live_reload_dev_js %>
+<% if site.metadata.fathom_site_id.to_s != "" %>
+<!-- Fathom - beautiful, simple website analytics -->
+<script src="https://cdn.usefathom.com/script.js" data-site="<%= site.metadata.fathom_site_id %>" defer></script>
+<!-- / Fathom -->
+<% end %>

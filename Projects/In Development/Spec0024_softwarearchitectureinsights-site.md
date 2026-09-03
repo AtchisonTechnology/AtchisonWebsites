@@ -804,3 +804,49 @@ its decision and the section it changed. Question 17 is new and open.
   site index 7 across `lib/worktree_env.rb`, `test/worktree_env_test.rb`,
   `Procfile`, root `CLAUDE.md`, `Projects/services.md`, `.worktreeinclude`)
   implemented and `make test` passing.
+* **2026-09-03 (night, later)** — Parts 2–4 and 6 implemented and verified
+  with a real local build (`bundle install` + `npm install` succeed;
+  `bin/bridgetown deploy` and `script/check_urls.rb` both pass clean).
+  Scaffolded `SoftwareArchitectureInsights/` from `LeeAtchison`; brought in
+  the real conductor-concept brand assets from the SAI project's Dropbox
+  folder (both SVG marks, the full favicon set rasterized from the square
+  mark via cairosvg since the pre-made favicon PNGs could not be downloaded
+  this session — binary downloads from `dropboxusercontent.com` are blocked
+  by this session's egress policy, text/SVG fetches through the Dropbox MCP
+  tool were not; a generated `og-card.png`; self-hosted Lora 400/700 woff2
+  subsets from Google Fonts) and all 13 palette tokens into
+  `frontend/styles/index.css`. Built the `articles`/`categories`/`series`
+  collections, the `article`/`category`/`series` layouts, and
+  `plugins/builders/sai_content.rb` — slug/date/category/series validation,
+  the title-block and bio strip (verified against a real Kit-published
+  article's actual body shape, fetched from the SAI Dropbox archive), the
+  future-date filter, category/series page generation, and a sitewide
+  output-HTML UTM rewrite pass (verified end to end: an in-body link to
+  another Lee domain correctly becomes `sai-web`/`referral`, and a link to
+  softwarearchitectureinsights.com itself correctly becomes a bare relative
+  path with its whole query string dropped). All four Testing-section build
+  fixtures (bad slug, unknown category, missing date, non-published status)
+  confirmed to fail/warn the build as specified, then removed. Wrote every
+  page in Part 4's table with real Kit-sourced copy where one existed (the
+  webinar, diagnostic, and subscribe pages' copy came from Kit's own landing
+  page API via the Kit MCP connection, not invented); sitemap.xml/robots.txt
+  implement the full six-key set including the sitemap⇄pagination interplay
+  bridgetown-paginate's own resource-replacement behavior created (page 1 of
+  `/posts/` is a `GeneratedPage`, not a `Resource`, after pagination runs —
+  handled explicitly rather than silently dropped from the sitemap). Wrote
+  `netlify.toml`'s Part 6 redirects, `_redirects.erb` for `former_slug`, and
+  `script/check_urls.rb` (sitemap⇄output coverage, tested; Kit-inventory
+  coverage, written but only usable once Part 5 produces an inventory).
+  Wrote `script/export_kit.rb` per Part 5's design (category scraping from
+  live pages, archive-Markdown-over-Kit-HTML preference, pandoc conversion)
+  but did **not** run it against the real 56-article back catalog — this
+  session's sandbox cannot reach `api.kit.com` (egress-blocked) to exercise
+  the standalone script, and populating real front matter for the 24
+  uncategorized/~50-missing-`meta_description` articles is Lee's approval
+  step by the spec's own design, not something to do unattended. Still
+  open before cutover: Fathom site ID, the Kit inline subscribe form uid,
+  and the www→apex decision (all Lee's side of the Netlify/DNS boundary,
+  Part 7); the back-catalog export itself; and the Testing section's
+  remaining checks (metadata-on-populated-articles, redirect-return-codes
+  against a live preview, `/feed.xml` validation) that need real content or
+  a live deploy to check meaningfully.

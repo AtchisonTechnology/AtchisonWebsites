@@ -1,0 +1,32 @@
+# Site settings
+# Accessed via site.metadata.title, site.metadata.email, and so on.
+
+title: Software Architecture Insights
+tagline: Architecture thinking you can actually use. Every Tuesday morning.
+author: Lee Atchison
+email: lee@leeatchison.com
+description: >-
+  Software Architecture Insights is Lee Atchison's weekly newsletter on
+  software architecture, cloud computing, and building systems that scale —
+  practical thinking you can actually use.
+
+# Hand-maintained; Lee bumps it when it moves (Spec0024 Open Question 13).
+subscriber_count: "1,700+"
+
+# Kit account details this site depends on but does not own. Both are
+# Kit-side setup Lee does by hand (Spec0024's Netlify/DNS boundary) — this
+# file just holds the resulting values so nothing is hard-coded in templates.
+#
+# kit_inline_form_uid: the uid of the (new, or un-archived) Kit inline
+# subscribe form (Open Question 14). Blank until Lee creates it.
+kit_inline_form_uid: ""
+# Fathom site ID for this domain (Open Question 14) — the Fathom site
+# already exists; Lee supplies the ID here.
+fathom_site_id: ""
+
+# Kit-hosted landing-page form uids these two pages embed (Spec0024 Part 4 —
+# the pages themselves are real Bridgetown pages now, but the lead-capture
+# form is still Kit's).
+service_ownership_diagnostic_form_uid: "2e2d7fc0c1"
+architecting_with_ai_form_uid: "4cad4660e5"
+subscribe_form_uid: "f0fbebfd67"

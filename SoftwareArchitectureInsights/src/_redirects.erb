@@ -1,0 +1,15 @@
+---
+layout: none
+permalink: /_redirects
+sitemap_exclude: true
+---
+<%
+  # Netlify reads _redirects from the publish directory alongside
+  # netlify.toml. One line per article carrying a former_slug — this is
+  # what makes a retitle "free" (Spec0024 Part 6): the old Kit URL keeps
+  # resolving without a hand-written rule.
+  renamed = site.collections.articles.resources.select { |r| r.data.former_slug }
+%>
+<% renamed.each do |article| %>
+/posts/<%= article.data.former_slug %>/* /posts/<%= article.data.slug %>/ 301!
+<% end %>

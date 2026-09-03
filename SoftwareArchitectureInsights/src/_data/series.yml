@@ -1,0 +1,13 @@
+# SAI multi-part series. An article's `series:` front matter must match a
+# `label` below exactly; the builder fails the build on an unrecognized
+# label, same as categories. `key` drives the /series/<key>/ page, sorted
+# oldest first by `date` within the series (Spec0024 Part 4, Open Question
+# 15). `description` is the one-paragraph blurb at the top of the page.
+
+- key: ai-native-architecture
+  label: "AI-Native Architecture"
+  description: >-
+    A four-part series applying the four-properties test — probabilistic
+    behavior, inference economics, the context supply chain, and model
+    lifecycle — to what makes an architecture AI-native rather than AI
+    bolted onto an old design.

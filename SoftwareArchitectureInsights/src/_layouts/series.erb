@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<% articles = site.collections.articles.resources
+     .select { |r| r.data.series == data.title }
+     .sort_by { |r| r.data.date } %>
+
+<header class="listing-header">
+  <h1><%= data.title %></h1>
+  <p class="listing-description"><%= data.description %></p>
+</header>
+
+<ol class="article-list">
+  <% articles.each do |article| %>
+    <li class="article-list-item">
+      <a href="<%= relative_url article.relative_url %>"><%= article.data.title %></a>
+      <% if article.data.series_position %>
+        <p class="article-list-series-position"><%= article.data.series_position %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ol>

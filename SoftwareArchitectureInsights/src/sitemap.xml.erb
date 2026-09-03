@@ -1,0 +1,77 @@
+---
+layout: none
+permalink: /sitemap.xml
+sitemap_exclude: true
+---
+<%
+  # Per-kind defaults (Spec0024 Part 4, "Sitemap and robots"). A page's own
+  # sitemap_priority/sitemap_changefreq front matter always wins; the
+  # category/series generator in plugins/builders/sai_content.rb sets both
+  # explicitly, so only home, articles, and everything else fall through to
+  # a computed default here.
+  #
+  # Two kinds of page reach this template: ordinary Resource::Base entries
+  # (site.resources) and, for /posts/, a bridgetown-paginate GeneratedPage —
+  # pagination replaces the original resource with one generated page per
+  # page number and removes it from site.resources entirely. Only page 1
+  # (the canonical /posts/ URL) is included here; page/2/, page/3/, etc. are
+  # deliberately left out of the sitemap, the common practice for paginated
+  # archives.
+  page_one = site.generated_pages.find do |p|
+    p.data["pagination_info"] && p.data["pagination_info"]["curr_page"] == 1
+  end
+
+  entries = site.resources
+    .select  { |r| r.relative_url.to_s.end_with?("/") }
+    .reject  { |r| r.data.sitemap_exclude || r.data.noindex || r.data.published == false }
+    .map     { |r| { url: r.relative_url, data: r.data, is_article: r.collection&.label == "articles" } }
+
+  if page_one && !(page_one.data["sitemap_exclude"] || page_one.data["noindex"])
+    entries << { url: page_one.url, data: page_one.data, is_article: false }
+  end
+
+  priority_for = lambda do |e|
+    e[:data]["sitemap_priority"] ||
+      if e[:url] == "/"
+        1.0
+      elsif e[:is_article]
+        0.8
+      else
+        0.5
+      end
+  end
+
+  changefreq_for = lambda do |e|
+    e[:data]["sitemap_changefreq"] ||
+      if ["/", "/posts/"].include?(e[:url])
+        "weekly"
+      elsif e[:is_article]
+        "monthly"
+      else
+        "yearly"
+      end
+  end
+
+  lastmod_for = lambda do |e|
+    value = e[:data]["updated"] || e[:data]["published_on"] || e[:data]["date"]
+    next nil unless value
+
+    value = Date.parse(value) if value.is_a?(String)
+    value.strftime("%Y-%m-%d")
+  end
+
+  entries.sort_by! { |e| e[:url] }
+%>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<% entries.each do |entry| %>
+  <url>
+    <loc><%= site.config.url %><%= entry[:url] %></loc>
+<% if (lastmod = lastmod_for.call(entry)) %>
+    <lastmod><%= lastmod %></lastmod>
+<% end %>
+    <changefreq><%= changefreq_for.call(entry) %></changefreq>
+    <priority><%= format("%.1f", priority_for.call(entry)) %></priority>
+  </url>
+<% end %>
+</urlset>

@@ -1,0 +1,17 @@
+---
+layout: none
+permalink: /robots.txt
+sitemap_exclude: true
+---
+User-agent: *
+Allow: /
+<%
+  disallowed = site.resources
+    .select  { |r| r.data.noindex || r.data.robots_disallow }
+    .sort_by { |r| r.relative_url }
+%>
+<% disallowed.each do |resource| %>
+Disallow: <%= resource.relative_url %>
+<% end %>
+
+Sitemap: <%= site.config.url %>/sitemap.xml

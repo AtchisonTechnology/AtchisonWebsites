@@ -1,0 +1,27 @@
+---
+layout: none
+permalink: /feed.xml
+sitemap_exclude: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= site.metadata.title %></title>
+  <subtitle><%= site.metadata.tagline %></subtitle>
+  <link href="<%= site.config.url %>/feed.xml" rel="self" />
+  <link href="<%= site.config.url %>/" />
+  <id><%= site.config.url %>/</id>
+  <updated><%= site.collections.articles.resources.first&.data&.date&.iso8601 %></updated>
+  <author><name><%= site.metadata.author %></name></author>
+
+  <% site.collections.articles.resources.first(20).each do |article| %>
+  <entry>
+    <title><%= article.data.title %></title>
+    <link href="<%= site.config.url %><%= article.relative_url %>" />
+    <id><%= site.config.url %><%= article.relative_url %></id>
+    <published><%= article.data.date.iso8601 %></published>
+    <updated><%= article.data.date.iso8601 %></updated>
+    <author><name><%= article.data.author || site.metadata.author %></name></author>
+    <summary><%= article.data.description %></summary>
+  </entry>
+  <% end %>
+</feed>
