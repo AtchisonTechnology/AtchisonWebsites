@@ -261,7 +261,7 @@ All of it is already emitted by the SAI template (Bridgetown-aligned
 |---|---|
 | `title`, `subtitle` | Rendered by the layout as `<h1>` and a subtitle line; `title` in `<title>` and `og:title`. |
 | `author` | Byline. |
-| `date` | Sort key and the displayed date. Required; the build fails on an article without it. **An article whose `date` is after the build date is dropped from the build** (not rendered, not in listings, feed, or sitemap) — this is what makes copying at Ready safe (Open Question 3; the Tuesday scheduled build is Open Question 17). The comparison is on the date in the site's timezone (`America/Los_Angeles`), so a 7:05 am Tuesday build sees Tuesday's article as current. |
+| `date` | Sort key and the displayed date. Required; the build fails on an article without it. **An article whose `date` is after the build date is dropped from the build** (not rendered, not in listings, feed, or sitemap) — this is what makes copying at Ready safe (Open Question 3; the Tuesday scheduled build is Open Question 17). The comparison is on the date, not the clock time, in the site's timezone (`America/Los_Angeles`) — any build that runs any time on Tuesday already sees that day's article as current. |
 | `published_on` | Displayed if present (it will differ from `date` only when a send slipped). Never `published:` — Bridgetown treats that key as a visibility switch. |
 | `slug` | Must equal basename (checked). |
 | `hero_image` | Bare filename; the layout prepends `/images/posts/`. Emitted as the article `<img>`, as **absolute** `og:image` and `twitter:image`. |
@@ -593,8 +593,9 @@ Mechanics:
 > `SoftwareArchitectureInsights/src/_articles/`, and `<id>.png` (plus any
 > `<id>-alt.png`) web-sized to 1600px wide (`sips -Z 1600`) into
 > `SoftwareArchitectureInsights/src/images/posts/`; commit on `main`; push.
-> The article stays hidden until its `date`; the Tuesday 7:05 am scheduled
-> build makes it live just after the Kit send.
+> The article stays hidden until its `date`; the Tuesday scheduled build
+> (around 6 am Pacific, an hour or more ahead of the 7 am Kit send — Lee's
+> preference, see Open Question 17) makes it live before the send.
 
 Decided 2026-09-03 (Open Question 3): Lee chose copying **at Ready** with
 automatic Tuesday publication over copying after the send. Three things the
@@ -691,9 +692,10 @@ its decision and the section it changed. Question 17 is new and open.
    Ready, with automatic publication on Tuesday morning** — Lee chose the
    automated option over copy-after-send. Consequences, now in Part 4 and
    Part 7: the builder drops any article whose `date` is after the build
-   date; a scheduled build fires every Tuesday at 7:05 am Pacific so the
-   article appears just after the Kit send; the publish procedure becomes
-   "copy at Ready". The *mechanism* for the scheduled build is Open
+   date; a scheduled build fires every Tuesday morning, ahead of the 7 am
+   Kit send (Lee's preference — see Open Question 17), so the article is
+   already live before the send; the publish procedure becomes "copy at
+   Ready". The *mechanism* for the scheduled build is Open
    Question 17.
 4. **Bio.** **Decided 2026-09-03: layout-rendered** from `_data/bio.yml`;
    the body's pasted copy is stripped when recognised.
@@ -741,26 +743,31 @@ its decision and the section it changed. Question 17 is new and open.
 16. **Sitemap/robots key set.** **Decided 2026-09-03: the six keys and the
     per-kind defaults stand; back-port to the other seven sites in a
     follow-on**, parked in `_Projects.md` at implementation.
-17. **Mechanism for the Tuesday 7:05 am scheduled build** (raised by the
+17. **Mechanism and timing for the Tuesday scheduled build** (raised by the
     answer to Q3). ~~Decided 2026-09-03: Netlify's own scheduled-build
-    feature.~~ **Superseded 2026-09-03 (night): a Netlify build hook plus a
-    Netlify Scheduled Function**, at Lee's direction — Netlify's native
-    scheduled-builds UI feature is the one this spec originally chose, and
-    is no longer how Netlify recommends doing this. The repo now carries
-    `SoftwareArchitectureInsights/netlify/functions/weekly-publish.mts`, a
-    Scheduled Function (cron `5 15 * * 2`, UTC) that `fetch`s a Netlify
+    feature, for Tuesdays at 7:05 am Pacific (just after the 7 am Kit
+    send).~~ **Superseded 2026-09-03 (night), twice the same night:**
+    first the *mechanism* — a Netlify build hook plus a Netlify Scheduled
+    Function, at Lee's direction, since Netlify's native scheduled-builds UI
+    feature (this spec's original choice) is no longer how Netlify
+    recommends doing this — then the *timing*, when Lee said he'd rather the
+    article go live before the Kit send (a few minutes to an hour before)
+    than after it, reversing the original "just after" design.
+    The repo carries `SoftwareArchitectureInsights/netlify/functions/weekly-publish.mts`,
+    a Scheduled Function (cron `0 13 * * 2`, UTC) that `fetch`es a Netlify
     build hook URL read from the `BUILD_HOOK_URL` environment variable.
     Creating the build hook and setting that env var are Lee's side of the
-    Netlify boundary, same as before; nothing else about the mechanism
-    changes — the builder's future-date filter is still what makes an early
-    copy safe, the scheduled trigger is still only what makes the article
-    *appear* on time, and a push on any other day still rebuilds and,
-    correctly, still hides a future-dated article. The cron is UTC and
-    fixed, so it cannot track Pacific's DST switch on its own; `5 15 * * 2`
-    is exact for PST and runs about an hour late (8:05 am) during PDT,
-    deliberately biased toward late rather than early since the future-date
-    filter is what actually prevents an early appearance regardless. See
-    the function file's header comment for the full reasoning and the
+    Netlify boundary, same as before. `13:00 UTC` is 6:00 am PDT (spring
+    through fall — one hour before the 7 am send) and 5:00 am PST (winter —
+    two hours before); the cron is UTC and fixed, so it cannot track
+    Pacific's DST switch on its own, and this is deliberately biased toward
+    *more* lead time in winter rather than any risk of drifting past the
+    send into "after," which is the one outcome ruled out. The future-date
+    filter in `plugins/builders/sai_content.rb` compares dates, not clock
+    times, so this is a pure lead-time tuning question, not a correctness
+    one — any build that runs after midnight Pacific on the article's
+    Tuesday already shows it, however early in the morning. See the
+    function file's header comment for the full reasoning and the
     Netlify-side setup steps. (Alternatives considered at the original
     2026-09-03 decision and not taken then: a GitHub Actions cron hitting a
     build hook, a Netlify Scheduled Function — the option superseding this
@@ -879,3 +886,13 @@ its decision and the section it changed. Question 17 is new and open.
   the function with esbuild and re-verified the Bridgetown build is
   unaffected. Creating the build hook and setting `BUILD_HOOK_URL` in
   Netlify are Lee's side, same boundary as before.
+* **2026-09-03 (night, later still)** — Lee finished the Netlify-side setup
+  from the previous entry (site created, build hook created, `BUILD_HOOK_URL`
+  set), then asked for the opposite of this spec's original timing: the
+  article should go live a few minutes to an hour **before** the 7 am Kit
+  send, not just after it. Changed `weekly-publish.mts`'s cron from
+  `5 15 * * 2` to `0 13 * * 2` (6:00 am PDT / 5:00 am PST — before the send
+  in both DST states, deliberately erring toward more lead time in winter
+  rather than any risk of landing after the send) and rewrote its header
+  comment and Open Question 17 to match. Re-verified the function still
+  bundles cleanly with esbuild.
