@@ -956,3 +956,42 @@ its decision and the section it changed. Question 17 is new and open.
   unset for now (the site's existing fallback), and thumbnail URLs are
   being collected in a manifest for a later download pass outside this
   sandbox.
+* **2026-09-03 (night, later still)** — Part 5 complete: the background
+  agent finished the remaining 52 articles (7 archive-sourced, 45
+  Kit-HTML-sourced), `bin/bridgetown build` passing clean at 56/56. Fixed a
+  latent bug it hit and hand-patched mid-export — `import_post.py`'s
+  `yaml_scalar()` didn't quote a value starting with a literal `"`
+  character, which produced invalid YAML for two articles' front matter.
+  Reviewed the export report with Lee rather than committing it as a repo
+  doc: flagged a third archive/Kit-slug mismatch beyond the two sanctioned
+  cases (`ai-closes-the-ticket-but-who-builds-the-system`, no `former_slug`
+  set since the archive's spelling was never a live Kit URL), five
+  borderline category calls, and three thin articles that are genuinely
+  sparse in Kit, not an artifact of cleaning. Lee confirmed the
+  content-based category approach (all 52, not just the spec's anticipated
+  24) is acceptable in place of the blocked live-page scrape, and approved
+  committing the batch. Pushed. `needs_hero_image.json` (39 entries) is the
+  input for a later hero-image download-and-web-size pass with real network
+  access — not done in this session.
+  Also, in parallel with Part 5: fixed the home page banner/nav (the full
+  1200×400 banner was being squeezed into the 40px nav slot, illegible;
+  swapped the nav for the square mark plus a text title, moved the full
+  banner to the home hero at a legible — then, per Lee, wider still —
+  size), diagnosed and fixed the subscribe form rendering stacked instead
+  of inline (Kit's embed script measures its container once at load and
+  writes a `min-width="..."` HTML attribute the shipped CSS keys off of,
+  not a live media query — below 700px it locks in a stacked layout
+  regardless of anything in our CSS; widened the form's container past
+  that threshold on the home page and, separately, the subscribe page's
+  narrower 42rem reading column via a viewport breakout), dropped a card
+  background that read as a mismatched box once the stacking was fixed,
+  added Lee's photo and the Atchison Academy logo to the About page and
+  Lee's photo to Links, added a tall conductor illustration to the
+  Subscribe page at wide viewports (extracted straight from the square
+  logo SVG's embedded image rather than using that SVG directly, which
+  also bakes in wordmark text a narrow crop would slice illegibly), and
+  gave the home page a large featured-article treatment for the most
+  recent issue above the regular grid. All verified with Playwright
+  screenshots against a local dev server (`bin/bridgetown start`, which
+  needed one more em-dash fixed in `config/initializers.rb` to run at all
+  under this sandbox's bare-ASCII locale) before pushing.
