@@ -111,11 +111,20 @@ def html_to_markdown(html: str) -> str:
     return markdown.strip()
 
 
+YAML_INDICATOR_CHARS = set('"\'-?:,[]{}#&*!|>%@`')
+
+
 def yaml_scalar(value):
     if value is None:
         return ""
     s = str(value)
-    if s == "" or any(c in s for c in [":", "#"]) or s != s.strip():
+    needs_quoting = (
+        s == ""
+        or s != s.strip()
+        or any(c in s for c in [":", "#"])
+        or (s[0] in YAML_INDICATOR_CHARS)
+    )
+    if needs_quoting:
         return json.dumps(s)
     return s
 
