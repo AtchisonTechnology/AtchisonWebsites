@@ -26,17 +26,13 @@ kit_inline_form_uid: "c448363077"
 # sites; confirmed 2026-09-03).
 fathom_site_id: "QZJQFDMY"
 
-# Kit hosted-landing-page uids (Spec0024 Part 4). NOT currently embeddable:
-# confirmed 2026-09-03 via Kit's API that all three are `type: "hosted"`
-# with `embed_js: null` — a hosted page's own form is baked into that
-# page's design, not exposed as a standalone script-tag embed the way
-# kit_inline_form_uid above is. subscribe.erb was fixed to embed
-# kit_inline_form_uid instead. service-ownership-diagnostic.erb and
-# architecting-with-ai.erb still point _kit_form.erb at these two values,
-# which will render a dead/non-functional embed — flagged to Lee, needs a
-# decision (build matching embed-type forms in Kit for these, replacing
-# the custom fields the hosted pages collect, or link out to the hosted
-# page instead of embedding).
-service_ownership_diagnostic_form_uid: "2e2d7fc0c1"
-architecting_with_ai_form_uid: "4cad4660e5"
-subscribe_form_uid: "f0fbebfd67" # unused now; see note above
+# The Kit hosted-landing-page uids that were here (the diagnostic and
+# webinar forms, plus the old subscribe-page uid) are gone: confirmed
+# 2026-09-03 via Kit's API that all three are `type: "hosted"` with
+# `embed_js: null`, not embeddable script-tag forms the way
+# kit_inline_form_uid above is. Rather than ship dead embeds,
+# src/service-ownership-diagnostic.erb and src/architecting-with-ai.erb
+# were removed at Lee's direction; netlify.toml now redirects both paths
+# straight to Kit's still-working hosted pages (temporary, see the
+# redirect rules' own comment). Rebuilding these as real Bridgetown pages
+# later needs matching embed-type Kit forms first.
