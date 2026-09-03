@@ -1,0 +1,72 @@
+# SAI Category Taxonomy (authoritative source: SAI project Dropbox
+# Content/Category Taxonomy.md, established 2026-08-20). Nine reader-facing
+# categories — eight topical, one utility. An article's `categories:` front
+# matter must use the exact `label` values below; the builder
+# (plugins/builders/sai_content.rb) fails the build on any label not listed
+# here and resolves each to its `key` for the /categories/<key>/ page.
+#
+# `description` is the one-paragraph blurb shown at the top of each
+# category's listing page (Spec0024 Part 4).
+
+- key: ai-native
+  label: "AI-Native Architecture"
+  description: >-
+    The four-properties test and everything that applies it: probabilistic
+    behavior, inference economics, the context supply chain, and model
+    lifecycle — architecture you can fail against the frame, not just
+    articles that mention AI.
+
+- key: ai-strategy
+  label: "AI Strategy & Adoption"
+  description: >-
+    The executive-facing AI lane: shadow AI, pilots to production, LLM cost,
+    build-vs-buy, where AI should run, readiness audits, and organizational
+    impact — deciding and buying, not designing.
+
+- key: security-risk
+  label: "Security & Risk"
+  description: >-
+    Least privilege, incident and break-glass access, agent permissions,
+    prompt injection, data leakage, zero trust, governance, and ethics —
+    including AI security, which lives here rather than in a category of
+    its own.
+
+- key: availability
+  label: "Availability & Resilience"
+  description: >-
+    SLAs and the gap between contractual and achievable, failure modes,
+    graceful degradation, blast radius, criticality tiers, service
+    ownership, and dependency mapping.
+
+- key: scalability
+  label: "Scalability & System Design"
+  description: >-
+    Scaling and its limits, data partitioning, distributed systems,
+    microservices, managing complexity, technical debt, and evolvability.
+
+- key: cloud
+  label: "Cloud Strategy & Economics"
+  description: >-
+    FinOps and cost governance, migration, repatriation, cloud maturity,
+    vendor lock-in and portability, and how cloud costs behave differently
+    from other business costs.
+
+- key: architect-role
+  label: "The Architect's Role"
+  description: >-
+    Decision rights, design review, working with multiple architects,
+    organizational design, team dynamics, influence, and career.
+
+- key: books-courses
+  label: "Books & Courses"
+  description: >-
+    Launch and promotional posts for Lee's books and courses — a container,
+    not a topic, so product posts do not dilute the topic shelves.
+
+- key: ai-ethics
+  label: "AI Ethics & Responsibility"
+  description: >-
+    Fairness and bias, AI safety, algorithmic accountability, transparency,
+    data ethics, and AI regulation — the question of whether we should be
+    doing this and to whom it is accountable, as distinct from Security &
+    Risk's question of whether it can be exploited.

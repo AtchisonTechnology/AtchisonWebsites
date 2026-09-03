@@ -1,0 +1,17 @@
+collections:
+  articles:
+    output: true
+    permalink: /posts/:slug/
+    sort_by: date
+    sort_direction: descending
+  categories:
+    output: true
+    permalink: /categories/:slug/
+  series:
+    output: true
+    permalink: /series/:slug/
+defaults:
+  - scope:
+      collection: articles
+    values:
+      layout: article

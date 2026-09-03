@@ -1,0 +1,27 @@
+# The standard SAI author bio (source of truth: SAI project Dropbox
+# Content/Standard Bio.md), rendered by the article layout at the foot of
+# every article (Spec0024 Part 4, body rule 3). `%{campaign}` is replaced
+# with the article's slug at render time.
+#
+# Written here with the canonical sai-email/email tags, exactly as the
+# template reads — the same output-HTML UTM rewrite pass that converts a
+# pasted article body's email tags to sai-web/referral (Part 4, body rule 2)
+# also rewrites this, so the bio only has to be correct once and both the
+# in-body link style and this partial stay driven by one piece of logic.
+# That same pass rewrites the Software Architecture Insights link to a bare
+# relative path, since a link to this site from this site is internal.
+template: >-
+  Lee Atchison is a software architect, author, and technology thought
+  leader. He is the author of [The Software Conductor](https://thesoftwareconductor.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)
+  and the O'Reilly book [Architecting for Scale](https://architectingforscale.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio),
+  and was the founder and CTO of Product Genius, an AI startup. He teaches
+  [software architecture and cloud courses](https://leeatchison.com/courses?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)
+  through Coursera, LinkedIn Learning, and O'Reilly. He writes about software
+  architecture, cloud systems, and AI at [Software Architecture Insights](https://softwarearchitectureinsights.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio),
+  and [works with organizations](https://leeatchison.com/contact?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)
+  on cloud modernization, AI enablement, and architecture strategy.
+
+# The exact trailing paragraph the post_read strip hook looks for in a
+# pasted body (Part 4, body rule 3) — kept here so the hook and the
+# rendered bio can never drift on wording.
+strip_match: "Lee Atchison is a software architect"

@@ -1,0 +1,11 @@
+<%
+  # Renders a Kit-hosted form by uid -- either the account's inline subscribe
+  # form (site.metadata.kit_inline_form_uid) or one of the two Kit-hosted
+  # landing-page forms this site's own pages reproduce (Spec0024 Part 4).
+  # Blank until Lee creates/supplies the uid in src/_data/site_metadata.yml.
+%>
+<% if uid.to_s != "" %>
+  <script async data-uid="<%= uid %>" src="https://softwarearchitectureinsights.kit.com/<%= uid %>/index.js"></script>
+<% else %>
+  <p class="kit-form-pending">(Subscribe form not yet configured -- see site_metadata.yml)</p>
+<% end %>

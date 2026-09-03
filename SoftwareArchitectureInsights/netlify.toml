@@ -1,0 +1,96 @@
+[dev]
+  command = "bin/bridgetown dev"
+  targetPort = 4000
+  port = 8888
+  publish = "output"
+  autoLaunch = true
+  framework = "#custom"
+
+[context.dev.build.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "development"
+
+[build]
+  command = "bin/bridgetown deploy"
+  publish = "output"
+  # Unlike LeeAtchison and AtchisonAcademy, this site does not read shared/ —
+  # it is deliberately standalone (Spec0024 Open Question 12; same reasoning
+  # as AtchisonAcademyCourses/Spec0021). Netlify's default build-skip diff,
+  # scoped to this site's own base directory, is therefore correct as-is and
+  # no `ignore` override is needed. See Bug0001/Bug0002 for why LeeAtchison
+  # and AtchisonAcademy need one and this site does not.
+
+[build.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+# Deploy Previews build exactly like production, so that the preview is
+# representative of what ships. These settings are identical to the [build]
+# ones above, which previews already inherit; they are stated explicitly as
+# the place to look when asking how previews differ here.
+#
+# The site URL itself is made preview aware in config/initializers.rb, not
+# here — Bridgetown does not read the site URL from the environment, so
+# setting URL or DEPLOY_PRIME_URL in this file would be inert. See Spec0004.
+[context.deploy-preview]
+  command = "bin/bridgetown deploy"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+[build.processing.html]
+  pretty_urls = true
+
+[[headers]]
+  for = "*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=15552000; includeSubDomains"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Cache-Control = "public, max-age=604800, s-max-age=604800"
+
+[[headers]]
+  for = "/*.(png|jpg|js|css|svg|woff|woff2|ttf|eot|ico)"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, s-max-age=31536000"
+
+# Every redirect below replaces a Kit-hosted URL on this domain (Spec0024
+# Part 6 inventory, verified live 2026-09-03). 301, permanent, and force so a
+# same-path Bridgetown page can never shadow one by accident during a build
+# that briefly lacks it. `/posts/<slug>` needs no rule here: Kit serves it
+# without a trailing slash, and Netlify's `pretty_urls` above already 301s
+# the slashless form to Bridgetown's `/posts/<slug>/`.
+[[redirects]]
+  from = "/profile"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/profile/posts"
+  to = "/posts/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/profile/about"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/profile/links"
+  to = "/links/"
+  status = 301
+  force = true
+
+# Kit Creator Network recommendations widget — no equivalent on this site.
+# Decided 2026-09-03 (Open Question 11): send to the home page.
+[[redirects]]
+  from = "/profile/recommendations"
+  to = "/"
+  status = 301
+  force = true

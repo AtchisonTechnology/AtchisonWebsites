@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<article class="article">
+  <header class="article-header">
+    <% data.categories.to_a.each do |label| %>
+      <% cat = site.data.categories.find { |c| c["label"] == label } %>
+      <% next unless cat %>
+      <a href="<%= relative_url "/categories/#{cat['key']}/" %>" class="article-category"><%= cat["label"] %></a>
+    <% end %>
+
+    <h1><%= data.title %></h1>
+    <% if data.subtitle %>
+      <p class="article-subtitle"><%= data.subtitle %></p>
+    <% end %>
+
+    <p class="article-byline">
+      By <%= data.author || site.metadata.author %>
+      &nbsp;&bull;&nbsp;
+      <time datetime="<%= data.date&.strftime('%Y-%m-%d') %>">
+        <%= (data.published_on || data.date)&.strftime('%B %-d, %Y') %>
+      </time>
+    </p>
+
+    <% if data.series %>
+      <% series = site.data.series.find { |s| s["label"] == data.series } %>
+      <% if series %>
+        <p class="article-series">
+          Part of the series
+          <a href="<%= relative_url "/series/#{series['key']}/" %>"><%= series["label"] %></a><% if data.series_position %> &mdash; <%= data.series_position %><% end %>
+        </p>
+      <% end %>
+    <% end %>
+
+    <% if data.hero_image %>
+      <img class="article-hero" src="<%= relative_url "/images/posts/#{data.hero_image}" %>" alt="" />
+    <% end %>
+  </header>
+
+  <div class="article-body">
+    <%= yield %>
+  </div>
+
+  <footer class="article-bio">
+    <p><%== data.bio_html %></p>
+  </footer>
+</article>
