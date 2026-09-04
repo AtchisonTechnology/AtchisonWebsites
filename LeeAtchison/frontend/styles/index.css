@@ -2651,3 +2651,127 @@ nav.site-nav a.nav-featured.is-active { color: var(--teal); }
     height: auto;
   }
 }
+
+/* ============================================
+   Ownership Workshop sales page (Spec0025)
+   Scoped under body.ownership-workshop so it never
+   leaks onto other pages. Brand values (primary
+   #0F3D91, CTA fill #F2A93B on #262626 text) come
+   from Marketing/Brand/Web/BRAND-INSTRUCTIONS.md and
+   are used as literals here rather than as new root
+   tokens, since they apply to this one page only.
+   This block is kept byte-identical in LeeAtchison's
+   copy of this file (Spec0025 Q4) even though that
+   site has no page using it.
+   ============================================ */
+body.ownership-workshop main h1 {
+  color: #0F3D91;
+}
+
+body.ownership-workshop .ownership-subhead {
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+body.ownership-workshop .ownership-content {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+body.ownership-workshop .ownership-content p {
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+body.ownership-workshop .ownership-content h2 {
+  color: #0F3D91;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 2.5rem 0 1rem;
+}
+
+body.ownership-workshop .ownership-leave-with {
+  margin-bottom: 1.5rem;
+}
+
+/* Two equal doors (Spec0025) — identical column and badge styling on
+   both sides is what keeps the call and the email option from reading
+   as a primary path and a fallback. Never style one side differently
+   from the other. */
+body.ownership-workshop .ownership-cta {
+  margin: 3rem auto 0;
+  max-width: 48rem;
+}
+
+body.ownership-workshop .ownership-cta-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+body.ownership-workshop .ownership-cta-intro h2 {
+  color: #0F3D91;
+}
+
+body.ownership-workshop .ownership-cta-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+body.ownership-workshop .ownership-cta-column {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+
+body.ownership-workshop .ownership-cta-badge {
+  display: inline-block;
+  background: #F2A93B;
+  color: #262626;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+body.ownership-workshop .ownership-cta-column p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+/* min-height keeps the two columns from reading unequal before the
+   third-party scripts finish loading and mount their own content —
+   #booking-page's own 600px rule (Schedule page, above) wins for the
+   SavvyCal side; this is the fallback for the Kit form side. */
+body.ownership-workshop .ownership-cta-embed {
+  text-align: left;
+  min-height: 480px;
+}
+
+@media (max-width: 720px) {
+  body.ownership-workshop .ownership-cta-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+body.ownership-workshop .ownership-bio {
+  max-width: 42rem;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px dotted var(--border);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
