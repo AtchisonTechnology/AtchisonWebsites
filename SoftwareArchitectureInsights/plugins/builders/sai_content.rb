@@ -6,9 +6,12 @@
 #      and series labels) and warns on a non-published `status`.
 #   2. Strips a pasted body's leading title block and trailing bio when they
 #      match front matter exactly — the file on disk is never touched.
-#   3. Drops any article whose `date` is in the future from this build
-#      entirely (not rendered, not listed, not in the feed or sitemap), so
-#      copying a file at 🚀 Ready is safe ahead of its Tuesday send.
+#   3. Drops any article whose `date` is in the future from a production
+#      build entirely (not rendered, not listed, not in the feed or
+#      sitemap), so copying a file at 🚀 Ready is safe ahead of its Tuesday
+#      send. Dev and Netlify deploy previews show future-dated articles —
+#      that is where they get reviewed before they ship, same reasoning as
+#      `hidden?` in LeeAtchison/AtchisonAcademy's shared_content.rb.
 #   4. Generates one page per category and per series from `_data/categories.yml`
 #      and `_data/series.yml`.
 #   5. Rewrites the sai-email/email UTM tags a pasted body and the rendered
@@ -194,7 +197,9 @@ class Builders::SaiContent < SiteBuilder
   # ---------------------------------------------------------------------
 
   def future_dated?(resource)
-    article_date(resource) > Time.now.to_date
+    return false unless article_date(resource) > Time.now.to_date
+
+    Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
   end
 
   def article_date(resource)

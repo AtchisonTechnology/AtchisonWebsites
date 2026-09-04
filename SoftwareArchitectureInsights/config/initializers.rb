@@ -42,6 +42,18 @@ Bridgetown.configure do |config|
   # current the moment Pacific clocks read Tuesday (Spec0024 Part 4).
   timezone "America/Los_Angeles"
 
+  # Bridgetown has its own built-in future-date gate (Publishable#publishable?,
+  # config key `future`, default false) that independently decides whether a
+  # resource's own page gets written at all — separate from, and in addition
+  # to, the future-date reject in plugins/builders/sai_content.rb that keeps
+  # future articles out of listings, categories, series pages, the feed, and
+  # the sitemap. Both need to agree, or a future article shows in dev/preview
+  # listings but its own /posts/<slug>/ page 404s. Same rule as the builder:
+  # visible in dev and on Netlify deploy previews (that is where a 🚀 Ready
+  # article gets reviewed ahead of its Tuesday send), dropped only from a
+  # true production build.
+  future(!(Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"))
+
   # The /posts/ archive paginates the articles collection (Spec0024 Part 4);
   # bridgetown-paginate is a transitive dependency already in Gemfile.lock.
   pagination do
