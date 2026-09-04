@@ -2,7 +2,7 @@
 title: "Your Function Call Was Free. This One Isn't."
 subtitle: "AI-Native Architecture, part two of four: every inference has a price and a latency."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-08-20
 date: 2026-09-08
 series: "AI-Native Architecture"

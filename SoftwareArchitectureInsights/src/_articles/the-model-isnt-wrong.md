@@ -2,7 +2,7 @@
 title: "The Model Isn't Wrong. Your Context Is."
 subtitle: "AI-Native Architecture, part three of four: your model is only as good as what you feed it."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-08-20
 date: 2026-09-15
 series: "AI-Native Architecture"

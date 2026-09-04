@@ -2,7 +2,7 @@
 title: "AI Didn't Break Your Risk Matrix. It Broke Your Scores."
 subtitle: "The matrix works unchanged. The definitions underneath it don't."
 author: "Lee Atchison"
-status: ready
+status: published
 created: 2026-08-13
 drafted: 2026-09-02
 promoted_to_in_progress: 2026-08-13

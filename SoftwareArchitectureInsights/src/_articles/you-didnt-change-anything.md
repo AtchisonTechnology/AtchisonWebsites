@@ -2,7 +2,7 @@
 title: "You Didn't Change Anything. It Changed Anyway."
 subtitle: "AI-Native Architecture, part four of four: the component that changes on someone else's schedule."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-08-20
 date: 2026-09-22
 series: "AI-Native Architecture"
