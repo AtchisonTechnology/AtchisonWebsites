@@ -2,7 +2,7 @@
 title: "Someone Has to Own Evaluation"
 subtitle: "AI-Native Architecture: what the org chart has to change, and what it should leave alone."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-09-02
 date: 2026-10-27
 series: "AI-Native Architecture"

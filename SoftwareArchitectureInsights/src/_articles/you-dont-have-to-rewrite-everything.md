@@ -2,7 +2,7 @@
 title: "You Don't Have to Rewrite Everything"
 subtitle: "AI-Native Architecture: which systems deserve the work, and which stay bolted on for good."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-09-02
 date: 2026-10-20
 series: "AI-Native Architecture"

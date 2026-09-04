@@ -2,7 +2,7 @@
 title: "You're at Level 2 and You Think You're at Level 4"
 subtitle: "AI-Native Architecture: a maturity model with a test at every level."
 author: "Lee Atchison"
-status: draft
+status: published
 created: 2026-09-02
 date: 2026-10-06
 series: "AI-Native Architecture"
