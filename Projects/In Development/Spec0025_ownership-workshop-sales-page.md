@@ -1,7 +1,7 @@
 # Ownership Workshop sales page on atchisonacademy.com
 
 * **ID:** Spec0025
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-09-04
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademy, LeeAtchison *(stylesheet parity only — see Q4)*
@@ -246,3 +246,23 @@ Coordinate before running it.
   footer. What is excluded is a navbar *entry* for the offer. A "sales page" here does not
   mean a stripped landing page. `LeeAtchison` was added to Systems Impacted as a
   result of Q4 — stylesheet parity only, no page and no content change on that site.
+* **2026-09-04** — Status moved to **Implementing**; implementation begun.
+* **2026-09-04** — First implementation pass complete: `AtchisonAcademy/src/ownership-workshop.erb`
+  created with the approved copy verbatim (headline through bio block), both contact routes
+  embedded in-page (SavvyCal inline widget, Kit form script), and the two CTAs styled
+  identically per the equal-doors rule. Page CSS added to both sites' `frontend/styles/index.css`
+  as one identical block scoped under `body.ownership-workshop` (Q4). Verified locally: builds
+  clean on both sites, page renders at `/ownership-workshop/` with correct title/canonical/OG
+  tags, appears in `sitemap.xml`, keeps the site's normal navbar (no new nav entry) and footer,
+  carries no dates/seat-counts/enrollment language, and reads as equal doors at both desktop and
+  mobile widths (screenshotted). The two stylesheets' *added* block is confirmed byte-identical
+  between sites; **note for Lee:** the two files as a whole were already not byte-identical before
+  this change (pre-existing divergence — LeeAtchison carries "What's New" home-band CSS Academy
+  doesn't have, Academy carries `.platform-card` CSS LeeAtchison doesn't have), so the Q4/Testing-
+  item-7 "confirm they are still identical" check does not hold file-wide; flagging rather than
+  fixing, since reconciling that is its own spec per this site's CLAUDE.md. Both third-party
+  embeds (SavvyCal, Kit) could not be loaded end-to-end in this sandbox (outbound network to
+  savvycal.com/kit.com is blocked here — confirmed the same failure hits the pre-existing Fathom
+  script, so it's an environment limit, not a code issue); that check, and the real submission
+  test, still need a Netlify deploy preview per the spec's own Testing section. Not yet committed
+  or pushed.
