@@ -1,9 +1,9 @@
 # Create the SoftwareArchitectureInsights site — move softwarearchitectureinsights.com from Kit to Bridgetown
 
 * **ID:** Spec0024
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-09-03
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-04
 * **Systems Impacted:** SoftwareArchitectureInsights (new, site index 7), plus
   repo-root shared infrastructure (`lib/worktree_env.rb`,
   `test/worktree_env_test.rb`, `Procfile`, `CLAUDE.md`,
