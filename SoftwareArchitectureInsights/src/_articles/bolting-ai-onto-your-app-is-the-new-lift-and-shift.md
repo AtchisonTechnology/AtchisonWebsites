@@ -20,6 +20,8 @@ description: >
   Every enterprise says it's adopting AI, the same way every enterprise once said it was in the cloud. Bolting AI features onto an existing system is the new lift-and-shift — the four-properties test for what genuinely AI-native architecture requires instead.
 categories:
   - "AI-Native Architecture"
+series: "AI-Native Architecture"
+series_position: "The anchor article — the four-properties test that opens the series"
 
 ---
 
