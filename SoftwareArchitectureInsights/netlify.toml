@@ -139,3 +139,17 @@
   to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
   status = 302
   force = true
+
+# /webinar-architecting-systems-with-ai is another URL in the wild for the
+# same webinar as /architecting-with-ai above — same Kit hosted landing page.
+[[redirects]]
+  from = "/webinar-architecting-systems-with-ai"
+  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/webinar-architecting-systems-with-ai/"
+  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
+  status = 302
+  force = true
