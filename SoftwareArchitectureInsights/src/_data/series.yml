@@ -7,7 +7,7 @@
 - key: ai-native-architecture
   label: "AI-Native Architecture"
   description: >-
-    A four-part series applying the four-properties test — probabilistic
+    A multi-part series applying the four-properties test — probabilistic
     behavior, inference economics, the context supply chain, and model
     lifecycle — to what makes an architecture AI-native rather than AI
     bolted onto an old design.
