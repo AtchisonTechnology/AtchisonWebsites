@@ -1,9 +1,11 @@
 # Ownership Workshop sales page on atchisonacademy.com
 
+**PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/29
+
 * **ID:** Spec0025
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-09-04
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-04
 * **Systems Impacted:** AtchisonAcademy, LeeAtchison *(stylesheet parity only — see Q4)*
 
 ---
@@ -266,3 +268,14 @@ Coordinate before running it.
   script, so it's an environment limit, not a code issue); that check, and the real submission
   test, still need a Netlify deploy preview per the spec's own Testing section. Not yet committed
   or pushed.
+* **2026-09-04** — Committed and pushed to `claude/spec0025-implementation-spsyrf`;
+  [PR #29](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/29) opened from the UI and
+  linked at the top of this file. All eight sites' Netlify deploy-preview checks resolved clean
+  (atchisonacademy and leeatchison built and went ready; the other six canceled — no relevant
+  changes) and no CI check suite failed. **Status moved to Closed** and the spec archived on
+  Lee's go-ahead; PR #29 merged the same day.
+  ⚠️ **Follow-up outside this repo, not done here:** Solution §2/Summary-step-7 call for marking
+  `Atchison Academy/workshop-ownership/Marketing/Sales Page.md` in Dropbox as superseded once the
+  page is live (Q5) — worth doing once the production deploy from this merge is confirmed out.
+  The end-to-end Kit-tag/SavvyCal-booking submission test (Testing section, final note) is also
+  still owed and belongs to the Academy project, coordinated separately before running it.
