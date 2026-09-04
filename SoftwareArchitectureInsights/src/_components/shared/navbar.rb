@@ -1,9 +1,10 @@
 class Shared::Navbar < Bridgetown::Component
   LINKS = [
-    { label: "Home",     path: "/" },
-    { label: "Articles", path: "/posts" },
-    { label: "About",    path: "/about" },
-    { label: "Links",    path: "/links" },
+    { label: "Home",      path: "/" },
+    { label: "Articles",  path: "/posts" },
+    { label: "AI-Native", path: "/series/ai-native-architecture" },
+    { label: "About",     path: "/about" },
+    { label: "Links",     path: "/links" },
   ].freeze
 
   attr_reader :metadata, :resource
