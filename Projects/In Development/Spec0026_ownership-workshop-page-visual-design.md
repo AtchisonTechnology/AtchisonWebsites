@@ -302,3 +302,14 @@ afterward. **Re-run it after this change**, since the form moves into an accordi
   **Still owed, outside this repo:** §4 hiding the "Built with Kit" badge (Kit account
   setting, Lee), and the end-to-end submission test that proves both Kit tags apply.
 * **2026-09-05** — [PR #30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30) opened from the UI and linked at the top of this file; **Status moved to Verifying.** Netlify deploy preview is where the two embeds and the accordion-with-vendor-widgets behaviour get checked.
+* **2026-09-05** — **Deploy-preview finding, fixed:** Lee reported the SavvyCal widget
+  rendering in a narrow box inside its panel, so the calendar had to be scrolled to reach
+  anything. Cause: the widget was mounted at page load, while its panel was `display:none`,
+  so it measured a zero-width container and never re-measured once the panel opened — the
+  exact risk flagged in the previous entry. Fix: `SavvyCal('inline', …)` now runs on the
+  **first open of "Book 20 minutes"** (once, from the accordion script), so it measures the
+  visible, full-width panel; if the accordion markup were ever absent it mounts immediately
+  as before. Kit's form was unaffected (plain HTML, width-responsive). Verified locally that
+  no `inline` call is queued at load or on opening the email door, exactly one on opening
+  the call door with the panel visible, and none on re-open; the accordion checks all still
+  pass. **Re-check on the preview**, since the vendor widget itself still cannot load here.
