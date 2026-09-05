@@ -120,7 +120,10 @@ description: A private half-day working session on service ownership and critica
 <script async src="https://embed.savvycal.com/v1/embed.js"></script>
 <script>
   SavvyCal('init');
-  SavvyCal('inline', { link: 'leeatchison/discuss-the-ownership-workshop-with-lee-atchison', selector: '#booking-page' });
+  // The inline widget is mounted by the accordion script below, on the first
+  // open of "Book 20 minutes" — not here. Mounted at page load it measures a
+  // panel that is display:none, sizes its iframe to zero width, and never
+  // recovers once the panel opens (seen on the Spec0026 deploy preview).
 </script>
 
 <script>
@@ -128,10 +131,16 @@ description: A private half-day working session on service ownership and critica
   // because it is tied to this page's markup, like the SavvyCal init above,
   // and keeping it here leaves LeeAtchison's identical index.js untouched.
   (function () {
+    var bookingMounted = false;
+    var mountBooking = function () {
+      if (bookingMounted) return;
+      bookingMounted = true;
+      SavvyCal('inline', { link: 'leeatchison/discuss-the-ownership-workshop-with-lee-atchison', selector: '#booking-page' });
+    };
+
     var doors = document.querySelector("[data-ownership-doors]");
-    if (!doors) return;
-    var buttons = Array.prototype.slice.call(doors.querySelectorAll(".ownership-door-button"));
-    if (buttons.length < 2) return;
+    var buttons = doors ? Array.prototype.slice.call(doors.querySelectorAll(".ownership-door-button")) : [];
+    if (buttons.length < 2) { mountBooking(); return; } // no accordion: panel is visible, mount now
 
     var panelFor = function (button) {
       return document.getElementById(button.getAttribute("aria-controls"));
@@ -154,6 +163,9 @@ description: A private half-day working session on service ownership and critica
         var opening = button.getAttribute("aria-expanded") !== "true";
         buttons.forEach(function (b) { setOpen(b, b === button && opening); });
         if (!opening) return;
+        // Mount the SavvyCal widget only once its panel is visible, so it
+        // measures the real panel width rather than a display:none box.
+        if (button.getAttribute("aria-controls") === "ownership-door-call") mountBooking();
         // Land the reader at the top of the door block — both buttons and
         // the top of the newly opened panel — rather than mid-calendar. The
         // sticky site header is accounted for by scroll-margin-top in CSS.
