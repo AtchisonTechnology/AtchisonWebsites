@@ -3,9 +3,9 @@
 **PR:** [#30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30)
 
 * **ID:** Spec0026
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-09-05
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-05
 * **Systems Impacted:** AtchisonAcademy, LeeAtchison *(stylesheet parity only — see Spec0025 Q4)*
 
 ---
@@ -314,3 +314,4 @@ afterward. **Re-run it after this change**, since the form moves into an accordi
   the call door with the panel visible, and none on re-open; the accordion checks all still
   pass. **Re-check on the preview**, since the vendor widget itself still cannot load here.
 * **2026-09-05** — Lee confirmed on the Netlify deploy preview (commit `d9bed5b`) that the SavvyCal widget now fills its panel. All eight Netlify statuses green on that head; PR #30 awaiting merge.
+* **2026-09-05** — **Status moved to Closed** and the spec archived on Lee's go-ahead; PR #30 merged the same day. **Still owed outside this repo:** §4 hiding the "Built with Kit" badge (Kit account setting), and the end-to-end submission test that proves both Kit tags apply, re-run now that the form sits inside the accordion.
