@@ -2653,7 +2653,7 @@ nav.site-nav a.nav-featured.is-active { color: var(--teal); }
 }
 
 /* ============================================
-   Ownership Workshop sales page (Spec0025)
+   Ownership Workshop sales page (Spec0025, Spec0026)
    Scoped under body.ownership-workshop so it never
    leaks onto other pages. Brand values (primary
    #0F3D91, CTA fill #F2A93B on #262626 text) come
@@ -2688,21 +2688,69 @@ body.ownership-workshop .ownership-content p {
   margin-bottom: 1.25rem;
 }
 
-body.ownership-workshop .ownership-content h2 {
+body.ownership-workshop .ownership-content h2,
+body.ownership-workshop .ownership-leave h2 {
   color: #0F3D91;
   font-size: 1.5rem;
   font-weight: 800;
   margin: 2.5rem 0 1rem;
 }
 
+/* "What you leave with" + tier map (Spec0026 §3). Wider than the 42rem
+   prose measure so the image has room beside the list; the image column
+   is the larger of the two because the SVG's own text is 16px at 760
+   wide and needs the width to stay readable. Stacks on narrow screens
+   with the image below the text, full width. */
+body.ownership-workshop .ownership-leave {
+  max-width: 60rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  column-gap: 2.5rem;
+  row-gap: 0;
+  align-items: center;
+}
+
+/* Heading spans both columns so it follows the prose directly, rather
+   than floating mid-height beside the tall image with the list. */
+body.ownership-workshop .ownership-leave h2 {
+  grid-column: 1 / -1;
+}
+
 body.ownership-workshop .ownership-leave-with {
   margin-bottom: 1.5rem;
 }
 
-/* Two equal doors (Spec0025) — identical column and badge styling on
-   both sides is what keeps the call and the email option from reading
-   as a primary path and a fallback. Never style one side differently
-   from the other. */
+body.ownership-workshop .ownership-leave-with li {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+body.ownership-workshop .ownership-tier-map {
+  margin: 0;
+}
+
+body.ownership-workshop .ownership-tier-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 720px) {
+  body.ownership-workshop .ownership-leave {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Two equal doors (Spec0025), as an accordion (Spec0026 §1).
+   Equality is structural, not styled: on load the page shows two
+   identical buttons and nothing else, so the vendors' widget sizes
+   cannot make one route look primary. Both buttons sit above both
+   panels, so opening one never pushes the other off a phone screen.
+   Never style one door differently from the other. */
 body.ownership-workshop .ownership-cta {
   margin: 3rem auto 0;
   max-width: 48rem;
@@ -2717,55 +2765,108 @@ body.ownership-workshop .ownership-cta-intro h2 {
   color: #0F3D91;
 }
 
-body.ownership-workshop .ownership-cta-columns {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  align-items: start;
+/* Header is sticky, so a scrollIntoView on expand needs this offset to
+   land the buttons below it rather than under it. */
+body.ownership-workshop .ownership-doors {
+  scroll-margin-top: 5rem;
 }
 
-body.ownership-workshop .ownership-cta-column {
+body.ownership-workshop .ownership-door-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+body.ownership-workshop .ownership-door-button {
+  display: block;
+  width: 100%;
+  background: #F2A93B;
+  color: #262626;
+  border: 2px solid #F2A93B;
+  border-radius: 100px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+body.ownership-workshop .ownership-door-button:hover {
+  background: #F5B85A;
+  border-color: #F5B85A;
+}
+
+body.ownership-workshop .ownership-door-button:focus-visible {
+  outline: 3px solid #0F3D91;
+  outline-offset: 3px;
+}
+
+/* The open door's button carries a chevron so the reader can see which
+   panel below belongs to it, and so it reads as closable. Both buttons
+   get the same treatment when open, so this marks a choice, not a rank.
+   Shown only once the script has collapsed the panels — with JavaScript
+   off both are open and the chevron would just be noise. */
+body.ownership-workshop [data-doors-enhanced] .ownership-door-button::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.6em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.2em) rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+body.ownership-workshop [data-doors-enhanced] .ownership-door-button[aria-expanded="true"] {
+  background: #262626;
+  border-color: #262626;
+  color: #F2A93B;
+}
+
+body.ownership-workshop [data-doors-enhanced] .ownership-door-button[aria-expanded="true"]::after {
+  transform: translateY(0.1em) rotate(225deg);
+}
+
+body.ownership-workshop .ownership-door-panel {
   background: var(--bg-alt);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem 1.5rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
-body.ownership-workshop .ownership-cta-badge {
-  display: inline-block;
-  background: #F2A93B;
-  color: #262626;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.5rem 1.25rem;
-  border-radius: 100px;
-  margin-bottom: 1rem;
+body.ownership-workshop .ownership-door-panel[hidden] {
+  display: none;
 }
 
-body.ownership-workshop .ownership-cta-column p {
+body.ownership-workshop .ownership-door-panel p {
   color: var(--text-muted);
   font-size: 0.95rem;
   margin-bottom: 1.25rem;
 }
 
-/* min-height keeps the two columns from reading unequal before the
-   third-party scripts finish loading and mount their own content —
-   #booking-page's own 600px rule (Schedule page, above) wins for the
-   SavvyCal side; this is the fallback for the Kit form side. */
+/* Reserves room while the third-party script mounts, so the panel does not
+   open short and then jump. #booking-page's own 600px rule (Schedule page,
+   above) wins for the SavvyCal side; this is the Kit form side's floor. */
 body.ownership-workshop .ownership-cta-embed {
   text-align: left;
   min-height: 480px;
 }
 
-@media (max-width: 720px) {
-  body.ownership-workshop .ownership-cta-columns {
+@media (max-width: 560px) {
+  body.ownership-workshop .ownership-door-buttons {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
+/* Bio with photo (Spec0026 §5). Portrait photo beside the text on wide
+   screens; stacked, photo first, on narrow ones. */
 body.ownership-workshop .ownership-bio {
   max-width: 42rem;
   margin: 3rem auto 0;
@@ -2774,4 +2875,25 @@ body.ownership-workshop .ownership-bio {
   color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.7;
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: center;
+}
+
+body.ownership-workshop .ownership-bio-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 560px) {
+  body.ownership-workshop .ownership-bio {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  body.ownership-workshop .ownership-bio-photo {
+    max-width: 12rem;
+  }
 }
