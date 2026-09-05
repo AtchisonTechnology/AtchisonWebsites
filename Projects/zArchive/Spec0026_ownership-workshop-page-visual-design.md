@@ -1,9 +1,11 @@
 # Ownership Workshop page — visual design and equal-weight CTAs
 
+**PR:** [#30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30)
+
 * **ID:** Spec0026
-* **Status:** In Spec Development/Refinement
+* **Status:** Closed
 * **Date Created:** 2026-09-05
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-05
 * **Systems Impacted:** AtchisonAcademy, LeeAtchison *(stylesheet parity only — see Spec0025 Q4)*
 
 ---
@@ -266,3 +268,50 @@ afterward. **Re-run it after this change**, since the form moves into an accordi
   was offered and declined, recorded so nobody adds one for fidelity to the framework.
   Button labels keep their current wording, changing role from section headings to
   actual buttons.
+* **2026-09-05** — Status moved to **Implementing** on Lee's go-ahead; implementation begun on branch `claude/spec0026-implementation-bxpr9n`.
+* **2026-09-05** — **Implementation pass complete on `claude/spec0026-implementation-bxpr9n`.**
+  The CTA block is now a two-button accordion: both buttons sit together *above* both
+  panels, so expanding one never pushes the other below a phone screen; the script
+  collapses both only once it is running (with JavaScript off both stay open, both forms
+  usable); one open at a time; real `<button>`s with `aria-expanded`/`aria-controls`; on
+  expand the door block scrolls to the top of the viewport, offset for the sticky header.
+  The accordion script is inline on the page (like the SavvyCal init) rather than in
+  `index.js`, because the two sites' `index.js` files are byte-identical and this spec's
+  parity obligation to `LeeAtchison` is the stylesheet only. Both embeds moved into their
+  panels unchanged (Kit form uid `6d6d7ce9c0` untouched). "What you leave with" now sits in
+  its own 60rem band with the tier map beside the list, image column the larger of the two,
+  stacking below the text under 720px. Photo downscaled with Pillow (no `sips` in the build
+  sandbox) to **640×962**, scale-only, EXIF stripped, 77KB, beside the bio at 10rem wide and
+  stacked above it under 560px. CSS added to both sites' `index.css` as one block replacing
+  the Spec0025 block; the block is confirmed byte-identical between sites, and the
+  whole-file divergence count is unchanged from before this spec (the pre-existing
+  divergence Spec0025 flagged).
+  ⚠️ **Two edits to the tier map on its way into `src/images/`, source in `assets_inbox/`
+  left untouched:** (1) a fallback font stack (the site's own) was added behind `Aptos` on
+  every text element — as an `<img>` the SVG cannot load web fonts, and Aptos is not on
+  iOS, Android or macOS, so without it the primary mobile case would render in a serif
+  default; (2) the C2PA provenance `<metadata>` blob (10KB of the 11.5KB file) was dropped,
+  since it hashes the original bytes and cannot stay valid once the file is edited.
+  Verified with headless Chromium at 390px and 1280px: both panels hidden on load, buttons
+  identical in size, stacked on phone and side by side on desktop, sibling button inside
+  the viewport after either expand, panel top in view, keyboard operable (Enter/Space/Tab),
+  no-JS shows both panels, every image loads, LeeAtchison still builds. **Not verifiable
+  here:** the SavvyCal and Kit embeds (outbound network is blocked in this sandbox, same as
+  Spec0025) — check on the deploy preview that both mount correctly inside a panel that was
+  `hidden` at page load, since neither vendor script was tested against that.
+  **Still owed, outside this repo:** §4 hiding the "Built with Kit" badge (Kit account
+  setting, Lee), and the end-to-end submission test that proves both Kit tags apply.
+* **2026-09-05** — [PR #30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30) opened from the UI and linked at the top of this file; **Status moved to Verifying.** Netlify deploy preview is where the two embeds and the accordion-with-vendor-widgets behaviour get checked.
+* **2026-09-05** — **Deploy-preview finding, fixed:** Lee reported the SavvyCal widget
+  rendering in a narrow box inside its panel, so the calendar had to be scrolled to reach
+  anything. Cause: the widget was mounted at page load, while its panel was `display:none`,
+  so it measured a zero-width container and never re-measured once the panel opened — the
+  exact risk flagged in the previous entry. Fix: `SavvyCal('inline', …)` now runs on the
+  **first open of "Book 20 minutes"** (once, from the accordion script), so it measures the
+  visible, full-width panel; if the accordion markup were ever absent it mounts immediately
+  as before. Kit's form was unaffected (plain HTML, width-responsive). Verified locally that
+  no `inline` call is queued at load or on opening the email door, exactly one on opening
+  the call door with the panel visible, and none on re-open; the accordion checks all still
+  pass. **Re-check on the preview**, since the vendor widget itself still cannot load here.
+* **2026-09-05** — Lee confirmed on the Netlify deploy preview (commit `d9bed5b`) that the SavvyCal widget now fills its panel. All eight Netlify statuses green on that head; PR #30 awaiting merge.
+* **2026-09-05** — **Status moved to Closed** and the spec archived on Lee's go-ahead; PR #30 merged the same day. **Still owed outside this repo:** §4 hiding the "Built with Kit" badge (Kit account setting), and the end-to-end submission test that proves both Kit tags apply, re-run now that the form sits inside the accordion.

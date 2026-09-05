@@ -36,13 +36,30 @@ description: A private half-day working session on service ownership and critica
 
   <p>The argument is the valuable part. It is usually the first time the organization has priced its own assumptions out loud, with the right people in the room to settle it.</p>
 
+</div>
+
+<%# "What you leave with" sits outside .ownership-content's 42rem measure so the
+    tier map has room beside the text (Spec0026 §3). It stacks below the text on
+    narrow screens. The image is the deliverable, not decoration: a skimmer who
+    reads only the picture still gets the pitch, so the alt text carries it too. %>
+<section class="ownership-leave">
   <h2>What you leave with</h2>
 
-  <ul class="services-list ownership-leave-with">
-    <li>A tier map of your actual services, argued through and written down.</li>
-    <li>A classification method your team can keep running without me.</li>
-    <li>One thing to fix first, with a reason attached.</li>
-  </ul>
+  <div class="ownership-leave-text">
+    <ul class="services-list ownership-leave-with">
+      <li>A tier map of your actual services, argued through and written down.</li>
+      <li>A classification method your team can keep running without me.</li>
+      <li>One thing to fix first, with a reason attached.</li>
+    </ul>
+  </div>
+
+  <figure class="ownership-tier-map">
+    <img src="<%= relative_url '/images/tier-map.svg' %>" width="760" height="751" loading="lazy"
+         alt="A sample tier map: nine services sorted into three tiers. Tier 1, revenue stops without it: checkout API, payments ledger, auth service, and the deploy tool, marked &ldquo;nobody had said so.&rdquo; Tier 2, degrades the product: search index, notification queue, reporting pipeline. Tier 3, absorbable for a day: admin console, batch exports.">
+  </figure>
+</section>
+
+<div class="ownership-content">
 
   <h2>Who it is for</h2>
 
@@ -60,23 +77,35 @@ description: A private half-day working session on service ownership and critica
 
 </div>
 
+<%# Two equal doors (Spec0025), as an accordion (Spec0026 §1).
+    Both buttons sit together ABOVE both panels, so expanding one never pushes
+    the other button off a phone screen — a sibling scrolled out of view is the
+    same as not existing at the moment the reader is choosing.
+    The script at the end of the page collapses both panels once it knows it is
+    running; without JavaScript both panels stay open and both forms usable.
+    Never style, size, or order the two doors differently from each other. %>
 <section class="ownership-cta">
   <div class="ownership-cta-intro">
     <h2>Two ways to start. Pick whichever you would rather do.</h2>
     <p>Both go to me. Neither is the fast lane.</p>
   </div>
 
-  <div class="ownership-cta-columns">
-    <div class="ownership-cta-column">
-      <span class="ownership-cta-badge">Book 20 minutes</span>
+  <div class="ownership-doors" data-ownership-doors>
+    <div class="ownership-door-buttons">
+      <button type="button" class="ownership-door-button" id="ownership-door-call-button"
+              aria-expanded="true" aria-controls="ownership-door-call">Book 20 minutes</button>
+      <button type="button" class="ownership-door-button" id="ownership-door-email-button"
+              aria-expanded="true" aria-controls="ownership-door-email">Ask by email</button>
+    </div>
+
+    <div class="ownership-door-panel" id="ownership-door-call" role="region" aria-labelledby="ownership-door-call-button">
       <p>A short call, and I will tell you whether this is worth your afternoon or whether you already have the parts that matter.</p>
       <div class="ownership-cta-embed">
         <div id="booking-page"></div>
       </div>
     </div>
 
-    <div class="ownership-cta-column">
-      <span class="ownership-cta-badge">Ask by email</span>
+    <div class="ownership-door-panel" id="ownership-door-email" role="region" aria-labelledby="ownership-door-email-button">
       <p>Send your questions and I will answer them properly, in writing.</p>
       <div class="ownership-cta-embed">
         <script async data-uid="6d6d7ce9c0" src="https://softwarearchitectureinsights.kit.com/6d6d7ce9c0/index.js"></script>
@@ -91,9 +120,66 @@ description: A private half-day working session on service ownership and critica
 <script async src="https://embed.savvycal.com/v1/embed.js"></script>
 <script>
   SavvyCal('init');
-  SavvyCal('inline', { link: 'leeatchison/discuss-the-ownership-workshop-with-lee-atchison', selector: '#booking-page' });
+  // The inline widget is mounted by the accordion script below, on the first
+  // open of "Book 20 minutes" — not here. Mounted at page load it measures a
+  // panel that is display:none, sizes its iframe to zero width, and never
+  // recovers once the panel opens (seen on the Spec0026 deploy preview).
 </script>
 
+<script>
+  // Accordion for the two doors. Lives on this page rather than in index.js
+  // because it is tied to this page's markup, like the SavvyCal init above,
+  // and keeping it here leaves LeeAtchison's identical index.js untouched.
+  (function () {
+    var bookingMounted = false;
+    var mountBooking = function () {
+      if (bookingMounted) return;
+      bookingMounted = true;
+      SavvyCal('inline', { link: 'leeatchison/discuss-the-ownership-workshop-with-lee-atchison', selector: '#booking-page' });
+    };
+
+    var doors = document.querySelector("[data-ownership-doors]");
+    var buttons = doors ? Array.prototype.slice.call(doors.querySelectorAll(".ownership-door-button")) : [];
+    if (buttons.length < 2) { mountBooking(); return; } // no accordion: panel is visible, mount now
+
+    var panelFor = function (button) {
+      return document.getElementById(button.getAttribute("aria-controls"));
+    };
+
+    var setOpen = function (button, open) {
+      button.setAttribute("aria-expanded", String(open));
+      var panel = panelFor(button);
+      if (panel) panel.hidden = !open;
+    };
+
+    // Collapse both only once we know the script is running (Spec0026 §1:
+    // both start collapsed — an expanded-by-default panel would be the
+    // primary door). A failed script leaves both open and both usable.
+    doors.setAttribute("data-doors-enhanced", "");
+    buttons.forEach(function (b) { setOpen(b, false); });
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var opening = button.getAttribute("aria-expanded") !== "true";
+        buttons.forEach(function (b) { setOpen(b, b === button && opening); });
+        if (!opening) return;
+        // Mount the SavvyCal widget only once its panel is visible, so it
+        // measures the real panel width rather than a display:none box.
+        if (button.getAttribute("aria-controls") === "ownership-door-call") mountBooking();
+        // Land the reader at the top of the door block — both buttons and
+        // the top of the newly opened panel — rather than mid-calendar. The
+        // sticky site header is accounted for by scroll-margin-top in CSS.
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        doors.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+      });
+    });
+  })();
+</script>
+
+<%# Bio with photo (Spec0026 §5): the tier map makes the offer concrete, the
+    photo makes the person real. Portrait ratio fills the block's height beside
+    the text; it stacks above the text on narrow screens. %>
 <div class="ownership-bio">
+  <img class="ownership-bio-photo" src="<%= relative_url '/images/lee-casual-vertical.jpeg' %>" width="640" height="962" loading="lazy" alt="Lee Atchison">
   <p>Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He wrote Architecting for Scale (O&rsquo;Reilly) on exactly this problem. He works with engineering organizations on risk, availability, and what it costs when nobody owns the thing that broke.</p>
 </div>
