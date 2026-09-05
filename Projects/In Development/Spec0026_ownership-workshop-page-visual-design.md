@@ -1,7 +1,9 @@
 # Ownership Workshop page — visual design and equal-weight CTAs
 
+**PR:** [#30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30)
+
 * **ID:** Spec0026
-* **Status:** Implementing
+* **Status:** Verifying
 * **Date Created:** 2026-09-05
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademy, LeeAtchison *(stylesheet parity only — see Spec0025 Q4)*
@@ -299,3 +301,4 @@ afterward. **Re-run it after this change**, since the form moves into an accordi
   `hidden` at page load, since neither vendor script was tested against that.
   **Still owed, outside this repo:** §4 hiding the "Built with Kit" badge (Kit account
   setting, Lee), and the end-to-end submission test that proves both Kit tags apply.
+* **2026-09-05** — [PR #30](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/30) opened from the UI and linked at the top of this file; **Status moved to Verifying.** Netlify deploy preview is where the two embeds and the accordion-with-vendor-widgets behaviour get checked.
