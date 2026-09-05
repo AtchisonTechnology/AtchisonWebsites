@@ -313,3 +313,4 @@ afterward. **Re-run it after this change**, since the form moves into an accordi
   no `inline` call is queued at load or on opening the email door, exactly one on opening
   the call door with the panel visible, and none on re-open; the accordion checks all still
   pass. **Re-check on the preview**, since the vendor widget itself still cannot load here.
+* **2026-09-05** — Lee confirmed on the Netlify deploy preview (commit `d9bed5b`) that the SavvyCal widget now fills its panel. All eight Netlify statuses green on that head; PR #30 awaiting merge.
