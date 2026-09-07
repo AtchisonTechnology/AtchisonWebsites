@@ -5,9 +5,19 @@ title: The Ownership Gap Workshop
 description: A private half-day working session on service ownership and criticality, run for your team, on your own services.
 ---
 
+<%# The photo sits beside the headline because the top of the page was otherwise
+    unbroken text, and what is being sold is four hours of Lee in the room. It
+    MOVED here from the bio at the bottom, which is now text only — the same
+    portrait twice on one page reads as a mistake. Not lazy-loaded: it is above
+    the fold. It stacks below the text on narrow screens. %>
 <header class="ownership-hero">
-  <h1>Your team leaves with a tier map. In one afternoon.</h1>
-  <p class="ownership-subhead">A private half-day working session on service ownership and criticality, run for your team, on your services.</p>
+  <div class="ownership-hero-text">
+    <h1>Everything is Critical. So nothing is.</h1>
+    <p class="ownership-subhead">Your team leaves with a tier map, and a plan. In one afternoon.</p>
+    <p class="ownership-hero-format">A private half-day working session on service ownership and criticality, run for your team, on your services.</p>
+  </div>
+
+  <img class="ownership-hero-photo" src="<%= relative_url '/images/lee-casual-vertical.jpeg' %>" width="640" height="962" alt="Lee Atchison">
 </header>
 
 <div class="ownership-content">
@@ -20,11 +30,20 @@ description: A private half-day working session on service ownership and critica
 
   <p>Most engineering organizations never made two decisions they <strong><em>think</em></strong> they made. What services matter most, and who is accountable for keeping the services up and operational. A service catalog does not make either one. It records decisions you already made, which is why catalog rollouts stall out with metadata nobody trusts.</p>
 
-  <p>So everything ends up Tier 1. And when everything is Tier 1, your reliability budget gets spread flat across services that do not deserve it equally, while the incident load never moves.</p>
+  <p>So everything ends up critical. And when everything is critical, your reliability budget gets spread flat across services that do not deserve it equally, while the incident load never moves.</p>
 
   <h2>What happens in the room</h2>
 
   <p>This is not a talk. Your team does the work, on your own systems, and I adjudicate.</p>
+
+  <%# The room, not the deliverable: the tier map further down shows what comes out,
+      this shows the work happening. Cropped to the three bands and the hands so it
+      reads at column width. Decorative in the sense that the prose already says
+      everything it says, so the alt text stays short. %>
+  <figure class="ownership-room-photo">
+    <img src="<%= relative_url '/images/tier-sorting.jpeg' %>" width="1024" height="715" loading="lazy"
+         alt="Hands sorting service cards into three tiers, each card tagged with an owner.">
+  </figure>
 
   <p>We start with the premise and a live scoring exercise, so the room sees its own gap before anyone argues about it. Then we install the model. A tier is a commitment, and you derive it from what happens when the thing fails rather than from the org chart.</p>
 
@@ -49,7 +68,7 @@ description: A private half-day working session on service ownership and critica
     <ul class="services-list ownership-leave-with">
       <li>A tier map of your actual services, argued through and written down.</li>
       <li>A classification method your team can keep running without me.</li>
-      <li>One thing to fix first, with a reason attached.</li>
+      <li>One thing to fix first, with a reason attached, and a plan you can follow from there.</li>
     </ul>
   </div>
 
@@ -87,7 +106,7 @@ description: A private half-day working session on service ownership and critica
 <section class="ownership-cta">
   <div class="ownership-cta-intro">
     <h2>Two ways to start. Pick whichever you would rather do.</h2>
-    <p>Both go to me. Neither is the fast lane.</p>
+    <p>Both come straight to me. Same attention either way.</p>
   </div>
 
   <div class="ownership-doors" data-ownership-doors>
@@ -176,10 +195,8 @@ description: A private half-day working session on service ownership and critica
   })();
 </script>
 
-<%# Bio with photo (Spec0026 §5): the tier map makes the offer concrete, the
-    photo makes the person real. Portrait ratio fills the block's height beside
-    the text; it stacks above the text on narrow screens. %>
+<%# Bio, text only. The photo that used to sit here (Spec0026 §5) moved to the
+    hero, where it also breaks up the top of the page. One portrait per page. %>
 <div class="ownership-bio">
-  <img class="ownership-bio-photo" src="<%= relative_url '/images/lee-casual-vertical.jpeg' %>" width="640" height="962" loading="lazy" alt="Lee Atchison">
   <p>Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He wrote Architecting for Scale (O&rsquo;Reilly) on exactly this problem. He works with engineering organizations on risk, availability, and what it costs when nobody owns the thing that broke.</p>
 </div>

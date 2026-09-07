@@ -2779,6 +2779,64 @@ body.ownership-workshop main h1 {
   color: #0F3D91;
 }
 
+/* Hero: headline and subhead on the left, portrait on the right. The photo
+   moved up from the bio (which is now text only) because the top of the page
+   was unbroken text. Selectors carry one extra class so they outrank the
+   site-wide centred `main h1` rule rather than fighting it with !important. */
+body.ownership-workshop .ownership-hero {
+  max-width: 56rem;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 13rem;
+  gap: 2.75rem;
+  align-items: center;
+}
+
+body.ownership-workshop .ownership-hero .ownership-hero-text h1 {
+  text-align: left;
+  margin: 0 0 1rem;
+}
+
+body.ownership-workshop .ownership-hero .ownership-subhead {
+  text-align: left;
+  margin: 0 0 0.75rem;
+  max-width: none;
+  font-size: 1.35rem;
+  color: var(--text);
+}
+
+/* The what-it-is line, under the deck. Smaller and muted so the order of
+   reading is headline, then deliverable, then format. */
+body.ownership-workshop .ownership-hero-format {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+body.ownership-workshop .ownership-hero-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 760px) {
+  body.ownership-workshop .ownership-hero {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    justify-items: center;
+  }
+  body.ownership-workshop .ownership-hero .ownership-hero-text h1,
+  body.ownership-workshop .ownership-hero .ownership-subhead,
+  body.ownership-workshop .ownership-hero-format {
+    text-align: center;
+  }
+  body.ownership-workshop .ownership-hero-photo {
+    max-width: 12rem;
+  }
+}
+
 body.ownership-workshop .ownership-subhead {
   text-align: center;
   font-size: 1.15rem;
@@ -2797,6 +2855,19 @@ body.ownership-workshop .ownership-content p {
   color: var(--text);
   line-height: 1.75;
   margin-bottom: 1.25rem;
+}
+
+/* Photo of the session inside the text column. Full measure, so it breaks the
+   run of paragraphs without pulling the eye out of the column. */
+body.ownership-workshop .ownership-room-photo {
+  margin: 1.75rem 0 2rem;
+}
+
+body.ownership-workshop .ownership-room-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
 }
 
 body.ownership-workshop .ownership-content h2,
@@ -2978,6 +3049,7 @@ body.ownership-workshop .ownership-cta-embed {
 
 /* Bio with photo (Spec0026 §5). Portrait photo beside the text on wide
    screens; stacked, photo first, on narrow ones. */
+/* Bio is text only since the portrait moved to the hero. */
 body.ownership-workshop .ownership-bio {
   max-width: 42rem;
   margin: 3rem auto 0;
@@ -2986,25 +3058,4 @@ body.ownership-workshop .ownership-bio {
   color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.7;
-  display: grid;
-  grid-template-columns: 10rem minmax(0, 1fr);
-  gap: 1.75rem;
-  align-items: center;
-}
-
-body.ownership-workshop .ownership-bio-photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-}
-
-@media (max-width: 560px) {
-  body.ownership-workshop .ownership-bio {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  body.ownership-workshop .ownership-bio-photo {
-    max-width: 12rem;
-  }
 }
