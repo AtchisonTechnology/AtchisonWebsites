@@ -22,11 +22,33 @@ description: A private half-day working session on service ownership and critica
 
 <div class="ownership-content">
 
-  <p>Something broke at 3am. The page went out.</p>
+  <%# The clock hangs in the left margin rather than sitting inside the text as a
+      drop cap: the opening paragraph is a single short line, so a floated cap has
+      nothing to wrap around and would just hang beside it. Hanging it outside the
+      measure keeps that line exactly as written and leaves the left edge of the
+      prose identical to every paragraph below. Decorative — the copy says all of
+      it — so it is aria-hidden. Below 900px it moves above the copy (see CSS). %>
+  <div class="ownership-opener">
+    <span class="ownership-opener-mark" aria-hidden="true">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4.5"
+           stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <circle cx="32" cy="36" r="21"/>
+        <path d="M12 12 A14 14 0 0 0 6.5 24"/>
+        <path d="M52 12 A14 14 0 0 1 57.5 24"/>
+        <path d="M32 25 L32 36 L40 41"/>
+        <path d="M13 55 L18 50"/>
+        <path d="M51 55 L46 50"/>
+      </svg>
+    </span>
 
-  <p>How long between that page firing and it reaching the person who could actually fix the thing? Not the person on call. The person who knew.</p>
+    <div class="ownership-opener-lines">
+      <p>Something broke at 3am. The page went out.</p>
 
-  <p>That gap is what this session closes.</p>
+      <p>How long between that page firing and it reaching the person who could actually fix the thing? Not the person on call. The person who knew.</p>
+
+      <p>That gap is what this session closes.</p>
+    </div>
+  </div>
 
   <p>Most engineering organizations never made two decisions they <strong><em>think</em></strong> they made. What services matter most, and who is accountable for keeping the services up and operational. A service catalog does not make either one. It records decisions you already made, which is why catalog rollouts stall out with metadata nobody trusts.</p>
 

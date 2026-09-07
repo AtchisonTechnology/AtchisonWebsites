@@ -2857,6 +2857,59 @@ body.ownership-workshop .ownership-content p {
   margin-bottom: 1.25rem;
 }
 
+/* Alarm-clock marker beside the opening paragraphs. It hangs in the left margin
+   rather than sitting inside the text as a drop cap, because the first paragraph
+   is one short line and a floated cap has nothing to wrap around. Hanging it
+   outside the 42rem measure means the prose keeps its width and its left edge
+   lines up with every paragraph after it. The -3.25rem pull is the marker plus
+   the gap; it fits inside main's slack down to ~842px, so the stacking
+   breakpoint below is set at 900px with room to spare. */
+body.ownership-workshop .ownership-opener {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.125rem;
+  margin-left: -3.25rem;
+}
+
+body.ownership-workshop .ownership-opener-mark {
+  /* display:block is load-bearing, not tidiness. This is a <span>, so outside a
+     flex parent it falls back to inline, where width and height do not apply --
+     and the SVG's width:100% then resolves against the whole text column and
+     fills it. That is exactly what happens under the 900px rule below, which
+     turns the flex parent into a block. Sizing it here covers both cases. */
+  display: block;
+  flex: 0 0 auto;
+  width: 2.125rem;
+  height: 2.125rem;
+  margin-top: 0.4rem;
+  color: #0F3D91;
+}
+
+body.ownership-workshop .ownership-opener-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+body.ownership-workshop .ownership-opener-lines {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Narrow: no margin left to hang into, so the clock goes above the copy and the
+   text returns to full measure. Same idea as the hero photo stacking above. */
+@media (max-width: 900px) {
+  body.ownership-workshop .ownership-opener {
+    display: block;
+    margin-left: 0;
+  }
+  body.ownership-workshop .ownership-opener-mark {
+    width: 1.875rem;
+    height: 1.875rem;
+    margin: 0 0 0.75rem;
+  }
+}
+
 /* Photo of the session inside the text column. Full measure, so it breaks the
    run of paragraphs without pulling the eye out of the column. */
 body.ownership-workshop .ownership-room-photo {
