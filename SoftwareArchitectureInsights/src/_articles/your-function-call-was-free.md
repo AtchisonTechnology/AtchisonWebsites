@@ -7,10 +7,10 @@ created: 2026-08-20
 date: 2026-09-08
 series: "AI-Native Architecture"
 series_position: "Act I, article 2 of 4 — property 2: inference economics"
-published_on:
+published_on: 2026-09-08
 
-sai_url:
-email_sent:
+sai_url: https://softwarearchitectureinsights.com/posts/your-function-call-was-free
+email_sent: 2026-09-08
 linkedin_url:
 
 hero_image: your-function-call-was-free.png
