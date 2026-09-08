@@ -2439,6 +2439,17 @@ hr {
 
 .ain-band.is-active p { color: var(--text); }
 
+/* Act heading within the series list */
+.ain-act {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--teal);
+  margin: 2rem 0 0.25rem;
+}
+
+.ain-act:first-of-type { margin-top: 1.5rem; }
+
 /* Series list */
 .ain-series {
   list-style: none;
