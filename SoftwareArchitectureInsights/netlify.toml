@@ -59,7 +59,11 @@
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=15552000; includeSubDomains"
     Referrer-Policy = "no-referrer-when-downgrade"
-    Cache-Control = "public, max-age=604800, s-max-age=604800"
+    # Browsers re-check hourly; the CDN can hold a page longer because
+    # Netlify purges its own cache on every deploy, so a new article or an
+    # edit is live at the edge immediately either way. The browser half is
+    # what a returning reader actually sees, and this site publishes weekly.
+    Cache-Control = "public, max-age=3600, s-max-age=604800"
 
 [[headers]]
   for = "/*.(png|jpg|js|css|svg|woff|woff2|ttf|eot|ico)"
