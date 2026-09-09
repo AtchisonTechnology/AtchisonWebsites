@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-04-16
 date: 2025-04-16
+series: "Security Fundamentals"
 published_on: 2025-04-16
 
 sai_url: https://softwarearchitectureinsights.com/posts/fortress-in-the-cloud-how-security-zones-shield-your-data-from-cyber-attacks

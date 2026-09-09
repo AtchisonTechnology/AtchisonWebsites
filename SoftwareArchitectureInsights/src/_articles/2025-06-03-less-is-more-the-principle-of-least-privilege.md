@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-06-03
 date: 2025-06-03
+series: "Security Fundamentals"
 published_on: 2025-06-03
 
 sai_url: https://softwarearchitectureinsights.com/posts/less-is-more-the-principle-of-least-privilege

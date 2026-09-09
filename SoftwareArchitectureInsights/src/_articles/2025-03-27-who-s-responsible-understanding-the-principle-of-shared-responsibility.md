@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-03-27
 date: 2025-03-27
+series: "Security Fundamentals"
 published_on: 2025-03-27
 
 sai_url: https://softwarearchitectureinsights.com/posts/who-s-responsible-understanding-the-principle-of-shared-responsibility

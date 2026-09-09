@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-02-17
 date: 2026-02-24
+series: "AI and the Developer"
 published_on: 2026-02-24
 
 sai_url: https://softwarearchitectureinsights.com/posts/ai-promised-10x-developers-the-reality-is-far-more-complicated

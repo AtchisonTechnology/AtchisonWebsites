@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-09-11
 date: 2025-09-17
+series: "AI and the Developer"
 published_on: 2025-09-17
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-new-reality-of-software-development-ai-s-impact-on-code-quality

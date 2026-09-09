@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2024-04-02
 date: 2024-04-09
+series: "Cloud Migration"
 published_on: 2024-04-09
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-big-cloud-migration-misstep

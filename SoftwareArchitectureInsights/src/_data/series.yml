@@ -3,8 +3,20 @@
 # label, same as categories. `key` drives the /series/<key>/ page, sorted
 # oldest first by `date` within the series (Spec0024 Part 4, Open Question
 # 15). `description` is the one-paragraph blurb at the top of the page.
+#
+# `order` is the hand-curated position on the /series/ index page — 1 is
+# most prominent. It is editorial judgment, not a computed value: reorder it
+# whenever the emphasis changes. Nothing else reads `order`, and the
+# individual /series/<key>/ pages ignore it entirely.
+#
+# Two flavors of series live here. Some were written as a planned run and
+# their articles carry a `series_position` line ("Act II, article 1 of 4").
+# Others were grouped after the fact, and their articles carry no
+# `series_position` — both the article layout and the series page treat that
+# field as optional, so a retrofitted series simply shows dates in order.
 
 - key: ai-native-architecture
+  order: 1
   label: "AI-Native Architecture"
   description: >-
     A multi-part series helping you to understand the AI-Native
@@ -13,10 +25,46 @@
     probabilistic behavior, inference economics, the context supply chain,
     and model lifecycle.
 
+- key: ai-and-the-developer
+  order: 2
+  label: "AI and the Developer"
+  description: >-
+    What AI actually does to the people who write software. Two years of
+    following the same argument: the productivity claims, the code quality
+    behind them, the costs that show up later, and what is left that only a
+    human developer can do.
+
 - key: ai-ethics
+  order: 3
   label: "AI Ethics"
   description: >-
     The AI/ligned run: AI ethics as an engineering discipline, not a
     philosophy seminar. Ethical risk, algorithmic accountability, the
     fairness impossibility results, the safety/ethics/governance
     distinction, and what the EU AI Act actually asks of you.
+
+- key: security-fundamentals
+  order: 4
+  label: "Security Fundamentals"
+  description: >-
+    The security principles that hold up regardless of what you are
+    building. Trust boundaries between your own services, who is actually
+    responsible for what in the cloud, security zones, and least privilege.
+
+- key: availability-blind-spots
+  order: 5
+  label: "Availability Blind Spots"
+  description: >-
+    The availability you think you have, and the availability you actually
+    have. Every article here is a risk that did not look like a risk: an
+    outage you scheduled yourself, a login you do not own, a single
+    architect, and a priority list where everything is critical.
+
+- key: cloud-migration
+  order: 6
+  label: "Cloud Migration"
+  description: >-
+    Moving to the cloud, and the ways it goes wrong in the middle. Why the
+    economics favor the move, the misstep almost everyone makes, how
+    complexity behaves during a migration, and why stopping halfway is the
+    worst place to stand.

@@ -560,6 +560,65 @@ a.article-list-category:hover { color: var(--brand-blue); }
 }
 
 /* ---------------------------------------------------------------- */
+/* Series index (/series/)                                            */
+/* ---------------------------------------------------------------- */
+
+.series-backlink {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--steel);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.series-backlink:hover {
+  color: var(--brand-blue);
+  text-decoration: underline;
+}
+
+.series-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.series-index-item {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--muted-cyan);
+  border-radius: 8px;
+  padding: 1.25rem 1.4rem;
+}
+
+.series-index-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.series-index-title:hover { color: var(--brand-blue); }
+
+.series-index-meta {
+  margin: 0.3rem 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted-cyan);
+}
+
+.series-index-description {
+  color: var(--stone-600);
+  font-size: 0.95rem;
+  margin: 0.6rem 0 0;
+}
+
+/* ---------------------------------------------------------------- */
 /* Article page                                                       */
 /* ---------------------------------------------------------------- */
 

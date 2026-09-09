@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-02-28
 date: 2025-03-03
+series: "Security Fundamentals"
 published_on: 2025-03-03
 
 sai_url: https://softwarearchitectureinsights.com/posts/don-t-let-your-services-become-trojan-horses-1

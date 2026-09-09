@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-12-30
 date: 2026-01-20
+series: "Availability Blind Spots"
 published_on: 2026-01-20
 
 sai_url: https://softwarearchitectureinsights.com/posts/your-google-account-is-a-single-point-of-failure-and-what-to-do-about-it

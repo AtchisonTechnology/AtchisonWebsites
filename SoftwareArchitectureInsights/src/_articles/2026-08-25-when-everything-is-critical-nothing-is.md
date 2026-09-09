@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-08-17
 date: 2026-08-25
+series: "Availability Blind Spots"
 published_on: 2026-08-25
 
 sai_url: https://softwarearchitectureinsights.com/posts/when-everything-is-critical-nothing-is

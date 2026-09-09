@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2024-02-15
 date: 2024-02-20
+series: "Cloud Migration"
 published_on: 2024-02-20
 
 sai_url: https://softwarearchitectureinsights.com/posts/you-can-t-afford-not-to-be-in-the-cloud

@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-03-11
 date: 2026-03-17
+series: "AI and the Developer"
 published_on: 2026-03-17
 
 sai_url: https://softwarearchitectureinsights.com/posts/when-the-bill-comes-due-amazon-s-ai-bet-and-the-engineers-it-let-go

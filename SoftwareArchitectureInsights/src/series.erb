@@ -1,0 +1,56 @@
+---
+layout: default
+title: Series
+permalink: /series/
+sitemap_priority: 0.7
+sitemap_changefreq: weekly
+description: >-
+  Every Software Architecture Insights series in one place — multi-part runs
+  on AI-native architecture, AI and the developer, AI ethics, security,
+  availability, and cloud migration.
+---
+
+<%
+  # Curated order, not computed: `order` in src/_data/series.yml is editorial
+  # judgment about which series matters most. Entries without an `order` sort
+  # last rather than blowing up, so adding a series to the YAML without
+  # deciding its rank still builds.
+  articles_by_series = site.collections.articles.resources
+    .select { |r| r.data.series }
+    .group_by { |r| r.data.series }
+
+  series_list = site.data.series.sort_by { |s| s["order"] || 999 }
+%>
+
+<header class="listing-header">
+  <h1>Series</h1>
+  <p class="listing-description">
+    Some of these were written as a planned run, start to finish. Others are
+    articles that turned out to be one argument spread over a couple of years.
+    Either way, they read best together.
+  </p>
+</header>
+
+<ol class="series-index">
+  <% series_list.each do |series| %>
+    <%
+      articles = (articles_by_series[series["label"]] || []).sort_by { |r| r.data.date }
+      next if articles.empty?
+      first, last = articles.first.data.date, articles.last.data.date
+      span = if first.strftime("%Y") == last.strftime("%Y")
+               first.strftime("%Y")
+             else
+               "#{first.strftime('%Y')}&ndash;#{last.strftime('%Y')}"
+             end
+    %>
+    <li class="series-index-item">
+      <a href="<%= relative_url "/series/#{series['key']}/" %>" class="series-index-title"><%= series["label"] %></a>
+      <p class="series-index-meta">
+        <%= articles.length %> <%= articles.length == 1 ? "article" : "articles" %>
+        &middot; <%= span %>
+      </p>
+      <p class="series-index-description"><%= series["description"] %></p>
+      <a href="<%= relative_url "/series/#{series['key']}/" %>" class="article-list-readmore">Read the series &rarr;</a>
+    </li>
+  <% end %>
+</ol>

@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2023-12-22
 date: 2023-12-26
+series: "Cloud Migration"
 published_on: 2023-12-26
 
 sai_url: https://softwarearchitectureinsights.com/posts/don-t-stop-your-migration

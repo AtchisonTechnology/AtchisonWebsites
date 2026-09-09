@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2023-12-26
 date: 2024-01-09
+series: "Availability Blind Spots"
 published_on: 2024-01-09
 
 sai_url: https://softwarearchitectureinsights.com/posts/planned-outages-are-still-outages

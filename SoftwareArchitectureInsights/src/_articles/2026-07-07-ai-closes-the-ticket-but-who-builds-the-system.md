@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-02
 date: 2026-07-07
+series: "AI and the Developer"
 published_on: 2026-07-07
 
 sai_url: https://softwarearchitectureinsights.com/posts/ai-closes-the-ticket-but-who-builds-the-system

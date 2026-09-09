@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2024-03-01
 date: 2024-03-05
+series: "AI and the Developer"
 published_on: 2024-03-05
 
 sai_url: https://softwarearchitectureinsights.com/posts/is-ai-code-automation-contributing-to-code-complexity

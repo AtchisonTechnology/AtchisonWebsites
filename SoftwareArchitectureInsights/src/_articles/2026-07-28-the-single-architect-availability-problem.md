@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-05-07
 date: 2026-07-28
+series: "Availability Blind Spots"
 published_on: 2026-07-28
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-single-architect-availability-problem

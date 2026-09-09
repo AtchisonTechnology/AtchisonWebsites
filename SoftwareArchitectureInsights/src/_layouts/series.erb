@@ -7,6 +7,7 @@ layout: default
      .sort_by { |r| r.data.date } %>
 
 <header class="listing-header">
+  <a href="<%= relative_url "/series/" %>" class="series-backlink">&larr; All series</a>
   <h1><%= data.title %></h1>
   <p class="listing-description"><%= data.description %></p>
 </header>

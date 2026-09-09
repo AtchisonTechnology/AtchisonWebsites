@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-12-30
 date: 2026-02-10
+series: "AI and the Developer"
 published_on: 2026-02-10
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-hidden-costs-of-vibe-programming-why-ai-generated-code-isn-t-the-shortcut-you-think-it-is

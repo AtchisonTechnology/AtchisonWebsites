@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2024-06-11
 date: 2024-07-16
+series: "Cloud Migration"
 published_on: 2024-07-16
 
 sai_url: https://softwarearchitectureinsights.com/posts/managing-complexity-in-a-cloud-migration

@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2025-03-07
 date: 2025-03-11
+series: "AI and the Developer"
 published_on: 2025-03-11
 
 sai_url: https://softwarearchitectureinsights.com/posts/beyond-the-tab-key-the-true-value-of-human-developers-in-an-ai-world
