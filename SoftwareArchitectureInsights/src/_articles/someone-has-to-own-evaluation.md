@@ -1,6 +1,6 @@
 ---
 title: "Someone Has to Own Evaluation"
-subtitle: "AI-Native Architecture: what the org chart has to change, and what it should leave alone."
+subtitle: "AI-Native Architecture, Act II, part four of four: a new title is usually how the work gets avoided."
 author: "Lee Atchison"
 status: published
 created: 2026-09-02
@@ -33,7 +33,7 @@ categories:
 
 # Someone Has to Own Evaluation
 
-*AI-Native Architecture: what the org chart has to change, and what it should leave alone.*
+*AI-Native Architecture, Act II, part four of four: a new title is usually how the work gets avoided.*
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "You Don't Have to Rewrite Everything"
-subtitle: "AI-Native Architecture: which systems deserve the work, and which stay bolted on for good."
+subtitle: "AI-Native Architecture, Act II, part three of four: most of your systems should stay bolted on."
 author: "Lee Atchison"
 status: published
 created: 2026-09-02
@@ -32,7 +32,7 @@ categories:
 
 # You Don't Have to Rewrite Everything
 
-*AI-Native Architecture: which systems deserve the work, and which stay bolted on for good.*
+*AI-Native Architecture, Act II, part three of four: most of your systems should stay bolted on.*
 
 ---
 

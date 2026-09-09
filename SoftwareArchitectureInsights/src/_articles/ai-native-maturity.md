@@ -1,6 +1,6 @@
 ---
 title: "You're at Level 2 and You Think You're at Level 4"
-subtitle: "AI-Native Architecture: a maturity model with a test at every level."
+subtitle: "AI-Native Architecture, Act II, part one of four: maturity is a test, not an adjective."
 author: "Lee Atchison"
 status: published
 created: 2026-09-02
@@ -31,7 +31,7 @@ categories:
 
 # You're at Level 2 and You Think You're at Level 4
 
-*AI-Native Architecture: a maturity model with a test at every level.*
+*AI-Native Architecture, Act II, part one of four: maturity is a test, not an adjective.*
 
 ---
 

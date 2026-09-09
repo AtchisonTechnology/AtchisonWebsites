@@ -1,6 +1,6 @@
 ---
 title: "Bolted On, Then Bolted Together"
-subtitle: "AI-Native Architecture: the anti-patterns that look like progress."
+subtitle: "AI-Native Architecture, Act II, part two of four: every anti-pattern started as work that looked correct."
 author: "Lee Atchison"
 status: published
 created: 2026-09-02
@@ -32,7 +32,7 @@ categories:
 
 # Bolted On, Then Bolted Together
 
-*AI-Native Architecture: the anti-patterns that look like progress.*
+*AI-Native Architecture, Act II, part two of four: every anti-pattern started as work that looked correct.*
 
 ---
 

@@ -20,7 +20,6 @@ description: >
   AI has been around since the 1950s, but it's no longer optional knowledge for architects. Why data pipelines, AI model lifecycle management, probabilistic system boundaries, and ethics all become first-class architectural concerns once AI enters your stack.
 categories:
   - "AI Strategy & Adoption"
-  - "AI-Native Architecture"
 
 ---
 
