@@ -20,7 +20,6 @@ description: >
   Prompt injection is the SQL injection of the AI era, except there's no equivalent of a prepared statement to fix it. Why the right question isn't "how do I prevent it" but "what can a compromised agent actually do" — and how least privilege and narrow blast radius answer that.
 categories:
   - "Security & Risk"
-  - "AI-Native Architecture"
 
 ---
 
