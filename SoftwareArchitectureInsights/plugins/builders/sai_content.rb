@@ -2,8 +2,9 @@
 # newsletter issue, byte-identical to its old Kit URL (Spec0024).
 #
 # This builder:
-#   1. Validates every article at read time (slug/basename, date, category
-#      and series labels) and warns on a non-published `status`.
+#   1. Validates every article at read time (date-prefixed filename against
+#      slug and date, required date, category and series labels) and warns
+#      on a non-published `status`.
 #   2. Strips a pasted body's leading title block and trailing bio when they
 #      match front matter exactly — the file on disk is never touched.
 #   3. Drops any article whose `date` is in the future from a production
@@ -124,12 +125,36 @@ class Builders::SaiContent < SiteBuilder
   # Validation
   # ---------------------------------------------------------------------
 
-  def validate_slug!(resource)
-    return if resource.data.slug.to_s == resource.basename_without_ext
+  # Filenames are date-prefixed (`YYYY-MM-DD-<slug>.md`) so the folder sorts
+  # by publication date on disk — the date is in front matter too, but a
+  # directory listing is where an already-published article actually gets
+  # found. The prefix is filing only: it does not change `slug:`, and the
+  # permalink is `/posts/:slug/`, so no published URL carries the date.
+  FILENAME_RE = /\A(?<date>\d{4}-\d{2}-\d{2})-(?<slug>.+)\z/.freeze
 
-    raise "#{resource.relative_path}: slug: #{resource.data.slug.inspect} does not match " \
-          "the filename #{resource.basename_without_ext.inspect} — the article ID, the " \
-          "filename, and slug: must always agree"
+  def validate_slug!(resource)
+    basename = resource.basename_without_ext
+    match = FILENAME_RE.match(basename)
+
+    unless match
+      raise "#{resource.relative_path}: filename #{basename.inspect} is not date-prefixed " \
+            "— article files must be named YYYY-MM-DD-<slug>.md, using the " \
+            "article's date:"
+    end
+
+    unless match[:slug] == resource.data.slug.to_s
+      raise "#{resource.relative_path}: slug: #{resource.data.slug.inspect} does not match " \
+            "the filename #{basename.inspect} — the article ID, the part of the " \
+            "filename after the date prefix, and slug: must always agree"
+    end
+
+    file_date = match[:date]
+    front_matter_date = article_date(resource).strftime("%Y-%m-%d")
+    return if file_date == front_matter_date
+
+    raise "#{resource.relative_path}: the filename's date prefix #{file_date.inspect} does " \
+          "not match date: #{front_matter_date.inspect} — rename the file whenever " \
+          "the publication date moves"
   end
 
   def validate_date!(resource)
