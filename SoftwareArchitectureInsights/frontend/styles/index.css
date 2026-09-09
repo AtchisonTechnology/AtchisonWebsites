@@ -229,9 +229,18 @@ body.article main {
   font-size: 0.95rem;
 }
 
-.site-nav a:hover,
+.site-nav a:hover {
+  color: var(--brand-blue);
+}
+
+/* The current page needs a treatment hover does not also use, or "you are
+   here" reads as nothing at all. Weight plus the cyan rule does that; the
+   underline reuses the accent already carrying category eyebrows. */
 .site-nav a.is-active {
   color: var(--brand-blue);
+  font-weight: 700;
+  border-bottom: 2px solid var(--muted-cyan);
+  padding-bottom: 2px;
 }
 
 .nav-subscribe {
