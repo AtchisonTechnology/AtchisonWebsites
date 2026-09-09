@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-08-06
+series: "AI/ligned"
 published_on: 2026-08-06
 
 sai_url: https://softwarearchitectureinsights.com/posts/fairness-in-ai-is-fairness-even-possible

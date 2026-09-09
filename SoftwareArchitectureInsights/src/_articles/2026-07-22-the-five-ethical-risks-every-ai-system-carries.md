@@ -5,6 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-07-22
+series: "AI/ligned"
 published_on: 2026-07-22
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-five-ethical-risks-every-ai-system-carries

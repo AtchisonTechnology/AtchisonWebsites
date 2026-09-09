@@ -12,3 +12,11 @@
     is, rather than bolt AI onto what you already built. Learn about
     probabilistic behavior, inference economics, the context supply chain,
     and model lifecycle.
+
+- key: ai-ligned
+  label: "AI/ligned"
+  description: >-
+    The AI/ligned run: AI ethics as an engineering discipline, not a
+    philosophy seminar. Ethical risk, algorithmic accountability, the
+    fairness impossibility results, the safety/ethics/governance
+    distinction, and what the EU AI Act actually asks of you.
