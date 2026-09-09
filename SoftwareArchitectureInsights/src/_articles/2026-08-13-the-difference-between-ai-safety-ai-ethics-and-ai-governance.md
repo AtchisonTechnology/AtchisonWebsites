@@ -5,7 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-08-13
-series: "AI/ligned"
+series: "AI Ethics"
 published_on: 2026-08-13
 
 sai_url: https://softwarearchitectureinsights.com/posts/the-difference-between-ai-safety-ai-ethics-and-ai-governance

@@ -5,7 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-08-20
-series: "AI/ligned"
+series: "AI Ethics"
 published_on: 2026-08-20
 
 sai_url: https://softwarearchitectureinsights.com/posts/what-the-eu-ai-act-actually-requires-and-what-it-doesn-t

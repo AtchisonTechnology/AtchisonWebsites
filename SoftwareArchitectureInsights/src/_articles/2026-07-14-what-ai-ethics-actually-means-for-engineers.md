@@ -5,7 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-07-14
-series: "AI/ligned"
+series: "AI Ethics"
 published_on: 2026-07-14
 
 sai_url: https://softwarearchitectureinsights.com/posts/what-ai-ethics-actually-means-for-engineers

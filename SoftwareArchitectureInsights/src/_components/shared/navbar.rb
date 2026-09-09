@@ -3,7 +3,7 @@ class Shared::Navbar < Bridgetown::Component
     { label: "Home",      path: "/" },
     { label: "Articles",  path: "/posts" },
     { label: "AI-Native", path: "/series/ai-native-architecture" },
-    { label: "AI Ethics", path: "/series/ai-ligned" },
+    { label: "AI Ethics", path: "/series/ai-ethics" },
     { label: "About",     path: "/about" },
     { label: "Links",     path: "/links" },
   ].freeze

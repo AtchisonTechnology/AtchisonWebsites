@@ -5,7 +5,7 @@ author: Lee Atchison
 status: published
 created: 2026-07-17
 date: 2026-07-30
-series: "AI/ligned"
+series: "AI Ethics"
 published_on: 2026-07-30
 
 sai_url: https://softwarearchitectureinsights.com/posts/why-the-algorithm-decided-is-never-an-acceptable-answer
