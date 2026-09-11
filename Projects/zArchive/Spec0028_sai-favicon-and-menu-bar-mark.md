@@ -1,10 +1,11 @@
 # SAI favicon and menu-bar mark: thicker conductor that reads at small sizes
 
 * **ID:** Spec0028
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-09-11
-* **Date Implemented:**
+* **Date Implemented:** 2026-09-11
 * **Systems Impacted:** SoftwareArchitectureInsights
+* **PR:** [#33](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/33)
 
 ---
 
@@ -104,3 +105,6 @@ navbar. Nothing else in `src/` references it or the 16/48/192/512 icons today
   smoke test (home page, `favicon.ico`, `favicon-32x32.png`,
   `apple-touch-icon.png`, and the nav mark all serve 200; nav mark renders at
   108×108 RGBA transparent, displayed at the existing 36px CSS size).
+* **2026-09-11** — [PR #33](https://github.com/AtchisonTechnology/AtchisonWebsites/pull/33)
+  opened, deploy preview confirmed (all 8 site checks green, no merge
+  conflict), squash-merged to `main`. Status set to Closed and file archived.
