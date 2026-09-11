@@ -38,6 +38,13 @@ layout: default
     <% end %>
   </header>
 
+  <% episode = site.collections.episodes.resources.find { |e| Array(e.data.source_articles).map(&:to_s).include?(data.slug.to_s) } %>
+  <% if episode %>
+    <p class="article-episode-link">
+      <a href="<%= relative_url episode.relative_url %>">&#127908; Listen to the episode: <%= episode.data.title %></a>
+    </p>
+  <% end %>
+
   <div class="article-body">
     <%= yield %>
   </div>

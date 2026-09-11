@@ -1,0 +1,98 @@
+---
+layout: default
+---
+
+<article class="episode">
+  <header class="episode-header">
+    <span class="episode-category"><%= data.category %></span>
+    <% Array(data.tags).each do |tag| %>
+      <span class="episode-tag"><%= tag %></span>
+    <% end %>
+
+    <h1><%= data.title %></h1>
+
+    <p class="episode-meta">
+      <% if data.date %>
+        <time datetime="<%= data.date.strftime('%Y-%m-%d') %>"><%= data.date.strftime('%B %-d, %Y') %></time>
+      <% end %>
+      <% if data.duration %>
+        &nbsp;&bull;&nbsp;<%= data.duration %>
+      <% end %>
+    </p>
+  </header>
+
+  <% if data.captivate_episode_id.to_s != "" %>
+    <div class="episode-player">
+      <iframe
+        style="width:100%;height:200px"
+        frameborder="no"
+        scrolling="no"
+        seamless
+        src="https://player.captivate.fm/episode/<%= data.captivate_episode_id %>/"
+        title="<%= data.title %>"
+      ></iframe>
+    </div>
+  <% end %>
+
+  <div class="episode-body">
+    <%= yield %>
+  </div>
+
+  <% source_articles = Array(data.source_articles).filter_map { |slug| site.collections.articles.resources.find { |a| a.data.slug.to_s == slug.to_s } } %>
+  <% if source_articles.any? %>
+    <section class="episode-source-articles">
+      <h2><%= source_articles.size > 1 ? "From the articles" : "From the article" %></h2>
+      <ul>
+        <% source_articles.each do |article| %>
+          <li><a href="<%= relative_url article.relative_url %>"><%= article.data.title %></a></li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if data.guest %>
+    <section class="episode-guest">
+      <h2>About the guest</h2>
+      <p><strong><%= data.guest["name"] %></strong><% if data.guest["bio"] %> &mdash; <%= data.guest["bio"] %><% end %></p>
+    </section>
+  <% end %>
+
+  <% if data.transcript_source.to_s.strip != "" %>
+    <details class="episode-transcript">
+      <summary>Show transcript</summary>
+      <%= markdownify(data.transcript_source) %>
+    </details>
+  <% end %>
+
+  <% same_category = site.collections.episodes.resources
+       .reject { |e| e.data.slug == data.slug }
+       .select { |e| e.data.category == data.category }
+     other_episodes = site.collections.episodes.resources
+       .reject { |e| e.data.slug == data.slug || e.data.category == data.category }
+     related = (same_category + other_episodes).first(3) %>
+  <% if related.any? %>
+    <section class="episode-related">
+      <h2>Related episodes</h2>
+      <ul class="article-list">
+        <% related.each do |episode| %>
+          <li class="article-list-item">
+            <div class="article-list-meta">
+              <span class="article-list-category"><%= episode.data.category %></span>
+              <% if episode.data.date %>
+                <time class="article-list-date" datetime="<%= episode.data.date.strftime('%Y-%m-%d') %>"><%= episode.data.date.strftime('%B %-d, %Y') %></time>
+              <% end %>
+            </div>
+            <a href="<%= relative_url episode.relative_url %>" class="article-list-title"><%= episode.data.title %></a>
+            <p class="article-list-description"><%= episode.data.description %></p>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <div class="article-subscribe">
+    <div class="article-subscribe-inner">
+      <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
+    </div>
+  </div>
+</article>

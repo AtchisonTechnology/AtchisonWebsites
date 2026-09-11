@@ -36,3 +36,16 @@ fathom_site_id: "QZJQFDMY"
 # straight to Kit's still-working hosted pages (temporary, see the
 # redirect rules' own comment). Rebuilding these as real Bridgetown pages
 # later needs matching embed-type Kit forms first.
+
+# Podcast (Spec0027). Hosting is Captivate, RSS feed https://feeds.captivate.fm/sai/.
+# Listed on Apple Podcasts (id 1630667647) and Spotify.
+podcast_apple_url: "https://podcasts.apple.com/podcast/id1630667647"
+podcast_spotify_url: "https://open.spotify.com/show/0t53gOHkSmnVp4QHiJBIpj"
+# Overcast resolves any show from its Apple Podcasts ID via this URL scheme,
+# so no separate Overcast-side ID is needed.
+podcast_overcast_url: "https://overcast.fm/itunes1630667647"
+podcast_rss_url: "https://feeds.captivate.fm/sai/"
+# Captivate's show ID, for the "Latest Episode Player" embed on /podcast/
+# (Captivate's embed code is `player.captivate.fm/show/<id>`). Supplied by
+# Lee 2026-09-11.
+captivate_show_id: "37ede49a-021a-4f15-b0dd-18b2a2653785"

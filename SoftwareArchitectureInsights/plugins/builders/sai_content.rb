@@ -218,11 +218,13 @@ class Builders::SaiContent < SiteBuilder
   end
 
   # ---------------------------------------------------------------------
-  # Future-date filter (Spec0024 Part 4)
+  # Future-date filter (Spec0024 Part 4). Compares in Pacific time
+  # (PacificDate, plugins/builders/pacific_date.rb) rather than the build
+  # server's UTC date — Spec0027.
   # ---------------------------------------------------------------------
 
   def future_dated?(resource)
-    return false unless article_date(resource) > Time.now.to_date
+    return false unless article_date(resource).strftime("%Y-%m-%d") > Builders::PacificDate.today
 
     Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
   end
