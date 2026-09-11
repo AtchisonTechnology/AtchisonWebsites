@@ -43,6 +43,9 @@ podcast_apple_url: "https://podcasts.apple.com/podcast/id1630667647"
 # Blank until Lee supplies the show's Spotify URL — src/podcast.erb skips a
 # subscribe button whose *_url is blank rather than show a dead link.
 podcast_spotify_url: ""
+# Overcast resolves any show from its Apple Podcasts ID via this URL scheme,
+# so no separate Overcast-side ID is needed.
+podcast_overcast_url: "https://overcast.fm/itunes1630667647"
 podcast_rss_url: "https://feeds.captivate.fm/sai/"
 # Captivate's show ID, for the "Latest Episode Player" embed on /podcast/
 # (Captivate's embed code is `player.captivate.fm/show/<id>`). Supplied by

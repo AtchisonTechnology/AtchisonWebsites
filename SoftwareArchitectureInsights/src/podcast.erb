@@ -22,15 +22,15 @@ description: >-
     enough for a commute, long enough to actually say something.
   </p>
 
+  <% subscribe_links = [
+       ["Apple Podcasts", site.metadata.podcast_apple_url],
+       ["Spotify", site.metadata.podcast_spotify_url],
+       ["Overcast", site.metadata.podcast_overcast_url],
+       ["RSS", site.metadata.podcast_rss_url],
+     ].select { |_label, url| url.to_s != "" } %>
   <ul class="podcast-subscribe-buttons">
-    <% if site.metadata.podcast_apple_url.to_s != "" %>
-      <li><a href="<%= site.metadata.podcast_apple_url %>" class="podcast-subscribe-button">Apple Podcasts</a></li>
-    <% end %>
-    <% if site.metadata.podcast_spotify_url.to_s != "" %>
-      <li><a href="<%= site.metadata.podcast_spotify_url %>" class="podcast-subscribe-button">Spotify</a></li>
-    <% end %>
-    <% if site.metadata.podcast_rss_url.to_s != "" %>
-      <li><a href="<%= site.metadata.podcast_rss_url %>" class="podcast-subscribe-button">RSS</a></li>
+    <% subscribe_links.each do |label, url| %>
+      <li><a href="<%= url %>" class="podcast-subscribe-button" target="_blank" rel="noopener"><%= label %></a></li>
     <% end %>
   </ul>
 </header>
