@@ -874,3 +874,150 @@ a.article-list-category:hover { color: var(--brand-blue); }
   color: var(--stone-600);
   margin-bottom: 2rem;
 }
+
+/* ---------------------------------------------------------------- */
+/* Podcast (Spec0027)                                                 */
+/* ---------------------------------------------------------------- */
+
+body.episode main {
+  max-width: 38rem;
+}
+
+.article-episode-link {
+  background: var(--highlight);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin: 1rem 0 0;
+}
+
+.article-episode-link a {
+  color: var(--brand-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.article-episode-link a:hover {
+  text-decoration: underline;
+}
+
+.podcast-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.podcast-show-art {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  margin: 0 auto 1.5rem;
+}
+
+.podcast-pitch {
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+  color: var(--steel);
+  font-size: 1.05rem;
+}
+
+.podcast-subscribe-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.podcast-subscribe-button {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border-radius: 4px;
+  border: 1px solid var(--brand-blue);
+  color: var(--brand-blue);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.podcast-subscribe-button:hover {
+  background: var(--brand-blue);
+  color: #fff;
+}
+
+.podcast-player {
+  margin-bottom: 2.5rem;
+}
+
+.podcast-player-pending {
+  padding: 1rem;
+  border: 1px dashed var(--rule);
+  border-radius: 4px;
+  color: var(--warning);
+  font-size: 0.85rem;
+}
+
+.podcast-episodes {
+  margin-bottom: 2.5rem;
+}
+
+.episode-header {
+  margin-bottom: 1.5rem;
+}
+
+.episode-category {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-cyan);
+  margin: 0 0.6rem 0.4rem 0;
+}
+
+.episode-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--stone-600);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin: 0 0.4rem 0.4rem 0;
+}
+
+.episode-meta {
+  color: var(--stone-600);
+  font-size: 0.88rem;
+}
+
+.episode-player {
+  margin: 1.5rem 0;
+}
+
+.episode-body {
+  font-size: 1.08rem;
+}
+
+.episode-source-articles,
+.episode-guest,
+.episode-related {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.episode-transcript {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--stone-600);
+  font-size: 0.95rem;
+}
+
+.episode-transcript summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}

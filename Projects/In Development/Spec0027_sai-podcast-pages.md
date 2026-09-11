@@ -1,7 +1,7 @@
 # SAI podcast pages: /podcast landing page, episode pages, article links
 
 * **ID:** Spec0027
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-09-11
 * **Date Implemented:**
 * **Systems Impacted:** SoftwareArchitectureInsights
@@ -218,3 +218,32 @@ All resolved 2026-09-11 (Lee):
   no pages for last season's episodes for now; show art on `/podcast/` and as
   every podcast page's social-share image. Added question 8 (artwork) after the
   show artwork was chosen. Solution and Testing updated to match.
+* **2026-09-11** — Moved to Implementing; implementation started.
+* **2026-09-11** — Implemented and tested locally (see Testing): `episodes`
+  collection and defaults; `plugins/builders/sai_podcast.rb` (validation,
+  transcript split at a `## Transcript` heading, future-date filter);
+  `plugins/builders/pacific_date.rb`, a shared Pacific-time "today" used by
+  both the episode and article future-date filters (fixes the timezone bug
+  from Open Question 6 — `sai_content.rb`'s filter now goes through it too);
+  `src/_layouts/episode.erb` and `src/podcast.erb`; the reverse-lookup
+  "Listen to the episode" block in `article.erb`; the navbar link; og:image
+  for `/podcast/` and episode pages (`_head.erb`); styles. `site_metadata.yml`
+  gained `podcast_apple_url`/`podcast_spotify_url`/`podcast_rss_url` (Apple
+  and RSS filled in from the podcast folder's CLAUDE.md; Spotify blank —
+  its button is skipped rather than shown broken) and `captivate_show_id`
+  (blank, same pending-placeholder pattern as `kit_inline_form_uid`) for the
+  Latest Episode Player. Tested with three temporary sample episodes (past,
+  future, and an interview with a guest) plus 60 generated ones for the
+  50-cap check, all removed before this commit — dev and production builds,
+  every validation rule's failure message, the future-date filter (dev shows
+  all three, production drops the future one from `/podcast/`, its own URL,
+  and the sitemap), the 50-episode cap, `feed.xml` staying episode-free, the
+  navbar active state, and phone-width screenshots of `/podcast/` and an
+  episode page. Not done: the actual show-art image file. The real asset
+  (`SAI Podcast Artwork 600.png`) lives in the podcast Dropbox folder's
+  `_Assets/`, but this sandbox's network policy blocks fetching Dropbox
+  file content, so `src/images/podcast/show-art.png` is referenced by the
+  templates and `og:image` but the file itself still needs to be added —
+  copy it in from Dropbox at that path. No real episode exists yet either
+  (`_Ready to Publish` is empty), so `src/_episodes/` is empty pending the
+  first one.

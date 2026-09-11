@@ -5,6 +5,7 @@ class Shared::Navbar < Bridgetown::Component
     { label: "AI-Native", path: "/series/ai-native-architecture" },
     { label: "AI Ethics", path: "/series/ai-ethics" },
     { label: "Series",    path: "/series" },
+    { label: "Podcast",   path: "/podcast" },
     { label: "About",     path: "/about" },
   ].freeze
 

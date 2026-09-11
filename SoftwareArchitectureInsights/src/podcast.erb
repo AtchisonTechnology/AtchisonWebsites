@@ -1,0 +1,82 @@
+---
+layout: default
+title: Podcast
+description: >-
+  Software Architecture Insights, the podcast: architecture thinking you can
+  actually use, from Lee Atchison. New episodes Tuesday mornings.
+---
+
+<header class="podcast-hero">
+  <img
+    src="<%= relative_url '/images/podcast/show-art.png' %>"
+    width="600"
+    height="600"
+    alt="Software Architecture Insights podcast cover art"
+    class="podcast-show-art"
+  />
+  <h1><%= site.metadata.title %>: The Podcast</h1>
+  <p class="podcast-pitch">
+    The same architecture thinking as the newsletter, in your ears. Lee
+    Atchison talks through the ideas behind the week's article, breaks down a
+    real design decision, or sits down with a guest — every episode short
+    enough for a commute, long enough to actually say something.
+  </p>
+
+  <ul class="podcast-subscribe-buttons">
+    <% if site.metadata.podcast_apple_url.to_s != "" %>
+      <li><a href="<%= site.metadata.podcast_apple_url %>" class="podcast-subscribe-button">Apple Podcasts</a></li>
+    <% end %>
+    <% if site.metadata.podcast_spotify_url.to_s != "" %>
+      <li><a href="<%= site.metadata.podcast_spotify_url %>" class="podcast-subscribe-button">Spotify</a></li>
+    <% end %>
+    <% if site.metadata.podcast_rss_url.to_s != "" %>
+      <li><a href="<%= site.metadata.podcast_rss_url %>" class="podcast-subscribe-button">RSS</a></li>
+    <% end %>
+  </ul>
+</header>
+
+<section class="podcast-player">
+  <% if site.metadata.captivate_show_id.to_s != "" %>
+    <iframe
+      style="width:100%;height:200px"
+      frameborder="no"
+      scrolling="no"
+      seamless
+      src="https://player.captivate.fm/show/<%= site.metadata.captivate_show_id %>/"
+      title="Latest episode"
+    ></iframe>
+  <% else %>
+    <p class="podcast-player-pending">(Latest Episode Player not yet configured — see site_metadata.yml)</p>
+  <% end %>
+</section>
+
+<section class="podcast-episodes">
+  <h2>All episodes</h2>
+
+  <% episodes = site.collections.episodes.resources.first(50) %>
+  <% if episodes.any? %>
+    <ul class="article-list">
+      <% episodes.each do |episode| %>
+        <li class="article-list-item">
+          <div class="article-list-meta">
+            <span class="article-list-category"><%= episode.data.category %></span>
+            <% if episode.data.date %>
+              <time class="article-list-date" datetime="<%= episode.data.date.strftime('%Y-%m-%d') %>"><%= episode.data.date.strftime('%B %-d, %Y') %></time>
+            <% end %>
+          </div>
+          <a href="<%= relative_url episode.relative_url %>" class="article-list-title"><%= episode.data.title %></a>
+          <p class="article-list-description"><%= episode.data.description %></p>
+          <a href="<%= relative_url episode.relative_url %>" class="article-list-readmore">Listen &rarr;</a>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>New episodes are on their way &mdash; check back soon.</p>
+  <% end %>
+</section>
+
+<section class="podcast-subscribe">
+  <div class="podcast-subscribe-inner">
+    <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
+  </div>
+</section>

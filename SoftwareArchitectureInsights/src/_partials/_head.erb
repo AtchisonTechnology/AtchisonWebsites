@@ -17,8 +17,15 @@
     resource.collection&.label == "articles"
   og_type = is_article ? "article" : "website"
 
+  # /podcast/ and every episode page share the show art as their
+  # social-share image (Spec0027) — covers both without needing to special-
+  # case the episodes collection vs. the plain /podcast/ page separately.
+  is_podcast_page = defined?(resource) && resource && resource.relative_url.to_s.start_with?("/podcast/")
+
   og_image_url = if is_article && resource.data.hero_image
     absolute_url("/images/posts/#{resource.data.hero_image}")
+  elsif is_podcast_page
+    absolute_url("/images/podcast/show-art.png")
   else
     absolute_url("/images/og-card.png")
   end

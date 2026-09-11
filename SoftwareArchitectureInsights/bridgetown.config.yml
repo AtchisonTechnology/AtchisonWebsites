@@ -10,8 +10,17 @@ collections:
   series:
     output: true
     permalink: /series/:slug/
+  episodes:
+    output: true
+    permalink: /podcast/:slug/
+    sort_by: date
+    sort_direction: descending
 defaults:
   - scope:
       collection: articles
     values:
       layout: article
+  - scope:
+      collection: episodes
+    values:
+      layout: episode
