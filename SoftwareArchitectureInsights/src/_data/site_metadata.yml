@@ -40,9 +40,7 @@ fathom_site_id: "QZJQFDMY"
 # Podcast (Spec0027). Hosting is Captivate, RSS feed https://feeds.captivate.fm/sai/.
 # Listed on Apple Podcasts (id 1630667647) and Spotify.
 podcast_apple_url: "https://podcasts.apple.com/podcast/id1630667647"
-# Blank until Lee supplies the show's Spotify URL — src/podcast.erb skips a
-# subscribe button whose *_url is blank rather than show a dead link.
-podcast_spotify_url: ""
+podcast_spotify_url: "https://open.spotify.com/show/0t53gOHkSmnVp4QHiJBIpj"
 # Overcast resolves any show from its Apple Podcasts ID via this URL scheme,
 # so no separate Overcast-side ID is needed.
 podcast_overcast_url: "https://overcast.fm/itunes1630667647"
