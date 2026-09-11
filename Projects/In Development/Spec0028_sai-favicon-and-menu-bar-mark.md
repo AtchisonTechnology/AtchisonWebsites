@@ -1,7 +1,7 @@
 # SAI favicon and menu-bar mark: thicker conductor that reads at small sizes
 
 * **ID:** Spec0028
-* **Status:** In Spec Development/Refinement
+* **Status:** Implementing
 * **Date Created:** 2026-09-11
 * **Date Implemented:**
 * **Systems Impacted:** SoftwareArchitectureInsights
@@ -97,3 +97,10 @@ navbar. Nothing else in `src/` references it or the 16/48/192/512 icons today
   header alone.
 * **2026-09-11** — Lee resolved Open Question 1: no web app manifest. All Open
   Questions resolved.
+* **2026-09-11** — Implemented: copied the seven favicon files and
+  `sai-nav-mark.png` from `assets_inbox/brand-mark/` into `src/`, and updated
+  `navbar.erb` to reference `sai-nav-mark.png` instead of
+  `sai-square-conductor.svg`. Verified with a full site build and a dev-server
+  smoke test (home page, `favicon.ico`, `favicon-32x32.png`,
+  `apple-touch-icon.png`, and the nav mark all serve 200; nav mark renders at
+  108×108 RGBA transparent, displayed at the existing 36px CSS size).
