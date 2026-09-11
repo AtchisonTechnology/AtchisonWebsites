@@ -20,17 +20,17 @@ import type { Config } from "@netlify/functions"
 //   3. Confirm the Netlify plan on this team supports Scheduled Functions.
 //
 // Cron is UTC and fixed, so it cannot itself track Pacific's DST switch.
-// 13:00 UTC is exactly 6:00 am PDT (spring through fall, the more common
-// state) -- one hour before the 7:00 am send, at the top of Lee's stated
-// "a few minutes to an hour before" window. During PST (winter) the same
-// 13:00 UTC lands at 5:00 am PST, two hours before the send: more lead time
-// than requested, but deliberately kept on the early side of the window
-// rather than drifting past it into "after," which is the one outcome Lee
-// ruled out. The future-date filter in plugins/builders/sai_content.rb
-// compares dates, not clock times, so any build that runs after midnight
-// Pacific on the article's Tuesday already shows it — there's no risk of
-// "too early" from the filter's side, only from how far ahead of the send
-// this fires.
+// 10:00 UTC is 3:00 am PDT (spring through fall) and 2:00 am PST (winter).
+// Moved from 13:00 UTC on 2026-09-11 (Lee) so the rebuild lands before the
+// SAI podcast release at 3:30 am Pacific on Tuesdays: each episode's page on
+// this site must exist before podcast apps link to it, and the release is
+// early so it reaches East Coast listeners (6:30 am Eastern). Articles now go
+// live about four to five hours before the 7:00 am Kit send, rather than the
+// earlier "a few minutes to an hour before" window (2026-09-03) — Lee
+// accepted that trade-off. Still before the send in both DST states, which
+// remains the hard requirement. The future-date filter in
+// plugins/builders/sai_content.rb compares dates, not clock times, so any
+// build after midnight Pacific on the article's Tuesday already shows it.
 export default async (req: Request) => {
   const { next_run } = await req.json()
 
@@ -46,5 +46,5 @@ export default async (req: Request) => {
 }
 
 export const config: Config = {
-  schedule: "0 13 * * 2",
+  schedule: "0 10 * * 2",
 }
