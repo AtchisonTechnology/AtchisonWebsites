@@ -1,9 +1,11 @@
 # SAI podcast pages: /podcast landing page, episode pages, article links
 
+**PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/32
+
 * **ID:** Spec0027
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-09-11
-* **Date Implemented:**
+* **Date Implemented:** 2026-09-11
 * **Systems Impacted:** SoftwareArchitectureInsights
 
 ---
@@ -247,3 +249,14 @@ All resolved 2026-09-11 (Lee):
   copy it in from Dropbox at that path. No real episode exists yet either
   (`_Ready to Publish` is empty), so `src/_episodes/` is empty pending the
   first one.
+* **2026-09-11** — Follow-up fixes on PR review from Lee: copied the real
+  show art from `assets_inbox/SAI Podcast Artwork 600.png` (Lee checked it
+  in there) to `src/images/podcast/show-art.png`; set `captivate_show_id`
+  from the ID Lee supplied; subscribe buttons (`podcast.erb`) now open in a
+  new tab (`target="_blank" rel="noopener"`); added an Overcast button,
+  built from the Apple Podcasts ID via `overcast.fm/itunes<id>` (no separate
+  Overcast ID needed); filled in `podcast_spotify_url` from the show's
+  Spotify link. All four subscribe buttons (Apple, Spotify, Overcast, RSS)
+  are now live. Confirmed working on the PR's Netlify deploy preview.
+* **2026-09-11** — Closed at Lee's direction; PR
+  https://github.com/AtchisonTechnology/AtchisonWebsites/pull/32 merged.
