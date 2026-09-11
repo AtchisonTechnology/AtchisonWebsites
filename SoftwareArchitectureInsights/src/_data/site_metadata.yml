@@ -44,8 +44,7 @@ podcast_apple_url: "https://podcasts.apple.com/podcast/id1630667647"
 # subscribe button whose *_url is blank rather than show a dead link.
 podcast_spotify_url: ""
 podcast_rss_url: "https://feeds.captivate.fm/sai/"
-# Captivate's numeric/slug show ID, for the "Latest Episode Player" embed on
-# /podcast/ (Captivate's embed code is `player.captivate.fm/show/<id>`).
-# Blank until Lee supplies it — src/podcast.erb shows a pending note instead
-# of a broken embed, same pattern as kit_inline_form_uid above.
-captivate_show_id: ""
+# Captivate's show ID, for the "Latest Episode Player" embed on /podcast/
+# (Captivate's embed code is `player.captivate.fm/show/<id>`). Supplied by
+# Lee 2026-09-11.
+captivate_show_id: "37ede49a-021a-4f15-b0dd-18b2a2653785"
