@@ -70,7 +70,6 @@ navbar. Nothing else in `src/` references it or the 16/48/192/512 icons today
 
 ## Summary of Steps Needed
 
-1. Resolve Open Questions.
 2. Copy the seven favicon files from `assets_inbox/brand-mark/` over the ones in `src/`.
 3. Copy `sai-nav-mark.png` to `src/images/brand/`; update `navbar.erb`.
 4. Test as above.
@@ -79,12 +78,12 @@ navbar. Nothing else in `src/` references it or the 16/48/192/512 icons today
 
 ## Open Questions
 
-1. **Web app manifest.** The 192 and 512 icons exist but no `site.webmanifest`
-   references them. Add a minimal manifest in this spec, or leave as is?
-   (Proposed: leave as is — out of scope.)
-2. **Kit.** The newsletter email and Kit's own favicon were updated by Lee
-   separately in September; should they move to this new mark too? That is a
-   Kit-side change, not a repo change.
+1. ~~**Web app manifest.**~~ **Decided (Lee, 2026-09-11): skip it.** The 192 and
+   512 icons are replaced but no `site.webmanifest` is added; iPhones use
+   `apple-touch-icon.png` for home-screen icons.
+2. ~~**Kit.**~~ **Decided (Lee, 2026-09-11): no change.** The email header is not
+   affected by this change, and the Kit-hosted website is no longer used, so its
+   favicon is irrelevant.
 
 ---
 
@@ -94,3 +93,7 @@ navbar. Nothing else in `src/` references it or the 16/48/192/512 icons today
   the "Blue" favicon and a transparent brand-blue menu-bar mark from mockups;
   all artwork placed in `SoftwareArchitectureInsights/assets_inbox/brand-mark/`
   for implementation.
+* **2026-09-11** — Lee resolved Open Question 2: leave Kit's favicon and email
+  header alone.
+* **2026-09-11** — Lee resolved Open Question 1: no web app manifest. All Open
+  Questions resolved.
