@@ -8,7 +8,7 @@ tags: []
 description: "How to decide which services matter most, and which one team owns each of them."
 captivate_episode_id: "8b8212c2-42c0-4030-ae9b-1232d80f8dd7"
 source_articles: [when-everything-is-critical-nothing-is]
-duration: "16:00"
+duration: "16:02"
 ---
 
 It's 3am and a payment service is failing. The engineer who answers has never touched it, and the next hour goes to finding someone who can fix it.
