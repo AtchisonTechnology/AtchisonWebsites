@@ -1,5 +1,7 @@
 # Video-plus-reading lesson type on AtchisonAcademyCourses
 
+**PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/34
+
 * **ID:** Spec0029
 * **Status:** Verifying
 * **Date Created:** 2026-09-15
