@@ -3,9 +3,9 @@
 **PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/34
 
 * **ID:** Spec0029
-* **Status:** Verifying
+* **Status:** Closed
 * **Date Created:** 2026-09-15
-* **Date Implemented:** YYYY-MM-DD
+* **Date Implemented:** 2026-09-15
 * **Systems Impacted:** AtchisonAcademyCourses (the Spec0021 site) only.
   No `shared/` changes, no Netlify/DNS changes, no URL changes.
 
@@ -130,3 +130,4 @@ not just the video played.
 * **2026-09-15** — Moved to Implementing.
 * **2026-09-15** — Implementation complete, verified in-browser (desktop +
   phone width) and via build-failure checks. Moved to Verifying; PR created.
+* **2026-09-15** — PR merged. Moved to Closed and archived.
