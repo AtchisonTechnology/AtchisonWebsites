@@ -132,6 +132,10 @@ resources:                          # resources lessons only — non-empty
   - title: Resource name
     url: https://...
     note: One-line description
+downloads:                          # OPTIONAL, any content_type — files this
+  - title: Worksheet (.xlsx)         # lesson asks the student to open
+    file: /files/courses/<course-id>/worksheet.xlsx
+    note: One-line description
 permalink: /sample-course/woid9w8d99/1x2/   # must equal <course permalink> + <module>x<lesson>/
 ---
 Body: the document itself for `text` lessons and the required reading for
@@ -148,6 +152,15 @@ The lesson's top-of-page navigation also drops its Next link on
 `video_reading` lessons (Next still appears in the bottom nav), so a student
 can't skip past the reading via the top of the page.
 ```
+
+`downloads` is deliberately NOT tied to `content_type`. An exercise file belongs
+on the lesson that asks for it, and that lesson is normally a `video_reading` —
+`resources` is for a curated link list, which is a different thing. Files live
+under `src/files/courses/<course-id>/`, are rendered as a "Files for this lesson"
+block at the foot of the lesson body whatever the content type, and the builder
+fails the build if a listed file does not exist. That check exists because 01-03's
+narration told students the worksheet was attached to the lesson while nothing was
+attached, and nothing caught it (Spec0033).
 
 `lesson.erb` builds the Vimeo embed itself from `vimeo_id` — Vimeo's standard
 responsive markup (padding-box wrapper, iframe at
@@ -192,7 +205,9 @@ Fails the build, loud, in the house style of `AtchisonAcademy`'s
   `vimeo_id`, is `resources` without a non-empty `resources` list, or is
   `video_reading` without a non-empty body or without positive-integer
   `video_minutes`/`reading_minutes`;
-- a lesson's permalink disagrees with `<course permalink> + <m>x<l>/`.
+- a lesson's permalink disagrees with `<course permalink> + <m>x<l>/`;
+- a lesson has a `downloads` key that is empty, or an entry missing `title`/`file`,
+  or pointing at a file that does not exist under `src/`.
 
 It also defines four template helpers: `course_purchase_url(course)`
 (above); `course_lessons(site, course)` — that course's lessons, sorted by

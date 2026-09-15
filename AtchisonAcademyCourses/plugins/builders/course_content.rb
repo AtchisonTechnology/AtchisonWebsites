@@ -182,10 +182,42 @@ class Builders::CourseContent < SiteBuilder
       end
     end
 
+    validate_downloads!(lesson)
+
     expected_permalink = "#{course.data[:permalink]}#{module_number}x#{lesson.data[:lesson]}/"
     if lesson.data[:permalink] != expected_permalink
       raise "#{path}: permalink #{lesson.data[:permalink].inspect} does not match " \
             "#{expected_permalink.inspect} (course permalink + module x lesson)"
+    end
+  end
+
+  # `downloads` is optional and allowed on ANY content_type — an exercise file
+  # belongs on the lesson that asks for it, and that lesson is usually a
+  # video_reading, not a `resources` list. Every entry needs a title and a file,
+  # and the file must actually exist under src/: 01-03's narration says the
+  # worksheet is attached to the lesson, and for a while nothing was, because
+  # nothing checked (Spec0033).
+  def validate_downloads!(lesson)
+    downloads = lesson.data[:downloads]
+    return if downloads.nil?
+
+    unless downloads.is_a?(Array) && downloads.any?
+      raise "#{lesson.relative_path}: downloads must be a non-empty list, or omit the key"
+    end
+
+    downloads.each do |entry|
+      title = entry[:title]
+      file = entry[:file]
+
+      if title.to_s.strip.empty? || file.to_s.strip.empty?
+        raise "#{lesson.relative_path}: every downloads entry needs a title and a file"
+      end
+
+      disk_path = File.join(lesson.site.source, file.to_s.sub(%r{\A/}, ""))
+      next if File.exist?(disk_path)
+
+      raise "#{lesson.relative_path}: download #{file.inspect} does not exist at " \
+            "#{disk_path} — the lesson would offer a link that 404s"
     end
   end
 

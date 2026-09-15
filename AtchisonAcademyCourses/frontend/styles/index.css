@@ -378,6 +378,34 @@ main {
 .resource-title { font-weight: 700; font-size: 1.05rem; }
 .resource-note { color: var(--text-muted); margin: 0.35rem 0 0; }
 
+/* Lesson downloads — files a lesson asks the student to open.
+   Rendered for ANY content_type, so a video_reading lesson can ship an
+   exercise file (Spec0033). */
+.lesson-downloads {
+  max-width: var(--content-w);
+  margin: 2.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.lesson-downloads-heading {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+.download-list { list-style: none; margin: 0; padding: 0; }
+.download-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+}
+.download-title { font-weight: 700; font-size: 1.05rem; }
+.download-note { color: var(--text-muted); margin: 0.35rem 0 0; }
+
 /* Course outline — sidebar on wide screens, <details> on mobile */
 .lesson-outline--sidebar { display: none; }
 .lesson-outline--mobile {

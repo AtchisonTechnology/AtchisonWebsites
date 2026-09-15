@@ -8,9 +8,27 @@ content_type: video_reading
 vimeo_id: 1227033166
 video_minutes: 8
 reading_minutes: 5
-reading_title: "A worked example"
+reading_title: "The worksheet, and a worked example"
+downloads:
+  - title: Cost Attribution Worksheet (.xlsx)
+    file: /files/courses/architecting-for-cost/cost-attribution-worksheet.xlsx
+    note: The exercise. Four tabs, about twenty minutes, your cloud bill open beside you. Your numbers stay in the file.
+  - title: Worked example — the filled worksheet (.xlsx)
+    file: /files/courses/architecting-for-cost/cost-attribution-worksheet-worked-example.xlsx
+    note: The same worksheet, filled in with the invented company from the reading below. Open it if you want to see a finished one before starting your own.
 permalink: /architecting-for-cost/lhtsulearu/1x3/
 ---
+The worksheet for this lesson is at the bottom of this page. There are two files there.
+
+The first is the blank Cost Attribution Worksheet. That is the one you fill in, with your own bill
+open beside you. Plan on about twenty minutes.
+
+The second is the same worksheet already filled in, using the invented company described below.
+Open it if you want to see a finished one before you start, or leave it closed until you are done
+and use it to check your own.
+
+Download the blank one now. The rest of this reading walks through the filled one.
+
 ⚠️ **The example company and its amounts are invented** for illustration, and the service names
 are AWS, as they are throughout this course. Nothing here quotes a price.
 

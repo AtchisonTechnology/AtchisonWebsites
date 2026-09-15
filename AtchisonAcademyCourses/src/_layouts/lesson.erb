@@ -102,6 +102,22 @@ layout: default
           <% end %>
         </ul>
       <% end %>
+
+      <% if (data.downloads || []).any? %>
+        <section class="lesson-downloads" aria-labelledby="lesson-downloads-heading">
+          <h2 id="lesson-downloads-heading" class="lesson-downloads-heading">Files for this lesson</h2>
+          <ul class="download-list">
+            <% data.downloads.each do |d| %>
+              <li class="download-card">
+                <a href="<%= relative_url d.file %>" class="download-title" download><%= d.title %></a>
+                <% if d.note %>
+                  <p class="download-note"><%= d.note %></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
     </div>
 
     <nav class="lesson-prevnext lesson-prevnext--bottom" aria-label="Lesson navigation">
