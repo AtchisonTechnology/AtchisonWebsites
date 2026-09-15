@@ -122,17 +122,31 @@ course: sample-course             # must name an existing course's course_id
 module: 1                          # must be declared on that course's modules list
 lesson: 2
 title: Title of this lesson
-content_type: video                # video | text | resources
-vimeo_id: 800363806                 # video lessons only — numeric Vimeo video ID (not a URL)
+content_type: video                # video | text | resources | video_reading
+vimeo_id: 800363806                 # video/video_reading lessons only — numeric Vimeo video ID (not a URL)
+video_minutes: 6                     # video_reading lessons only — required, positive integer
+reading_minutes: 4                   # video_reading lessons only — required, positive integer
+reading_title: Going deeper: ...      # video_reading lessons only — optional, defaults to
+                                       # "Going deeper: what the video didn't cover."
 resources:                          # resources lessons only — non-empty
   - title: Resource name
     url: https://...
     note: One-line description
 permalink: /sample-course/woid9w8d99/1x2/   # must equal <course permalink> + <module>x<lesson>/
 ---
-Body: the document itself for `text` lessons (images under
-src/images/courses/<course-id>/); optional intro/notes for `video` and
-`resources` lessons.
+Body: the document itself for `text` lessons and the required reading for
+`video_reading` lessons (images under src/images/courses/<course-id>/);
+optional intro/notes for `video` and `resources` lessons.
+
+`video_reading` is for a lesson with two required parts, watched/read in
+order: a video, then a reading that carries **new** material (not a recap of
+the video). `lesson.erb` renders "Part 1: Watch (N min)" with the Vimeo
+embed, a divider, then "Part 2: Read (N min)" with `reading_title` as a
+heading and the body in full `.lesson-document` reading styling — unlike
+plain `video`, where the body renders as optional notes under the player.
+The lesson's top-of-page navigation also drops its Next link on
+`video_reading` lessons (Next still appears in the bottom nav), so a student
+can't skip past the reading via the top of the page.
 ```
 
 `lesson.erb` builds the Vimeo embed itself from `vimeo_id` — Vimeo's standard
@@ -174,14 +188,19 @@ Fails the build, loud, in the house style of `AtchisonAcademy`'s
   `shared/_courses/<course_id>.md` file;
 - a lesson names a `course` that doesn't exist, duplicates another lesson's
   `<module>x<lesson>` pair, has a `module` not declared on its course, has an
-  invalid `content_type`, is `video` without a numeric `vimeo_id`, or is
-  `resources` without a non-empty `resources` list;
+  invalid `content_type`, is `video` or `video_reading` without a numeric
+  `vimeo_id`, is `resources` without a non-empty `resources` list, or is
+  `video_reading` without a non-empty body or without positive-integer
+  `video_minutes`/`reading_minutes`;
 - a lesson's permalink disagrees with `<course permalink> + <m>x<l>/`.
 
-It also defines two template helpers: `course_purchase_url(course)` (above)
-and `course_lessons(site, course)` — that course's lessons, sorted by
+It also defines four template helpers: `course_purchase_url(course)`
+(above); `course_lessons(site, course)` — that course's lessons, sorted by
 `(module, lesson)`, which `course.erb` and `lesson.erb` both use for the
-module outline and prev/next navigation.
+module outline and prev/next navigation; and `content_type_label(content_type)`
+/ `reading_title(lesson_data)` — display helpers used by `course.erb` and
+`_lesson_outline.erb` for the type badge (`video_reading` shows as
+"video + reading") and by `lesson.erb` for the reading heading default.
 
 ## Adding a real course
 

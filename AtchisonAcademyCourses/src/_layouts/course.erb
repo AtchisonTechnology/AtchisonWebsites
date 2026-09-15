@@ -33,7 +33,7 @@ layout: default
               <a href="<%= relative_url lesson.relative_url %>" class="course-lesson-row">
                 <span class="lesson-number"><%= mod.number %>x<%= lesson.data.lesson %></span>
                 <span class="lesson-title"><%= lesson.data.title %></span>
-                <span class="lesson-type lesson-type--<%= lesson.data.content_type %>"><%= lesson.data.content_type %></span>
+                <span class="lesson-type lesson-type--<%= lesson.data.content_type %>"><%= content_type_label(lesson.data.content_type) %></span>
               </a>
             </li>
           <% end %>

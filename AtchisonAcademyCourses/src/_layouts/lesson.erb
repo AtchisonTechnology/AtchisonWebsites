@@ -30,10 +30,12 @@ layout: default
       <% else %>
         <a href="<%= relative_url course.relative_url %>" class="lesson-prev">&larr; Course Index</a>
       <% end %>
-      <% if next_lesson %>
-        <a href="<%= relative_url next_lesson.relative_url %>" class="lesson-next"><%= next_lesson.data.title %> &rarr;</a>
-      <% else %>
-        <a href="<%= relative_url course.relative_url %>" class="lesson-next">Course Index &rarr;</a>
+      <% if data.content_type != "video_reading" %>
+        <% if next_lesson %>
+          <a href="<%= relative_url next_lesson.relative_url %>" class="lesson-next"><%= next_lesson.data.title %> &rarr;</a>
+        <% else %>
+          <a href="<%= relative_url course.relative_url %>" class="lesson-next">Course Index &rarr;</a>
+        <% end %>
       <% end %>
     </nav>
 
@@ -53,6 +55,26 @@ layout: default
           <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
         <div class="lesson-notes">
+          <%= yield %>
+        </div>
+      <% when "video_reading" %>
+        <p class="lesson-part-label">Part 1: Watch (<%= data.video_minutes %> min)</p>
+        <div class="video-embed">
+          <div class="video-embed-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/<%= data.vimeo_id %>?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="<%= data.title %>"
+            ></iframe>
+          </div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+        </div>
+        <hr class="lesson-part-divider">
+        <p class="lesson-part-label">Part 2: Read (<%= data.reading_minutes %> min)</p>
+        <div class="lesson-document">
+          <h2 class="lesson-reading-title"><%= reading_title(data) %></h2>
           <%= yield %>
         </div>
       <% when "text" %>
