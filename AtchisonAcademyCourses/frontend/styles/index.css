@@ -110,6 +110,23 @@ main {
 .catalog-item {
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.catalog-item-body { flex: 1; min-width: 0; }
+.catalog-item-thumb-link { flex: none; display: block; }
+.catalog-item-thumb {
+  width: 120px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  display: block;
+}
+@media (max-width: 30rem) {
+  .catalog-item { display: block; }
+  .catalog-item-thumb { width: 100%; margin-bottom: 0.75rem; }
 }
 .catalog-item:last-child { border-bottom: none; }
 .catalog-item-title { font-size: 1.15rem; font-weight: 700; }

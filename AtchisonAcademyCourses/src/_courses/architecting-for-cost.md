@@ -4,6 +4,7 @@ course_id: architecting-for-cost
 secret: lhtsulearu
 title: Architecting for Cost
 description: Cost is not a finance problem you inherit once a month. It is something your architecture emits, continuously, from decisions made long before anyone looked at a bill. This course teaches you to read a cloud bill backwards to the choices that caused it, and to make the next set of choices on purpose.
+cover_image: /images/courses/architecting-for-cost/cover.jpg
 purchase_url: https://atchisonacademy.com/courses/architecting-for-cost/
 permalink: /architecting-for-cost/lhtsulearu/
 modules:

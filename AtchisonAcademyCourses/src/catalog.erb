@@ -17,10 +17,17 @@ title: Course Catalog
   <ul class="catalog-list">
     <% site.collections["courses"].resources.sort_by { |c| c.data.title }.each do |course| %>
       <li class="catalog-item">
-        <a href="<%= relative_url course.relative_url %>" class="catalog-item-title"><%= course.data.title %></a>
-        <% if course.data.description %>
-          <p class="catalog-item-description"><%= course.data.description %></p>
+        <% if course.data.cover_image %>
+          <a href="<%= relative_url course.relative_url %>" class="catalog-item-thumb-link">
+            <img src="<%= relative_url course.data.cover_image %>" alt="" class="catalog-item-thumb" />
+          </a>
         <% end %>
+        <div class="catalog-item-body">
+          <a href="<%= relative_url course.relative_url %>" class="catalog-item-title"><%= course.data.title %></a>
+          <% if course.data.description %>
+            <p class="catalog-item-description"><%= course.data.description %></p>
+          <% end %>
+        </div>
       </li>
     <% end %>
   </ul>
