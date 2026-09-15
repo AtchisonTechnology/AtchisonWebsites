@@ -10,6 +10,9 @@ title: Course Catalog
   # once, never regenerated.
 %>
 <div class="catalog-page">
+  <a href="https://atchisonacademy.com/" class="site-logo-link">
+    <img src="<%= relative_url '/images/logo-academy-banner.png' %>" alt="Atchison Academy" class="site-logo-banner" />
+  </a>
   <h1>Courses</h1>
   <ul class="catalog-list">
     <% site.collections["courses"].resources.sort_by { |c| c.data.title }.each do |course| %>

@@ -11,15 +11,15 @@ reading_minutes: 4
 reading_title: "The sorting test"
 permalink: /architecting-for-cost/lhtsulearu/1x4/
 ---
-⭐ Carries the reference version of the capital-versus-operating-expense point. The full treatment,
-including how to use it in a funding argument, is lesson 08-01, *The Color of Money*.
+The video sorts a few examples. This is the whole list, so you can place a specific piece of work
+without guessing.
 
 One question sorts most cost work: **can this be fixed without changing the system?**
 
 | Work | Owner | Why |
 |---|---|---|
 | Rate and commitment purchasing | FinOps | Changes price, not usage |
-| Tagging, allocation, showback plumbing | FinOps | Reporting, though the model behind it is yours (lesson 07-01) |
+| Tagging, allocation, showback plumbing | FinOps | Reporting, though the model behind it is yours (lesson 7x1) |
 | Anomaly detection and budget alerts | FinOps | Watches effects |
 | Forecasting | FinOps | Needs your input, not your ownership |
 | Idle and orphan cleanup | FinOps | Nothing structural changes |
@@ -61,6 +61,9 @@ Why a CFO cares:
 The practical consequence for you is narrow but real. The same cost proposal, with the same numbers,
 wins at one company and dies at another, and the difference has nothing to do with the technical
 argument. Knowing which kind of company you work for tells you which argument to make.
+
+That is the short version. Lesson 8x1, *The Color of Money*, works through how to use it in a
+funding argument.
 
 ## The working agreement
 

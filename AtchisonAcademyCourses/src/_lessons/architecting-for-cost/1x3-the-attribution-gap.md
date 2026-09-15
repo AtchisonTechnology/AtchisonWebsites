@@ -11,8 +11,8 @@ reading_minutes: 5
 reading_title: "A worked example"
 permalink: /architecting-for-cost/lhtsulearu/1x3/
 ---
-⚠️ **The example company and its amounts are invented** for illustration. Service names are AWS,
-per the course's provider decision. Nothing here quotes a price.
+⚠️ **The example company and its amounts are invented** for illustration, and the service names
+are AWS, as they are throughout this course. Nothing here quotes a price.
 
 The video walks through the worksheet one tab at a time. This is what a finished Attribution Table
 looks like, so you have something to compare yours against.
@@ -35,7 +35,7 @@ is probably right. Nobody has checked utilization to confirm it, so it is marked
 the honest mark, and it keeps the largest line on the bill inside the gap where it belongs.
 
 **Row 2.** This one is sure, and still expensive. The team knows exactly why it pays this. The cost bought
-something real, which is isolation that customers signed for. Lesson 01-02 called that a decision
+something real, which is isolation that customers signed for. Lesson 1x2 called that a decision
 rather than a finding, and module 4 is about deciding it on purpose.
 
 **Row 3.** This is the most useful row on the sheet. Nobody knows what is crossing zones, or why. A blank
@@ -70,7 +70,7 @@ choosing between Sure and Guessing, pick Guessing.
 
 ## Using the translation table without cheating
 
-The ten-row translation table in lesson 01-02's reading lists common line items and their usual
+The ten-row translation table in lesson 1x2's reading lists common line items and their usual
 causes. Use it to decide where to look. Do not copy from it.
 
 If the table suggests a cause and you confirm it on your own system, write it in and mark it Sure.

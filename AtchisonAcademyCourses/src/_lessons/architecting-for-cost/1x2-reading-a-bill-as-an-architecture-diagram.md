@@ -11,8 +11,8 @@ reading_minutes: 3
 reading_title: "The translation table"
 permalink: /architecting-for-cost/lhtsulearu/1x2/
 ---
-⚠️ **Examples are AWS**, per the course's provider decision. The structures are the same everywhere;
-the service names are not. Nothing here quotes a price, so nothing here goes stale on a price change.
+⚠️ **Examples in this course all use AWS.** The structures are the same on any provider; the
+service names are not. Nothing here quotes a price, so nothing here goes stale on a price change.
 
 Keep this next to your cost console the first few times. The middle column is a starting hypothesis,
 never a conclusion.
@@ -53,12 +53,12 @@ drawing conclusions about it.
 expensive and every consuming team look efficient.
 
 **Growth that tracks traffic.** A line that rises with revenue may be fine. Compare against a
-denominator, not against last month. That denominator is discussed in lesson 02-02.
+denominator, not against last month. That denominator is discussed in lesson 2x2.
 
 ## The exercise
 
 Take your top five line items. For each one, write a single sentence naming the architectural
 decision you believe caused it, and note how confident you are.
 
-Keep the sheet. Lesson 01-03 is about the entries you could not fill in, and having your own version
+Keep the sheet. Lesson 1x3 is about the entries you could not fill in, and having your own version
 in front of you makes that lesson land differently than watching it in the abstract.

@@ -11,6 +11,10 @@ layout: default
   module_title = (course.data.modules || []).find { |m| m.number == data.module }&.title
 %>
 
+<a href="https://atchisonacademy.com/" class="lesson-page-logo-link">
+  <img src="<%= relative_url '/images/logo-academy-banner.png' %>" alt="Atchison Academy" class="lesson-page-logo" />
+</a>
+
 <div class="lesson-page">
   <aside class="lesson-outline lesson-outline--sidebar" aria-label="Course contents">
     <a href="<%= relative_url course.relative_url %>" class="outline-course-title"><%= course.data.title %></a>
@@ -20,7 +24,7 @@ layout: default
   <article class="lesson-content">
     <header class="lesson-header">
       <a href="<%= relative_url course.relative_url %>" class="lesson-course-link">&larr; <%= course.data.title %></a>
-      <p class="lesson-eyebrow">Module <%= data.module %> &mdash; <%= module_title %> &middot; Lesson <%= data.module %>x<%= data.lesson %></p>
+      <p class="lesson-eyebrow">Module <%= data.module %> &mdash; <%= module_title %> &middot; Lesson <%= data.lesson %></p>
       <h1 class="lesson-title"><%= data.title %></h1>
     </header>
 

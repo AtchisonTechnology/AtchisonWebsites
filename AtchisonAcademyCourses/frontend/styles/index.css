@@ -92,6 +92,16 @@ main {
 }
 .btn-primary:hover { background: var(--navy-mid); }
 
+.site-logo-link {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.5rem;
+}
+.site-logo-banner {
+  width: 200px;
+  height: auto;
+}
+
 /* ============================================
    Catalog page (Lee's private bookmark)
    ============================================ */
@@ -188,6 +198,16 @@ main {
 .sharing-notice-link {
   font-weight: 600;
   word-break: break-all;
+}
+
+.lesson-page-logo-link {
+  display: block;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+.lesson-page-logo {
+  width: 110px;
+  height: auto;
 }
 
 /* ============================================

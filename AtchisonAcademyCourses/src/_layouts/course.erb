@@ -7,6 +7,9 @@ layout: default
 %>
 
 <article class="course-page">
+  <a href="https://atchisonacademy.com/" class="site-logo-link">
+    <img src="<%= relative_url '/images/logo-academy-banner.png' %>" alt="Atchison Academy" class="site-logo-banner" />
+  </a>
   <header class="course-header">
     <% if data.cover_image %>
       <img src="<%= relative_url data.cover_image %>" alt="<%= data.title %> cover art" class="course-cover" />
@@ -31,7 +34,7 @@ layout: default
           <% lessons.select { |l| l.data.module == mod.number }.sort_by { |l| l.data.lesson }.each do |lesson| %>
             <li>
               <a href="<%= relative_url lesson.relative_url %>" class="course-lesson-row">
-                <span class="lesson-number"><%= mod.number %>x<%= lesson.data.lesson %></span>
+                <span class="lesson-number"><%= lesson.data.lesson %></span>
                 <span class="lesson-title"><%= lesson.data.title %></span>
                 <span class="lesson-type lesson-type--<%= lesson.data.content_type %>"><%= content_type_label(lesson.data.content_type) %></span>
               </a>
