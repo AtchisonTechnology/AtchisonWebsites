@@ -156,9 +156,13 @@ can't skip past the reading via the top of the page.
 `downloads` is deliberately NOT tied to `content_type`. An exercise file belongs
 on the lesson that asks for it, and that lesson is normally a `video_reading` —
 `resources` is for a curated link list, which is a different thing. Files live
-under `src/files/courses/<course-id>/`, are rendered as a "Files for this lesson"
-block at the foot of the lesson body whatever the content type, and the builder
-fails the build if a listed file does not exist. That check exists because 01-03's
+under `src/files/courses/<course-id>/` and are rendered as a "Files for this
+lesson" block by the `lesson_downloads` partial, whatever the content type. On a
+`video_reading` lesson the block sits BETWEEN the video and the reading, not at
+the foot of the page (Lee, 2026-09-15) — the video usually walks the student
+through the file, so it has to be in hand before they read, and a block above the
+video would push the player below the fold. Every other content type renders it at
+the foot of the body. The builder fails the build if a listed file does not exist. That check exists because 01-03's
 narration told students the worksheet was attached to the lesson while nothing was
 attached, and nothing caught it (Spec0033).
 

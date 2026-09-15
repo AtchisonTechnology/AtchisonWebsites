@@ -75,6 +75,7 @@ layout: default
           </div>
           <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
+        <%= render "lesson_downloads", lesson: data %>
         <hr class="lesson-part-divider">
         <p class="lesson-part-label">Part 2: Read (<%= data.reading_minutes %> min)</p>
         <div class="lesson-document">
@@ -103,20 +104,8 @@ layout: default
         </ul>
       <% end %>
 
-      <% if (data.downloads || []).any? %>
-        <section class="lesson-downloads" aria-labelledby="lesson-downloads-heading">
-          <h2 id="lesson-downloads-heading" class="lesson-downloads-heading">Files for this lesson</h2>
-          <ul class="download-list">
-            <% data.downloads.each do |d| %>
-              <li class="download-card">
-                <a href="<%= relative_url d.file %>" class="download-title" download><%= d.title %></a>
-                <% if d.note %>
-                  <p class="download-note"><%= d.note %></p>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </section>
+      <% unless data.content_type == "video_reading" %>
+        <%= render "lesson_downloads", lesson: data %>
       <% end %>
     </div>
 

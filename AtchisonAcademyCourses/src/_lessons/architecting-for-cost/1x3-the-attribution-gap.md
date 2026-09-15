@@ -18,7 +18,7 @@ downloads:
     note: The same worksheet, filled in with the invented company from the reading below. Open it if you want to see a finished one before starting your own.
 permalink: /architecting-for-cost/lhtsulearu/1x3/
 ---
-The worksheet for this lesson is at the bottom of this page. There are two files there.
+Two files are linked just above this reading.
 
 The first is the blank Cost Attribution Worksheet. That is the one you fill in, with your own bill
 open beside you. Plan on about twenty minutes.

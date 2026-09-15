@@ -7,10 +7,10 @@ created: 2026-08-20
 date: 2026-09-15
 series: "AI-Native Architecture"
 series_position: "Act I, article 3 of 4 — property 3: the context supply chain"
-published_on:
+published_on: 2026-09-15
 
-sai_url:
-email_sent:
+sai_url: https://softwarearchitectureinsights.com/posts/the-model-isnt-wrong
+email_sent: 2026-09-15
 linkedin_url:
 
 hero_image: the-model-isnt-wrong.png
