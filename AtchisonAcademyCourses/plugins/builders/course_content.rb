@@ -14,7 +14,14 @@
 # See Spec0021.
 class Builders::CourseContent < SiteBuilder
   MIN_SECRET_LENGTH = 8
-  CONTENT_TYPES = %w[video text resources].freeze
+  CONTENT_TYPES = %w[video text resources video_reading].freeze
+  CONTENT_TYPE_LABELS = {
+    "video" => "video",
+    "text" => "text",
+    "resources" => "resources",
+    "video_reading" => "video + reading"
+  }.freeze
+  DEFAULT_READING_TITLE = "Going deeper: what the video didn't cover.".freeze
 
   def build
     hook :site, :post_read do |site|
@@ -44,6 +51,18 @@ class Builders::CourseContent < SiteBuilder
       site.collections["lessons"].resources
         .select { |l| l.data[:course] == course.data[:course_id] }
         .sort_by { |l| [l.data[:module], l.data[:lesson]] }
+    end
+
+    # Display label for a lesson's content_type, used by course.erb and
+    # _lesson_outline.erb instead of printing the raw type string.
+    helper :content_type_label do |content_type|
+      CONTENT_TYPE_LABELS.fetch(content_type, content_type)
+    end
+
+    # A video_reading lesson's reading heading, falling back to the default
+    # when reading_title is absent.
+    helper :reading_title do |lesson_data|
+      lesson_data[:reading_title] || DEFAULT_READING_TITLE
     end
   end
 
@@ -142,12 +161,25 @@ class Builders::CourseContent < SiteBuilder
             "#{CONTENT_TYPES.join(', ')}"
     end
 
-    if content_type == "video" && !lesson.data[:vimeo_id].to_s.match?(/\A\d+\z/)
-      raise "#{path}: content_type: video requires a numeric vimeo_id"
+    if %w[video video_reading].include?(content_type) && !lesson.data[:vimeo_id].to_s.match?(/\A\d+\z/)
+      raise "#{path}: content_type: #{content_type} requires a numeric vimeo_id"
     end
 
     if content_type == "resources" && (lesson.data[:resources] || []).empty?
       raise "#{path}: content_type: resources requires a non-empty resources list"
+    end
+
+    if content_type == "video_reading"
+      if lesson.content.to_s.strip.empty?
+        raise "#{path}: content_type: video_reading requires a non-empty body (the reading)"
+      end
+
+      %i[video_minutes reading_minutes].each do |key|
+        value = lesson.data[key]
+        unless value.is_a?(Integer) && value.positive?
+          raise "#{path}: content_type: video_reading requires a positive integer #{key}"
+        end
+      end
     end
 
     expected_permalink = "#{course.data[:permalink]}#{module_number}x#{lesson.data[:lesson]}/"

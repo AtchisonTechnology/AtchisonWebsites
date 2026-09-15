@@ -168,6 +168,7 @@ main {
 .lesson-type--video   { background: var(--teal-light); color: #0e7490; }
 .lesson-type--text    { background: var(--bg-alt);     color: var(--navy-mid); }
 .lesson-type--resources { background: #fef3c7; color: #92400e; }
+.lesson-type--video_reading { background: var(--teal-light); color: var(--navy-mid); }
 
 /* ============================================
    Sharing notice — compact band above the footer,
@@ -252,6 +253,23 @@ main {
   max-width: var(--content-w);
   margin: 1.75rem auto 0;
 }
+
+/* video_reading lessons: labeled parts + divider between video and reading */
+.lesson-part-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--navy-mid);
+  margin: 0 0 0.6rem;
+}
+.lesson-part-divider {
+  max-width: var(--content-w);
+  margin: 2.25rem auto;
+  border: none;
+  border-top: 2px solid var(--border);
+}
+.lesson-reading-title { margin-top: 0; }
 
 /* Text lessons: comfortable reading measure */
 .lesson-document {
@@ -341,6 +359,15 @@ main {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   color: var(--text-muted);
   flex-shrink: 0;
+}
+.outline-lesson-title { flex: 1; }
+.outline-lesson-type {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  align-self: center;
 }
 
 @media (min-width: 900px) {

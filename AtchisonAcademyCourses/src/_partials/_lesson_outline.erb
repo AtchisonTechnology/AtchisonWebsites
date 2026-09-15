@@ -12,6 +12,7 @@
           <a href="<%= relative_url l.relative_url %>">
             <span class="outline-lesson-number"><%= mod.number %>x<%= l.data.lesson %></span>
             <span class="outline-lesson-title"><%= l.data.title %></span>
+            <span class="outline-lesson-type outline-lesson-type--<%= l.data.content_type %>"><%= content_type_label(l.data.content_type) %></span>
           </a>
         </li>
       <% end %>

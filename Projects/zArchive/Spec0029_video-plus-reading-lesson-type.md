@@ -1,7 +1,9 @@
 # Video-plus-reading lesson type on AtchisonAcademyCourses
 
+**PR:** https://github.com/AtchisonTechnology/AtchisonWebsites/pull/34
+
 * **ID:** Spec0029
-* **Status:** In Spec Development/Refinement
+* **Status:** Verifying
 * **Date Created:** 2026-09-15
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademyCourses (the Spec0021 site) only.
@@ -125,3 +127,6 @@ not just the video played.
   `video_reading`; drop top Next on this type; minutes required; default
   reading heading; type labels for all types in the sidebar. Solution,
   Testing, and Steps updated to match.
+* **2026-09-15** — Moved to Implementing.
+* **2026-09-15** — Implementation complete, verified in-browser (desktop +
+  phone width) and via build-failure checks. Moved to Verifying; PR created.
