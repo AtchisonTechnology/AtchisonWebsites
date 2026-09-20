@@ -32,7 +32,8 @@ module WorktreeEnv
     "BusinessBreakthrough30" => 3,
     "ArchitectingForScale" => 4,
     "AtchisonAcademy" => 5,
-    "AtchisonAcademyCourses" => 6,
+    # 6 -- AtchisonAcademyCourses, retired 2026-09-20 (site removed from the
+    # repo). The index stays reserved forever so no other site shifts ports.
     "SoftwareArchitectureInsights" => 7,
   }.freeze
 

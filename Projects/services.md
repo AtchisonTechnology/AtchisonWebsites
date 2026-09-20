@@ -30,7 +30,7 @@ Maximum 10 sites (indices 0–9). Each block holds IDs up to 999.
 | 3 | `BusinessBreakthrough30` | businessbreakthrough30.com | Active | 12000 | 12000 + N | 13000 + N |
 | 4 | `ArchitectingForScale` | architectingforscale.com | Active | 14000 | 14000 + N | 15000 + N |
 | 5 | `AtchisonAcademy` | atchisonacademy.com | Active | 16000 | 16000 + N | 17000 + N |
-| 6 | `AtchisonAcademyCourses` | courses.atchisonacademy.com | Active | 18000 | 18000 + N | 19000 + N |
+| 6 | `AtchisonAcademyCourses` | _(removed)_ | **Retired 2026-09-20** | — | — | — |
 | 7 | `SoftwareArchitectureInsights` | softwarearchitectureinsights.com | Active | 20000 | 20000 + N | 21000 + N |
 
 Derivation lives in `lib/worktree_env.rb` (repo root) and is the single source

@@ -4,7 +4,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 ## What this repo is
 
-Eight independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
+Seven independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
 Spec/Bug process:
 
@@ -16,7 +16,6 @@ Spec/Bug process:
 | `BusinessBreakthrough30` | Business Breakthrough 30 | businessbreakthrough30.com |
 | `ArchitectingForScale` | Architecting for Scale (book site) | architectingforscale.com |
 | `AtchisonAcademy` | Atchison Academy | atchisonacademy.com |
-| `AtchisonAcademyCourses` | Atchison Academy Courses (unlisted course content; does not join `shared/`) | courses.atchisonacademy.com |
 | `SoftwareArchitectureInsights` | Software Architecture Insights (weekly newsletter site; email stays on Kit; does not join `shared/`) | softwarearchitectureinsights.com |
 
 Each site has its own `CLAUDE.md` with its architecture, layouts, CSS tokens,
@@ -79,14 +78,10 @@ flag and production URL; **the two copies must be kept in sync by hand.**
 
 No other site defines these collections. A new site joins by adding its own
 three keys, its two symlinks and its builder, plus one `SITES` entry in each
-existing builder — no change to existing content. `AtchisonAcademyCourses`
-(Spec0021) deliberately does **not** join: its `courses`/`lessons`
-collections are unlisted purchaser-only content, not marketing metadata, so
-it carries no symlinks into `shared/`, no `shared_content.rb`, and no entry
-in either existing builder's `SITES` registry. Its own validation builder
-does a read-only filename check against `shared/_courses` (to confirm a
-derived purchase-page link won't 404) — that is the only thing it reads from
-`shared/`.
+existing builder — no change to existing content. A site whose content is
+not marketing metadata need not join at all: `AtchisonAcademyCourses`
+(Spec0021) never did, and that site was removed from the repo on 2026-09-20.
+`SoftwareArchitectureInsights` is likewise standalone.
 
 ## Commands (repo root)
 
@@ -110,8 +105,9 @@ Bridgetown). Per-site build/deploy commands live in each site's own CLAUDE.md.
 This project follows the `spec-bug-process` skill (Spec/Bug tracking,
 worktrees, resource isolation). Project parameters:
 
-- **Sites/services:** eight, indices 0–7 — see `Projects/services.md`. Indices
-  are permanent; a new site takes the next unused index.
+- **Sites/services:** seven live, indices 0–7 with 6 retired — see
+  `Projects/services.md`. Indices are permanent; a retired site keeps its
+  index forever and a new site takes the next unused one (8 next).
 - **Worktrees:** `.claude/worktrees/`, named exactly `spec####` / `bug####`
   (gitignored).
 - **Credentials keys:** none. These are static sites with no encrypted
@@ -148,7 +144,6 @@ Following the skill's scheme exactly, with `N` = the worktree's numeric ID:
 | 3 | `BusinessBreakthrough30` | 12000 | 12000 + N | 13000 + N |
 | 4 | `ArchitectingForScale` | 14000 | 14000 + N | 15000 + N |
 | 5 | `AtchisonAcademy` | 16000 | 16000 + N | 17000 + N |
-| 6 | `AtchisonAcademyCourses` | 18000 | 18000 + N | 19000 + N |
 | 7 | `SoftwareArchitectureInsights` | 20000 | 20000 + N | 21000 + N |
 
 IDs start at `0001`, so main (N = 0) never collides. IDs above `999` overflow

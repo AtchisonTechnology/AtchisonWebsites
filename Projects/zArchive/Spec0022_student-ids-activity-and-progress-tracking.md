@@ -1,13 +1,23 @@
 # Student-specific IDs, activity tracking, and course progress on AtchisonAcademyCourses
 
 * **ID:** Spec0022
-* **Status:** Hold/Deferred
+* **Status:** Cancelled
 * **Date Created:** 2026-09-01
 * **Date Implemented:** YYYY-MM-DD
 * **Systems Impacted:** AtchisonAcademyCourses (the Spec0021 site), plus —
   depending on the approach chosen — its first serverless code (Netlify
   Functions) and a datastore. **Depends on Spec0021**; nothing here can start
   until that site exists.
+
+---
+
+## Cancellation note (2026-09-20)
+
+Cancelled because the site it depends on is gone. Lee stopped using
+`AtchisonAcademyCourses` (courses.atchisonacademy.com) and the site was
+removed from this repo on 2026-09-20; Spec0021, which created it, is
+archived. Everything below assumed that site as its host, so there is
+nothing here left to build. Kept for the thinking, not as a live idea.
 
 ---
 
