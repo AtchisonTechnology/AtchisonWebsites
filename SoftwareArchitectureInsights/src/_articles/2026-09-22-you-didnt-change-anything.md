@@ -7,10 +7,10 @@ created: 2026-08-20
 date: 2026-09-22
 series: "AI-Native Architecture"
 series_position: "Act I, article 4 of 4 — property 4: model lifecycle"
-published_on:
+published_on: 2026-09-22
 
-sai_url:
-email_sent:
+sai_url: https://softwarearchitectureinsights.com/posts/you-didnt-change-anything
+email_sent: 2026-09-22
 linkedin_url:
 
 hero_image: you-didnt-change-anything.png
