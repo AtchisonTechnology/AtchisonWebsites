@@ -68,6 +68,40 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, s-max-age=31536000"
 
+# atchisontechnology.com (apex and www) is an alias domain on this Netlify
+# site. Without these rules it served leeatchison.com's content under its own
+# hostname — duplicate content at a second domain, with no canonical tag to
+# say which is the original. Every path now goes to the same path on
+# leeatchison.com. 301, permanent, because this alias is never going to become
+# its own site, and a permanent redirect is what consolidates the alias's
+# search ranking onto leeatchison.com. Netlify matches domain-level rules on
+# scheme, so http and https are each listed. These come first so they win
+# before any path rule below; a path that has its own redirect on
+# leeatchison.com (e.g. /academy) simply takes a second hop from there.
+[[redirects]]
+  from = "https://atchisontechnology.com/*"
+  to = "https://leeatchison.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://atchisontechnology.com/*"
+  to = "https://leeatchison.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.atchisontechnology.com/*"
+  to = "https://leeatchison.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.atchisontechnology.com/*"
+  to = "https://leeatchison.com/:splat"
+  status = 301
+  force = true
+
 # /academy was the Atchison Academy landing page until the Academy became its
 # own site at atchisonacademy.com (Spec0005, Spec0006). These are 301 —
 # permanent, deliberately, and the opposite of the 302s Spec0002 used for the
