@@ -3112,3 +3112,97 @@ body.ownership-workshop .ownership-bio {
   font-size: 0.95rem;
   line-height: 1.7;
 }
+
+/* ============================================
+   Webinar pages (src/webinars/)
+   These pages carry page_class "course webinar": the course class
+   is what makes <main> full-width and opts them out of the boxed
+   generic-page rules, and they reuse .course-header / .course-body.
+   ============================================ */
+body.webinar .webinar-lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  max-width: 600px;
+  margin: -1rem 0 2rem;
+}
+
+body.webinar .webinar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* The title slide is near-white, so it needs a border to separate it from
+   the page background. */
+body.webinar .webinar-title-slide {
+  margin: 1.75rem 0 2rem;
+}
+
+body.webinar .webinar-title-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+/* Short clips: a row of three cards, stacking on narrow screens. The
+   .course-body-inner ul rule adds bullets and indent, so reset them here. */
+body.webinar .course-body-inner ul.webinar-clips {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+body.webinar .webinar-clips li {
+  margin: 0;
+}
+
+body.webinar .webinar-clips a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+  color: var(--navy);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+body.webinar .webinar-clips a:hover {
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(6,182,212,0.18);
+}
+
+body.webinar .webinar-clip-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--navy);
+  font-size: 0.8rem;
+  padding-left: 0.15rem;
+  margin-bottom: 0.4rem;
+}
+
+body.webinar .webinar-clip-label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+body.webinar .webinar-clip-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
