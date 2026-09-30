@@ -9,7 +9,7 @@ promoted_to_in_progress: 2026-08-13
 retitled: 2026-08-13
 former_slug: same-matrix-different-scoring
 date: 2026-09-29
-published_on:
+published_on: 2026-09-29
 
 sai_url:
 email_sent:
