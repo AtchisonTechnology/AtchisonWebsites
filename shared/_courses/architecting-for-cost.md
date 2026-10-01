@@ -1,6 +1,6 @@
 ---
 layout: course
-title: Cloud Cost Architecture
+title: Architecting for Cost
 show_academy: true
 order_academy: 15
 canonical_site: academy
