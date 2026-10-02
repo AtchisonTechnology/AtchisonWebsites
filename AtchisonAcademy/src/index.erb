@@ -25,6 +25,11 @@ title: Home
   # The featured course is the visible course carrying `spotlight_academy`;
   # its content comes from its sales data file.
   featured_course = academy_courses.find { |c| c.data.spotlight_academy }
+  # It already has its own section above the course grid, so the grid skips it.
+  if featured_course
+    academy_courses_featured -= [featured_course]
+    academy_courses_other    -= [featured_course]
+  end
   featured_sales  = featured_course && sales_data_for(featured_course)
   worksheet_page  = site.resources.find { |r| r.relative_url == "/free/cost-attribution-worksheet/" }
 %>
