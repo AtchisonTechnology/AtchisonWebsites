@@ -701,3 +701,10 @@ worktree) and check:
   `unlisted: true`, so the launch offer goes live with it. The welcome page's `hidden` came off
   too, so a buyer never lands on a 404. The webinar page stays hidden. Going fully public later
   means deleting the `unlisted` line.
+- **2026-10-02 — Trailer added.** Vimeo `1232444304` (Lee) is now the trailer on the sales page
+  and the launch page, with Vimeo's own title card as the poster. Tested: it plays on click with
+  captions on. The play button moved to the poster's bottom-left so it doesn't cover the title
+  card. The home page's featured-course section uses the same trailer, and it appears there
+  once the course is no longer `unlisted`. *The Floor* short (`1232442814`) was not added to
+  the launch page: a second video at the top would compete with the trailer and push Buy below
+  the fold on phones.
