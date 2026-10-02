@@ -273,6 +273,15 @@ anything that links to it. The home page relies on this: its featured-course,
 how-it-works and free-worksheet sections show only when their targets exist
 in the build.
 
+**Unlisted pages.** `unlisted: true` is the step between hidden and listed:
+the page is published and reachable by its URL (from an email, an ad or a
+coupon link), but the site never volunteers it. `shared_content.rb` keeps it
+out of the sitemap, and the course listings (`index.erb`, including the
+featured course; `courses.erb`; and `course.erb`'s "More Courses") skip it. It
+is **not** `noindex`. An unlisted course's offers are live, since an offer
+inherits only its sales page's *hidden* state. To list it, delete the
+`unlisted` line.
+
 **When an offer ends.** Two layers. In the page, `offer.erb` writes
 `redirect_at` into a data attribute, and `frontend/javascript/index.js`
 `location.replace()`s to the sales page once the visitor's clock passes it.

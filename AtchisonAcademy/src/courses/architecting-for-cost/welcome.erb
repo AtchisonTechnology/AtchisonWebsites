@@ -4,12 +4,11 @@ page_class: "course selling"
 title: "You're in"
 description: "What to do next after buying Architecting for Cost."
 # Supporting page (Spec0031 §B4): where Kit sends buyers after checkout.
-# Unlisted. Hidden in production until launch; remove `hidden` in the same
-# commit as the course's (§B8). After it ships, set the Kit product's
-# after-purchase link to this URL.
+# Unlisted (noindex, no sitemap entry, nothing links to it). Live since the
+# sales page went live unlisted, 2026-10-02, so a buyer never lands on a 404.
+# Set the Kit product's after-purchase link to this URL.
 noindex: true
 sitemap_exclude: true
-hidden: true
 ---
 
 <%# The sign-in facts below come from Cedarras's own code (rails-backend:

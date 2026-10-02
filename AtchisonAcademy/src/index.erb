@@ -11,7 +11,9 @@ title: Home
   academy_books_featured   = academy_books.select { |b| b.data.feature_academy }
   academy_books_other      = academy_books.reject { |b| b.data.feature_academy }
 
-  academy_courses          = site.collections["courses"].resources.sort_by { |c| c.data.order_academy || 99 }
+  # `unlisted` courses are published but never listed (see shared_content.rb),
+  # so they also can't be the featured course.
+  academy_courses          = site.collections["courses"].resources.reject { |c| c.data.unlisted }.sort_by { |c| c.data.order_academy || 99 }
   academy_courses_featured = academy_courses.select { |c| c.data.feature_academy }
   academy_courses_other    = academy_courses.reject { |c| c.data.feature_academy }
 

@@ -694,3 +694,10 @@ worktree) and check:
     the headline rather than sitting above it. So the launch hero reads: headline, launch intro,
     tagline (dropped on phones), then price and Buy.
   - The home page hero going live before launch: Lee doesn't mind, so no change.
+- **2026-10-02 — Sales and launch pages live but unlisted** (Lee). Lee wanted them reachable but
+  not referred to by the home page, the courses page or the sitemap. Added `unlisted: true`: the
+  page is published, kept out of the sitemap, and skipped by every course listing, including the
+  home page's featured course and "More Courses". The course file swapped `hidden: true` for
+  `unlisted: true`, so the launch offer goes live with it. The welcome page's `hidden` came off
+  too, so a buyer never lands on a 404. The webinar page stays hidden. Going fully public later
+  means deleting the `unlisted` line.

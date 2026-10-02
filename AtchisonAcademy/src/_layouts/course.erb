@@ -79,7 +79,7 @@ layout: default
     </div>
     <div class="more-courses-grid">
       <% site.collections["courses"].resources
-           .select { |c| c.relative_url != resource.relative_url }
+           .select { |c| c.relative_url != resource.relative_url && !c.data.unlisted }
            .first(4).each do |course| %>
         <a href="<%= relative_url course.relative_url %>" class="more-course-card">
           <% if course.data.availability == "prelaunch" %>

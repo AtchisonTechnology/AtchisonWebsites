@@ -20,7 +20,8 @@ title: Courses
 </section>
 
 <%
-  all_courses = site.collections["courses"].resources.sort_by { |c| c.data.order_academy || 99 }
+  # `unlisted` courses are published but never listed (see shared_content.rb).
+  all_courses = site.collections["courses"].resources.reject { |c| c.data.unlisted }.sort_by { |c| c.data.order_academy || 99 }
   featured_courses  = all_courses.select { |c| c.data.feature_academy }
   remaining_courses = all_courses.reject { |c| c.data.feature_academy }
 %>

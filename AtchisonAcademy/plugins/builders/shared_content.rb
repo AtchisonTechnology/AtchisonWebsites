@@ -67,6 +67,15 @@ class Builders::SharedContent < SiteBuilder
       # welcome or signup page stays out of production, its sitemap and its
       # redirects, while deploy previews still render it.
       site.collections["pages"].resources.reject! { |resource| self.class.hidden?(resource) }
+
+      # `unlisted: true` is the step between hidden and listed: the page is
+      # published and reachable by its URL (from an email or an ad), but this
+      # site never volunteers it. It stays out of the sitemap here, and the
+      # course listings (index.erb, courses.erb, course.erb's "More Courses")
+      # skip it. Not noindex: a search engine that finds it may index it.
+      site.resources.each do |resource|
+        resource.data[:sitemap_exclude] = true if resource.data[:unlisted]
+      end
     end
 
     # Template helper for a pre-launch course's two CTA buttons. `prelaunch_url`
