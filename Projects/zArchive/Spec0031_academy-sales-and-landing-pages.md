@@ -734,3 +734,10 @@ worktree) and check:
 - **2026-10-02 — "Watch with sound" removed** (Lee). It doubled Vimeo's own Unmute badge, and
   Vimeo moves that badge between screen sizes, so covering it wasn't reliable. The trailer still
   autoplays muted with captions; visitors unmute with Vimeo's button.
+- **2026-10-02 — Soft launch** (Lee, after closing). `unlisted` removed from the course: it is
+  now the home page's featured course, is listed on `/courses/`, and is in the sitemap. The
+  launch offer page stays unlisted, as all offers are. The webinar page (B5) was renamed to
+  *When the Cloud Savings Stop*, at `/webinars/when-the-cloud-savings-stop/`
+  (`src/webinars/when-the-cloud-savings-stop.erb`), with the line "Why the finance playbook stops
+  finding money, and the architecture decisions that set your cloud bill." It is still hidden
+  until the LinkedIn Event exists. This supersedes B5's and Q3's title and slug.

@@ -1,8 +1,8 @@
 ---
 layout: default
 page_class: "course webinar selling"
-title: "Why Finance Can't Fix Your Cloud Bill"
-description: "A free webinar from Lee Atchison: why the finance playbook stops finding money, and the design decisions that drive your cloud bill."
+title: "When the Cloud Savings Stop"
+description: "Why the finance playbook stops finding money, and the architecture decisions that set your cloud bill."
 image: /images/sales/architecting-for-cost/og.png
 # Supporting page (Spec0031 §B5), same pattern as architecting-with-ai.erb.
 # `state` is upcoming or replay. Hidden until the LinkedIn Event exists.
@@ -24,8 +24,7 @@ hidden: true
   course_url = relative_url current_offer_url(data.product, data.offer_slug)
 %>
 
-<%# PLACEHOLDER: the one-line description is the webinar topic from
-    Marketing Plan.md §5.5, pending the copy file. %>
+<%# Title and one-line description: Lee, 2026-10-02. %>
 <section class="course-header">
   <div class="course-header-inner">
     <div class="course-badge-row">
@@ -33,7 +32,7 @@ hidden: true
       <span class="course-stat-line"><%= data.state == "replay" ? "Replay" : data.starts_at %></span>
     </div>
     <h1><%= data.title %></h1>
-    <p class="webinar-lead">Why the finance playbook stops finding money, and the design decisions that drive the bill.</p>
+    <p class="webinar-lead">Why the finance playbook stops finding money, and the architecture decisions that set your cloud bill.</p>
     <div class="webinar-actions">
       <% if data.state == "upcoming" %>
         <% if data.linkedin_event_url.to_s != "" %>
