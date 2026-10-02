@@ -1,7 +1,7 @@
 # Academy sales pages, offer landing pages, and the Architecting for Cost launch pages
 
 * **ID:** Spec0031
-* **Status:** Defining
+* **Status:** Implementing
 * **Date Created:** 2026-10-02
 * **Systems Impacted:** AtchisonAcademy, shared *(one course file: `shared/_courses/architecting-for-cost.md`)*
 
@@ -429,6 +429,10 @@ does, and the Kit signup form (email only).
   page must build without it.
 - Embed pattern: the same Kit script embed as `ownership-workshop.erb`.
 - Indexed and in the sitemap. It is public by design.
+- **Goes live early, not at launch** (Lee, 2026-10-02). It carries its own
+  `hidden: true` until the Kit form's `uid` is wired in. Then its `hidden` is
+  removed, ahead of Oct 26, so the signup runs live but unpromoted during the
+  build window.
 
 ## B4. Welcome page (W4) — `/courses/architecting-for-cost/welcome/`
 
@@ -479,6 +483,18 @@ The home page leads with the Academy's own courses. Sections, in order:
 Copy for the hero, "how it works" and about sections comes from the copy file
 (B1).
 
+**The home page must be safe to merge before launch** (Lee, 2026-10-02). Each
+new section appears only once what it points to is public:
+
+- **Featured course** and **How Academy courses work** — only when a visible
+  course carries `spotlight_academy`. While the course is hidden, production
+  drops it, so both sections hide.
+- **The free worksheet** — only when the free worksheet page (B3) is not
+  hidden.
+
+So production never links to a hidden page, and the new sections go live with
+the launch switch (B8) or, for the worksheet, when its page does (B3).
+
 ## B7. Assets
 
 From Dropbox into `assets_inbox/`, then resized into
@@ -494,8 +510,9 @@ From Dropbox into `assets_inbox/`, then resized into
 The course stays `hidden: true` through the build, so production does not
 show it, while deploy previews do. **Going live is one change:** remove
 `hidden: true` from the course file. The launch page inherits it (A6), so it
-goes live in the same change. The welcome and free worksheet pages carry their
-own `hidden: true`, removed in the same commit. *Leave `hidden` in place; Lee decides
+goes live in the same change. The welcome page carries its
+own `hidden: true`, removed in the same commit. The free worksheet page goes
+live earlier, on its own (B3). *Leave `hidden` in place; Lee decides
 when to ship.*
 
 ## B9. Launch checklist (Lee, outside the repo)
@@ -567,6 +584,10 @@ worktree) and check:
 12. Production build (`hidden: true` still set): the sales, launch, welcome and
     free worksheet pages do not exist, and are absent from the sitemap. On a
     deploy preview they all render.
+13. Production build, home page: with the course and worksheet page hidden,
+    none of the new sections show and nothing links to a hidden page. Unhide
+    only the worksheet page: its home section appears, the course sections
+    don't.
 
 ---
 
