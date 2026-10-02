@@ -1,8 +1,9 @@
 # Academy sales pages, offer landing pages, and the Architecting for Cost launch pages
 
 * **ID:** Spec0031
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-10-02
+* **Date Implemented:** 2026-10-02
 * **Systems Impacted:** AtchisonAcademy, shared *(one course file: `shared/_courses/architecting-for-cost.md`)*
 
 ---
@@ -334,10 +335,19 @@ features of `_head.erb` and the layouts, not per page.
 
 The trailer is hosted on Vimeo, like every course video.
 
-- **Click to play, never autoplay.** Show a poster image with a play button.
-  Load the Vimeo player only when it is clicked. This keeps the hero fast and
-  keeps Vimeo's scripts off pages where nobody plays the video.
-- **Captions on by default** (Vimeo's `texttrack` player parameter).
+- **Sales and offer pages: muted autoplay** (Lee, 2026-10-02; this replaced
+  the original click-to-play). The player loads on page open with the Vimeo
+  parameters `autoplay=1&muted=1&texttrack=en`. **Vimeo's own Unmute
+  button** turns the sound on. There is no button of our own: a "Watch with
+  sound" prompt was built, and then removed at Lee's request (2026-10-02)
+  because it doubled Vimeo's.
+- **Everywhere else: click to play.** That means the home page's featured
+  course. A poster image with a play button renders, and the Vimeo player
+  loads only when it is clicked.
+- **Reduced motion:** a visitor whose browser asks for reduced motion gets
+  click to play on every page, as BRAND.md §8 requires.
+- **Captions on by default** (Vimeo's `texttrack` player parameter), in every
+  case.
 - **Domain privacy.** The Vimeo embed lock is currently set to
   `courses.atchisonacademy.com`. The trailer either needs `atchisonacademy.com`
   added to its allowed domains, or should be a public video. *Lee sets this in
@@ -603,7 +613,10 @@ worktree) and check:
    Check with a LinkedIn Post Inspector run on the deploy preview.
 9. At phone width: hero order is headline → trailer → Buy, and Buy is visible
    without scrolling.
-10. Trailer: click to play, captions on, no Vimeo requests before the click.
+10. Trailer: on the sales and launch pages it starts playing muted on load,
+    with captions on, and Vimeo's Unmute button turns the sound on. On the home page, and
+    for reduced-motion visitors, it is click to play with no Vimeo requests
+    before the click.
 11. Home page: featured course shows from `spotlight_academy`; removing the
     key hides the section cleanly.
 12. Production build (`hidden: true` still set): the sales, launch, welcome and
@@ -708,3 +721,16 @@ worktree) and check:
   once the course is no longer `unlisted`. *The Floor* short (`1232442814`) was not added to
   the launch page: a second video at the top would compete with the trailer and push Buy below
   the fold on phones.
+- **2026-10-02 — Closed and archived** (Lee). Shipped to production in `d5d3655`, `4fde94b` and
+  `4cb5f10`. The sales, launch, welcome, free worksheet and thanks pages are live; the sales and
+  launch pages are unlisted. The webinar page stays hidden until its LinkedIn Event exists.
+  Lee's open B9 checklist items continue outside this spec.
+- **2026-10-02 — Trailer: muted autoplay on the sales and launch pages** (Lee, after closing). A9
+  and testing step 10 were rewritten to match: the trailer autoplays muted with
+  `autoplay=1&muted=1&texttrack=en`, and a centered "Watch with sound" button unmutes it and
+  restarts it. Tested on the launch page: after the click the volume is 1, the player is unmuted
+  and playing from the start, and the button is gone. The home page and reduced-motion visitors
+  keep click to play.
+- **2026-10-02 — "Watch with sound" removed** (Lee). It doubled Vimeo's own Unmute badge, and
+  Vimeo moves that badge between screen sizes, so covering it wasn't reliable. The trailer still
+  autoplays muted with captions; visitors unmute with Vimeo's button.

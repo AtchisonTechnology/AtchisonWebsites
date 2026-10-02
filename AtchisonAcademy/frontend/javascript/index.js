@@ -132,21 +132,35 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
-// Trailer (§A9): click to play, never autoplay. The Vimeo iframe is created
-// only on click, so no Vimeo request is made before then. Captions on by
-// default via texttrack.
+// Trailer (§A9). Captions on via texttrack in every case.
+//
+// [data-trailer-autoplay] (sales and offer page heroes): the player loads at
+// once, muted. Vimeo's player shows its own Unmute button for that.
+//
+// Otherwise, or when the visitor prefers reduced motion: click to play. The
+// iframe is created only on click, so no Vimeo request happens before then.
 document.addEventListener("DOMContentLoaded", () => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+  const loadPlayer = (trailer, { muted }) => {
+    const params = new URLSearchParams({ autoplay: "1" })
+    if (muted) params.set("muted", "1")
+    params.set("texttrack", "en")
+
+    const iframe = document.createElement("iframe")
+    iframe.src = `https://player.vimeo.com/video/${trailer.dataset.vimeoId}?${params}`
+    iframe.title = "Course trailer"
+    iframe.allow = "autoplay; fullscreen; picture-in-picture"
+    iframe.allowFullscreen = true
+    trailer.replaceChildren(iframe)
+    trailer.classList.add("is-playing")
+  }
+
   document.querySelectorAll("[data-trailer]").forEach((trailer) => {
-    const button = trailer.querySelector("button")
-    button?.addEventListener("click", () => {
-      const iframe = document.createElement("iframe")
-      const params = new URLSearchParams({ autoplay: "1", texttrack: "en", dnt: "1" })
-      iframe.src = `https://player.vimeo.com/video/${trailer.dataset.vimeoId}?${params}`
-      iframe.title = "Course trailer"
-      iframe.allow = "autoplay; fullscreen; picture-in-picture"
-      iframe.allowFullscreen = true
-      trailer.replaceChildren(iframe)
-      trailer.classList.add("is-playing")
-    })
+    if (trailer.hasAttribute("data-trailer-autoplay") && !reducedMotion) {
+      loadPlayer(trailer, { muted: true })
+    } else {
+      trailer.querySelector("button")?.addEventListener("click", () => loadPlayer(trailer, { muted: false }))
+    }
   })
 })

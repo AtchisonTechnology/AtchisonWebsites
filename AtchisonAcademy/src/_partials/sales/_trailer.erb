@@ -1,10 +1,16 @@
-<%# Click to play, never autoplay (Spec0031 §A9). The Vimeo player loads only
-    on click, so no Vimeo request is made before then; captions are on by
-    default (texttrack). While there is no trailer, the course image stands
-    in the video's place. %>
+<%# The trailer (Spec0031 §A9). Captions on by default (texttrack).
+
+    With `autoplay: true` (the sales and offer page heroes), the player loads
+    on page open, muted; Vimeo's own Unmute button turns the sound on. Without it (the home page's featured course),
+    it's click to play: the poster and a play button render, and the Vimeo
+    player loads only on click. Visitors who ask for reduced motion always
+    get click to play. frontend/javascript/index.js does the loading.
+
+    While there is no trailer, the course image stands in the video's place. %>
 <% sales = page.sales %>
+<% trailer_autoplay = (defined?(autoplay) && autoplay) ? true : false %>
 <% if page.trailer_id %>
-  <div class="sales-trailer" data-trailer data-vimeo-id="<%= page.trailer_id %>">
+  <div class="sales-trailer" data-trailer data-vimeo-id="<%= page.trailer_id %>"<% if trailer_autoplay %> data-trailer-autoplay<% end %>>
     <button type="button" class="sales-trailer-play" aria-label="Play the trailer">
       <img src="<%= relative_url(sales.trailer.poster || sales.hero_image) %>" width="1280" height="720" alt="" />
       <span class="sales-trailer-icon" aria-hidden="true">&#9654;</span>

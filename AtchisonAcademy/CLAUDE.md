@@ -317,9 +317,12 @@ else a sales or offer page's `og_image`, else `/images/og-card.png`. Every
 one must be 1200×630. The description falls back to the sales data file's
 `description`.
 
-**Trailer.** The trailer is Vimeo, click to play. The poster and a play
-button render first, and the iframe (`autoplay=1&texttrack=en`) is created
-only on click, so no Vimeo request happens before then. While `vimeo_id` is
+**Trailer.** The trailer is on Vimeo, with captions on (`texttrack=en`)
+everywhere. In the sales and offer page heroes (`render "sales/trailer", ...,
+autoplay: true`), it starts muted on page load (`autoplay=1&muted=1`), and
+Vimeo's own Unmute button turns the sound on. Everywhere
+else, and for visitors who prefer reduced motion, it's click to play: the
+poster and a play button render, and the iframe is created only on click. While `vimeo_id` is
 null, the hero shows `hero_image` instead. The trailer's Vimeo privacy must
 allow `atchisonacademy.com`, because course videos are locked to
 `courses.atchisonacademy.com`.
