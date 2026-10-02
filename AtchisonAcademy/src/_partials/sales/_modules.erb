@@ -1,0 +1,19 @@
+<% modules = page.sales.modules %>
+<% if modules && modules.items.to_a.any? %>
+<section class="sales-section">
+  <div class="sales-inner">
+    <h2><%= modules.heading %></h2>
+    <% if modules.intro %>
+      <p class="sales-intro"><%= sales_text modules.intro, page.sales %></p>
+    <% end %>
+    <ol class="sales-modules">
+      <% modules.items.each do |mod| %>
+        <li>
+          <h3><%= mod.title %></h3>
+          <p><%= sales_text mod.summary, page.sales %></p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</section>
+<% end %>

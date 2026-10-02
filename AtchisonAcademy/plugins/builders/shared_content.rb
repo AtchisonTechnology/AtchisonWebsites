@@ -14,8 +14,10 @@
 #
 # It also validates each course's `availability`/`prelaunch_*` keys and drops
 # any resource carrying `hidden: true` from production builds (Spec0010).
+# The same `hidden?` rule also drops hidden standalone pages (`src/**/*.erb`),
+# and `offers.rb` applies it to offer pages (Spec0031) — one rule, not copies.
 #
-# See Spec0008, Spec0009, and Spec0010.
+# See Spec0008, Spec0009, Spec0010, and Spec0031.
 require "uri"
 
 class Builders::SharedContent < SiteBuilder
@@ -58,8 +60,13 @@ class Builders::SharedContent < SiteBuilder
           apply_canonical!(resource)
         end
         resources.select! { |resource| resource.data[SHOW_FLAG] }
-        resources.reject! { |resource| hidden?(resource) }
+        resources.reject! { |resource| self.class.hidden?(resource) }
       end
+
+      # Standalone pages honor `hidden: true` too (Spec0031): a pre-launch
+      # welcome or signup page stays out of production, its sitemap and its
+      # redirects, while deploy previews still render it.
+      site.collections["pages"].resources.reject! { |resource| self.class.hidden?(resource) }
     end
 
     # Template helper for a pre-launch course's two CTA buttons. `prelaunch_url`
@@ -198,7 +205,10 @@ class Builders::SharedContent < SiteBuilder
   # This runs after `validate!`, so a hidden item's front matter is still
   # checked on every production build — a draft cannot rot into an invalid
   # state while nobody is looking at it.
-  def hidden?(resource)
+  #
+  # Public, as a class method, so `offers.rb` applies this exact rule rather
+  # than a copy of it (Spec0031).
+  def self.hidden?(resource)
     return false unless resource.data[:hidden]
 
     Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"

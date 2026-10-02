@@ -1,0 +1,29 @@
+---
+layout: default
+page_class: "course selling"
+title: "Thanks"
+description: "Thanks for answering."
+# Supporting page (Spec0031 §B3a): where the three Kit Link Triggers in the
+# free Cost Attribution Worksheet's confirmation email land, after Kit tags
+# the reader's answer. Reached only from that email, so unlisted. Live with
+# the free worksheet page (§B3): their `hidden` came off together, 2026-10-02.
+noindex: true
+sitemap_exclude: true
+---
+
+<%# Copy: final, from Lee (2026-10-02). Same look as the free worksheet
+    page. No price, no Buy button, no amber. %>
+<div class="selling-page">
+  <header class="selling-page-header">
+    <div class="sales-inner">
+      <h1>Thanks. That helps.</h1>
+    </div>
+  </header>
+
+  <div class="selling-page-body">
+    <div class="sales-inner">
+      <p>Your answer tells me which cost problems to write about next.</p>
+      <p><a href="<%= relative_url '/free/cost-attribution-worksheet/' %>">Back to the Cost Attribution Worksheet &rarr;</a></p>
+    </div>
+  </div>
+</div>

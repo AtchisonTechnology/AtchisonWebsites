@@ -1,0 +1,57 @@
+---
+layout: default
+page_class: "course selling"
+title: "You're in"
+description: "What to do next after buying Architecting for Cost."
+# Supporting page (Spec0031 §B4): where Kit sends buyers after checkout.
+# Unlisted. Hidden in production until launch; remove `hidden` in the same
+# commit as the course's (§B8). After it ships, set the Kit product's
+# after-purchase link to this URL.
+noindex: true
+sitemap_exclude: true
+hidden: true
+---
+
+<%# The sign-in facts below come from Cedarras's own code (rails-backend:
+    EnrollmentMailer, PasswordSetupsController, the /login and /password/new
+    routes), read 2026-10-02:
+    - A Kit purchase tags the buyer; a Kit webhook makes Cedarras enroll them,
+      usually within minutes.
+    - A first-time student gets "Welcome — you now have access to <course>"
+      from Cedarras <no-reply@cedarras.com>, with a one-time "Set your
+      password" link (expires in 7 days; passwords are 12+ characters).
+      Setting it does not sign them in; they then sign in at /login.
+    - A returning student gets "You now have access to <course>" and just
+      signs in.
+    - A lost or expired link: /password/new sends a fresh one.
+    Re-check these if Cedarras's emails change. %>
+<%# Copy: Sales Page Copy.md §3, approved by Lee 2026-10-02. Steps 1 and 2
+    agree with the facts above. Two additions, Lee 2026-10-02: step 1 names
+    Cedarras as the sender (by name only; no email address on the page), and
+    the "new link" line covers a lost or expired set-password link. %>
+<% sales = site.data.sales["architecting-for-cost"] %>
+
+<div class="selling-page">
+  <header class="selling-page-header">
+    <div class="sales-inner">
+      <h1>You're in.</h1>
+      <p>Thanks for buying Architecting for Cost.</p>
+    </div>
+  </header>
+
+  <div class="selling-page-body">
+    <div class="sales-inner">
+      <ol class="selling-steps">
+        <li><strong>Check your email.</strong> Your sign-in details are on the way from Cedarras, the platform the course runs on. Give it a few minutes, and check your spam folder if it doesn't show up.</li>
+        <li><strong>Set your password.</strong> If this is your first Atchison Academy course, the email has a link to set one.</li>
+        <li><strong>Sign in and start.</strong> Lesson one is about why the finance playbook stops finding money.</li>
+      </ol>
+
+      <p><a href="https://courses.atchisonacademy.com/" class="btn btn-deep">Go to your course &rarr;</a></p>
+
+      <p>No email, or the link expired? <a href="https://courses.atchisonacademy.com/password/new">Get a new link</a> using the email you bought with.</p>
+
+      <p>Questions? <%= sales_text "{contact}", sales %></p>
+    </div>
+  </div>
+</div>

@@ -434,6 +434,29 @@ does, and the Kit signup form (email only).
   removed, ahead of Oct 26, so the signup runs live but unpromoted during the
   build window.
 
+## B3a. Worksheet answer thanks page — `/free/cost-attribution-worksheet/thanks/`
+
+Source: `AtchisonAcademy/src/free/cost-attribution-worksheet/thanks.erb`.
+
+The landing page for the three Kit Link Triggers in the free Cost Attribution
+Worksheet's confirmation email. Readers click one of three answers to *"When
+you flag a cost problem caused by an architectural decision, what happens?"*
+Kit tags the click, then sends them here. The page only says thanks.
+
+**Copy** (final, Lee 2026-10-02; don't rewrite):
+
+- Headline: *Thanks. That helps.*
+- Body: *Your answer tells me which cost problems to write about next.*
+- Link: *Back to the Cost Attribution Worksheet* → `/free/cost-attribution-worksheet/`
+
+**Rules:**
+
+- `noindex`, and excluded from the sitemap. It's only reached from an email.
+- No Buy button and no price. It doesn't use the amber call-to-action color.
+- Same look as the free worksheet page (B3).
+- Hidden until launch, the same as the free worksheet page: `hidden: true`,
+  removed in the same commit as B3's.
+
 ## B4. Welcome page (W4) — `/courses/architecting-for-cost/welcome/`
 
 Where Kit sends buyers after checkout. `noindex`, not in the sitemap.
@@ -512,7 +535,8 @@ show it, while deploy previews do. **Going live is one change:** remove
 `hidden: true` from the course file. The launch page inherits it (A6), so it
 goes live in the same change. The welcome page carries its
 own `hidden: true`, removed in the same commit. The free worksheet page goes
-live earlier, on its own (B3). *Leave `hidden` in place; Lee decides
+live earlier, on its own (B3), and its thanks page (B3a) goes live in the same
+commit as it. *Leave `hidden` in place; Lee decides
 when to ship.*
 
 ## B9. Launch checklist (Lee, outside the repo)
@@ -524,6 +548,7 @@ when to ship.*
 5. Test purchase end to end with a 100%-off link: sales page → checkout →
    welcome page → enrollment email → Cedarras sign-in.
 6. Deploy again on Thu Nov 26, the day after the launch offer's `redirect_at`.
+7. Point the three worksheet answer Link Triggers in Kit at https://atchisonacademy.com/free/cost-attribution-worksheet/thanks/
 
 ---
 
@@ -588,6 +613,11 @@ worktree) and check:
     none of the new sections show and nothing links to a hidden page. Unhide
     only the worksheet page: its home section appears, the course sections
     don't.
+14. Worksheet thanks page (B3a): it renders at
+    `/free/cost-attribution-worksheet/thanks/` with the final copy and a link
+    back to the worksheet page; it carries `noindex`; it is absent from
+    `sitemap.xml`; and a production build (`hidden: true` still set) leaves
+    it out, while a deploy preview renders it.
 
 ---
 
@@ -597,7 +627,70 @@ worktree) and check:
    section partials, `offers.rb`, `_redirects.erb`, `_head.erb` (noindex and
    social image), Buy-link script, Fathom event, trailer embed.
 2. `BRAND.md` copied in; `CLAUDE.md` section and checklist (A10).
-3. Part B pages: sales, launch, free worksheet, welcome, webinar, home.
+3. Part B pages: sales, launch, free worksheet, worksheet thanks, welcome, webinar, home.
 4. Assets into `src/images/sales/architecting-for-cost/`.
 5. Testing above, on a deploy preview.
 6. Lee: the B9 checklist, and the ship decision.
+
+---
+
+## History of Updates
+
+- **2026-10-02 — Implemented on `main` (not committed).** Parts A and B built and tested as
+  specified. Deviations and additions, each for a reason:
+  - **`src/redirects.erb`, not `src/_redirects.erb`.** Bridgetown ignores source files that
+    start with `_`; the permalink is still `/_redirects`.
+  - **Buy buttons open Kit's checkout overlay** (`data-commerce` + Kit's `commerce.js`, the
+    same embed as SoftwareArchitectureInsights' `donate.erb`), at Lee's request during
+    implementation, rather than navigating to the Kit product page. Verified: the launch
+    overlay shows $695 struck through and $495.
+  - **Sales copy** is `Sales Page Copy.md` (approved by Lee 2026-10-02, arrived during
+    implementation), transcribed verbatim. Its structure added a "The problem" section after
+    the hero, a tagline line in the hero, per-page Buy labels ("Buy the course" / "Get the
+    launch price"), and an offer `end_line:` override for the launch page's own end-date
+    wording. `[contact]` renders as a "Contact me" link to `https://leeatchison.com/contact`
+    (Q1).
+  - **Welcome page sign-in steps** were checked against Cedarras's own code (enrollment and
+    password-setup mailers and the `/login` and `/password/new` routes). The approved copy agrees
+    with them.
+  - **Selling pages carry the `course` body class**, set by `offers.rb` on sales and offer
+    pages and by `page_class` on supporting pages. It opts them out of the boxed generic-page
+    CSS the way the webinar pages already do, without editing selectors kept identical to
+    LeeAtchison's copy.
+  - **On phones, the hero drops the tagline** (and on an offer page, the pitch, which the intro
+    stands in for), so Buy stays above the fold: 568px on the sales page and 631px on the
+    launch page, at 375×812.
+  - **`spotlight_academy: true`** added to the course file to feature it on the home page
+    (§B6). The home page's old "Start Learning Today" band was replaced by the newsletter
+    signup (§B6 item 7), using SAI's inline Kit form `c448363077`.
+  - **Free worksheet page copy** reuses the home page's approved worksheet section. The copy
+    file has nothing specific to that page.
+  - **Ownership Workshop migration** added to `_Projects.md` as a future idea.
+- **2026-10-02 — Added B3a, the worksheet answer thanks page** (Lee). It is where the three Kit
+  Link Triggers in the worksheet confirmation email land. Built at
+  `src/free/cost-attribution-worksheet/thanks.erb` with Lee's final copy: `noindex`,
+  sitemap-excluded, no price or Buy button, and hidden until launch alongside B3. Added testing
+  step 14 and launch checklist item 7. Verified: it renders in dev with `noindex` and no sitemap
+  entry, a production build leaves it out, and a deploy preview renders it.
+- **2026-10-02 — Lee's decisions on the implementation review.**
+  - **UTM values:** the UTM Standard was updated to match the code rather than the other way
+    round. It gains source `atchisonacademy`, medium `web`, named campaign `afc-launch`, the
+    `hero`/`price`/`footer` Buy-button positions, and a new *Atchison Academy Buy Buttons*
+    section. That section records two rules: the sales page Buy button deliberately carries no
+    `utm_campaign`, and tags a visitor arrives with win over the page's own.
+  - **Access length:** resolved. The FAQ's "does not expire" stands.
+  - **Refund FAQ:** no email address goes on the public page. Buyers get it from the Cedarras
+    email.
+  - **Welcome page:** step 1 now names Cedarras as the sender (by name, with no address), and a
+    "Get a new link" line points to `courses.atchisonacademy.com/password/new` for a lost or
+    expired set-password link.
+- **2026-10-02 — Worksheet form wired in; launch hero settled.**
+  - The Kit form `4628ece1f7` (Lee) is set as `kit_form_uid` on the free worksheet page. Per
+    B3, that page's `hidden` came off, along with the B3a thanks page's in the same change.
+    Production builds now publish both: the worksheet page is indexed and in the sitemap, the
+    thanks page is `noindex` and excluded, and the home page's worksheet section appears. Every
+    course page stays hidden.
+  - **Offer hero (Lee: "make it right"):** an offer's `intro` now replaces the sales pitch under
+    the headline rather than sitting above it. So the launch hero reads: headline, launch intro,
+    tagline (dropped on phones), then price and Buy.
+  - The home page hero going live before launch: Lee doesn't mind, so no change.

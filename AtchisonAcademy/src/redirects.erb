@@ -1,0 +1,20 @@
+---
+# Netlify _redirects (Spec0031 §A7). The source file can't itself be named
+# _redirects.erb: Bridgetown ignores any source file starting with "_".
+#
+# One forced 302 per offer page whose redirect_at has passed at build time
+# (offer_state: ended, set by plugins/builders/offers.rb), sending it to its
+# product's sales page. 302, not 301: the URL may be reused by a later
+# campaign. The "!" is required — the ended page's file is still in the
+# output, and Netlify serves an existing file over an unforced rule.
+# Hidden offers are dropped before this renders, so they never get a rule.
+#
+# This only takes effect at the next deploy after redirect_at; the in-page
+# redirect in frontend/javascript/index.js covers the gap.
+layout: none
+permalink: /_redirects
+sitemap_exclude: true
+---
+<% site.collections["offers"].resources.select { |o| o.data.offer_state == "ended" }.sort_by(&:relative_url).each do |offer| %>
+<%= offer.relative_url %>  <%= site.data.sales[offer.data.product].sales_url %>  302!
+<% end %>

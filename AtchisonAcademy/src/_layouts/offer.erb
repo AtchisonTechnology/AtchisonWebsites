@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<%# An offer page (Spec0031 §A5): the product's sales page, rendered from the
+    same data file and partials, with this offer's price, Buy link and copy
+    overrides. Validated, unlisted and given `offer_state` by
+    plugins/builders/offers.rb.
+
+    The redirect marker is the in-page half of §A7: once `redirect_at` has
+    passed on the visitor's clock, frontend/javascript/index.js sends them to
+    the sales page. The durable half is the forced 302 in src/redirects.erb,
+    from the next deploy on. %>
+<% page = selling_page(resource) %>
+<% if data.redirect_at %>
+  <div hidden data-offer-redirect-at="<%= data.redirect_at.iso8601 %>"
+       data-offer-redirect-to="<%= relative_url page.sales.sales_url %>"></div>
+<% end %>
+<%= render "sales/page", page: page, body: yield %>

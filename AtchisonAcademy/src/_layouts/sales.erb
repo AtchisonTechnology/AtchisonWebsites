@@ -1,0 +1,7 @@
+---
+layout: default
+---
+
+<%# A product's sales page (Spec0031 §A1). Every word comes from the data file
+    named by `sales_data:` — see src/_data/sales/ and src/_partials/sales/. %>
+<%= render "sales/page", page: selling_page(resource), body: yield %>

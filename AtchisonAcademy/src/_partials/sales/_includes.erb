@@ -1,0 +1,22 @@
+<%# The artifact list follows the last item, which introduces it. %>
+<% includes = page.sales.includes %>
+<% if includes && includes.items.to_a.any? %>
+<section class="sales-section sales-section--alt">
+  <div class="sales-inner">
+    <h2><%= includes.heading %></h2>
+    <% includes.items.each do |item| %>
+      <p><%= sales_text item, page.sales %></p>
+    <% end %>
+    <% if includes.artifacts.to_a.any? %>
+      <ul class="sales-artifacts">
+        <% includes.artifacts.each do |artifact| %>
+          <li><%= artifact %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if includes.closing %>
+      <p class="sales-closing-line"><%= sales_text includes.closing, page.sales %></p>
+    <% end %>
+  </div>
+</section>
+<% end %>

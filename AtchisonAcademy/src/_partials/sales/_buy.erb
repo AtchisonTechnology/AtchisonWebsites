@@ -1,0 +1,26 @@
+<%# Price, Buy button and (offer pages only) the end-date line. `content` is
+    the button's position — hero, price or footer — and becomes its
+    utm_content. data-buy marks the link for the arrival-UTM copier and the
+    Fathom click event in frontend/javascript/index.js. data-commerce makes
+    Kit's commerce.js (loaded once per page in _page.erb) open the checkout
+    as an overlay on this page; it reads the href at click time, so the
+    coupon and tracking tags go through. Without the script it is an
+    ordinary link to the Kit product page. `detail`, if given,
+    is a line between the price and the button. %>
+<% buy_detail = (defined?(detail) && detail) || nil %>
+<div class="sales-buy">
+  <p class="sales-price">
+    <span class="sales-price-amount"><%= page.money(page.price) %></span>
+    <% if page.offer? %>
+      <span class="sales-price-regular">(regularly <%= page.money(page.standard_price) %>)</span>
+    <% end %>
+  </p>
+  <% if buy_detail %>
+    <p class="sales-buy-detail"><%= sales_text buy_detail, page.sales %></p>
+  <% end %>
+  <a href="<%= page.buy_url(content) %>" class="btn btn-buy" data-buy data-commerce
+     data-fathom-event="<%= page.fathom_event %>"><%= page.buy_label %></a>
+  <% if page.end_line %>
+    <p class="sales-end"><%= page.end_line %></p>
+  <% end %>
+</div>

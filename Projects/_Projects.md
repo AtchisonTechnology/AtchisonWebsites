@@ -18,6 +18,14 @@ remove it from this list.
 - **Notes:** Any additional context, open questions, or considerations.
 -->
 
+### Move the Ownership Workshop page onto the sales layout
+- **Description:** `AtchisonAcademy/src/ownership-workshop.erb` is hand-built. Rebuild it as a
+  sales page (`layout: sales` + a `src/_data/sales/ownership-workshop.yml`) so it gains offer
+  pages, Buy-link tracking and the Fathom Buy event for free.
+- **Notes:** Out of scope for Spec0031, which built the mechanism. The page works as is; its
+  SavvyCal booking flow and Kit question form would need sections the sales partials don't
+  have yet. Added 2026-10-02.
+
 ---
 
 ## New Items Needing Specs/Bugs

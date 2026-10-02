@@ -1,0 +1,63 @@
+---
+layout: default
+page_class: "course webinar selling"
+title: "Why Finance Can't Fix Your Cloud Bill"
+description: "A free webinar from Lee Atchison: why the finance playbook stops finding money, and the design decisions that drive your cloud bill."
+image: /images/sales/architecting-for-cost/og.png
+# Supporting page (Spec0031 §B5), same pattern as architecting-with-ai.erb.
+# `state` is upcoming or replay. Hidden until the LinkedIn Event exists.
+state: upcoming
+starts_at: "Thursday, November 19, 10am Pacific"
+linkedin_event_url: ""          # TODO: the LinkedIn Event, once created
+replay_url: ""                  # set when state: replay
+# The replay page links to this offer while it is active, else to the
+# product's sales page.
+product: architecting-for-cost
+offer_slug: launch
+hidden: true
+---
+
+<%
+  unless %w[upcoming replay].include?(data.state)
+    raise "#{resource.relative_path}: state: #{data.state} must be upcoming or replay"
+  end
+  course_url = relative_url current_offer_url(data.product, data.offer_slug)
+%>
+
+<%# PLACEHOLDER: the one-line description is the webinar topic from
+    Marketing Plan.md §5.5, pending the copy file. %>
+<section class="course-header">
+  <div class="course-header-inner">
+    <div class="course-badge-row">
+      <span class="course-platform-badge">Free Webinar</span>
+      <span class="course-stat-line"><%= data.state == "replay" ? "Replay" : data.starts_at %></span>
+    </div>
+    <h1><%= data.title %></h1>
+    <p class="webinar-lead">Why the finance playbook stops finding money, and the design decisions that drive the bill.</p>
+    <div class="webinar-actions">
+      <% if data.state == "upcoming" %>
+        <% if data.linkedin_event_url.to_s != "" %>
+          <%# LinkedIn is third-party, so it opens in a new tab. %>
+          <a href="<%= data.linkedin_event_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Register on LinkedIn &rarr;</a>
+        <% else %>
+          <span class="selling-placeholder">LinkedIn Event URL not set yet</span>
+        <% end %>
+      <% else %>
+        <% if data.replay_url.to_s != "" %>
+          <a href="<%= data.replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the Replay &rarr;</a>
+        <% end %>
+        <a href="<%= course_url %>" class="btn btn-outline">See the course &rarr;</a>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="course-body">
+  <div class="course-body-inner">
+    <% if data.state == "upcoming" %>
+      <p>A free 30-minute webinar on <%= data.starts_at %>. Register through the LinkedIn Event.</p>
+    <% else %>
+      <p>The replay is free. The webinar is the premise of the course <a href="<%= course_url %>">Architecting for Cost</a>.</p>
+    <% end %>
+  </div>
+</section>

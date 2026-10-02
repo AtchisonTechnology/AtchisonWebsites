@@ -1,0 +1,145 @@
+# Sales data for Architecting for Cost (Spec0031 §A4).
+#
+# EVERYTHING the sales page shows comes from this file, and every offer page
+# for this product (src/_offers/architecting-for-cost-*.md) reads it too, so
+# an edit here carries through to all of them. The partials in
+# src/_partials/sales/ contain no product-specific words.
+#
+# COPY SOURCE: `architecting-for-cost/Marketing/Sales Page Copy.md` in
+# Dropbox, approved by Lee 2026-10-02, transcribed verbatim. Until the page
+# ships that file is the source; once it ships, THIS file is the source and
+# the Dropbox file is marked superseded (the same rule Spec0025 used).
+#
+# Text fields go through the `sales_text` helper (plugins/builders/offers.rb):
+# HTML is escaped, then *italic*, **bold**, and {contact} — a link to
+# contact_url labelled contact_label, standing in for the copy file's
+# [contact] — are expanded. Nothing else is interpreted.
+
+product: architecting-for-cost          # must match this file's name
+sales_url: /courses/architecting-for-cost/
+title: "Architecting for Cost"
+hook: "Finance can't fix your cloud bill."
+pitch: "Your architecture caused it, and only architecture decisions can change it."
+tagline: "A self-paced video course for software architects and engineering leaders."
+# The page's meta and social description: hook, pitch and tagline together.
+description: "Finance can't fix your cloud bill. Your architecture caused it, and only architecture decisions can change it. A self-paced video course for software architects and engineering leaders."
+
+price: 695
+currency: USD
+buy_url: "https://softwarearchitectureinsights.kit.com/products/architecting-for-cost"  # Lee 2026-10-02 (Q2)
+buy_label: "Buy the course"
+# Fathom event name for Buy clicks on the sales page; offer pages append
+# their own slug (e.g. buy-architecting-for-cost-launch).
+fathom_event: buy-architecting-for-cost
+
+# Contact link for the copy's [contact] (Spec0031 Q1, Lee 2026-10-02).
+contact_url: "https://leeatchison.com/contact"
+contact_label: "Contact me"
+
+# Fallback image for the hero while there is no trailer, and the trailer's
+# poster once there is one. 1280×720.
+hero_image: /images/sales/architecting-for-cost/hero.jpg
+hero_image_alt: "An architect's drawing of a set of buildings, with lines running from them into a stack of coins"
+trailer:
+  vimeo_id: null                        # the hero shows hero_image while null (A9)
+  poster: /images/sales/architecting-for-cost/hero.jpg
+og_image: /images/sales/architecting-for-cost/og.png   # 1200×630
+
+# ORDER and PRESENCE of the sections below the hero. An optional section with
+# no content (quotes) hides itself.
+sections:
+  - problem
+  - who
+  - modules
+  - includes
+  - about
+  - price
+  - quotes
+  - faq
+
+problem:
+  heading: "The savings dried up. The bill didn't."
+  paragraphs:
+    - "Your company did the sensible things. It tagged everything, shrank the oversized servers, turned off what nobody used, and bought reserved capacity."
+    - "The first pass found real money. The second found a little. By the third, it took weeks of engineering time to find a rounding error."
+    - "And the bill is climbing again..."
+    - "That's the floor. Finance can run the playbook perfectly and still get stuck there. Everything below the floor was set by design decisions. How many services you run. Where your data lives and how often it moves. How fast you need to recover when something breaks."
+    - "Each of those choices came with a monthly invoice. Nobody saw it when the choice was made."
+
+who:
+  heading: "Who this course is for"
+  items:
+    - "**Architects and senior engineers** who've been handed a cost target. You can name your five biggest line items. You can't yet say which design decision caused any of them."
+    - "**Engineering leaders and CTOs** who ran the finance playbook, hit its floor, and watched the bill keep climbing. You need your architects to own the next round, and a way to show finance it's working."
+  not_for: "*Not for:* anyone looking for a console tour or a list of cost-cutting tips. This course is about the decisions, not the dashboards."
+
+modules:
+  heading: "What you'll learn"
+  items:
+    - title: "Your Bill Is a Design Document"
+      summary: "Why the finance playbook stops working, and how to read a cloud bill backwards, from each line item to the decision behind it."
+    - title: "Cost as a Design Constraint"
+      summary: "Treat cost like availability and latency. Pick the unit that matters, and write cost into your architecture decisions."
+    - title: "The Decisions That Dominate the Bill"
+      summary: "Where the money is. Service granularity, synchronous calls, and capacity sized for a peak you rarely hit."
+    - title: "Multi-Tenancy and the Shape of Isolation"
+      summary: "The decision with the widest cost spread, and the hardest one to reverse. Including the customer who costs more than they pay."
+    - title: "Data Gravity, Egress, and the Price of Boundaries"
+      summary: "Every boundary your data crosses has a toll. Plus what your recovery targets cost, priced rung by rung."
+    - title: "AI Inference Economics"
+      summary: "Why inference breaks your cost model, and the routing, caching and hosting choices that set the number."
+    - title: "Making Cost Visible and Enforceable"
+      summary: "Attribution that survives a re-org, showback that changes behavior, and cost checks that catch a decision before it ships."
+    - title: "Making the Architectural Cost Case"
+      summary: "Turn a design trade-off into a finance argument, write the proposal that gets funded, and defend a number you don't control."
+
+includes:
+  heading: "What you get"
+  items:
+    - "**33 video lessons**, about three hours in all, each with a written reading."
+    - "**8 worksheets and templates** you use on your own systems:"
+  artifacts:
+    - "Cost Attribution Worksheet"
+    - "Cost-Annotated ADR template"
+    - "Unit Economics Calculator"
+    - "Multi-tenancy Cost Model"
+    - "Boundary and Egress Map"
+    - "Inference Cost Model"
+    - "Cost Guardrail Checklist"
+    - "Executive Cost-Case One-Pager"
+  closing: "Self-paced. Start any time, and go at your own speed."
+
+about:
+  heading: "About your instructor"
+  photo: /images/lee-casual-vertical.jpeg
+  photo_width: 640
+  photo_height: 962
+  paragraphs:
+    - "Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He wrote *Architecting for Scale* (O'Reilly), and more than 180,000 learners have taken his courses."
+    - "This course takes the same approach to cost. Treat it as a design decision, and make the decision on purpose."
+
+price_section:
+  heading: "Architecting for Cost"
+  summary: "33 video lessons with readings, and 8 worksheets and templates."
+  refund: "30-day refund, no questions asked."
+  note: "Paying for this yourself, or a student? {contact} and tell me about it. I'll make it work."
+
+# Real quotes only, never invented. The section hides while this is empty.
+# Shape: - { quote: "...", name: "...", role: "..." }
+quotes: []
+
+faq:
+  heading: "Questions"
+  items:
+    - q: "How do I get access?"
+      a: "Right after you buy, you'll get an email with your sign-in details. If this is your first Atchison Academy course, you'll set a password. Then sign in at courses.atchisonacademy.com and the course is there."
+    - q: "How long do I have access?"
+      a: "Your course access does not expire. All the material you download is yours to keep forever."
+    - q: "What's included?"
+      a: "33 video lessons, each with a written reading, and 8 downloadable worksheets and templates. About three hours of video."
+    - q: "Is this a FinOps course?"
+      a: "No. FinOps teaches finance and operations teams to measure, allocate and buy cloud capacity well. This course is for the people who design the systems that create the bill. It covers the part FinOps can't reach."
+    - q: "What if it isn't for me?"
+      a: "Email within 30 days for a full refund. No questions asked."
+    - q: "Can I buy it for my team?"
+      a: "Yes. {contact} and tell me how many people. Team pricing is per seat."

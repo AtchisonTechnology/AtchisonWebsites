@@ -3206,3 +3206,538 @@ body.webinar .webinar-clip-meta {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+
+/* ============================================
+   Selling pages (Spec0031): sales pages, offer pages, and supporting pages
+   (welcome, free lead magnet, webinar), plus the home page's featured-course
+   sections.
+
+   Colors here come only from BRAND.md (the --aa-* block below is copied
+   verbatim from it). Amber is the Buy color and nothing else: .btn-buy is
+   the only rule that uses --aa-amber-fill. Light grounds by default, per
+   BRAND.md §5.
+   ============================================ */
+:root {
+  /* Core — from the logo */
+  --aa-deep:        #0F3D91;  /* primary: headings, links, primary button      */
+  --aa-blue:        #1E66D0;  /* secondary: sub-heads, active states           */
+  --aa-sky:         #49B3FF;  /* DARK GROUNDS ONLY                             */
+
+  /* Accent — teal */
+  --aa-teal:        #0C7375;  /* the text-safe teal, for light grounds         */
+  --aa-teal-light:  #20C7C9;  /* dark grounds only. NOT a text color on white  */
+  --aa-cyan:        #73E0FF;  /* decorative on dark                            */
+
+  /* Emphasis — amber, the only warm color in the system */
+  --aa-amber:       #96560B;  /* amber as TYPE                                 */
+  --aa-amber-fill:  #F2A93B;  /* amber as FILL. Never as type on white         */
+
+  /* Neutrals */
+  --aa-ink:         #262626;  /* body text                                     */
+  --aa-ink-muted:   #5A6472;  /* captions, metadata                            */
+  --aa-night:       #0A1B3A;  /* dark ground: footer, dark sections            */
+  --aa-night-2:     #12294F;  /* dark gradients, dark cards                    */
+
+  /* Surfaces */
+  --aa-white:       #FFFFFF;
+  --aa-tint-1:      #F4F8FE;  /* page / section background                     */
+  --aa-tint-2:      #E6EFFB;  /* callouts, table stripes                       */
+  --aa-rule:        #CFE0F5;  /* hairlines. NEVER type                         */
+  --aa-rule-strong: #9CBDE4;  /* hairlines that must read on a tinted ground   */
+}
+
+/* Selling pages carry the "course" body class (offers.rb sets it on sales
+   and offer pages; supporting pages set page_class "course selling"), which
+   is what makes <main> full-width and opts them out of the boxed
+   generic-page rules — the same arrangement as the webinar pages. */
+
+/* The Buy button: --aa-ink on --aa-amber-fill, 7.58:1 (BRAND.md §2). */
+.btn-buy {
+  background: var(--aa-amber-fill);
+  color: var(--aa-ink) !important;
+  font-size: 1.05rem;
+  padding: 0.85rem 2rem;
+}
+
+.btn-buy:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+}
+
+/* Non-Buy actions on selling pages: BRAND.md's primary and secondary. */
+.btn-deep {
+  background: var(--aa-deep);
+  color: var(--aa-white) !important;
+}
+
+.btn-deep:hover { background: var(--aa-blue); }
+
+.btn-deep-outline {
+  background: transparent;
+  color: var(--aa-deep) !important;
+  border-color: var(--aa-deep);
+}
+
+.btn-deep-outline:hover { background: var(--aa-tint-2); }
+
+/* Focus rings are mandatory (BRAND.md §6). */
+.btn-buy:focus-visible,
+.btn-deep:focus-visible,
+.btn-deep-outline:focus-visible,
+.sales-trailer-play:focus-visible,
+body.selling a:focus-visible {
+  outline: 2px solid var(--aa-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-buy:hover { transform: none; }
+}
+
+/* ---- Hero ---- */
+.sales-hero {
+  background: linear-gradient(160deg, var(--aa-tint-1) 0%, var(--aa-tint-2) 100%);
+  padding: 3.5rem 2rem;
+  border-bottom: 1px solid var(--aa-rule);
+}
+
+.sales-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  grid-template-areas:
+    "head  media"
+    "buy   media";
+  grid-template-rows: auto 1fr;
+  column-gap: 3rem;
+  row-gap: 1.5rem;
+  align-items: start;
+}
+
+.sales-hero-head  { grid-area: head; }
+.sales-hero-media { grid-area: media; align-self: center; }
+.sales-hero-buy   { grid-area: buy; }
+
+.sales-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--aa-teal);
+  margin-bottom: 0.75rem;
+}
+
+.sales-hero h1 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--aa-deep);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.sales-lede {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--aa-ink);
+  margin: 0 0 0.6rem;
+}
+
+.sales-tagline { color: var(--aa-ink-muted); margin: 0; }
+
+/* An offer's intro: a callout under the headline, in the pitch's place. */
+.sales-offer-intro {
+  background: var(--aa-white);
+  border-left: 4px solid var(--aa-deep);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+  margin: 0 0 1rem;
+  color: var(--aa-ink);
+  font-weight: 600;
+}
+
+.sales-hero-image,
+.sales-trailer,
+.sales-trailer-play img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.sales-hero-image,
+.sales-trailer {
+  border: 1px solid var(--aa-rule-strong);
+  box-shadow: 0 8px 28px rgba(15, 61, 145, 0.12);
+  background: var(--aa-white);
+}
+
+.sales-trailer { overflow: hidden; position: relative; }
+
+.sales-trailer-play {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.sales-trailer-play img { border-radius: 0; }
+
+.sales-trailer-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: var(--aa-deep);
+  color: var(--aa-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  padding-left: 0.3rem;
+  box-shadow: 0 4px 18px rgba(10, 27, 58, 0.35);
+}
+
+.sales-trailer iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+/* ---- Price + Buy block (hero, price section, closing band) ---- */
+.sales-buy { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+
+.sales-price { margin: 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+
+.sales-price-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--aa-deep);
+  line-height: 1;
+}
+
+.sales-price-regular { font-size: 1rem; color: var(--aa-ink-muted); }
+
+.sales-end {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--aa-amber); /* amber as type, 5.78:1 on white (BRAND.md §2) */
+}
+
+/* ---- Sections ---- */
+.sales-section {
+  background: var(--aa-white);
+  padding: 3.5rem 2rem;
+  color: var(--aa-ink);
+}
+
+.sales-section--alt { background: var(--aa-tint-1); }
+
+.sales-inner { max-width: 820px; margin: 0 auto; }
+
+.sales-section h2,
+.sales-closing h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--aa-deep);
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+}
+
+.sales-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--aa-deep);
+  margin: 1.75rem 0 0.75rem;
+}
+
+.sales-section p { line-height: 1.7; }
+
+.sales-section a:not(.btn) {
+  color: var(--aa-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sales-section a:not(.btn):hover { color: var(--aa-blue); }
+
+.sales-intro { font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+.sales-list { margin: 0; padding-left: 1.25rem; line-height: 1.7; }
+.sales-list li { margin-bottom: 0.5rem; }
+
+.sales-artifacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.6rem;
+}
+
+.sales-artifacts li {
+  background: var(--aa-tint-1);
+  border: 1px solid var(--aa-rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  color: var(--aa-deep);
+}
+
+.sales-modules {
+  list-style: none;
+  counter-reset: module;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sales-modules li {
+  counter-increment: module;
+  background: var(--aa-white);
+  border: 1px solid var(--aa-rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem 1rem 3.75rem;
+  position: relative;
+}
+
+.sales-modules li::before {
+  content: counter(module);
+  position: absolute;
+  left: 1.25rem;
+  top: 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--aa-teal);
+}
+
+.sales-modules h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
+.sales-modules p { margin: 0; color: var(--aa-ink-muted); line-height: 1.55; }
+
+.sales-about { display: flex; gap: 2rem; align-items: center; }
+
+.sales-about-photo {
+  width: 9rem;
+  height: auto;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.sales-price-section { text-align: left; border-top: 1px solid var(--aa-rule); }
+.sales-buy-detail { margin: 0; }
+.sales-refund { margin: 1rem 0 0; font-weight: 600; }
+.sales-price-note { margin: 0.5rem 0 0; color: var(--aa-ink-muted); }
+.sales-muted { color: var(--aa-ink-muted); }
+.sales-closing-line { margin: 1.25rem 0 0; font-weight: 600; }
+.sales-artifacts { margin-bottom: 0.5rem !important; }
+
+.sales-quotes { display: grid; gap: 1.25rem; }
+.sales-quote { margin: 0; }
+.sales-quote blockquote { margin: 0 0 0.4rem; font-size: 1.1rem; color: var(--aa-ink); }
+.sales-quote figcaption { color: var(--aa-ink-muted); font-size: 0.9rem; }
+
+.sales-faq { margin: 0; }
+.sales-faq dt { font-weight: 600; color: var(--aa-deep); margin-top: 1.25rem; }
+.sales-faq dt:first-child { margin-top: 0; }
+.sales-faq dd { margin: 0.35rem 0 0; line-height: 1.7; }
+
+.sales-prose h2 { margin-top: 0; }
+
+.sales-closing {
+  background: var(--aa-tint-2);
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--aa-rule);
+}
+
+.sales-closing h2 { margin-bottom: 1rem; }
+
+/* Phones: headline, then the trailer, then Buy (Spec0031 §B1). Tightened
+   padding keeps the Buy button above the fold at common phone heights. */
+@media (max-width: 820px) {
+  .sales-hero { padding: 1.75rem 1.25rem 2rem; }
+
+  .sales-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "media"
+      "buy";
+    grid-template-rows: auto;
+    row-gap: 1.1rem;
+  }
+
+  .sales-hero h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+  .sales-lede { font-size: 1.05rem; margin-bottom: 0.35rem; }
+  .sales-tagline { display: none; }
+  .sales-offer-intro { font-size: 0.95rem; margin-bottom: 0; }
+  .sales-eyebrow { margin-bottom: 0.4rem; }
+  .sales-price-amount { font-size: 1.6rem; }
+
+  .sales-section { padding: 2.5rem 1.25rem; }
+  .sales-closing { padding: 2.5rem 1.25rem; }
+  .sales-about { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---- Supporting pages: welcome, free lead magnet ---- */
+.selling-page {
+  background: var(--aa-white);
+  color: var(--aa-ink);
+}
+
+.selling-page-header {
+  background: linear-gradient(160deg, var(--aa-tint-1) 0%, var(--aa-tint-2) 100%);
+  border-bottom: 1px solid var(--aa-rule);
+  padding: 3.5rem 2rem 3rem;
+}
+
+.selling-page-header h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--aa-deep);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.selling-page-header p { font-size: 1.15rem; margin: 0; }
+
+.selling-page-body { padding: 3rem 2rem 4rem; }
+
+.selling-page h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--aa-deep);
+  margin: 2rem 0 0.75rem;
+}
+
+.selling-page p { line-height: 1.7; }
+
+.selling-page a:not(.btn) {
+  color: var(--aa-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.selling-steps { padding-left: 1.4rem; line-height: 1.7; }
+.selling-steps li { margin-bottom: 1rem; }
+.selling-steps strong { color: var(--aa-deep); }
+
+.selling-callout {
+  background: var(--aa-tint-2);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* A marked gap for a value not supplied yet (a Kit uid, an event URL).
+   Neutral, not amber: amber means Buy. */
+.selling-placeholder {
+  display: inline-block;
+  border: 2px dashed var(--aa-ink-muted);
+  color: var(--aa-ink-muted);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+}
+
+.course-header .selling-placeholder {
+  border-color: var(--aa-white);
+  color: var(--aa-white);
+}
+
+@media (max-width: 820px) {
+  .selling-page-header { padding: 2.25rem 1.25rem 2rem; }
+  .selling-page-body { padding: 2rem 1.25rem 3rem; }
+}
+
+/* ---- Home page: featured course, how it works, free worksheet, about ---- */
+.home-featured {
+  background: var(--aa-white);
+  padding: 4rem 2rem;
+}
+
+.home-featured-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.home-featured h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 700;
+  color: var(--aa-deep);
+  margin-bottom: 0.75rem;
+}
+
+.home-featured-hook { font-size: 1.15rem; color: var(--aa-ink); }
+
+.home-band {
+  padding: 3.5rem 2rem;
+  background: var(--aa-tint-1);
+  color: var(--aa-ink);
+}
+
+.home-band--white { background: var(--aa-white); }
+
+.home-band-inner { max-width: 820px; margin: 0 auto; }
+
+.home-band h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--aa-deep);
+  margin-bottom: 1rem;
+}
+
+.home-how {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.home-how li {
+  background: var(--aa-white);
+  border: 1px solid var(--aa-rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem;
+  color: var(--aa-ink);
+  line-height: 1.55;
+}
+
+.home-how strong { display: block; color: var(--aa-deep); margin-bottom: 0.25rem; }
+
+.home-band p { line-height: 1.7; }
+
+.home-band-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.home-band-row p { margin: 0; font-size: 1.1rem; }
+
+.home-newsletter .kit-form-pending { color: var(--aa-ink-muted); }
+
+@media (max-width: 820px) {
+  .home-featured { padding: 2.5rem 1.25rem; }
+  .home-featured-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .home-band { padding: 2.5rem 1.25rem; }
+}

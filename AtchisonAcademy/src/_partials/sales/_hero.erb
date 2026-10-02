@@ -1,0 +1,28 @@
+<%# Wide screens: headline, pitch, price and Buy on the left, the trailer on
+    the right. Phones: headline, trailer, Buy — the grid areas in index.css
+    reorder the same three blocks. On an offer page the offer's intro takes
+    the pitch's place under the headline. On phones the tagline is dropped
+    so Buy stays above the fold. %>
+<% sales = page.sales %>
+<section class="sales-hero<%= " sales-hero--offer" if page.offer? %>">
+  <div class="sales-hero-inner">
+    <div class="sales-hero-head">
+      <p class="sales-eyebrow"><%= sales.title %></p>
+      <h1><%= page.headline %></h1>
+      <% if page.intro %>
+        <p class="sales-offer-intro"><%= sales_text page.intro, sales %></p>
+      <% else %>
+        <p class="sales-lede"><%= sales_text sales.pitch, sales %></p>
+      <% end %>
+      <% if sales.tagline %>
+        <p class="sales-tagline"><%= sales_text sales.tagline, sales %></p>
+      <% end %>
+    </div>
+    <div class="sales-hero-media">
+      <%= render "sales/trailer", page: page %>
+    </div>
+    <div class="sales-hero-buy">
+      <%= render "sales/buy", page: page, content: "hero" %>
+    </div>
+  </div>
+</section>

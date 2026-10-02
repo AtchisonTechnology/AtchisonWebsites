@@ -1,0 +1,13 @@
+<% price = page.sales.price_section %>
+<section class="sales-section sales-price-section" id="price">
+  <div class="sales-inner">
+    <h2><%= price&.heading || page.sales.title %></h2>
+    <%= render "sales/buy", page: page, content: "price", detail: price&.summary %>
+    <% if price&.refund %>
+      <p class="sales-refund"><%= sales_text price.refund, page.sales %></p>
+    <% end %>
+    <% if price&.note %>
+      <p class="sales-price-note"><%= sales_text price.note, page.sales %></p>
+    <% end %>
+  </div>
+</section>

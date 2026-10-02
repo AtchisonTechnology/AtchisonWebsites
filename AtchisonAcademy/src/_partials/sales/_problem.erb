@@ -1,0 +1,11 @@
+<% problem = page.sales.problem %>
+<% if problem && problem.paragraphs.to_a.any? %>
+<section class="sales-section">
+  <div class="sales-inner">
+    <h2><%= problem.heading %></h2>
+    <% problem.paragraphs.each do |para| %>
+      <p><%= sales_text para, page.sales %></p>
+    <% end %>
+  </div>
+</section>
+<% end %>

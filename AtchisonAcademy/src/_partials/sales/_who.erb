@@ -1,0 +1,14 @@
+<% who = page.sales.who %>
+<% if who && who.items.to_a.any? %>
+<section class="sales-section sales-section--alt">
+  <div class="sales-inner">
+    <h2><%= who.heading %></h2>
+    <% who.items.each do |item| %>
+      <p><%= sales_text item, page.sales %></p>
+    <% end %>
+    <% if who.not_for %>
+      <p class="sales-muted"><%= sales_text who.not_for, page.sales %></p>
+    <% end %>
+  </div>
+</section>
+<% end %>

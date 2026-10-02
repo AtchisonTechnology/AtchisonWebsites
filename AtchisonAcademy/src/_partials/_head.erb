@@ -5,8 +5,13 @@
 <title><%= page_title %></title>
 
 <%
-  # Per-page description, falling back to the site-level one.
-  page_description = strip_newlines(defined?(description) && description ? description : metadata.description)
+  # A sales or offer page's product data (Spec0031), or nil on any other page.
+  sales = defined?(resource) && resource ? sales_data_for(resource) : nil
+
+  # Per-page description, then the product's, then the site-level one.
+  page_description = strip_newlines(
+    (defined?(description) && description) || sales&.description || metadata.description
+  )
 
   # Canonical and og:url are absolute and per-page. Only pretty URLs (which end
   # in a slash) are real pages; 404.html and 500.html must not claim to be one,
@@ -22,11 +27,21 @@
   # See Spec0009.
   canonical_url = page_url ? (resource.data.canonical_url || page_url) : nil
 
-  og_image_url = absolute_url("/images/og-card.png")
+  # Per-page social image (Spec0031, A8): `image:` front matter, else a sales
+  # or offer page's `og_image`, else the site card. Every one of them must be
+  # 1200x630; the width/height tags below declare it.
+  og_image_url = absolute_url(
+    (defined?(resource) && resource && resource.data.image) || sales&.og_image || "/images/og-card.png"
+  )
   og_type = defined?(resource) && resource && resource.collection&.label == "posts" ? "article" : "website"
 %>
 
 <meta name="description" content="<%= page_description %>" />
+<%# `noindex: true` in front matter keeps any page out of search results.
+    Offer pages always carry it (offers.rb); the welcome page sets it. %>
+<% if defined?(resource) && resource && resource.data.noindex %>
+<meta name="robots" content="noindex" />
+<% end %>
 <% if canonical_url %>
 <link rel="canonical" href="<%= canonical_url %>" />
 <% end %>

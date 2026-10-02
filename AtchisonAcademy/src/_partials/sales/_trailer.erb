@@ -1,0 +1,16 @@
+<%# Click to play, never autoplay (Spec0031 §A9). The Vimeo player loads only
+    on click, so no Vimeo request is made before then; captions are on by
+    default (texttrack). While there is no trailer, the course image stands
+    in the video's place. %>
+<% sales = page.sales %>
+<% if page.trailer_id %>
+  <div class="sales-trailer" data-trailer data-vimeo-id="<%= page.trailer_id %>">
+    <button type="button" class="sales-trailer-play" aria-label="Play the trailer">
+      <img src="<%= relative_url(sales.trailer.poster || sales.hero_image) %>" width="1280" height="720" alt="" />
+      <span class="sales-trailer-icon" aria-hidden="true">&#9654;</span>
+    </button>
+  </div>
+<% else %>
+  <img class="sales-hero-image" src="<%= relative_url sales.hero_image %>" width="1280" height="720"
+       alt="<%= sales.hero_image_alt %>" />
+<% end %>

@@ -1,0 +1,41 @@
+---
+layout: default
+page_class: "course selling"
+title: "Free: The Cost Attribution Worksheet"
+description: "The Cost Attribution Worksheet takes your five biggest cloud line items and asks what decision caused each one. Free, from Lee Atchison."
+image: /images/sales/architecting-for-cost/og.png
+# Supporting page (Spec0031 §B3): the free lead magnet. Public and indexed
+# by design. Live early, on its own, ahead of the course launch: its
+# `hidden` came off when the Kit form was wired in (2026-10-02), together
+# with free/cost-attribution-worksheet/thanks.erb's (§B3a).
+#
+# The Kit signup form (email only). With this blank the page shows a marked
+# placeholder instead.
+kit_form_uid: "4628ece1f7"
+---
+
+<%# Copy: the heading and paragraph are the home page's free-worksheet
+    section from Sales Page Copy.md §4 (approved 2026-10-02); that file has
+    no copy of its own for this page yet. %>
+
+<div class="selling-page">
+  <header class="selling-page-header">
+    <div class="sales-inner">
+      <p class="sales-eyebrow">Free worksheet</p>
+      <h1>How much of your cloud bill can you explain?</h1>
+    </div>
+  </header>
+
+  <div class="selling-page-body">
+    <div class="sales-inner">
+      <p>The Cost Attribution Worksheet takes your five biggest line items and asks what decision caused each one. Most teams find out it's fewer than they thought.</p>
+
+      <h2>Get the free worksheet</h2>
+      <% if data.kit_form_uid.to_s != "" %>
+        <script async data-uid="<%= data.kit_form_uid %>" src="https://softwarearchitectureinsights.kit.com/<%= data.kit_form_uid %>/index.js"></script>
+      <% else %>
+        <p class="selling-placeholder">Signup form not configured yet: set <code>kit_form_uid</code> in this page's front matter.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

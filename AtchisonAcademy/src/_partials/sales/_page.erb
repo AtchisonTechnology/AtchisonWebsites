@@ -1,0 +1,31 @@
+<%# The whole selling page below the navbar, shared by the sales and offer
+    layouts. `sections:` in the data file sets the order and presence of
+    everything after the hero. An offer's markdown body and its
+    `extra_sections:` go immediately before the price section. %>
+<%# Kit's checkout overlay for the data-commerce Buy links (see _buy.erb).
+    Same embed as SoftwareArchitectureInsights/src/donate.erb. The host is
+    the Buy link's own, so a product sold from another Kit account works. %>
+<script src="https://<%= URI.parse(page.sales.buy_url).host %>/commerce.js" async defer></script>
+
+<%= render "sales/hero", page: page %>
+
+<% page.sales.sections.each do |name| %>
+  <% if name == "price" %>
+    <% if body.to_s.strip != "" %>
+      <section class="sales-section sales-extra">
+        <div class="sales-inner sales-prose"><%= body %></div>
+      </section>
+    <% end %>
+    <% page.extra_sections.each do |extra| %>
+      <%= render "sales/#{extra["partial"]}", page: page %>
+    <% end %>
+  <% end %>
+  <%= render "sales/#{name}", page: page %>
+<% end %>
+
+<section class="sales-closing">
+  <div class="sales-inner">
+    <h2><%= page.sales.title %></h2>
+    <%= render "sales/buy", page: page, content: "footer" %>
+  </div>
+</section>

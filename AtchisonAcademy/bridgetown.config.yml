@@ -5,3 +5,8 @@ collections:
   courses:
     output: true
     permalink: /courses/:slug/
+  # Offer pages (Spec0031): one file per special-price page. Each file sets
+  # its own permalink — the product's sales page URL plus an offer slug —
+  # and plugins/builders/offers.rb validates it.
+  offers:
+    output: true

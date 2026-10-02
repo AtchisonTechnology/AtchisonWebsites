@@ -1,0 +1,17 @@
+<% about = page.sales.about %>
+<% if about && about.paragraphs.to_a.any? %>
+<section class="sales-section">
+  <div class="sales-inner sales-about">
+    <% if about.photo %>
+      <img src="<%= relative_url about.photo %>" width="<%= about.photo_width %>" height="<%= about.photo_height %>"
+           alt="Lee Atchison" class="sales-about-photo" />
+    <% end %>
+    <div>
+      <h2><%= about.heading %></h2>
+      <% about.paragraphs.each do |para| %>
+        <p><%= sales_text para, page.sales %></p>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>

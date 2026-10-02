@@ -1,0 +1,14 @@
+<% faq = page.sales.faq %>
+<% if faq && faq.items.to_a.any? %>
+<section class="sales-section">
+  <div class="sales-inner">
+    <h2><%= faq.heading %></h2>
+    <dl class="sales-faq">
+      <% faq.items.each do |item| %>
+        <dt><%= item.q %></dt>
+        <dd><%= sales_text item.a, page.sales %></dd>
+      <% end %>
+    </dl>
+  </div>
+</section>
+<% end %>

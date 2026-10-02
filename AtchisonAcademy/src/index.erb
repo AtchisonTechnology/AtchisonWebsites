@@ -14,6 +14,17 @@ title: Home
   academy_courses          = site.collections["courses"].resources.sort_by { |c| c.data.order_academy || 99 }
   academy_courses_featured = academy_courses.select { |c| c.data.feature_academy }
   academy_courses_other    = academy_courses.reject { |c| c.data.feature_academy }
+
+  # Spec0031 §B6. Each new section shows only once what it points to is
+  # public, so this page is safe to merge before launch: a hidden course or
+  # page has already been dropped from the build (shared_content.rb), so it
+  # can't be found here in production, while dev and deploy previews see it.
+  #
+  # The featured course is the visible course carrying `spotlight_academy`;
+  # its content comes from its sales data file.
+  featured_course = academy_courses.find { |c| c.data.spotlight_academy }
+  featured_sales  = featured_course && sales_data_for(featured_course)
+  worksheet_page  = site.resources.find { |r| r.relative_url == "/free/cost-attribution-worksheet/" }
 %>
 
 <section class="academy-hero">
@@ -21,8 +32,66 @@ title: Home
     <div class="academy-hero-logo">
       <img src="<%= relative_url '/images/logo-academy.png' %>" alt="Atchison Academy" />
     </div>
-    <h1>Atchison Academy</h1>
-    <p>Exclusive books, courses, and training directly from Lee Atchison &mdash; for software architects and technology leaders who want to build, scale, and lead with confidence.</p>
+    <h1>Architecture courses from someone who's run it at scale.</h1>
+    <p>Practical, self-paced courses for software architects and engineering leaders, from Lee Atchison.</p>
+  </div>
+</section>
+
+<%# Copy for the hero and the sections below: Sales Page Copy.md §4,
+    approved by Lee 2026-10-02. The featured course's title and line come
+    from its sales data file. %>
+<% if featured_course %>
+<section class="home-featured">
+  <div class="home-featured-inner">
+    <div>
+      <p class="sales-eyebrow">New course</p>
+      <h2><%= featured_course.data.title %></h2>
+      <% if featured_sales %>
+        <p class="home-featured-hook"><%= featured_sales.hook %> <%= featured_sales.pitch %></p>
+      <% else %>
+        <p class="home-featured-hook"><%= featured_course.data.summary %></p>
+      <% end %>
+      <a href="<%= relative_url featured_course.relative_url %>" class="btn btn-deep">See the course &rarr;</a>
+    </div>
+    <div>
+      <% if featured_sales %>
+        <%= render "sales/trailer", page: selling_page(featured_course) %>
+      <% elsif featured_course.data.cover_image %>
+        <img src="<%= relative_url featured_course.data.cover_image %>" alt="<%= featured_course.data.title %> course image" class="sales-hero-image" />
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="home-band">
+  <div class="home-band-inner">
+    <h2>How the courses work</h2>
+    <ul class="home-how">
+      <li><strong>Short video lessons.</strong> Each one makes one argument, with a reading you can come back to.</li>
+      <li><strong>Tools you keep.</strong> Worksheets and templates you use on your own systems, not just during the course.</li>
+      <li><strong>Your own pace.</strong> Start when you want, and stop when the meeting runs long.</li>
+    </ul>
+  </div>
+</section>
+<% end %>
+
+<% if worksheet_page %>
+<section class="home-band home-band--white">
+  <div class="home-band-inner">
+    <h2>How much of your cloud bill can you explain?</h2>
+    <p>The Cost Attribution Worksheet takes your five biggest line items and asks what decision caused each one. Most teams find out it's fewer than they thought.</p>
+    <a href="<%= relative_url worksheet_page.relative_url %>" class="btn btn-deep-outline">Get the free worksheet &rarr;</a>
+  </div>
+</section>
+<% end %>
+
+<section class="home-band">
+  <div class="home-band-inner sales-about">
+    <img src="<%= relative_url '/images/lee-casual-vertical.jpeg' %>" width="640" height="962" alt="Lee Atchison" class="sales-about-photo" />
+    <div>
+      <h2>About Lee</h2>
+      <p>Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He's the author of <em>Architecting for Scale</em> (O&rsquo;Reilly), and he writes the Software Architecture Insights newsletter.</p>
+    </div>
   </div>
 </section>
 
@@ -123,14 +192,13 @@ title: Home
 </section>
 <% end %>
 
-<section class="academy-cta">
-  <div class="academy-cta-inner">
-    <div class="academy-cta-logo">
-      <img src="<%= relative_url '/images/logo-academy.png' %>" alt="Atchison Academy" />
-    </div>
-    <div>
-      <span class="section-label">Premium Training</span>
-      <h2 class="section-title" style="color:#ffffff;">Start Learning Today</h2>
-    </div>
+<%# Newsletter signup: the Software Architecture Insights inline Kit form
+    (uid from SoftwareArchitectureInsights/src/_data/site_metadata.yml). The
+    form's own button label is set in Kit. %>
+<section class="home-band home-newsletter">
+  <div class="home-band-inner">
+    <h2>Software Architecture Insights</h2>
+    <p>A weekly newsletter on building and running systems that scale.</p>
+    <script async data-uid="c448363077" src="https://softwarearchitectureinsights.kit.com/c448363077/index.js"></script>
   </div>
 </section>

@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Brand, color, typography and logo rules: see BRAND.md. Follow it exactly; do not invent brand values.
+
 ## Commands
 
 Always use the `bin/bridgetown` binstub to ensure the correct version runs.
@@ -55,14 +57,23 @@ src/
     page.erb              # Adds <h1> from data.title, then yields (extends default)
     book.erb              # Book detail layout (full-width via body.book)
     course.erb            # Course detail layout (full-width via body.course)
+    sales.erb             # Sales page, rendered from a sales data file (Spec0031)
+    offer.erb             # Offer page: the sales page with overrides (Spec0031)
   _partials/
-    _head.erb             # <head> contents: meta, canonical/OG, favicon, assets, Fathom
+    _head.erb             # <head> contents: meta, canonical/OG, robots, favicon, assets, Fathom
     _footer.erb           # Site footer
+    sales/                # One partial per selling-page section (Spec0031)
+  _offers/                # Offer pages, one file each (Spec0031)
+  courses/<slug>/welcome.erb  # Post-purchase welcome pages
+  free/                   # Free lead-magnet signup pages
+  webinars/               # Webinar pages
+  redirects.erb           # Generates /_redirects for ended offers
   _components/shared/
     navbar.erb            # Navigation template
     navbar.rb             # Bridgetown::Component class (receives metadata, resource)
   _data/
     site_metadata.yml     # title, tagline, description — accessed as site.metadata
+    sales/<product>.yml   # All sales copy and settings for one product (Spec0031)
   _books/                 # -> ../../shared/_books  (symlink; 2 shown here)
   _courses/               # -> ../../shared/_courses (symlink; 12 shown here)
   images/
@@ -172,7 +183,7 @@ Because the files are shared, membership, featuring and ordering are expressed w
 | `feature_leeatchison` | Featured on leeatchison.com |
 | `order_academy` | Sort position on this site |
 | `order_leeatchison` | Sort position on leeatchison.com |
-| `spotlight_academy` | Would place an item in a home-page "What's New" band on this site (Spec0016) — validated but nothing renders it here; `spotlight_leeatchison` is the equivalent for leeatchison.com's band |
+| `spotlight_academy` | The home page's **featured course** on this site (Spec0031 §B6). The first visible course carrying it is featured, with its content from its sales data file; with none, the featured-course and how-it-works sections hide. `spotlight_leeatchison` drives leeatchison.com's "What's New" band (Spec0016) |
 | `canonical_site` | Which site owns the SEO original of this item's page — `academy` or `leeatchison` |
 
 `feature_*`, `order_*` and `spotlight_*` are written only on items carrying the matching `show_*`; the builder fails the build otherwise. This site's `order_academy` values start as a subsequence of `order_leeatchison` and so have gaps — that sorts correctly, and either site can be re-sequenced without touching the other. The retired `academy`, `academy_featured`, `featured` and bare `order` keys are gone — nothing reads them.
@@ -189,9 +200,140 @@ flag, from silently re-creating duplicate pages across the two domains.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.
 
+## Selling pages: sales pages, offers, and supporting pages
+
+Spec0031 built this for Architecting for Cost, as a mechanism every later
+Academy product reuses. Read this section before adding a price, a product or
+a page that sells.
+
+**Three kinds of selling page.**
+
+| Kind | What it is | Indexed? | URL |
+|---|---|---|---|
+| **Sales page** | The permanent public page for a product. Every Buy link, ad and email points here by default | Yes | `/courses/<course-slug>/`, or `/<product-slug>/` for a non-course product |
+| **Offer page** | A special-price copy of a sales page for one campaign. Unlisted, and it expires | No | `<sales page URL><offer-slug>/`, e.g. `/courses/architecting-for-cost/launch/` |
+| **Supporting page** | Sells nothing itself: a welcome page, a free lead-magnet page, a webinar page | Welcome: no. Free and webinar: yes | `<sales page URL>welcome/`, `/free/<slug>/`, `/webinars/<slug>/` |
+
+Offer slugs name the campaign (`launch`, `webinar-2027-q1`), never the price.
+
+**Why offers exist at all:** Kit checkout has no discount-code field. A
+discount exists only as a coupon *link*, so every special price needs a page
+whose Buy button carries that link.
+
+**Sales data file — `src/_data/sales/<product>.yml`.** Every word and setting
+on a product's sales page: hook, pitch, price, `buy_url`, trailer, `og_image`,
+and one block per section. `sections:` sets the order and presence of the
+sections below the hero; each name is a partial in `src/_partials/sales/`.
+Optional sections (quotes, the trailer) hide themselves when empty. Partials
+hold no product-specific words. Text fields go through the `sales_text`
+helper: escaped, then `**bold**`, `*italic*` and `{contact}` (a link to
+`contact_url`, labelled `contact_label`) are expanded. Nothing else is.
+
+A course's sales page is its own course page: the shared course file sets
+`layout: sales` and `sales_data: <product>`, and keeps only what every course
+has (title, summary, ordering, card image). The sales copy lives here, not in
+`shared/`, because leeatchison.com reads `shared/` and sales copy is
+Academy-only. A non-course product gets a standalone `src/<product-slug>.erb`
+with the same two keys.
+
+**Offer file — `src/_offers/<product>-<offer-slug>.md`.** Required: `product`,
+`permalink`, `price`, `buy_url` (the coupon link). Optional overrides:
+`headline`, `intro` (a callout under the headline, replacing the pitch), `buy_label`, `ends_at` and
+`redirect_at` (timestamps with a UTC offset), `show_end`, `end_line` (replaces
+the generated "Ends Sunday, November 22 at midnight Pacific"),
+`utm_campaign`, `extra_sections` (partials inserted before the price section),
+and a markdown body (also rendered before the price section). Everything else
+comes from the product's sales data file, so a sales-page edit carries
+through to every offer. The offer price shows beside the standard one:
+"$495 (regularly $695)". `ends_at` is the advertised end; `redirect_at` (it
+defaults to `ends_at`) is when the page actually goes away. They can differ:
+a coupon can keep working quietly for a few days.
+
+**`plugins/builders/offers.rb`** runs at `:site, :post_read` at high priority
+and fails the build if an offer names no sales data file, has a permalink
+that isn't the sales URL plus one segment, is missing `price` or `buy_url`,
+isn't cheaper than the standard price, shares a permalink with another
+offer, or has `redirect_at` before `ends_at`. It forces `noindex` and
+`sitemap_exclude` on every offer (no opt-out), sets `offer_state`
+(`active`/`ended`, from `redirect_at` against build time), and gives sales and
+offer pages the `course selling` body class. (`course` opts them out of the
+boxed generic-page CSS, as the webinar pages do; supporting pages set it in
+their own `page_class`.) It also provides the helpers the selling layouts use:
+`selling_page`, `sales_data_for`, `sales_text`, `buy_link` and
+`current_offer_url`.
+
+**Hidden pages.** `hidden: true` (Spec0010: hidden in production, visible in
+dev and on deploy previews) now also covers standalone pages and offers.
+`Builders::SharedContent.hidden?` is the one rule. `shared_content.rb` drops
+hidden pages, and `offers.rb` drops hidden offers. **An offer also inherits
+its sales page's hidden state.** So for a launch, unhiding the course
+unhides its offers in the same change. A dropped page leaves the build
+entirely, which keeps it out of the sitemap, out of `_redirects`, and out of
+anything that links to it. The home page relies on this: its featured-course,
+how-it-works and free-worksheet sections show only when their targets exist
+in the build.
+
+**When an offer ends.** Two layers. In the page, `offer.erb` writes
+`redirect_at` into a data attribute, and `frontend/javascript/index.js`
+`location.replace()`s to the sales page once the visitor's clock passes it.
+At the server, `src/redirects.erb` (named without the leading underscore,
+because Bridgetown ignores `_`-prefixed sources; its permalink is
+`/_redirects`) writes one rule per ended offer:
+`/courses/x/launch/  /courses/x/  302!`. It's **302**, because the URL may be
+reused. The **`!`** is required, because the page file still exists and
+Netlify serves an existing file over an unforced rule. The server rule only
+appears at the next deploy after `redirect_at`, so deploy that day.
+`netlify.toml` still has no `[[redirects]]`; Netlify reads `_redirects` first.
+
+**Buy buttons.** `src/_partials/sales/_buy.erb`. Each is
+`<a class="btn btn-buy" data-buy data-commerce>`:
+
+- `data-commerce` plus Kit's `commerce.js` (loaded once by `_page.erb`) opens
+  Kit's checkout as an overlay on the page, the same embed as
+  SoftwareArchitectureInsights' `donate.erb`.
+- The href carries
+  `utm_source=atchisonacademy&utm_medium=web[&utm_campaign=<offer's>]&utm_content=<hero|price|footer>`,
+  appended with `&` when the coupon link already has a query string.
+- `index.js` copies any `utm_*` the visitor arrived with onto every Buy link.
+  Arrival values win.
+- `index.js` fires the Fathom event in `data-fathom-event` on click:
+  `buy-<product>` on the sales page, `buy-<product>-<offer-slug>` on an offer.
+
+`btn-buy` is the **only** rule that uses `--aa-amber-fill`. Amber means Buy
+(BRAND.md §2).
+
+**Head.** Front matter `noindex: true` emits `<meta name="robots"
+content="noindex">` on any page. The social image is `image:` front matter,
+else a sales or offer page's `og_image`, else `/images/og-card.png`. Every
+one must be 1200×630. The description falls back to the sales data file's
+`description`.
+
+**Trailer.** The trailer is Vimeo, click to play. The poster and a play
+button render first, and the iframe (`autoplay=1&texttrack=en`) is created
+only on click, so no Vimeo request happens before then. While `vimeo_id` is
+null, the hero shows `hero_image` instead. The trailer's Vimeo privacy must
+allow `atchisonacademy.com`, because course videos are locked to
+`courses.atchisonacademy.com`.
+
+**Brand tokens.** The `--aa-*` block at the head of the selling-pages
+section of `index.css` is copied verbatim from BRAND.md. Selling pages use
+only those tokens. The rest of the site still uses the LeeAtchison-derived
+tokens.
+
+> **To add an offer page:**
+> 1. Create the coupon link in Kit.
+> 2. Add `src/_offers/<product>-<offer-slug>.md` with `product`, `permalink`,
+>    `price`, `buy_url`, and any overrides.
+> 3. Set `ends_at` / `redirect_at` if it expires.
+> 4. Build. The builder rejects a wrong product, permalink or price.
+> 5. Check the deploy preview: price, Buy link (hover it), end-date line.
+> 6. Put a reminder in Todoist to deploy the day after `redirect_at`.
+
 ## Netlify and the retired /academy page
 
 `netlify.toml` here has **no `[[redirects]]` section at all**, and does not need one.
+(The only redirects this site emits are the generated `_redirects` rules for ended offers —
+see **Selling pages** above.)
 The cutover is complete: `atchisonacademy.com` has its own Netlify site and resolves to
 this directory rather than being an alias on the leeatchison.com site, so the two 302
 rules that used to send it to `leeatchison.com/academy/` are gone from

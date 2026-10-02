@@ -87,3 +87,66 @@ document.addEventListener("DOMContentLoaded", () => {
   boxes.forEach((b) => b.addEventListener("change", update))
   update()
 })
+
+// ============================================================
+// Selling pages (Spec0031): sales, offer and supporting pages
+// ============================================================
+
+// An ended offer sends the visitor to its sales page (§A7, in-page layer).
+// Runs as soon as this deferred script executes, before DOMContentLoaded
+// listeners, so an expired offer never gets a chance to sell. The forced 302
+// in _redirects takes over from the next deploy after redirect_at.
+;(() => {
+  const marker = document.querySelector("[data-offer-redirect-at]")
+  if (!marker) return
+
+  const at = Date.parse(marker.dataset.offerRedirectAt)
+  if (!Number.isNaN(at) && Date.now() >= at) {
+    window.location.replace(marker.dataset.offerRedirectTo)
+  }
+})()
+
+// Buy links (§A8). Each [data-buy] link already carries this page's own
+// utm_ tags. Copy any utm_* parameters the visitor arrived with onto it, so
+// the newsletter or LinkedIn source survives to checkout. Arrival
+// parameters win over the page's defaults. Each click also fires the page's
+// Fathom event, so traffic and Buy clicks can be compared per page.
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("a[data-buy]")
+  if (links.length === 0) return
+
+  const arrival = [...new URLSearchParams(window.location.search)]
+    .filter(([key]) => key.startsWith("utm_"))
+
+  links.forEach((link) => {
+    if (arrival.length > 0) {
+      const url = new URL(link.href)
+      arrival.forEach(([key, value]) => url.searchParams.set(key, value))
+      link.href = url.toString()
+    }
+
+    link.addEventListener("click", () => {
+      const name = link.dataset.fathomEvent
+      if (name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+    })
+  })
+})
+
+// Trailer (§A9): click to play, never autoplay. The Vimeo iframe is created
+// only on click, so no Vimeo request is made before then. Captions on by
+// default via texttrack.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-trailer]").forEach((trailer) => {
+    const button = trailer.querySelector("button")
+    button?.addEventListener("click", () => {
+      const iframe = document.createElement("iframe")
+      const params = new URLSearchParams({ autoplay: "1", texttrack: "en", dnt: "1" })
+      iframe.src = `https://player.vimeo.com/video/${trailer.dataset.vimeoId}?${params}`
+      iframe.title = "Course trailer"
+      iframe.allow = "autoplay; fullscreen; picture-in-picture"
+      iframe.allowFullscreen = true
+      trailer.replaceChildren(iframe)
+      trailer.classList.add("is-playing")
+    })
+  })
+})
