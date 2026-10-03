@@ -766,3 +766,17 @@ worktree) and check:
 - **2026-10-03 — Webinar page made public; Questions section added** (Lee). `hidden` was removed;
   a blank LinkedIn Event URL now shows "Registration opens soon on LinkedIn. Check back here for
   the link." A Questions section links to the contact form and Lee's LinkedIn, both in a new tab.
+- **2026-10-03 — Webinar page filled with its copy** (Lee). The copy is `Webinar Page Copy.md`
+  from the webinar's Dropbox folder (copied to `AtchisonAcademy/assets_inbox/`). The page has a
+  hero; a "Below the floor" section; About Lee, reused from the sales data minus its course
+  paragraph; an offer block; a free worksheet section; and a "Have a question?" section. The
+  per-run settings are documented in the page's front matter. The offer block shows the run's
+  offer while it's active (price, "regularly $695", end-date line, and a Buy button with the
+  Kit overlay, Fathom event `buy-architecting-for-cost-webinar`). Otherwise it shows $695 and a
+  "See the course" link. The social preview uses a new `social_title:` front matter key in
+  `_head.erb` and a 1200x630 image cut from the webinar's event cover.
+- **2026-10-03 — Webinar images** (Lee). The link-preview image must not carry a run date. It is
+  now the event cover with its date line replaced by `atchisonacademy.com/cost-webinar`, so it
+  stays correct for every run. The LinkedIn Event's own cover, which does carry the date, is
+  untouched in Dropbox. The page hero also shows the cover's illustration, with no text, beside
+  the title on wide screens and below the registration line on phones.

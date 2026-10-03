@@ -2,22 +2,34 @@
 layout: default
 page_class: "course webinar selling"
 title: "When the Cloud Savings Stop"
-description: "Why the finance playbook stops finding money, and the architecture decisions that set your cloud bill."
-image: /images/sales/architecting-for-cost/og.png
+social_title: "When the Cloud Savings Stop | A free webinar from Lee Atchison"
+description: "Why the finance playbook stops finding money, and the design decisions that set the rest of your cloud bill. A free 30-minute session for architects and engineering leaders."
+# 1200x630 link preview: the webinar's "Webinar Event Cover 1920x1080.png"
+# with its date replaced by the short URL, so it never goes stale between
+# runs (Lee, 2026-10-03). Source: assets_inbox/webinar-architecting-for-cost-preview-1920x1080.png.
+image: /images/webinars/architecting-for-cost-og.png
 # Supporting page (Spec0031 §B5), same pattern as architecting-with-ai.erb.
-# `state` is upcoming or replay. Live even before the LinkedIn Event exists
-# (Lee, 2026-10-03): with `linkedin_event_url` blank, the page says that
-# registration opens soon instead of showing the button.
+# Copy: Dropbox webinar-architecting-for-cost/Marketing/Webinar Page Copy.md
+# (copied to assets_inbox/webinar-architecting-for-cost-page-copy.md).
 #
 # ⚠️ NEVER MOVE OR RENAME THIS FILE. The short link /cost-webinar (a 302 in
 # netlify.toml) points at /webinars/architecting-for-cost/, and that short
 # link is spoken in a recorded video and shown on its last slide.
+#
+# PER-RUN SETTINGS. Everything else on the page stays the same every run.
+#   state:              upcoming (before a run) or replay (after it)
+#   starts_at:          the run's date and time, shown exactly as written
+#   linkedin_event_url: the run's LinkedIn Event; blank shows "registration
+#                       opens soon" instead of the button
+#   replay_url:         the replay, for state: replay
+#   offer_slug:         the run's offer page (e.g. launch). While that offer
+#                       is live and active, the offer block shows its price,
+#                       end date and Buy button; otherwise it shows the
+#                       standard price and links to the sales page.
 state: upcoming
 starts_at: "Thursday, November 19, 10am Pacific"
-linkedin_event_url: ""          # the LinkedIn Event; blank shows "registration opens soon"
-replay_url: ""                  # set when state: replay
-# The replay page links to this offer while it is active, else to the
-# product's sales page.
+linkedin_event_url: ""
+replay_url: ""
 product: architecting-for-cost
 offer_slug: launch
 ---
@@ -26,51 +38,116 @@ offer_slug: launch
   unless %w[upcoming replay].include?(data.state)
     raise "#{resource.relative_path}: state: #{data.state} must be upcoming or replay"
   end
-  course_url = relative_url current_offer_url(data.product, data.offer_slug)
+  sales = site.data.sales[data.product]
+  offer = current_offer(data.product, data.offer_slug)
+  offer_page = offer && selling_page(offer)
+  worksheet_url = relative_url "/free/cost-attribution-worksheet/"
 %>
 
-<%# Title and one-line description: Lee, 2026-10-02. %>
 <section class="course-header">
-  <div class="course-header-inner">
-    <div class="course-badge-row">
-      <span class="course-platform-badge">Free Webinar</span>
-      <span class="course-stat-line"><%= data.state == "replay" ? "Replay" : data.starts_at %></span>
-    </div>
-    <h1><%= data.title %></h1>
-    <p class="webinar-lead">Why the finance playbook stops finding money, and the architecture decisions that set your cloud bill.</p>
-    <div class="webinar-actions">
+  <div class="course-header-inner webinar-hero">
+    <div class="webinar-hero-text">
+      <div class="course-badge-row">
+        <span class="course-platform-badge">Free webinar</span>
+      </div>
+      <h1><%= data.title %></h1>
+      <div class="webinar-intro">
+        <p>Your company tagged everything, shrank the oversized servers, and bought reserved capacity. It found real money.</p>
+        <p>Then the savings stopped, and the bill kept climbing.</p>
+      </div>
+
+      <%# The webinar block: the part that changes between runs. %>
       <% if data.state == "upcoming" %>
-        <% if data.linkedin_event_url.to_s != "" %>
-          <%# LinkedIn is third-party, so it opens in a new tab. %>
-          <a href="<%= data.linkedin_event_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Register on LinkedIn &rarr;</a>
-        <% else %>
-          <p class="webinar-pending">Registration opens soon on LinkedIn. Check back here for the link.</p>
-        <% end %>
+        <p class="webinar-date-line"><%= data.starts_at %> &middot; 30 minutes &middot; Free on LinkedIn Live</p>
+        <div class="webinar-actions">
+          <% if data.linkedin_event_url.to_s != "" %>
+            <%# LinkedIn is third-party, so it opens in a new tab. %>
+            <a href="<%= data.linkedin_event_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Save your seat on LinkedIn</a>
+          <% else %>
+            <p class="webinar-pending">Registration opens soon on LinkedIn. Check back here for the link.</p>
+          <% end %>
+        </div>
       <% else %>
+        <p class="webinar-date-line">Recorded webinar &middot; free to watch</p>
         <% if data.replay_url.to_s != "" %>
-          <a href="<%= data.replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the Replay &rarr;</a>
+          <div class="webinar-actions">
+            <a href="<%= data.replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the replay</a>
+          </div>
         <% end %>
-        <a href="<%= course_url %>" class="btn btn-outline">See the course &rarr;</a>
       <% end %>
     </div>
+    <%# The illustration from the event cover, without its text (cut from
+        assets_inbox/webinar-architecting-for-cost-event-cover-1920x1080.png). %>
+    <img class="webinar-hero-art" src="<%= relative_url '/images/webinars/architecting-for-cost-art.jpg' %>"
+         width="1060" height="530" alt="A hand pressing down on a concrete floor, with a glowing gem in a hollow beneath it" />
   </div>
 </section>
 
 <section class="course-body">
   <div class="course-body-inner">
-    <% if data.state == "upcoming" %>
-      <% if data.linkedin_event_url.to_s != "" %>
-        <p>A free 30-minute webinar on <%= data.starts_at %>. Register through the LinkedIn Event.</p>
-      <% else %>
-        <p>A free 30-minute webinar on <%= data.starts_at %>. Registration opens soon on LinkedIn, and the link will be on this page.</p>
-      <% end %>
-    <% else %>
-      <p>The replay is free. The webinar is the premise of the course <a href="<%= course_url %>">Architecting for Cost</a>.</p>
-    <% end %>
+    <h2>Below the floor</h2>
+    <p>Every team that runs the finance playbook hits a floor. Above it was waste. Below it is something else.</p>
+    <p>Everything below the floor was set by design decisions. How many services you run. Where your data moves. How fast you need to recover.</p>
+    <p>In this session you'll see:</p>
+    <ul>
+      <li>Why tagging, rightsizing and commitments all stop at the same place</li>
+      <li>How to read your cloud bill backwards, from a line item to the decision that caused it</li>
+      <li>What one small system costs at each recovery target, from $413 to $1,270 a month</li>
+      <li>Where finance's job ends and yours begins</li>
+      <li>Three things you can do Monday</li>
+    </ul>
+    <p><strong>Who it's for:</strong> Architects, senior engineers and engineering leaders who own a cloud cost target.</p>
 
-    <%# The same in every run and both states (Lee, 2026-10-03). Both links
-        open a new tab (Lee's call), so a viewer doesn't lose this page. %>
-    <h2>Questions?</h2>
-    <p>Want to ask me something? Send me a note through <a href="https://leeatchison.com/contact" target="_blank" rel="noopener noreferrer">my contact form</a>, or reach me on <a href="https://www.linkedin.com/in/leeatchison/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+    <%# About Lee: the sales page's block, minus its last paragraph (which is
+        about the course), from the same sales data file. %>
+    <% about = sales.about %>
+    <div class="sales-about webinar-about">
+      <img src="<%= relative_url about.photo %>" width="<%= about.photo_width %>" height="<%= about.photo_height %>"
+           alt="Lee Atchison" class="sales-about-photo" />
+      <div>
+        <h2><%= about.heading %></h2>
+        <% about.paragraphs[0...-1].each do |para| %>
+          <p><%= sales_text para, sales %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <%# The offer block: changes with the run's offer (offer_slug). %>
+    <div class="webinar-offer">
+      <h2>Go deeper: Architecting for Cost</h2>
+      <p>The webinar comes from my course, Architecting for Cost. It works through the decisions that drive the bill, one at a time: multi-tenancy, data movement, recovery targets and AI inference. And it ends with how to make the cost case to the people who fund the fix.</p>
+      <p>8 modules, 33 short video lessons, and 8 worksheets and templates you use on your own systems.</p>
+      <div class="sales-buy">
+        <% if offer_page %>
+          <script src="https://<%= URI.parse(offer.data.buy_url).host %>/commerce.js" async defer></script>
+          <p class="sales-price">
+            <span class="sales-price-amount"><%= offer_page.money(offer_page.price) %></span>
+            <span class="sales-price-regular">(regularly <%= offer_page.money(offer_page.standard_price) %>)</span>
+          </p>
+          <% if offer_page.end_line %>
+            <p class="sales-end"><%= offer_page.end_line %></p>
+          <% end %>
+          <a href="<%= offer_page.buy_url("price") %>" class="btn btn-buy" data-buy data-commerce
+             data-fathom-event="<%= sales.fathom_event %>-webinar"><%= offer_page.buy_label %></a>
+        <% else %>
+          <p class="sales-price"><span class="sales-price-amount">$<%= sales.price %></span></p>
+          <a href="<%= relative_url sales.sales_url %>" class="btn btn-deep">See the course</a>
+        <% end %>
+        <p class="sales-refund">30-day refund, no questions asked.</p>
+      </div>
+    </div>
+
+    <h2>Start with your own bill</h2>
+    <p>Not ready for the course? Start with the exercise from the webinar.</p>
+    <p>The free Cost Attribution Worksheet walks you through your top five cloud costs, and the decision behind each one. Two out of five is a normal answer.</p>
+    <p><a href="<%= worksheet_url %>" class="btn btn-deep-outline">Get the free worksheet</a></p>
+
+    <%# The same every run. Both links open a new tab (Lee, 2026-10-03). %>
+    <h2>Have a question?</h2>
+    <p>Ask me. I'll get back to you.</p>
+    <ul>
+      <li><a href="https://leeatchison.com/contact/" target="_blank" rel="noopener noreferrer">Contact me</a></li>
+      <li><a href="https://www.linkedin.com/in/leeatchison/" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a></li>
+    </ul>
   </div>
 </section>

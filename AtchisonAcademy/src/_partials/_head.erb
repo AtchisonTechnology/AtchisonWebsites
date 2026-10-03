@@ -3,6 +3,9 @@
 <% resource_title = strip_html(strip_newlines(title)) %>
 <% page_title = resource_title != "Index" ? "#{resource_title} | #{metadata.title}" : "#{metadata.title}: #{metadata.tagline}" %>
 <title><%= page_title %></title>
+<%# `social_title:` front matter replaces the title in link previews only
+    (og:title, twitter:title); the browser tab keeps page_title. %>
+<% social_title = (defined?(resource) && resource && resource.data.social_title) || page_title %>
 
 <%
   # A sales or offer page's product data (Spec0031), or nil on any other page.
@@ -46,7 +49,7 @@
 <link rel="canonical" href="<%= canonical_url %>" />
 <% end %>
 
-<meta property="og:title" content="<%= page_title %>" />
+<meta property="og:title" content="<%= social_title %>" />
 <meta property="og:description" content="<%= page_description %>" />
 <meta property="og:type" content="<%= og_type %>" />
 <% if page_url %>
@@ -57,7 +60,7 @@
 <meta property="og:image:height" content="630" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="<%= page_title %>" />
+<meta name="twitter:title" content="<%= social_title %>" />
 <meta name="twitter:description" content="<%= page_description %>" />
 <meta name="twitter:image" content="<%= og_image_url %>" />
 

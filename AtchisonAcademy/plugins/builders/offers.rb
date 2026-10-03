@@ -82,6 +82,16 @@ class Builders::Offers < SiteBuilder
     # it exists in this build (not hidden) and is active, else the product's
     # sales page. Used by pages that link to "the current price", e.g. the
     # webinar replay page.
+    # The named offer's resource if it is in this build (not hidden) and
+    # active, else nil. For pages that show an offer's price and Buy button
+    # outside the offer page itself, e.g. the webinar page's offer block.
+    helper :current_offer do |product, offer_slug|
+      offer = site.collections["offers"].resources.find do |r|
+        r.data.product == product && r.data.permalink.to_s.end_with?("/#{offer_slug}/")
+      end
+      offer if offer && offer.data.offer_state == "active"
+    end
+
     helper :current_offer_url do |product, offer_slug|
       offer = site.collections["offers"].resources.find do |r|
         r.data.product == product && r.data.permalink.to_s.end_with?("/#{offer_slug}/")
