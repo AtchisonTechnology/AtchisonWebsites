@@ -99,7 +99,7 @@ modules:
 includes:
   heading: "What you get"
   items:
-    - "**33 video lessons**, about three hours in all, each with a written reading."
+    - "**33 video lessons**, each with a written reading: about three hours of video, 5-8 hours of total time commitment, plus the time you spend applying the tools to your own architecture."
     - "**8 worksheets and templates** you use on your own systems:"
   artifacts:
     - "Cost Attribution Worksheet"
@@ -139,7 +139,7 @@ faq:
     - q: "How long do I have access?"
       a: "Your course access does not expire. All the material you download is yours to keep forever."
     - q: "What's included?"
-      a: "33 video lessons, each with a written reading, and 8 downloadable worksheets and templates. About three hours of video."
+      a: "33 video lessons, each with a written reading, and 8 downloadable worksheets and templates. About three hours of video and 5-8 hours in all, plus the time you spend applying the tools to your own architecture."
     - q: "Is this a FinOps course?"
       a: "No. FinOps teaches finance and operations teams to measure, allocate and buy cloud capacity well. This course is for the people who design the systems that create the bill. It covers the part FinOps can't reach."
     - q: "What if it isn't for me?"
