@@ -343,9 +343,11 @@ tokens.
 
 ## Netlify and the retired /academy page
 
-`netlify.toml` here has **no `[[redirects]]` section at all**, and does not need one.
-(The only redirects this site emits are the generated `_redirects` rules for ended offers —
-see **Selling pages** above.)
+`netlify.toml` here carries only **permanent short links**, such as `/cost-webinar` →
+`/webinars/architecting-for-cost/` (302). A short link is printed or spoken somewhere
+that can't be edited, so never change or remove one, and never move its destination
+page. The only other redirects this site emits are the generated `_redirects` rules
+for ended offers (see **Selling pages** above), which Netlify reads first.
 The cutover is complete: `atchisonacademy.com` has its own Netlify site and resolves to
 this directory rather than being an alias on the leeatchison.com site, so the two 302
 rules that used to send it to `leeatchison.com/academy/` are gone from

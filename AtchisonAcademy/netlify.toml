@@ -50,6 +50,19 @@
   NODE_ENV = "development"
   BRIDGETOWN_ENV = "production"
 
+# Permanent short links. Each is spoken or printed somewhere that can't be
+# edited, so neither side of a rule may ever change. 302, not 301, so the
+# destination can move without browsers having cached the old one. A rule
+# here is independent of the build, so a template bug can't break it.
+#
+# /cost-webinar: spoken in the recorded "When the Cloud Savings Stop"
+# webinar and shown on its last slide (Spec0031 §B5). Netlify matches it with
+# or without a trailing slash.
+[[redirects]]
+  from = "/cost-webinar"
+  to = "/webinars/architecting-for-cost/"
+  status = 302
+
 [build.processing.html]
   pretty_urls = true
 

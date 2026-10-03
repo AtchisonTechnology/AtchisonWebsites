@@ -482,7 +482,7 @@ Take the exact sign-in steps from `Course Delivery.md`; do not guess them.
 **After it ships, Lee changes the Kit product's after-purchase link to this
 URL** (launch checklist).
 
-## B5. Webinar page (W5) — `/webinars/why-finance-cant-fix-your-cloud-bill/`
+## B5. Webinar page (W5) — `/webinars/architecting-for-cost/`
 
 Same pattern as `/webinars/architecting-with-ai/`. Two states from one front
 matter key:
@@ -492,9 +492,26 @@ matter key:
 - **`replay`** — the replay link, and a link to the launch page while the
   offer is active, otherwise the sales page.
 
-**Title:** *Why Finance Can't Fix Your Cloud Bill* (Lee, 2026-10-02).
-**The LinkedIn Event URL is not set yet.** Build the page with a placeholder
-for it, and keep it `hidden` until it exists.
+**Title:** *When the Cloud Savings Stop* (Lee, 2026-10-02; this replaced *Why
+Finance Can't Fix Your Cloud Bill*). One line: "Why the finance playbook stops
+finding money, and the architecture decisions that set your cloud bill."
+Source: `AtchisonAcademy/src/webinars/architecting-for-cost.erb`.
+
+**Short link: `/cost-webinar`**, a **302** to `/webinars/architecting-for-cost/`
+(Lee, 2026-10-03). It's spoken in the recorded webinar and shown on its last
+slide, so **neither the short link nor the page URL may ever change or
+break**. The rule lives in `AtchisonAcademy/netlify.toml`, independent of the
+build. It's 302 rather than 301 so the destination can still move without
+browsers caching the old one.
+
+**Live before the LinkedIn Event exists** (Lee, 2026-10-03). The page isn't
+hidden. While `linkedin_event_url` is blank, it says "Registration opens soon on
+LinkedIn. Check back here for the link." in place of the button. The run's date
+is `starts_at`, plain text, in the page's front matter.
+
+**Questions section**, the same in every run and both states: a link to
+https://leeatchison.com/contact and to https://www.linkedin.com/in/leeatchison/,
+both opening in a new tab.
 
 ## B6. Home page rebuild (W1) — `/`
 
@@ -741,3 +758,11 @@ worktree) and check:
   (`src/webinars/when-the-cloud-savings-stop.erb`), with the line "Why the finance playbook stops
   finding money, and the architecture decisions that set your cloud bill." It is still hidden
   until the LinkedIn Event exists. This supersedes B5's and Q3's title and slug.
+- **2026-10-03 — Webinar page URL and short link** (Lee). The webinar page moved to
+  `/webinars/architecting-for-cost/` (from `/webinars/when-the-cloud-savings-stop/`, which was
+  never live), and the permanent short link `/cost-webinar` is a 302 to it in `netlify.toml`.
+  B5 was updated, superseding the title and slug in Q3 and in the soft-launch entry above. The
+  page is still hidden until the LinkedIn Event exists.
+- **2026-10-03 — Webinar page made public; Questions section added** (Lee). `hidden` was removed;
+  a blank LinkedIn Event URL now shows "Registration opens soon on LinkedIn. Check back here for
+  the link." A Questions section links to the contact form and Lee's LinkedIn, both in a new tab.

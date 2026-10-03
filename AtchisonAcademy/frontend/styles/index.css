@@ -3127,6 +3127,13 @@ body.webinar .webinar-lead {
   margin: -1rem 0 2rem;
 }
 
+/* Shown in place of the registration button until the LinkedIn Event exists. */
+body.webinar .webinar-pending {
+  margin: 0;
+  font-weight: 600;
+  color: var(--white);
+}
+
 body.webinar .webinar-actions {
   display: flex;
   flex-wrap: wrap;

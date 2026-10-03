@@ -5,16 +5,21 @@ title: "When the Cloud Savings Stop"
 description: "Why the finance playbook stops finding money, and the architecture decisions that set your cloud bill."
 image: /images/sales/architecting-for-cost/og.png
 # Supporting page (Spec0031 §B5), same pattern as architecting-with-ai.erb.
-# `state` is upcoming or replay. Hidden until the LinkedIn Event exists.
+# `state` is upcoming or replay. Live even before the LinkedIn Event exists
+# (Lee, 2026-10-03): with `linkedin_event_url` blank, the page says that
+# registration opens soon instead of showing the button.
+#
+# ⚠️ NEVER MOVE OR RENAME THIS FILE. The short link /cost-webinar (a 302 in
+# netlify.toml) points at /webinars/architecting-for-cost/, and that short
+# link is spoken in a recorded video and shown on its last slide.
 state: upcoming
 starts_at: "Thursday, November 19, 10am Pacific"
-linkedin_event_url: ""          # TODO: the LinkedIn Event, once created
+linkedin_event_url: ""          # the LinkedIn Event; blank shows "registration opens soon"
 replay_url: ""                  # set when state: replay
 # The replay page links to this offer while it is active, else to the
 # product's sales page.
 product: architecting-for-cost
 offer_slug: launch
-hidden: true
 ---
 
 <%
@@ -39,7 +44,7 @@ hidden: true
           <%# LinkedIn is third-party, so it opens in a new tab. %>
           <a href="<%= data.linkedin_event_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Register on LinkedIn &rarr;</a>
         <% else %>
-          <span class="selling-placeholder">LinkedIn Event URL not set yet</span>
+          <p class="webinar-pending">Registration opens soon on LinkedIn. Check back here for the link.</p>
         <% end %>
       <% else %>
         <% if data.replay_url.to_s != "" %>
@@ -54,9 +59,18 @@ hidden: true
 <section class="course-body">
   <div class="course-body-inner">
     <% if data.state == "upcoming" %>
-      <p>A free 30-minute webinar on <%= data.starts_at %>. Register through the LinkedIn Event.</p>
+      <% if data.linkedin_event_url.to_s != "" %>
+        <p>A free 30-minute webinar on <%= data.starts_at %>. Register through the LinkedIn Event.</p>
+      <% else %>
+        <p>A free 30-minute webinar on <%= data.starts_at %>. Registration opens soon on LinkedIn, and the link will be on this page.</p>
+      <% end %>
     <% else %>
       <p>The replay is free. The webinar is the premise of the course <a href="<%= course_url %>">Architecting for Cost</a>.</p>
     <% end %>
+
+    <%# The same in every run and both states (Lee, 2026-10-03). Both links
+        open a new tab (Lee's call), so a viewer doesn't lose this page. %>
+    <h2>Questions?</h2>
+    <p>Want to ask me something? Send me a note through <a href="https://leeatchison.com/contact" target="_blank" rel="noopener noreferrer">my contact form</a>, or reach me on <a href="https://www.linkedin.com/in/leeatchison/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
   </div>
 </section>
