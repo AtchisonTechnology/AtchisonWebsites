@@ -7,7 +7,7 @@ created: 2026-09-02
 date: 2026-10-06
 series: "AI-Native Architecture"
 series_position: "Act II, article 1 of 4 — the maturity model"
-published_on:
+published_on: 2026-10-06
 
 sai_url:
 email_sent:
