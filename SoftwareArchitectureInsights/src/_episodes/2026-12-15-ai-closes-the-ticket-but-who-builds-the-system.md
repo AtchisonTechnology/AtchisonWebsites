@@ -6,7 +6,7 @@ episode_number: 20
 category: Beyond the Article
 tags: []
 description: "What a team lead actually does when AI closes the tickets and nobody builds the system."
-captivate_episode_id: ""
+captivate_episode_id: "0c2c863f-2939-4a83-9557-11cdc26303e9"
 source_articles: [ai-closes-the-ticket-but-who-builds-the-system]
 duration: "11:09"
 ---

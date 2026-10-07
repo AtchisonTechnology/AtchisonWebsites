@@ -157,3 +157,60 @@
   to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
   status = 302
   force = true
+
+# Podcast house-ad URLs (added 2026-10-06, Lee). A podcast ad can't carry a
+# link, so each ad says a short URL here and these rules forward it with UTM
+# tags. utm_content is the path, not the ad: several ads can share a path.
+# Registry and rationale: "Podcast House Ad Redirects" in the UTM Standard
+# (Dropbox: Professional/Social Media/UTM Standard.md); which ads use which
+# path: SAI Podcast/Ads/Campaigns.md. 302, not 301, so a destination can
+# change later without re-recording the ad and without browsers caching the
+# old one. /join, not /subscribe: /subscribe is a real page on this site.
+
+[[redirects]]
+  from = "/scale"
+  to = "https://architectingforscale.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=scale"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/scale/"
+  to = "https://architectingforscale.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=scale"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/conductor"
+  to = "https://thesoftwareconductor.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=conductor"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/conductor/"
+  to = "https://thesoftwareconductor.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=conductor"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/academy"
+  to = "https://atchisonacademy.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=academy"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/academy/"
+  to = "https://atchisonacademy.com/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=academy"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/join"
+  to = "/subscribe/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=join"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/join/"
+  to = "/subscribe/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=join"
+  status = 302
+  force = true

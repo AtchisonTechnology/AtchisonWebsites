@@ -6,7 +6,7 @@ episode_number: 18
 category: Beyond the Article
 tags: [Series]
 description: "Agents with no step limit, cost in the design review, and the latency half of inference economics."
-captivate_episode_id: ""
+captivate_episode_id: "d78c5fb0-b1d8-4c6e-8ebb-1bd6dbdeb98e"
 source_articles: [your-function-call-was-free]
 duration: "11:03"
 ---

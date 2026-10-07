@@ -6,7 +6,7 @@ episode_number: 19
 category: Then vs. Now
 tags: []
 description: "Almost three years after arguing the cloud costs less than it looks, Lee checks what held up and what he understated."
-captivate_episode_id: ""
+captivate_episode_id: "0f7b436a-629f-4f14-b0b1-4dfc49172490"
 source_articles: [you-can-t-afford-not-to-be-in-the-cloud]
 duration: "9:55"
 ---

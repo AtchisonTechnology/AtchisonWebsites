@@ -6,7 +6,7 @@ episode_number: 23
 category: Beyond the Article
 tags: []
 description: "Finding the systems nobody owns, turning them off without getting burned, and getting the time to do it."
-captivate_episode_id: ""
+captivate_episode_id: "f5c55f10-5f15-450f-aa02-8af24f1a03ad"
 source_articles: [nobody-gets-promoted-for-turning-things-off]
 duration: "13:48"
 ---

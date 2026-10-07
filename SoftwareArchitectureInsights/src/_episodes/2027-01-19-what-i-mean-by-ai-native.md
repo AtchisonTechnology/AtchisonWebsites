@@ -6,7 +6,7 @@ episode_number: 24
 category: Questions I Get Asked
 tags: [Series]
 description: "A precise definition of AI-native, the four properties it rests on, and what it doesn't mean."
-captivate_episode_id: ""
+captivate_episode_id: "8e5d6bd2-121c-4e37-b3a8-736db07c66f1"
 source_articles: []
 duration: "12:26"
 ---
