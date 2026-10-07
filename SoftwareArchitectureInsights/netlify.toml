@@ -214,3 +214,27 @@
   to = "/subscribe/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=join"
   status = 302
   force = true
+
+[[redirects]]
+  from = "/cost"
+  to = "https://atchisonacademy.com/courses/architecting-for-cost/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=cost"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/cost/"
+  to = "https://atchisonacademy.com/courses/architecting-for-cost/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=cost"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/worksheet"
+  to = "https://atchisonacademy.com/free/cost-attribution-worksheet/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=worksheet"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/worksheet/"
+  to = "https://atchisonacademy.com/free/cost-attribution-worksheet/?utm_source=sai-podcast&utm_medium=podcast&utm_campaign=evergreen&utm_content=worksheet"
+  status = 302
+  force = true
