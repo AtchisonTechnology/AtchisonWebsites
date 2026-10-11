@@ -1,9 +1,9 @@
 # Architecting for Cost launch price: extend the end date to Tue Dec 1
 
 * **ID:** Spec0033
-* **Status:** In Spec Development/Refinement
+* **Status:** Closed
 * **Date Created:** 2026-10-11
-* **Date Implemented:**
+* **Date Implemented:** 2026-10-11
 * **Systems Impacted:** AtchisonAcademy
 
 ---
@@ -72,3 +72,4 @@ None. Both decisions above are Lee's (2026-10-11).
   Dec 1 instead of running a separate Black Friday sale, and to keep the 3-day grace period
   (through Dec 4). Researched the offer file and `AtchisonAcademy/CLAUDE.md` (offer fields).
   Ready for implementation once Lee moves it to Implementing.
+* **2026-10-11** — Implemented and deployed by Lee; launch page live with the Dec 1 end date. Lee set the Kit LAUNCH coupon to expire Sat Dec 5, midnight PT. Closed and archived at Lee's request.
