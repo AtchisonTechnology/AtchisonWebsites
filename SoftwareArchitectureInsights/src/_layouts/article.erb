@@ -53,9 +53,5 @@ layout: default
     <p><%== data.bio_html %></p>
   </footer>
 
-  <div class="article-subscribe">
-    <div class="article-subscribe-inner">
-      <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
-    </div>
-  </div>
+  <%= render "article_subscribe" %>
 </article>

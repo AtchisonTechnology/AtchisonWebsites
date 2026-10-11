@@ -1,0 +1,15 @@
+<%
+  # The subscribe block at the end of every article and episode page
+  # (Spec0032): heading, pitch, the Kit inline form, and the subscriber
+  # count. Only .article-subscribe-inner breaks out to Kit's 700px
+  # measurement width; the copy stays at the reading column.
+  heading ||= "Enjoyed this? Get the next one."
+%>
+<div class="article-subscribe">
+  <h2 class="article-subscribe-heading"><%= heading %></h2>
+  <p class="article-subscribe-pitch">Practical architecture thinking, every Tuesday morning. From someone still doing the work.</p>
+  <div class="article-subscribe-inner">
+    <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
+  </div>
+  <p class="article-subscribe-count">Join <%= site.metadata.subscriber_count %> architects &amp; engineering leaders. Unsubscribe anytime.</p>
+</div>

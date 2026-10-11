@@ -90,9 +90,5 @@ layout: default
     </section>
   <% end %>
 
-  <div class="article-subscribe">
-    <div class="article-subscribe-inner">
-      <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
-    </div>
-  </div>
+  <%= render "article_subscribe", heading: "Enjoyed this episode? Get the next one." %>
 </article>

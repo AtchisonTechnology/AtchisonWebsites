@@ -751,6 +751,23 @@ a.article-list-category:hover { color: var(--brand-blue); }
   border-top: 1px solid var(--rule);
 }
 
+/* Copy around the article-end form (Spec0032). Sits in .article-subscribe,
+   outside the breakout, so it wraps at the article's reading width. */
+.article-subscribe-heading {
+  margin: 0 0 0.5rem;
+}
+
+.article-subscribe-pitch {
+  margin: 0 0 0.25rem;
+  color: var(--steel);
+}
+
+.article-subscribe-count {
+  color: var(--stone-600);
+  font-size: 0.9rem;
+  margin: 0.75rem 0 0;
+}
+
 .kit-form-pending {
   padding: 1rem;
   border: 1px dashed var(--rule);

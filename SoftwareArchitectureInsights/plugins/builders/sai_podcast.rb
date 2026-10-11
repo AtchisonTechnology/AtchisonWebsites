@@ -5,9 +5,9 @@
 #
 # This builder:
 #   1. Validates every episode at read time (date-prefixed filename against
-#      slug and date, required date, slug's category prefix against
-#      category:, tags: from the allowed set, every source_articles slug
-#      exists in the articles collection).
+#      slug and date, required date, a known category:, tags: from the
+#      allowed set, every source_articles slug exists in the articles
+#      collection).
 #   2. Drops any episode whose `date` is in the future from a production
 #      build (not rendered, not listed on /podcast/, not in the sitemap),
 #      the same mechanism and Pacific-time comparison (PacificDate) as
@@ -23,17 +23,17 @@
 require "date"
 
 class Builders::SaiPodcast < SiteBuilder
-  # Episode ID prefix for each of the seven categories (Episode Tracker.md,
-  # "Quick reference"). The slug's prefix and the category: label must agree.
-  CATEGORY_PREFIXES = {
-    "Beyond the Article"     => "beyond-",
-    "Then vs. Now"           => "then-now-",
-    "Teardown"                => "teardown-",
-    "Questions I Get Asked"  => "asked-",
-    "Course Spin-off"        => "course-",
-    "Interview"               => "interview-",
-    "Reading"                  => "reading-",
-  }.freeze
+  # The seven episode categories (Episode Tracker.md, "Quick reference").
+  # The category: label is shown on the page, so a typo fails the build.
+  CATEGORIES = [
+    "Beyond the Article",
+    "Then vs. Now",
+    "Teardown",
+    "Questions I Get Asked",
+    "Course Spin-off",
+    "Interview",
+    "Reading",
+  ].freeze
 
   VALID_TAGS = %w[Contrarian Series].freeze
 
@@ -110,20 +110,10 @@ class Builders::SaiPodcast < SiteBuilder
   end
 
   def validate_category!(resource)
-    category = resource.data.category.to_s
-    prefix = CATEGORY_PREFIXES[category]
+    return if CATEGORIES.include?(resource.data.category.to_s)
 
-    unless prefix
-      raise "#{resource.relative_path}: category: #{resource.data.category.inspect} is not " \
-            "one of the seven known categories — see " \
-            "Builders::SaiPodcast::CATEGORY_PREFIXES"
-    end
-
-    slug = resource.data.slug.to_s
-    return if slug.start_with?(prefix)
-
-    raise "#{resource.relative_path}: slug: #{slug.inspect} does not start with " \
-          "#{prefix.inspect}, the ID prefix for category: #{category.inspect}"
+    raise "#{resource.relative_path}: category: #{resource.data.category.inspect} is not " \
+          "one of the seven known categories — see Builders::SaiPodcast::CATEGORIES"
   end
 
   def validate_tags!(resource)
