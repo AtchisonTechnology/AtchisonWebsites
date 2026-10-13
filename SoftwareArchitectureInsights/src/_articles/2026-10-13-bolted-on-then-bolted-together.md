@@ -7,7 +7,7 @@ created: 2026-09-02
 date: 2026-10-13
 series: "AI-Native Architecture"
 series_position: "Act II, article 2 of 4 — the anti-pattern catalog"
-published_on:
+published_on: 2026-10-13
 
 sai_url:
 email_sent:
