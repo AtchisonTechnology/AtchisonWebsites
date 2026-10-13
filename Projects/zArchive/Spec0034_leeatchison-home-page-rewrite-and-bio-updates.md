@@ -1,9 +1,9 @@
 # leeatchison.com home page rewrite, new bio across all sites, Person structured data, and redirects for old URLs
 
 * **ID:** Spec0034
-* **Status:** Implementing
+* **Status:** Closed
 * **Date Created:** 2026-10-13
-* **Date Implemented:**
+* **Date Implemented:** 2026-10-13
 * **Systems Impacted:** LeeAtchison, SoftwareArchitectureInsights, TheSoftwareConductor, ArchitectingForScale, stosa, BusinessBreakthrough30, AtchisonAcademy
 
 ---
@@ -220,6 +220,8 @@ Found 2026-10-13 while checking for gaps:
 ---
 
 ## History of Updates
+
+- 2026-10-13: Closed at Lee's direction after verifying the live sites. Core sentence on all seven sites, no old phrasing left. Structured data checked live: Person (leeatchison.com home and about, SAI about), Article (SAI articles), Book (three book sites), Course (Academy courses). Schema.org validator: Person 0 errors, 0 warnings. Google Rich Results Test: Article valid, with one optional note (`datePublished` has no time or time zone). 42 of 43 old URLs tested and redirect to a live page (the www variant couldn't be tested from Claude's network). New share image live. Search Console 404 validation started 2026-10-13.
 
 - 2026-10-13: Moved to Implementing and built on `main`, Parts 1 to 6. All seven sites build clean. The core sentence appears on every site, including all 68 SAI articles through `bio.yml`, and none of the old opening lines survive in built output. JSON-LD parses: Person on the leeatchison.com home and about pages, Person reference on the SAI about page, Article on all 68 SAI articles, Book on the three book sites, and Course on the four Atchison Academy-hosted courses. Architecting for Scale and Business Breakthrough have no ISBN in the repo, so their Book records leave it out. 57 redirects in `netlify.toml`; every internal target exists in the build and every external target returns 200. Old blog matches are listed under Part 5 for review. Share card regenerated in the original layout with headless Chrome. The generator stays out of the repo, as in Spec0003. Not done yet: Rich Results Test and "Validate fix" (both after deploy), and the `Identity.md` tracking rows in the Visibility project.
 

@@ -1,7 +1,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <% resource_title = strip_html(strip_newlines(title)) %>
-<% page_title = resource_title != "Index" ? "#{resource_title} | #{metadata.title}" : "#{metadata.title}: #{metadata.tagline}" %>
+<%# The home page (title "Home") and any "Index" page get "Lee Atchison: <tagline>" rather than "Home | Lee Atchison". %>
+<% page_title = %w[Index Home].include?(resource_title) ? "#{metadata.title}: #{metadata.tagline}" : "#{resource_title} | #{metadata.title}" %>
 <title><%= page_title %></title>
 
 <%

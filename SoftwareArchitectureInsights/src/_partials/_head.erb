@@ -66,12 +66,20 @@
   json_ld = if is_article
     published = resource.data.published_on || resource.data.date
     modified = resource.data.updated || resource.data.date_modified
+    # Full ISO 8601 with offset. Google flags a bare date as missing a time
+    # zone; a Date (no time) becomes midnight in the site's timezone
+    # (America/Los_Angeles, config/initializers.rb).
+    iso_datetime = ->(d) {
+      next nil unless d
+      t = d.respond_to?(:hour) ? d : Time.new(d.year, d.month, d.day)
+      t.iso8601
+    }
     {
       "@context" => "https://schema.org",
       "@type" => "Article",
       "headline" => strip_html(strip_newlines(resource.data.title)),
-      "datePublished" => published&.strftime("%Y-%m-%d"),
-      "dateModified" => modified&.strftime("%Y-%m-%d"),
+      "datePublished" => iso_datetime.(published),
+      "dateModified" => iso_datetime.(modified),
       "url" => page_url,
       "image" => og_image_url,
       "author" => { "@type" => "Person" }.merge(lee_ref),
