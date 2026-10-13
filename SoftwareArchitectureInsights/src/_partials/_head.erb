@@ -54,6 +54,59 @@
 <meta name="twitter:description" content="<%= page_description %>" />
 <meta name="twitter:image" content="<%= og_image_url %>" />
 
+<%
+  # Structured data (Spec0034). Lee's master Person record lives on
+  # leeatchison.com under the @id below; this site points at it rather than
+  # redefining him, so search engines and AI crawlers see one Lee Atchison.
+  lee_ref = {
+    "@id" => "https://leeatchison.com/#person",
+    "name" => "Lee Atchison",
+    "url" => "https://leeatchison.com/"
+  }
+  json_ld = if is_article
+    published = resource.data.published_on || resource.data.date
+    modified = resource.data.updated || resource.data.date_modified
+    {
+      "@context" => "https://schema.org",
+      "@type" => "Article",
+      "headline" => strip_html(strip_newlines(resource.data.title)),
+      "datePublished" => published&.strftime("%Y-%m-%d"),
+      "dateModified" => modified&.strftime("%Y-%m-%d"),
+      "url" => page_url,
+      "image" => og_image_url,
+      "author" => { "@type" => "Person" }.merge(lee_ref),
+      "publisher" => {
+        "@type" => "Organization",
+        "name" => "Software Architecture Insights",
+        "url" => "https://softwarearchitectureinsights.com/",
+        "logo" => absolute_url("/images/brand/sai-nav-mark.png")
+      }
+    }.compact
+  elsif defined?(resource) && resource && resource.relative_url.to_s == "/about/"
+    {
+      "@context" => "https://schema.org",
+      "@type" => "Person",
+      **lee_ref,
+      "description" => "Lee Atchison is a software architect and author who helps companies architect and operate AI-powered SaaS at scale.",
+      "sameAs" => [
+        "https://www.linkedin.com/in/leeatchison",
+        "https://github.com/leeatchison",
+        "https://x.com/leeatchison",
+        "https://www.threads.com/@leeatchison",
+        "https://www.amazon.com/author/leeatchison",
+        "https://softwarearchitectureinsights.com/",
+        "https://atchisonacademy.com/",
+        "https://thesoftwareconductor.com/",
+        "https://architectingforscale.com/",
+        "https://stosa.org/"
+      ]
+    }
+  end
+%>
+<% if json_ld %>
+<script type="application/ld+json"><%== JSON.pretty_generate(json_ld) %></script>
+<% end %>
+
 <link rel="icon" href="<%= relative_url '/favicon.ico' %>" />
 <link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32x32.png' %>" />
 <link rel="apple-touch-icon" href="<%= relative_url '/apple-touch-icon.png' %>" />

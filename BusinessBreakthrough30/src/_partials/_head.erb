@@ -39,6 +39,26 @@
 <meta name="twitter:description" content="<%= page_description %>" />
 <meta name="twitter:image" content="<%= og_image_url %>" />
 
+<%
+  # Book structured data on the home page (Spec0034). The author points at
+  # Lee's master Person record on leeatchison.com by @id.
+  if defined?(resource) && resource && resource.relative_url.to_s == "/"
+    book_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "Book",
+      "name" => "Business Breakthrough 3.0",
+      "url" => "https://businessbreakthrough30.com/",
+      "image" => absolute_url("/images/cover-600.png"),
+      "publisher" => { "@type" => "Organization", "name" => "Executive Book Publishing" },
+      "author" => [
+        { "@type" => "Person", "@id" => "https://leeatchison.com/#person", "name" => "Lee Atchison", "url" => "https://leeatchison.com/" },
+        { "@type" => "Person", "name" => "Ken Gavranovic" }
+      ]
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(book_ld) %></script>
+<% end %>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />

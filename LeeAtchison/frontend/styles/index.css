@@ -388,7 +388,7 @@ body.homepage main {
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -398,6 +398,8 @@ body.homepage main {
   border-radius: var(--radius);
   padding: 2rem;
   transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .pillar-card:hover {
@@ -436,6 +438,17 @@ body.homepage main {
   line-height: 1.65;
   margin: 0;
 }
+
+.pillar-link {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.pillar-link:hover { color: var(--teal); text-decoration: none; }
 
 /* ============================================
    About
@@ -794,6 +807,15 @@ a.topic-tag--link:hover {
 }
 
 .contact-text .section-label { margin-bottom: 0.5rem; }
+
+.contact-intro {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 1rem 0 0;
+}
+
+.contact-cta { margin-top: 2rem; }
 
 .services-list {
   list-style: none;

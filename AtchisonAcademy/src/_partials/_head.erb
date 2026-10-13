@@ -64,6 +64,25 @@
 <meta name="twitter:description" content="<%= page_description %>" />
 <meta name="twitter:image" content="<%= og_image_url %>" />
 
+<%
+  # Course structured data (Spec0034), only for courses offered directly on
+  # Atchison Academy. Coursera, LinkedIn Learning and O'Reilly publish their
+  # own course records, so those pages are skipped. The instructor points at
+  # Lee's master Person record on leeatchison.com by @id.
+  if page_url && resource.collection&.label == "courses" && resource.data.platform == "Atchison Academy"
+    course_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "Course",
+      "name" => strip_html(resource.data.title.to_s),
+      "description" => strip_html(strip_newlines(resource.data.summary.to_s)),
+      "url" => page_url,
+      "provider" => { "@type" => "Organization", "name" => "Atchison Academy", "url" => "https://atchisonacademy.com/" },
+      "instructor" => { "@type" => "Person", "@id" => "https://leeatchison.com/#person", "name" => "Lee Atchison", "url" => "https://leeatchison.com/" }
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(course_ld) %></script>
+<% end %>
+
 <link rel="icon" type="image/png" href="<%= relative_url '/images/favicon.png' %>" />
 
 <link rel="stylesheet" href="<%= asset_path :css %>" />

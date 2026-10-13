@@ -11,8 +11,8 @@
 # That same pass rewrites the Software Architecture Insights link to a bare
 # relative path, since a link to this site from this site is internal.
 template: >-
-  Lee Atchison is a software architect, author, and technology thought
-  leader. He is the author of [The Software Conductor](https://thesoftwareconductor.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)
+  Lee Atchison is a software architect and author who helps companies
+  architect and operate AI-powered SaaS at scale. He is the author of [The Software Conductor](https://thesoftwareconductor.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)
   and the O'Reilly book [Architecting for Scale](https://architectingforscale.com/?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio),
   and was the founder and CTO of Product Genius, an AI startup. He teaches
   [software architecture and cloud courses](https://leeatchison.com/courses?utm_source=sai-email&utm_medium=email&utm_campaign=%{campaign}&utm_content=bio)

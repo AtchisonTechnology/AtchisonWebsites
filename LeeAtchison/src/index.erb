@@ -6,13 +6,13 @@ title: Home
 
 <section class="hero">
   <div class="hero-content">
-    <span class="hero-eyebrow">Cloud Strategist &amp; Software Architect</span>
-    <h1>Modernize the Enterprise</h1>
-    <p class="hero-subtitle">Tap into thoughtful advice and expertise from leading cloud strategist Lee Atchison.</p>
-    <p class="hero-desc">Organizations need modern applications, processes, and tools to compete. Without reliable digital services, customers will leave.</p>
+    <span class="hero-eyebrow">Software Architect &amp; Author</span>
+    <h1>AI-Powered SaaS That Holds Up at Scale</h1>
+    <p class="hero-subtitle">Lee Atchison is a software architect and author who helps companies architect and operate AI-powered SaaS at scale.</p>
+    <p class="hero-desc">Adding AI to a product is the easy part. Keeping it fast, affordable and reliable once real customers arrive is where most teams get stuck.</p>
     <div class="btn-group">
       <a href="/#contact" class="btn btn-primary">Work with Lee</a>
-      <a href="/#insights" class="btn btn-outline">Explore Resources</a>
+      <a href="https://softwarearchitectureinsights.com" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Read the Newsletter</a>
     </div>
   </div>
 </section>
@@ -84,28 +84,43 @@ title: Home
 </section>
 <% end %>
 
-<section class="pillars">
+<section class="pillars" id="topics">
+  <div class="section-header">
+    <span class="section-label">What Lee Works On</span>
+    <h2 class="section-title">Four Problems Lee Helps Solve</h2>
+  </div>
   <div class="pillars-grid">
     <div class="pillar-card">
       <div class="pillar-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
       </div>
-      <h3>Scalable &amp; Agile</h3>
-      <p>Scalable applications and agile business adaptation to stay ahead in a fast-moving market.</p>
+      <h3>Architecting AI-powered SaaS at scale</h3>
+      <p>Most AI features start bolted onto the side of the app. That works for a demo. At scale, the model needs a real place in the architecture.</p>
+      <a href="<%= relative_url '/ainative' %>" class="pillar-link">The five levels of AI-native architecture &rarr;</a>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
-      <h3>Cost-Effective Operations</h3>
-      <p>Efficient, cost-effective operations that deliver results without bloated infrastructure costs.</p>
+      <h3>AI cost architecture</h3>
+      <p>A function call used to be free. A model call isn&rsquo;t, and the bill grows with every customer. Cost has to be part of the design, because the invoice is a bad place to find out.</p>
+      <a href="https://softwarearchitectureinsights.com/posts/your-function-call-was-free/" class="pillar-link" target="_blank" rel="noopener noreferrer">Your Function Call Was Free. This One Isn&rsquo;t. &rarr;</a>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       </div>
-      <h3>Managed Risk</h3>
-      <p>Manageable risk and technical debt so you can move fast without breaking critical systems.</p>
+      <h3>Operating AI reliably in production</h3>
+      <p>An AI feature can be up and still be wrong. Reliability now means knowing how often it&rsquo;s wrong, who it affects, and how fast you&rsquo;ll notice.</p>
+      <a href="https://softwarearchitectureinsights.com/posts/ai-didnt-break-your-risk-matrix/" class="pillar-link" target="_blank" rel="noopener noreferrer">AI Didn&rsquo;t Break Your Risk Matrix. It Broke Your Scores. &rarr;</a>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Scalability and high availability</h3>
+      <p>Your system worked fine at a thousand users. Then it didn&rsquo;t. Lee has done this work since Amazon, and wrote the O&rsquo;Reilly book on it.</p>
+      <a href="https://architectingforscale.com" class="pillar-link" target="_blank" rel="noopener noreferrer">Architecting for Scale &rarr;</a>
     </div>
   </div>
 </section>
@@ -118,20 +133,21 @@ title: Home
       </div>
       <div class="about-credentials">
         <span class="credential-badge">Software Architect</span>
-        <span class="credential-badge">Published Author</span>
-        <span class="credential-badge">Public Speaker</span>
-        <span class="credential-badge">Fractional Chief Architect</span>
+        <span class="credential-badge">Author</span>
+        <span class="credential-badge">Former AI Company CTO</span>
+        <span class="credential-badge">Advisor</span>
       </div>
     </div>
     <div class="about-text">
       <span class="section-label">About Lee</span>
-      <h2 class="section-title">Three Decades of Industry-Shaping Experience</h2>
-      <p>Lee Atchison is a software architect, published author, and public speaker specializing in cloud computing and application modernization. With over three decades of experience, Lee has worked with some of the world&rsquo;s most innovative technology companies.</p>
-      <p>As a recognized thought leader, Lee shares expertise through books, columns, blogs, and speaking engagements &mdash; and works directly with organizations as a Fractional Chief Architect consultant across multiple industries.</p>
+      <h2 class="section-title">From Amazon and New Relic to AI</h2>
+      <p>Lee Atchison is a software architect and author who helps companies architect and operate AI-powered SaaS at scale. At Amazon, he helped rearchitect the retail website and built AWS Elastic Beanstalk. He led architecture for New Relic&rsquo;s fast-growing SaaS platform and served as CTO of an AI company. He wrote <em>Architecting for Scale</em> (O&rsquo;Reilly) and publishes Software Architecture Insights.</p>
+      <p><a href="<%= relative_url '/about' %>" class="book-link">More about Lee &rarr;</a></p>
       <div class="about-companies">
         <span class="company-tag">Amazon.com</span>
         <span class="company-tag">AWS</span>
         <span class="company-tag">New Relic</span>
+        <span class="company-tag">Product Genius</span>
       </div>
     </div>
   </div>
@@ -231,14 +247,13 @@ title: Home
     </div>
     <span class="section-label">Knowledge Hub</span>
     <h2 class="section-title">Software Architecture Insights</h2>
-    <p class="insights-desc">A curated resource for software architects and aspiring professionals covering cloud computing, application security, scalability, and high availability.</p>
+    <p class="insights-desc">Lee&rsquo;s weekly newsletter and podcast on building AI into SaaS, what it costs to run, keeping it reliable, and designing for scale.</p>
     <div class="insights-topics">
       <a href="<%= relative_url '/ainative' %>" class="topic-tag topic-tag--link">AI-Native</a>
-      <span class="topic-tag">Cloud Computing</span>
-      <span class="topic-tag">Application Security</span>
+      <span class="topic-tag">AI Cost</span>
+      <span class="topic-tag">AI Reliability</span>
       <span class="topic-tag">Scalability</span>
       <span class="topic-tag">High Availability</span>
-      <span class="topic-tag">Modern Architecture</span>
       <span class="topic-tag">Tech Leadership</span>
     </div>
     <a href="https://softwarearchitectureinsights.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Explore the Article Library</a>
@@ -249,13 +264,15 @@ title: Home
   <div class="contact-inner">
     <div class="contact-text">
       <span class="section-label">Work with Lee</span>
-      <h2 class="section-title">Ready to Modernize Your Organization?</h2>
+      <h2 class="section-title">Let&rsquo;s Look at Your Architecture</h2>
+      <p class="contact-intro">Usually something ran fine until it didn&rsquo;t, or an AI feature is about to ship. Either way, the earlier we talk, the cheaper the fix.</p>
       <ul class="services-list">
-        <li>Cloud modernization consulting and strategy</li>
-        <li>Fractional Chief Architect services</li>
-        <li>Architecture review and assessment</li>
-        <li>Team mentoring and enablement</li>
+        <li>Architecture reviews for AI-powered SaaS platforms</li>
+        <li>AI cost and reliability assessments</li>
+        <li>Scalability and availability reviews</li>
+        <li>Fractional chief architect and advisory roles</li>
       </ul>
+      <a href="<%= relative_url '/contact' %>" class="btn btn-primary contact-cta">Talk With Lee</a>
     </div>
     <div class="contact-methods">
       <a href="<%= relative_url '/contact' %>" class="contact-method">

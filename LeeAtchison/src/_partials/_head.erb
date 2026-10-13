@@ -46,6 +46,44 @@
 <meta name="twitter:description" content="<%= page_description %>" />
 <meta name="twitter:image" content="<%= og_image_url %>" />
 
+<%
+  # Master Person record (Spec0034). Every other site's structured data points
+  # at this @id, so search engines and AI crawlers see one Lee Atchison behind
+  # all of it. Emitted on the home and about pages only.
+  if defined?(resource) && resource && ["/", "/about/"].include?(resource.relative_url.to_s)
+    person_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "Person",
+      "@id" => "https://leeatchison.com/#person",
+      "name" => "Lee Atchison",
+      "url" => "https://leeatchison.com/",
+      "image" => absolute_url("/images/lee-atchison.png"),
+      "jobTitle" => "Software Architect",
+      "description" => "Lee Atchison is a software architect and author who helps companies architect and operate AI-powered SaaS at scale.",
+      "worksFor" => { "@type" => "Organization", "name" => "Atchison Technology" },
+      "knowsAbout" => [
+        "Architecting AI-powered SaaS at scale",
+        "AI cost architecture",
+        "Operating AI reliably in production",
+        "Scalability and high availability"
+      ],
+      "sameAs" => [
+        "https://www.linkedin.com/in/leeatchison",
+        "https://github.com/leeatchison",
+        "https://x.com/leeatchison",
+        "https://www.threads.com/@leeatchison",
+        "https://www.amazon.com/author/leeatchison",
+        "https://softwarearchitectureinsights.com/",
+        "https://atchisonacademy.com/",
+        "https://thesoftwareconductor.com/",
+        "https://architectingforscale.com/",
+        "https://stosa.org/"
+      ]
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(person_ld) %></script>
+<% end %>
+
 <link rel="icon" type="image/png" href="<%= relative_url '/images/favicon.png' %>" />
 
 <link rel="stylesheet" href="<%= asset_path :css %>" />

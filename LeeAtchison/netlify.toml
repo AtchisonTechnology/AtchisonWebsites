@@ -131,3 +131,311 @@
   to = "/ainative/"
   status = 301
   force = true
+
+# Old URLs Google Search Console still reports as 404 (Spec0034): retired
+# pages, pre-rename book and course slugs, and the old WordPress blog. 301,
+# permanent, so whatever ranking and inbound links they still carry move to
+# the live page. Netlify matches on path, so old utm_* query strings need no
+# separate rules.
+
+# Retired pages and old book and course slugs.
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/home/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/follow"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/media"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/calendar"
+  to = "/schedule/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/architecting-for-scale"
+  to = "/books/architecting-for-scale/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/business-breakthrough-3"
+  to = "/books/business-breakthrough-3/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/books/business-breakthrough-30"
+  to = "/books/business-breakthrough-3/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/books/97-things-every-cloud-engineer-should-know"
+  to = "/books/97-things-cloud-engineer/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/books/97-things-every-information-security-professional-should-know"
+  to = "/books/97-things-infosec/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/understanding-the-impact-of-a-merger-for-it-teams"
+  to = "/courses/understanding-impact-merger-it-teams/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/understanding-the-value-of-cloud-native-architecture"
+  to = "/courses/understanding-value-cloud-native/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/cloud-careers-from-developer-to-architect"
+  to = "/courses/cloud-careers-developer-to-architect/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/presenting-cloud-migration-benefits-to-the-c-suite"
+  to = "/courses/presenting-cloud-migration-benefits/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/cloud-migration-fundamentals-best-practices-for-moving-to-the-cloud"
+  to = "/courses/cloud-migration-fundamentals/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/software-architecture-from-developer-to-architect"
+  to = "/courses/software-architecture-developer-to-architect/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/framing-cloud-discussions-for-the-c-suite"
+  to = "/courses/framing-cloud-discussions-c-suite/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/avoiding-bad-decisions-in-your-cloud-strategy"
+  to = "/courses/avoiding-bad-decisions-cloud-strategy/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/creating-and-leveraging-a-cloud-center-of-excellence-in-your-organization"
+  to = "/courses/cloud-center-of-excellence/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/courses/cloud-security/"
+  to = "/courses/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/what-is-a-stosa-organization/"
+  to = "https://stosa.org/"
+  status = 301
+  force = true
+
+
+# Old WordPress-era posts that were republished on Software Architecture
+# Insights, matched by title and topic. These come before the catch-all
+# prefix rules below so they win.
+[[redirects]]
+  from = "/mdb-weekly/best-practices-for-managing-configurations-in-cloud-native-applications/*"
+  to = "https://softwarearchitectureinsights.com/posts/five-best-practices-for-managing-configurations-in-cloud-native-applications-1/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/best-practices-for-managing-configurations-in-cloud-native-applications-mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/posts/five-best-practices-for-managing-configurations-in-cloud-native-applications-1/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/complexity/is-ai-code-automation-contributing-to-code-complexity/*"
+  to = "https://softwarearchitectureinsights.com/posts/is-ai-code-automation-contributing-to-code-complexity/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/principle-of-shared-responsibility-in-cloud-native-applications-mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/posts/who-s-responsible-understanding-the-principle-of-shared-responsibility/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/isolation-zones-cloud-native-application-security/*"
+  to = "https://softwarearchitectureinsights.com/posts/fortress-in-the-cloud-how-security-zones-shield-your-data-from-cyber-attacks/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/keep-microservices-secure-even-from-themselves-mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/posts/don-t-let-your-services-become-trojan-horses-1/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/just-in-time-permissions-in-microservices-based-applications-mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/posts/less-is-more-the-principle-of-least-privilege/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/choice-vs-complexity-in-modern-applications-mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/posts/why-increasing-complexity-actually-can-decrease-complexity/"
+  status = 301
+  force = true
+
+
+# Every other old blog post has no matching article; send it to the
+# Software Architecture Insights home page.
+[[redirects]]
+  from = "/2016"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/2016/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/app-architectures"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/app-architectures/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/complexity"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/complexity/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cloud"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cloud/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/scale-availability"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/scale-availability/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mdb-weekly/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tech-trends"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tech-trends/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lp"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/lp/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/is-it-sla-or-slo/*"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/is-it-sla-or-slo"
+  to = "https://softwarearchitectureinsights.com/"
+  status = 301
+  force = true

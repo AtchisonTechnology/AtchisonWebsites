@@ -43,6 +43,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
 
+<%
+  # Book structured data on the home page (Spec0034). The author points at
+  # Lee's master Person record on leeatchison.com by @id.
+  if defined?(resource) && resource && resource.relative_url.to_s == "/"
+    book_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "Book",
+      "name" => "The Software Conductor",
+      "url" => "https://thesoftwareconductor.com/",
+      "image" => absolute_url("/images/cover-600.png"),
+      "isbn" => "979-8-9960196-0-1",
+      "publisher" => { "@type" => "Organization", "name" => "Atchison Academy" },
+      "author" => { "@type" => "Person", "@id" => "https://leeatchison.com/#person", "name" => "Lee Atchison", "url" => "https://leeatchison.com/" }
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(book_ld) %></script>
+<% end %>
+
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
