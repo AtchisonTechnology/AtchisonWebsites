@@ -52,12 +52,12 @@ og_image: /images/sales/architecting-for-cost/og.png   # 1200×630
 # no content (quotes) hides itself.
 sections:
   - problem
+  - quotes
   - who
   - modules
   - includes
   - about
   - price
-  - quotes
   - faq
 
 problem:

@@ -1,7 +1,7 @@
 <%# Real quotes only. The section does not render at all while `quotes:` is empty. %>
 <% quotes = page.sales.quotes.to_a %>
 <% if quotes.any? %>
-<section class="sales-section">
+<section class="sales-section sales-section--quotes">
   <div class="sales-inner">
     <div class="sales-quotes">
       <% quotes.each do |q| %>
