@@ -131,9 +131,10 @@ price_section:
 # Shape: - { quote: "...", name: "...", role: "..." }
 quotes:
   # Ken Gavranovic. Wording and byline approved by Ken (audio), 2026-10-14.
+  # "VP, Cox Automotive" added at Ken's request, 2026-10-15.
   - quote: "I've sat in a lot of meetings about cutting the cloud bill. Finance trims a few percent, then hits a wall. The real money was locked in months earlier, by design decisions nobody priced. Lee teaches architects to price those decisions. I'd want every engineer on my team to take this course."
     name: "Ken Gavranovic"
-    role: "former EVP & GM, New Relic"
+    role: "VP, Cox Automotive; former EVP & GM, New Relic"
 
 faq:
   heading: "Questions"
