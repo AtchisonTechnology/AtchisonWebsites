@@ -1,9 +1,8 @@
 # SAI article-end subscribe form: add "please subscribe" messaging around it
 
-* **ID:** Spec0032
-* **Status:** Implementing
+* **Linear:** [WEB-5](https://linear.app/atchison-technlology/issue/WEB-5)
+* **Formerly:** Spec0032
 * **Date Created:** 2026-10-11
-* **Date Implemented:**
 * **Systems Impacted:** SoftwareArchitectureInsights
 
 ---

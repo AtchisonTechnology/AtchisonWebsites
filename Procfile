@@ -1,7 +1,5 @@
-# Dev servers for every site, on worktree-derived ports.
-# Each bin/dev derives its own port from the checkout name -- see
-# lib/worktree_env.rb and Projects/services.md. Run `bin/site-port --all`
-# (or `make ports`) to see what this checkout will use.
+# Dev servers for every site. Each bin/dev starts its site on that site's
+# own dev port -- see Projects/services.md.
 leeatchison: LeeAtchison/bin/dev
 tsc: TheSoftwareConductor/bin/dev
 stosa: stosa/bin/dev

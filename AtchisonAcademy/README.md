@@ -23,14 +23,13 @@ bundle install && npm install
 ## Development
 
 ```sh
-bin/dev                    # Dev server on this checkout's derived port (16000 on main)
+bin/dev                    # Dev server on port 16000
 bin/bridgetown build       # One-shot build to output/
 bin/bridgetown clean       # Delete output/ and .bridgetown-cache/
 ```
 
-This site is index 5 in the monorepo's port scheme: `16000` on `main`, `16000 + N` in a
-`spec####` worktree, `17000 + N` in a `bug####` worktree. The port is derived, never
-configured — run `../bin/site-port AtchisonAcademy` to see what this checkout will use.
+This site's dev port is `16000` (`BRIDGETOWN_PORT` overrides it). See
+`../Projects/services.md` for every site's port.
 
 To rebuild frontend assets independently:
 

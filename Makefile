@@ -3,7 +3,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help clean dev ports test
+.PHONY: help clean dev
 
 help: ## Show this list of available targets
 	@grep -E '^[a-zA-Z0-9/_-]+:.*##' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*##"}; {printf "  %-15s %s\n", $$1, $$2}'
@@ -11,11 +11,5 @@ help: ## Show this list of available targets
 clean: ## Remove stray .DS_Store files from the repo
 	find . -name '.DS_Store' -type f -delete
 
-dev: ## Run all websites on their worktree-derived ports
+dev: ## Run all websites, each on its own dev port
 	@foreman start
-
-ports: ## Show the dev ports this checkout (main or worktree) will use
-	@bin/site-port --all
-
-test: ## Run the worktree port-derivation unit test
-	ruby test/worktree_env_test.rb

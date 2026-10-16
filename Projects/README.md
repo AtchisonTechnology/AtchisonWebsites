@@ -1,14 +1,14 @@
 # Projects
 
-Spec/Bug-driven development tracking for the AtchisonWebsites monorepo, per the
-`spec-bug-process` skill.
+Spec files for the AtchisonWebsites monorepo, per the `linear-dev-process`
+skill. Work is tracked in Linear (team **Atchison Websites**, `WEB`); every
+issue's status lives there, never in these files.
 
-- **`_Projects.md`** — ideas and items that are not yet Specs/Bugs.
-- **`services.md`** — the site registry and the dev-port derivation table.
-- **`In Development/`** — active Spec/Bug files (entire pre-archive lifecycle).
-  Each file's **Status** field is the sole source of truth for its state.
-- **`zArchive/`** — completed (Closed) and abandoned (Cancelled) files.
+- **`WEB-<n>.md`** — the spec file for Linear issue WEB-<n>. Content only, no
+  status.
+- **`services.md`** — the site registry and each site's dev port.
+- **`zArchive/`** — pre-Linear `Spec####`/`Bug####` files, kept as history.
 
-Spec/Bug templates are not kept here; they come from the skill's `assets/`.
+Spec templates come from the skill, not from this folder.
 
 Project parameters and overrides are declared in the repo root `CLAUDE.md`.

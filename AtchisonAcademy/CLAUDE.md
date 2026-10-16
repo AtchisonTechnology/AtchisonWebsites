@@ -25,10 +25,8 @@ npm run esbuild            # One-shot minified bundle (production)
 npm run esbuild-dev        # Watch mode (development)
 ```
 
-**Dev port.** This is site index 5 in the monorepo: `16000` on `main`, `16000 + N` in a
-`spec####` worktree, `17000 + N` in a `bug####` worktree. Nothing here hardcodes it —
-`bin/dev` and `config/puma.rb` both re-derive it from `../lib/worktree_env.rb`, keyed on
-the repo-root directory name. See `../Projects/services.md` for the full table.
+**Dev port.** `16000`, set in `bin/dev` and `config/puma.rb` (`BRIDGETOWN_PORT`
+overrides it). See `../Projects/services.md` for every site's port.
 
 ## Architecture
 

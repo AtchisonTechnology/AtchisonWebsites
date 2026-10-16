@@ -6,7 +6,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 Seven independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
-Spec/Bug process:
+development process:
 
 | Directory | Site | Live URL |
 |---|---|---|
@@ -87,99 +87,41 @@ not marketing metadata need not join at all: `AtchisonAcademyCourses`
 
 ```bash
 make            # list targets
-make dev        # foreman: run all seven sites at once, on derived ports
-make ports      # show the dev ports this checkout will use
-make test       # unit-test the port derivation
+make dev        # foreman: run all seven sites at once, each on its own port
 make clean      # remove stray .DS_Store files
-
-bin/site-port stosa        # one site's port in this checkout
-bin/site-port --all        # all of them
-bin/site-port --worktree   # "main", or the worktree name
 ```
 
-To run a single site: `<Site>/bin/dev` (derives its port and starts
-Bridgetown). Per-site build/deploy commands live in each site's own CLAUDE.md.
+To run a single site: `<Site>/bin/dev` (starts it on that site's port; see
+`Projects/services.md`). Per-site build/deploy commands live in each site's own CLAUDE.md.
 
 ## Development Process
 
-This project follows the `spec-bug-process` skill (Spec/Bug tracking,
-worktrees, resource isolation). Project parameters:
+This project follows the `linear-dev-process` skill (Linear issue tracking,
+spec files, PR flow). Project parameters:
 
-- **Sites/services:** seven live, indices 0–7 with 6 retired — see
-  `Projects/services.md`. Indices are permanent; a retired site keeps its
-  index forever and a new site takes the next unused one (8 next).
-- **Worktrees:** `.claude/worktrees/`, named exactly `spec####` / `bug####`
-  (gitignored).
+- **Linear team:** Atchison Websites (`WEB`).
+- **Sites:** see `Projects/services.md`. A spec's **Systems Impacted** field
+  names the specific site(s) it touches, using the directory names above.
+- **Worktrees:** not used. All work happens in the main checkout.
 - **Credentials keys:** none. These are static sites with no encrypted
-  credentials, so a fresh worktree has nothing secret to copy in. See
-  `.worktreeinclude` (intentionally empty) — but a fresh worktree does need
-  `bundle install` and `npm install` per site.
+  credentials.
 - **Synchronized doc artifacts in-scope for specs:** none.
-- **Process overrides:**
-  - **No database isolation** — there are no databases. Only ports are
-    derived. Everything in the skill's `resource-isolation.md` about
-    `database.yml`, `db:prepare`, and the `psql` cleanup rule is inert here,
-    and worktree cleanup accordingly covers only the worktree, its branch,
-    and any running servers.
-  - **No Vite band** — the 5173/6173 frontend band is unused; each site
-    serves its own assets.
-  - **Worktree name is the repo-root basename**, since sites are
-    subdirectories of the repo (`lib/worktree_env.rb` handles this; the
-    equivalent trap in a Rails layout is `Rails.root.parent.basename`).
-
-### Port derivation
-
-`lib/worktree_env.rb` is the single source of truth; every consumer re-derives
-independently at startup, so nothing is generated, recorded, or passed around.
-Consumers: `bin/site-port`, each `<Site>/bin/dev`, each
-`<Site>/config/puma.rb` (fallback when `BRIDGETOWN_PORT` is unset).
-
-Following the skill's scheme exactly, with `N` = the worktree's numeric ID:
-
-| Index | Site | main | `spec####` | `bug####` |
-|---|---|---|---|---|
-| 0 | `LeeAtchison` | 3000 | 3000 + N | 4000 + N |
-| 1 | `TheSoftwareConductor` | 8000 | 8000 + N | 9000 + N |
-| 2 | `stosa` | 10000 | 10000 + N | 11000 + N |
-| 3 | `BusinessBreakthrough30` | 12000 | 12000 + N | 13000 + N |
-| 4 | `ArchitectingForScale` | 14000 | 14000 + N | 15000 + N |
-| 5 | `AtchisonAcademy` | 16000 | 16000 + N | 17000 + N |
-| 7 | `SoftwareArchitectureInsights` | 20000 | 20000 + N | 21000 + N |
-
-IDs start at `0001`, so main (N = 0) never collides. IDs above `999` overflow
-into the next block — which shows up immediately as a port-bind failure, not
-as silent cross-talk. `make test` proves every combination up to 999 is unique.
-
-**Note:** the ports for `TheSoftwareConductor`, `stosa`, and
-`BusinessBreakthrough30` changed from the old flat 3010/3020/3030 when this
-scheme was adopted, so that spec worktree ports could never collide with a
-site running on main.
+- **Process overrides:** none.
 
 ### Tracking
 
-Everything tracked lives in `Projects/`:
+Every issue's status lives in Linear, never in git. `Projects/` holds:
 
 | File | Purpose |
 |---|---|
-| `_Projects.md` | Ideas not yet turned into a Spec/Bug |
-| `services.md` | Site registry + port table |
-| `In Development/` | Active Spec/Bug files — each file's Status field is the source of truth |
-| `zArchive/` | Closed and Cancelled files |
+| `WEB-<n>.md` | The spec file for Linear issue WEB-<n>: content only, no status |
+| `services.md` | Site registry and dev ports |
+| `zArchive/` | Pre-Linear `Spec####`/`Bug####` files, kept as history |
 
-Spec/Bug files are created from the skill's bundled templates (not copied into
-this repo). A Spec/Bug's **Systems Impacted** field must name the specific
-site(s) it touches, using the directory names above — that is what determines
-which sites a worktree needs booted and rebuilt.
+To see the status of everything, query the Linear team, not the files.
 
-There is no central tracker file: each Spec/Bug file's own **Status** field is
-the sole source of truth for its state (the old `_Project Tracker.md` was
-retired 2026-09-01 because every branch touched it, causing constant merge
-conflicts). To see the status of everything, grep `Status:` across
-`Projects/In Development/`.
-
-Reminders that matter most here: never change a Spec/Bug's workflow status
-without being asked; never commit, push, or open a PR without explicit
-permission.
+Reminders that matter most here: never change an issue's status without
+being asked; never commit, push, or open a PR without explicit permission.
 
 ## File deletion permission
 
