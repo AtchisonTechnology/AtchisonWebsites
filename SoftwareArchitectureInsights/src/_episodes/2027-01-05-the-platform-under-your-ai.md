@@ -6,7 +6,7 @@ episode_number: 22
 category: Beyond the Article
 tags: [Series]
 description: "How to turn one team's AI gateway into a shared platform: start from the copy with the scars, keep only what's general, and hand over cost first."
-captivate_episode_id: ""
+captivate_episode_id: "81e1cb9c-26e6-4136-83fc-6e24304522b0"
 source_articles: [the-platform-under-your-ai]
 duration: "15:21"
 ---

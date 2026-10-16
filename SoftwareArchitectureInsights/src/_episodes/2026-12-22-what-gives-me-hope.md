@@ -6,7 +6,7 @@ episode_number: 21
 category: Questions I Get Asked
 tags: []
 description: "Lee is still worried about AI. Here are four things from 2026 that give him real hope, and one small thing to try in January for each."
-captivate_episode_id: ""
+captivate_episode_id: "8f590f02-52cd-49de-b7a4-306f3de045bf"
 source_articles: []
 duration: "10:40"
 ---
