@@ -7,7 +7,7 @@ created: 2026-09-02
 date: 2026-10-20
 series: "AI-Native Architecture"
 series_position: "Act II, article 3 of 4 — the migration path"
-published_on:
+published_on: 2026-10-20
 
 sai_url:
 email_sent:
