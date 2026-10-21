@@ -13,7 +13,8 @@
 #      send. Dev and Netlify deploy previews show future-dated articles —
 #      that is where they get reviewed before they ship, same reasoning as
 #      `hidden?` in LeeAtchison/AtchisonAcademy's shared_content.rb.
-#   4. Generates one page per category and per series from `_data/categories.yml`
+#   4. Generates one page per category, and per series that has a visible
+#      article, from `_data/categories.yml`
 #      and `_data/series.yml`.
 #   5. Rewrites the sai-email/email UTM tags a pasted body and the rendered
 #      bio both carry into sai-web/referral, and makes a self-link to this
@@ -98,7 +99,14 @@ class Builders::SaiContent < SiteBuilder
         end
       end
 
+      # The generator runs after post_read, so the collection has already
+      # lost any future-dated article in production. A series with none left
+      # gets no page (and no sitemap entry) until its first article is live.
+      series_labels = site.collections["articles"].resources.map { |r| r.data.series }.compact.uniq
+
       site.data.series.each do |series|
+        next unless series_labels.include?(series["label"])
+
         add_resource :series, "#{series["key"]}.md" do
           layout "series"
           permalink "/series/#{series["key"]}/"
