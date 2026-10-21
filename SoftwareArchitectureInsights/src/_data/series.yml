@@ -25,8 +25,17 @@
     probabilistic behavior, inference economics, the context supply chain,
     and model lifecycle.
 
-- key: ai-and-the-developer
+- key: every-nine-has-a-price
   order: 2
+  label: "Every Nine Has a Price"
+  description: >-
+    What your availability actually costs. Every extra nine, every standby
+    server, every retry and every second region shows up on the bill, and
+    most teams never priced any of them. Put a price on each reliability
+    decision, so you can make it on purpose.
+
+- key: ai-and-the-developer
+  order: 3
   label: "AI and the Developer"
   description: >-
     What AI actually does to the people who write software. Two years of
@@ -35,7 +44,7 @@
     human developer can do.
 
 - key: ai-ethics
-  order: 3
+  order: 4
   label: "AI Ethics"
   description: >-
     The AI/ligned run: AI ethics as an engineering discipline, not a
@@ -44,7 +53,7 @@
     distinction, and what the EU AI Act actually asks of you.
 
 - key: security-fundamentals
-  order: 4
+  order: 5
   label: "Security Fundamentals"
   description: >-
     The security principles that hold up regardless of what you are
@@ -52,7 +61,7 @@
     responsible for what in the cloud, security zones, and least privilege.
 
 - key: availability-blind-spots
-  order: 5
+  order: 6
   label: "Availability Blind Spots"
   description: >-
     The availability you think you have, and the availability you actually
@@ -61,7 +70,7 @@
     architect, and a priority list where everything is critical.
 
 - key: cloud-migration
-  order: 6
+  order: 7
   label: "Cloud Migration"
   description: >-
     Moving to the cloud, and the ways it goes wrong in the middle. Why the
