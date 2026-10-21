@@ -4,6 +4,7 @@ class Shared::Navbar < Bridgetown::Component
     { label: "Articles",  path: "/posts" },
     { label: "AI-Native", path: "/series/ai-native-architecture" },
     { label: "AI Ethics", path: "/series/ai-ethics" },
+    { label: "Questions", path: "/questions" },
     { label: "Series",    path: "/series" },
     { label: "Podcast",   path: "/podcast" },
     { label: "About",     path: "/about" },
@@ -15,8 +16,12 @@ class Shared::Navbar < Bridgetown::Component
     @metadata, @resource = metadata, resource
   end
 
+  # "Questions" stays out of the menu until at least one question page is
+  # published (the builder drops questions with no live article).
   def links
-    LINKS
+    return LINKS if questions?
+
+    LINKS.reject { |l| l[:path] == "/questions" }
   end
 
   # Current page wins on exact match; an article or category page highlights
@@ -38,6 +43,10 @@ class Shared::Navbar < Bridgetown::Component
   end
 
   private
+
+  def questions?
+    @resource.nil? || @resource.site.collections["questions"].resources.any?
+  end
 
   def matches?(path)
     current = @resource&.relative_url.to_s
