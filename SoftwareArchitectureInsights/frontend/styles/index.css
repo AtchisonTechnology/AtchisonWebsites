@@ -385,6 +385,39 @@ body.article main {
   color: var(--brand-blue);
 }
 
+/* Home page "Common questions" (WEB-11). Shown only when at least one
+   question page is live. Full-sentence titles, so a plain list rather than
+   the category pills. */
+.home-section-description {
+  margin: -0.25rem 0 1rem;
+  color: var(--steel);
+  font-size: 0.95rem;
+}
+
+.question-shelf {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.question-shelf-number {
+  font-weight: 700;
+  color: var(--steel);
+}
+
+.question-shelf a {
+  color: var(--steel);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.question-shelf a:hover {
+  color: var(--brand-blue);
+  text-decoration: underline;
+}
+
 /* ---------------------------------------------------------------- */
 /* Featured article (home page, most recent issue)                    */
 /* ---------------------------------------------------------------- */

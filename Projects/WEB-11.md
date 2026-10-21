@@ -193,3 +193,4 @@ Resolved (Lee, 2026-10-21):
 
 - 2026-10-21: Five questions (SAI-115 to SAI-119) added to src/_questions and 30 articles tagged. AI Ethics removed from the top menu (Lee).
 - 2026-10-21: Question pages get Article JSON-LD (Lee as author, SAI as publisher, no dates) and og:type article, matching articles. Missed in the original design. FAQPage markup considered and skipped: Google stopped showing FAQ rich results in May 2026 (Lee).
+- 2026-10-21: SEO pass (Lee): question pages keep the standard SAI share card (no per-question images). Added a "Common questions" list on the home page (numbered, with a one-line description; moved below the article list so the Latest article stays near the top), shown only when a question is live, and BreadcrumbList JSON-LD (Home > Questions > question) on question pages.

@@ -136,6 +136,22 @@
 <% if json_ld %>
 <script type="application/ld+json"><%== JSON.pretty_generate(json_ld) %></script>
 <% end %>
+<% if is_question %>
+<%
+  # Breadcrumb trail for question pages (WEB-11): Home > Questions > this
+  # question, so search results can show where the page sits.
+  breadcrumb_ld = {
+    "@context" => "https://schema.org",
+    "@type" => "BreadcrumbList",
+    "itemListElement" => [
+      { "@type" => "ListItem", "position" => 1, "name" => "Home", "item" => absolute_url("/") },
+      { "@type" => "ListItem", "position" => 2, "name" => "Questions", "item" => absolute_url("/questions/") },
+      { "@type" => "ListItem", "position" => 3, "name" => strip_html(strip_newlines(resource.data.title)), "item" => page_url }
+    ]
+  }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(breadcrumb_ld) %></script>
+<% end %>
 
 <link rel="icon" href="<%= relative_url '/favicon.ico' %>" />
 <link rel="icon" type="image/png" sizes="32x32" href="<%= relative_url '/favicon-32x32.png' %>" />

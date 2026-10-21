@@ -84,3 +84,16 @@ description: >-
   </ul>
   <p><a href="<%= relative_url '/posts' %>">All articles &rarr;</a></p>
 </section>
+
+<% home_questions = site.collections.questions.resources.sort_by { |q| q.data.order || 999 } %>
+<% if home_questions.any? %>
+<section class="home-categories home-questions">
+  <h2>Common questions</h2>
+  <p class="home-section-description">Short answers to the problems teams ask about most, with the articles that go deeper.</p>
+  <ol class="question-shelf">
+    <% home_questions.each_with_index do |question, i| %>
+      <li><span class="question-shelf-number">Question <%= i + 1 %>.</span> <a href="<%= relative_url question.relative_url %>"><%= question.data.title %></a></li>
+    <% end %>
+  </ol>
+</section>
+<% end %>
