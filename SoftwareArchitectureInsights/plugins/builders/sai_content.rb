@@ -16,7 +16,10 @@
 #   4. Generates one page per category, and per series that has a visible
 #      article, from `_data/categories.yml`
 #      and `_data/series.yml`.
-#   5. Rewrites the sai-email/email UTM tags a pasted body and the rendered
+#   5. Validates article `questions:` keys against src/_questions, stamps
+#      sitemap values on each question page, and drops a question with no
+#      live article from a production build (WEB-11), same rule as series.
+#   6. Rewrites the sai-email/email UTM tags a pasted body and the rendered
 #      bio both carry into sai-web/referral, and makes a self-link to this
 #      site relative and untagged — one pass, applied to every page's
 #      rendered HTML, so body content and the bio partial share one rule
@@ -50,6 +53,9 @@ class Builders::SaiContent < SiteBuilder
     \s*
   /x
 
+  QUESTION_SITEMAP_PRIORITY = 0.7
+  QUESTION_SITEMAP_CHANGEFREQ = "weekly".freeze
+
   VALID_CHANGEFREQ = %w[always hourly daily weekly monthly yearly never].freeze
 
   def build
@@ -59,12 +65,17 @@ class Builders::SaiContent < SiteBuilder
       bio_template          = site.data.bio["template"]
 
       resources = site.collections["articles"].resources
+      questions = site.collections["questions"].resources
+      question_keys = questions.map(&:basename_without_ext)
+
+      questions.each { |question| validate_question!(question) }
 
       resources.each do |resource|
         validate_slug!(resource)
         validate_date!(resource)
         validate_categories!(resource, categories_by_label)
         validate_series!(resource, series_by_label)
+        validate_question_keys!(resource, question_keys)
         warn_on_status(resource)
 
         strip_title_block!(resource)
@@ -73,12 +84,34 @@ class Builders::SaiContent < SiteBuilder
       end
 
       resources.reject! { |resource| future_dated?(resource) }
+
+      # After the article filter, so "live" means what the build will ship.
+      # A question nobody has tagged yet is also held back in production, so
+      # an answer can be written and previewed before its articles exist.
+      live_keys = resources.flat_map { |r| Array(r.data.questions) }.uniq
+      questions.each do |question|
+        question.data.sitemap_priority ||= QUESTION_SITEMAP_PRIORITY
+        question.data.sitemap_changefreq ||= QUESTION_SITEMAP_CHANGEFREQ
+      end
+      questions.reject! { |q| hide_unpublished? && !live_keys.include?(q.basename_without_ext) }
     end
 
     # Runs after generators (category/series pages included) and before
     # rendering, so every page's sitemap_priority/sitemap_changefreq — hand
     # written or generator-assigned — gets checked once, in one place.
     hook :site, :pre_render do |site|
+      # No questions yet (or none live): /questions/ is kept out of the
+      # sitemap and marked noindex (Bridgetown still writes the file). Navbar
+      # and footer hide their link on the same test.
+      if site.collections["questions"].resources.empty?
+        site.resources.each do |r|
+          next unless r.relative_url.to_s == "/questions/"
+
+          r.data.published = false
+          r.data.noindex = true
+        end
+      end
+
       site.resources.each do |resource|
         validate_sitemap_priority!(resource)
         validate_sitemap_changefreq!(resource)
@@ -198,6 +231,27 @@ class Builders::SaiContent < SiteBuilder
           "known series — see src/_data/series.yml for the exact labels"
   end
 
+  # Questions are named by key (the filename), not title: titles are long and
+  # get reworded, keys stay put.
+  def validate_question_keys!(resource, question_keys)
+    Array(resource.data.questions).each do |key|
+      next if question_keys.include?(key)
+
+      raise "#{resource.relative_path}: questions: #{key.inspect} is not a known " \
+            "question — it must match a file name in src/_questions (without .md)"
+    end
+  end
+
+  def validate_question!(question)
+    attrs = question.model.data_attributes
+    %w[title description order].each do |field|
+      next unless attrs[field].to_s.strip.empty?
+
+      raise "#{question.relative_path}: missing required #{field}: — the page, the " \
+            "meta description and the /questions/ index all read it"
+    end
+  end
+
   def validate_sitemap_priority!(resource)
     priority = resource.data.sitemap_priority
     return if priority.nil?
@@ -234,6 +288,10 @@ class Builders::SaiContent < SiteBuilder
   def future_dated?(resource)
     return false unless article_date(resource).strftime("%Y-%m-%d") > Builders::PacificDate.today
 
+    hide_unpublished?
+  end
+
+  def hide_unpublished?
     Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
   end
 

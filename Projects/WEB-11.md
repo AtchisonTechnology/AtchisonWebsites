@@ -186,3 +186,4 @@ Resolved (Lee, 2026-10-21):
   article-assignment list moved to those issues. SAI team got a
   `Question Issue` label and one `Q:` label per question.
 - 2026-10-21: Moved to Implementing (Lee). Implementation handed to Claude Code; branch vs. main is Lee's call there.
+- 2026-10-21: Open Question 1 (AI Ethics link) stays open: Lee chose to decide once the new menu can be seen. Implementation done on branch `lee/web-11-sai-questions-pages-problem-focused-pages-for-search`, uncommitted: `questions` collection, builder validation/live-article filter/sitemap values, `question.erb` layout, `/questions/` index, article line, navbar and footer links. Tested with placeholder questions (removed).

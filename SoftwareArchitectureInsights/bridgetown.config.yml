@@ -10,6 +10,10 @@ collections:
   series:
     output: true
     permalink: /series/:slug/
+  questions:
+    output: true
+    permalink: /questions/:slug/
+    sort_by: order
   episodes:
     output: true
     permalink: /podcast/:slug/
@@ -20,6 +24,10 @@ defaults:
       collection: articles
     values:
       layout: article
+  - scope:
+      collection: questions
+    values:
+      layout: question
   - scope:
       collection: episodes
     values:

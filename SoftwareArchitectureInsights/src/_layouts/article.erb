@@ -33,6 +33,14 @@ layout: default
       <% end %>
     <% end %>
 
+    <% question_pages = Array(data.questions).filter_map { |key| site.collections.questions.resources.find { |q| q.basename_without_ext == key } } %>
+    <% question_pages.each do |question| %>
+      <p class="article-series">
+        Answers the question:
+        <a href="<%= relative_url question.relative_url %>"><%= question.data.title %></a>
+      </p>
+    <% end %>
+
     <% if data.hero_image %>
       <img class="article-hero" src="<%= relative_url "/images/posts/#{data.hero_image}" %>" alt="" />
     <% end %>

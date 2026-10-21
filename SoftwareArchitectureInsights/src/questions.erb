@@ -1,0 +1,41 @@
+---
+layout: default
+title: Questions
+permalink: /questions/
+sitemap_priority: 0.7
+sitemap_changefreq: weekly
+description: >-
+  Straight answers to the problems architects and engineering leaders
+  actually run into: slow microservices, outages, cloud bills, AI-generated
+  code, and where to start with an AI strategy.
+---
+
+<%
+  # Curated order, as with series: `order` in each question's front matter is
+  # editorial. The builder has already dropped any question with no live
+  # article from a production build, so everything in the collection shows.
+  questions = site.collections.questions.resources.sort_by { |q| q.data.order || 999 }
+%>
+
+<header class="listing-header">
+  <h1>Questions</h1>
+  <p class="listing-description">
+    The problems readers bring me, not the topics I'd pick. Each page gives a
+    short answer first, then the articles that go deeper.
+  </p>
+</header>
+
+<ol class="series-index">
+  <% questions.each do |question| %>
+    <%
+      key = question.basename_without_ext
+      count = site.collections.articles.resources.count { |r| Array(r.data.questions).include?(key) }
+    %>
+    <li class="series-index-item">
+      <a href="<%= relative_url question.relative_url %>" class="series-index-title"><%= question.data.title %></a>
+      <p class="series-index-meta"><%= count %> <%= count == 1 ? "article" : "articles" %></p>
+      <p class="series-index-description"><%= question.data.description %></p>
+      <a href="<%= relative_url question.relative_url %>" class="article-list-readmore">Read the answer &rarr;</a>
+    </li>
+  <% end %>
+</ol>
