@@ -18,6 +18,7 @@ meta_description: "\"We need an AI strategy\" usually means \"make sense of this
 slug: we-need-an-ai-strategy-what-your-boss-really-means
 description: >
   When leadership demands an AI strategy, they usually mean "we need innovation" or "we don't want to fall behind." How architects turn that vague directive into concrete questions about business goals, data readiness, alternatives to AI, and who owns ongoing operational cost.
+questions: [boss-wants-an-ai-strategy]
 categories:
   - "AI Strategy & Adoption"
   - "The Architect's Role"

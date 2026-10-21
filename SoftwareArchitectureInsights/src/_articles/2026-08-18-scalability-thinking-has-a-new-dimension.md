@@ -18,6 +18,7 @@ meta_description: "Scalability used to mean throughput. AI-augmented teams add a
 slug: scalability-thinking-has-a-new-dimension
 description: >
   AI coding assistants let teams move faster, but velocity changes the risk profile of an existing system. Boundary clarity, narrow contracts, and continuous architectural validation are what make a system evolvable at AI speed, not just human speed.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
 

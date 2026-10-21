@@ -19,6 +19,7 @@ meta_description: "GitClear's 2025 report: copy/pasted code now exceeds refactor
 slug: beyond-the-tab-key-the-true-value-of-human-developers-in-an-ai-world
 description: >
   GitClear's 2025 study of 211 million lines of code found copy/pasted code has overtaken refactored code for the first time in recorded history. As AI generates more code, the human edge shifts to refactoring, system-level understanding, and quality guardianship.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
 

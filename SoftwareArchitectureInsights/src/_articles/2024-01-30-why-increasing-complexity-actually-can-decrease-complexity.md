@@ -18,6 +18,7 @@ meta_description: A system made of hundreds of microservices looks more complex 
 slug: why-increasing-complexity-actually-can-decrease-complexity
 description: >
   Splitting a monolith into microservices makes the system as a whole look more complex — but it shrinks the complexity any one developer has to hold in their head, if you get service sizing and team ownership right.
+questions: [microservices-slowing-us-down]
 categories:
   - "Scalability & System Design"
 

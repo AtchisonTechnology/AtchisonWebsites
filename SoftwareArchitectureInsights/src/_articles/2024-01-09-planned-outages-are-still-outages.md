@@ -19,6 +19,7 @@ meta_description: A weekly two-hour maintenance window caps your availability at
 slug: planned-outages-are-still-outages
 description: >
   Customers don't care whether an outage was planned. Why routine maintenance windows quietly cap your real availability far below the 99.9%+ your team thinks it's hitting, and why the fix is zero-downtime deployment, not a bigger excuse.
+questions: [site-keeps-going-down]
 categories:
   - "Availability & Resilience"
 

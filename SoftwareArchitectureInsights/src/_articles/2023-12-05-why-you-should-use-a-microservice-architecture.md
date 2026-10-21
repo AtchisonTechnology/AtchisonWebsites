@@ -18,6 +18,7 @@ meta_description: Why monolithic apps turn into an unmanageable 'muck' as they g
 slug: why-you-should-use-a-microservice-architecture
 description: >
   How a growing monolith turns into unmanageable "muck" — slow releases, tangled ownership, cascading bugs — and how splitting it into microservices with a STOSA-style single-owner model lets development teams and the business scale together.
+questions: [microservices-slowing-us-down]
 categories:
   - "Scalability & System Design"
 

@@ -19,6 +19,7 @@ slug: it-passed-the-test-that-doesn-t-mean-it-works
 description: >
   Every testing, monitoring, and reliability practice you own rests on one assumption: same input, same output. An LLM in the call path removes it. What replaces it is evaluation, thresholds, and verification as an explicit architectural layer with a cost and an owner.
 former_slug: it-passed-the-test
+questions: [site-keeps-going-down]
 categories:
   - "AI-Native Architecture"
   - "Availability & Resilience"

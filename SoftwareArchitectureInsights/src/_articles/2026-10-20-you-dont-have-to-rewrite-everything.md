@@ -24,6 +24,7 @@ description: >
   thing more, because the pressure to declare everything AI-native comes from
   outside engineering. Four criteria that sort the estate, and three answers
   instead of one.
+questions: [boss-wants-an-ai-strategy]
 categories:
   - "AI-Native Architecture"
   - "Cloud Strategy & Economics"

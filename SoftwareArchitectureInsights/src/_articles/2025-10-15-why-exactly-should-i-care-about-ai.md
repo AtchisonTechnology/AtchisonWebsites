@@ -18,6 +18,7 @@ meta_description: AI isn't new, but it's now unavoidable for architects. Why dat
 slug: why-exactly-should-i-care-about-ai
 description: >
   AI has been around since the 1950s, but it's no longer optional knowledge for architects. Why data pipelines, AI model lifecycle management, probabilistic system boundaries, and ethics all become first-class architectural concerns once AI enters your stack.
+questions: [boss-wants-an-ai-strategy]
 categories:
   - "AI Strategy & Adoption"
 

@@ -18,6 +18,7 @@ meta_description: "Conway's Law applies one level up: how an architect leads sha
 slug: your-architectural-style-is-part-of-your-architecture
 description: >
   Conway's Law says systems mirror communication structures. The less-discussed corollary: how an architect leads (centralized control vs. distributed judgment) shapes the coupling and evolvability of the system itself, not just the org chart.
+questions: [microservices-slowing-us-down]
 categories:
   - "The Architect's Role"
 

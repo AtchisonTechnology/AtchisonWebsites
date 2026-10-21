@@ -103,8 +103,8 @@ as `/series/`.
 <link>" — for each question the article carries.
 
 **Menu:** add "Questions" to `navbar.rb`, and to the footer next to Series
-(Lee, 2026-10-21). Whether to drop the AI Ethics link at the same time is
-open until the new menu can be seen (Open Question 1).
+(Lee, 2026-10-21). The AI Ethics link was removed once the new menu was
+visible (Lee, 2026-10-21).
 
 **Docs to update in the same change:** the front-matter field list in
 `_Active Projects/Software Architecture Insights/Email and Website/CLAUDE.md`
@@ -151,7 +151,7 @@ placeholder question files on a branch; they are not shipped.
 5. Article layout line; navbar and footer links.
 6. Update the SAI front-matter docs.
 7. Build and test with placeholder questions.
-8. Decide the AI Ethics menu link once the new menu is visible.
+8. Decide the AI Ethics menu link once the new menu is visible. Done 2026-10-21: removed.
 
 The five real questions ship through their SAI issues (SAI-115 to SAI-119).
 
@@ -159,10 +159,13 @@ The five real questions ship through their SAI issues (SAI-115 to SAI-119).
 
 ## Open Questions
 
-1. **Drop the AI Ethics menu link?** Lee leans yes; leave open until the
-   menu with "Questions" added can be seen (Lee, 2026-10-21).
+None.
 
 Resolved (Lee, 2026-10-21):
+
+- AI Ethics link removed from the top menu once Questions was visible;
+  the menu didn't fit well with both. The series page stays, reached from
+  /series/.
 
 - One file per question, in a `questions` collection — not a YAML list.
 - Articles name questions by key, not title.
@@ -187,3 +190,5 @@ Resolved (Lee, 2026-10-21):
   `Question Issue` label and one `Q:` label per question.
 - 2026-10-21: Moved to Implementing (Lee). Implementation handed to Claude Code; branch vs. main is Lee's call there.
 - 2026-10-21: Open Question 1 (AI Ethics link) stays open: Lee chose to decide once the new menu can be seen. Implementation done on branch `lee/web-11-sai-questions-pages-problem-focused-pages-for-search`, uncommitted: `questions` collection, builder validation/live-article filter/sitemap values, `question.erb` layout, `/questions/` index, article line, navbar and footer links. Tested with placeholder questions (removed).
+
+- 2026-10-21: Five questions (SAI-115 to SAI-119) added to src/_questions and 30 articles tagged. AI Ethics removed from the top menu (Lee).

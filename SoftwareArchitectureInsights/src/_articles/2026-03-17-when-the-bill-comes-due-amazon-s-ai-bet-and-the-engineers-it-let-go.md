@@ -19,6 +19,7 @@ meta_description: Amazon cut 30,000 jobs citing AI efficiency gains, then conven
 slug: when-the-bill-comes-due-amazon-s-ai-bet-and-the-engineers-it-let-go
 description: >
   Amazon laid off thousands of engineers citing AI efficiency gains, then convened an internal "deep dive" after high-severity outages linked to AI-assisted code — including a sentence about GenAI changes quietly deleted from the internal memo. Questions every organization cutting engineering headcount for AI should be asking itself.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "The Architect's Role"
   - "Scalability & System Design"

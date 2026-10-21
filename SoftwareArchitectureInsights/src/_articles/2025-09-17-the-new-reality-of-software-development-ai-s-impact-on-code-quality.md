@@ -19,6 +19,7 @@ meta_description: The first episode of the Software Architecture Insights podcas
 slug: the-new-reality-of-software-development-ai-s-impact-on-code-quality
 description: >
   The debut episode of the Software Architecture Insights podcast digs into the 2025 GitClear AI Code Quality Research report — 211 million lines of code showing rising duplication and complexity as AI-assisted development spreads.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
 

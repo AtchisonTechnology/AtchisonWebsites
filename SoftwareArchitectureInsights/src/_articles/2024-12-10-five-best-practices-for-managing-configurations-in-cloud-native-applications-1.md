@@ -18,6 +18,7 @@ meta_description: Configuration is everywhere in a cloud-native app. Five practi
 slug: five-best-practices-for-managing-configurations-in-cloud-native-applications-1
 description: >
   In a microservice-based application, configuration is scattered across network rules, load balancers, security permissions, and application settings. Five best practices — single source of truth, automated variation, revision control, centralization, and automated distribution — for treating configuration as the asset it is.
+questions: [microservices-slowing-us-down]
 categories:
   - "Scalability & System Design"
 

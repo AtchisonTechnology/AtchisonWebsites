@@ -19,6 +19,7 @@ meta_description: Lift-and-shift promises a quick cloud migration, but static re
 slug: the-big-cloud-migration-misstep
 description: >
   Lift-and-shift feels like the safe first move into the cloud, but moving an application unchanged means paying for static resources instead of the cloud's real advantage: dynamic scaling. Why that shortcut can be the most expensive mistake in a migration.
+questions: [cloud-bill-keeps-growing]
 categories:
   - "Cloud Strategy & Economics"
 

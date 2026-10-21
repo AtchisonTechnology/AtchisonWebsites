@@ -19,6 +19,7 @@ meta_description: GitClear's 623-million-change study finds AI-assisted teams sh
 slug: ai-closes-the-ticket-but-who-builds-the-system
 description: >
   AI coding tools close tickets fast, but GitClear's 2026 research across 623 million code changes shows refactoring down 70% and duplicated code up 81% since 2023. AI doesn't make developers better — it amplifies the habits they already have.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
   - "The Architect's Role"

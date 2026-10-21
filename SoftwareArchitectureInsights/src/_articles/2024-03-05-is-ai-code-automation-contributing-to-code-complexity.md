@@ -19,6 +19,7 @@ meta_description: GitClear's 153-million-line study finds AI code assistants wri
 slug: is-ai-code-automation-contributing-to-code-complexity
 description: >
   GitHub says Copilot makes developers 55% faster, but a 153-million-line GitClear study finds a less flattering trend underneath: rising code churn and a surge in copy/pasted, non-DRY code since AI code generation went mainstream.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
 

@@ -19,6 +19,7 @@ meta_description: "\"Sign In with Google\" turns your Google account into a sing
 slug: your-google-account-is-a-single-point-of-failure-and-what-to-do-about-it
 description: >
   "Sign In with Google" is convenient, but it turns your Google account into a single point of failure — locked out of Google means locked out of everything linked to it. Why password managers and passkeys give the same one-click convenience without the coupling.
+questions: [site-keeps-going-down]
 categories:
   - "Security & Risk"
   - "Availability & Resilience"

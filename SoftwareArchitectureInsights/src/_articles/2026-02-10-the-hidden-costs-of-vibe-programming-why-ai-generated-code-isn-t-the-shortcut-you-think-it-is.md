@@ -19,6 +19,7 @@ meta_description: "Vibe programming doesn't reduce your need for developers. It 
 slug: the-hidden-costs-of-vibe-programming-why-ai-generated-code-isn-t-the-shortcut-you-think-it-is
 description: >
   Vibe-programmed code accumulates as thousands of lines nobody wrote or fully understands. Why that trades short-term velocity for compounding technical debt, hidden security vulnerabilities, and a vicious cycle where teams use AI to understand the AI-written code they can no longer maintain themselves.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
 

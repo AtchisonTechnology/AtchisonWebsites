@@ -19,6 +19,7 @@ meta_description: Most reliability failures are ownership failures. Two decision
 slug: when-everything-is-critical-nothing-is
 description: >
   Reliability isn't only a technical property, it's an ownership property. Two decisions sit underneath every reliable system, what actually matters and who is accountable for keeping it up, and most organizations have made neither.
+questions: [site-keeps-going-down]
 categories:
   - "Availability & Resilience"
   - "The Architect's Role"

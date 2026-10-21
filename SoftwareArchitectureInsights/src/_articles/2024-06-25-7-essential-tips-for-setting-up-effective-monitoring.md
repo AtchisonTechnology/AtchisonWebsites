@@ -18,6 +18,7 @@ meta_description: Seven practical tips for building an effective, multi-layered 
 slug: 7-essential-tips-for-setting-up-effective-monitoring
 description: >
   A practical field guide to modern application monitoring: defining goals, layering cluster/pod/app-level metrics, choosing tools, and setting up alerts that actually help.
+questions: [site-keeps-going-down]
 categories:
   - "Scalability & System Design"
 

@@ -18,6 +18,7 @@ meta_description: Centralizing configuration isn't enough at scale. Configuratio
 slug: beyond-the-basics-making-configuration-management-work-at-scale
 description: >
   Centralizing your configuration files was step one. At real scale, you need configuration-as-a-service, hierarchies that match your org, dynamic configuration driven by live conditions, and a configuration testing strategy as rigorous as your code testing.
+questions: [microservices-slowing-us-down]
 categories:
   - "Scalability & System Design"
 

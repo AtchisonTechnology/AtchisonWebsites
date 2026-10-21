@@ -18,6 +18,7 @@ meta_description: AI is a tool, not a product strategy. A practical checklist fo
 slug: ai-hype-vs-application-reality-how-architects-can-keep-their-products-on-track-in-2025
 description: >
   When leadership says "We need AI!", the architect's job is to translate that into a real strategy — not chase the buzzword. A practical checklist for evaluating AI requests, managing up, and accounting for the long-tail cost of maintaining what you build.
+questions: [boss-wants-an-ai-strategy]
 categories:
   - "AI Strategy & Adoption"
   - "The Architect's Role"

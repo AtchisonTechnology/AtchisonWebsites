@@ -23,6 +23,7 @@ description: >
   each with an observable test instead of an adjective. Most organizations
   are two levels below where they believe they are, for the same reason they
   were on cloud maturity. The demo works, so the architecture must be fine.
+questions: [boss-wants-an-ai-strategy]
 categories:
   - "AI-Native Architecture"
   - "AI Strategy & Adoption"

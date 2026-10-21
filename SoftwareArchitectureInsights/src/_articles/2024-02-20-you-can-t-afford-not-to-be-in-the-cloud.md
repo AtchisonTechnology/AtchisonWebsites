@@ -19,6 +19,7 @@ meta_description: "Comparing cloud server cost to on-prem server cost misses the
 slug: you-can-t-afford-not-to-be-in-the-cloud
 description: >
   A CEO who compares cloud server pricing directly to on-prem server pricing is only looking at half the ledger. The real financial case for the cloud is dynamic resource allocation and a shift from capital expense to cost of goods sold.
+questions: [cloud-bill-keeps-growing]
 categories:
   - "Cloud Strategy & Economics"
 

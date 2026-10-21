@@ -3,7 +3,6 @@ class Shared::Navbar < Bridgetown::Component
     { label: "Home",      path: "/" },
     { label: "Articles",  path: "/posts" },
     { label: "AI-Native", path: "/series/ai-native-architecture" },
-    { label: "AI Ethics", path: "/series/ai-ethics" },
     { label: "Questions", path: "/questions" },
     { label: "Series",    path: "/series" },
     { label: "Podcast",   path: "/podcast" },
@@ -27,11 +26,12 @@ class Shared::Navbar < Bridgetown::Component
   # Current page wins on exact match; an article or category page highlights
   # its parent nav item (Articles) via the prefix.
   #
-  # Most specific wins. "/series" is a prefix of "/series/ai-ethics", so on
-  # the AI Ethics page both links match on prefix alone — only the longest
-  # matching path stays highlighted, which keeps the two dedicated series
-  # links lit on their own pages while "Series" lights up on the index and
-  # on every series that has no nav item of its own.
+  # Most specific wins. "/series" is a prefix of
+  # "/series/ai-native-architecture", so on the AI-Native page both links
+  # match on prefix alone — only the longest matching path stays
+  # highlighted, which keeps the dedicated series link lit on its own page
+  # while "Series" lights up on the index and on every series that has no
+  # nav item of its own.
   def active?(path)
     return false unless matches?(path)
 

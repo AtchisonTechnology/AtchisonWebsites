@@ -19,6 +19,7 @@ meta_description: Apply the single-point-of-failure test to your architecture pr
 slug: the-single-architect-availability-problem
 description: >
   Reliability engineering asks what happens when a component becomes unavailable. Most organizations never ask that about the person who holds all the architectural context — and the six-week test to find out if you have that single point of failure.
+questions: [site-keeps-going-down]
 categories:
   - "Availability & Resilience"
   - "The Architect's Role"

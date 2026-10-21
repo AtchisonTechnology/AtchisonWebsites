@@ -24,6 +24,7 @@ description: >
   pile up with no owner and no users. They cost complexity, security surface
   and cloud spend, and the cost compounds. How to retire a system safely, and
   how to change the incentives that keep them alive.
+questions: [cloud-bill-keeps-growing]
 categories:
   - "Scalability & System Design"
   - "Cloud Strategy & Economics"

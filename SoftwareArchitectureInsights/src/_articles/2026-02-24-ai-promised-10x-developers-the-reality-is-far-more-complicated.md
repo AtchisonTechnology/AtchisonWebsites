@@ -19,6 +19,7 @@ meta_description: GitClear's 2,000-developer-week study finds AI gives a real bu
 slug: ai-promised-10x-developers-the-reality-is-far-more-complicated
 description: >
   A GitClear study of 2,000 developer-weeks finds AI coding tools deliver roughly 25% average productivity gains, concentrated among senior engineers who already knew what they were doing — alongside a 10x jump in code churn that stores up technical debt for later.
+questions: [is-ai-making-our-code-worse]
 categories:
   - "Scalability & System Design"
   - "The Architect's Role"

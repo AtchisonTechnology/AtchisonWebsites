@@ -19,6 +19,7 @@ meta_description: A single compromised microservice can become the entry point t
 slug: don-t-let-your-services-become-trojan-horses-1
 description: >
   Microservices multiply your attack surface. A single compromised service, even inside a private network you assumed was safe, can become a Trojan Horse for compromising every neighboring service.
+questions: [microservices-slowing-us-down]
 categories:
   - "Security & Risk"
 

@@ -24,6 +24,7 @@ description: >
   that tests the model instead of the system, RAG on a data model never meant
   to be retrieved from, the agent with tool access, and the special-case
   integration. Each one, and the check that finds it.
+questions: [microservices-slowing-us-down]
 categories:
   - "AI-Native Architecture"
   - "Scalability & System Design"

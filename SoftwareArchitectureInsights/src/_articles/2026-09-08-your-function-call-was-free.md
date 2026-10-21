@@ -23,6 +23,7 @@ description: >
   call expensive. AI does it again, except the cost is money as well as
   latency. Model routing is an architectural decision, not an optimization you
   do later.
+questions: [cloud-bill-keeps-growing]
 categories:
   - "AI-Native Architecture"
   - "Cloud Strategy & Economics"
