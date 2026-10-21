@@ -192,3 +192,4 @@ Resolved (Lee, 2026-10-21):
 - 2026-10-21: Open Question 1 (AI Ethics link) stays open: Lee chose to decide once the new menu can be seen. Implementation done on branch `lee/web-11-sai-questions-pages-problem-focused-pages-for-search`, uncommitted: `questions` collection, builder validation/live-article filter/sitemap values, `question.erb` layout, `/questions/` index, article line, navbar and footer links. Tested with placeholder questions (removed).
 
 - 2026-10-21: Five questions (SAI-115 to SAI-119) added to src/_questions and 30 articles tagged. AI Ethics removed from the top menu (Lee).
+- 2026-10-21: Question pages get Article JSON-LD (Lee as author, SAI as publisher, no dates) and og:type article, matching articles. Missed in the original design. FAQPage markup considered and skipped: Google stopped showing FAQ rich results in May 2026 (Lee).

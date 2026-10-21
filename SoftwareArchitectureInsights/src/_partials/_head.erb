@@ -15,7 +15,9 @@
 
   is_article = defined?(resource) && resource && resource.respond_to?(:collection) &&
     resource.collection&.label == "articles"
-  og_type = is_article ? "article" : "website"
+  is_question = defined?(resource) && resource && resource.respond_to?(:collection) &&
+    resource.collection&.label == "questions"
+  og_type = (is_article || is_question) ? "article" : "website"
 
   # /podcast/ and every episode page share the show art as their
   # social-share image (Spec0027) — covers both without needing to special-
@@ -80,6 +82,26 @@
       "headline" => strip_html(strip_newlines(resource.data.title)),
       "datePublished" => iso_datetime.(published),
       "dateModified" => iso_datetime.(modified),
+      "url" => page_url,
+      "image" => og_image_url,
+      "author" => { "@type" => "Person" }.merge(lee_ref),
+      "publisher" => {
+        "@type" => "Organization",
+        "name" => "Software Architecture Insights",
+        "url" => "https://softwarearchitectureinsights.com/",
+        "logo" => absolute_url("/images/brand/sai-nav-mark.png")
+      }
+    }.compact
+  elsif is_question
+    # Question pages (WEB-11) are Lee's own written answers, so they get the
+    # same Article record as articles: Lee as author, SAI as publisher.
+    # No dates: a question file has none, and Bridgetown's build-time
+    # default would make dateModified change on every deploy.
+    {
+      "@context" => "https://schema.org",
+      "@type" => "Article",
+      "headline" => strip_html(strip_newlines(resource.data.title)),
+      "description" => strip_html(strip_newlines(resource.data.description.to_s)),
       "url" => page_url,
       "image" => og_image_url,
       "author" => { "@type" => "Person" }.merge(lee_ref),
