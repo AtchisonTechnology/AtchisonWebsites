@@ -2,7 +2,69 @@
 layout: default
 page_class: ownership-workshop
 title: The Ownership Gap Workshop
-description: A private half-day working session on service ownership and criticality, run for your team, on your own services.
+description: A private half-day service ownership and criticality workshop for engineering leaders. Your team tiers its own services and leaves with a tier map. Remote, $6,000 flat.
+# Drives the Service/Offer and FAQPage JSON-LD in _head.erb (WEB-12). The
+# visible FAQ below renders from the same list, so text and markup cannot drift.
+# Answers are Markdown; the JSON-LD strips the links to plain text.
+service:
+  name: The Ownership Gap Workshop
+  price: 6000
+  currency: USD
+  area_served: Worldwide
+faq:
+  - q: What is a service tiering workshop?
+    a: >-
+      A working session where your team decides how critical each of your
+      services actually is, and writes it down. Not a lecture. You classify
+      your own system, against evidence, and leave with a tier map.
+  - q: How do you decide which services are Tier 1?
+    a: >-
+      From what happens when the service fails, not from who built it or how
+      important it feels. A tier is a set of commitments: an availability
+      target, an on-call obligation, a review burden, a spend level. If a
+      service doesn't need those commitments, it isn't Tier 1.
+  - q: Why didn't our service catalog fix this?
+    a: >-
+      A catalog records decisions. It doesn't make them. If nobody decided
+      what matters most and who owns it, the catalog fills up with metadata
+      nobody trusts. I wrote about this in
+      [When Everything Is Critical, Nothing Is](https://softwarearchitectureinsights.com/posts/when-everything-is-critical-nothing-is/).
+  - q: How does this relate to STOSA?
+    a: >-
+      [STOSA](https://stosa.org/) is the ownership model: every service has
+      exactly one owning team. This workshop is the criticality half. Which
+      services matter most, so ownership and reliability spend go where they
+      count.
+  - q: Who should be in the room?
+    a: >-
+      The people who can decide. Engineering leadership, the platform team,
+      and the owners of your most argued-about services. The session is worth
+      less with a room that has to go ask someone.
+  - q: How much does it cost?
+    a: >-
+      $6,000 for the session, up to 25 people. One fee, not per seat, so
+      there's no reason to leave anyone out.
+  - q: Is it remote? Can you come on site?
+    a: >-
+      It runs remote by default. On-site is possible. Ask, and I'll quote it
+      for your location.
+  - q: What do we need to prepare?
+    a: >-
+      A list of what you run, if you have one. If you don't, that's fine.
+      Building the inventory is the first part of the work, and it's where
+      most teams find out what they didn't know.
+  - q: What does it not cover?
+    a: >-
+      Availability targets, error budgets, ownership assignment, blast radius
+      and the incident path. Those come after you have tiers. I'll tell you
+      which to tackle next.
+  - q: Who runs it?
+    a: >-
+      I do. Lee Atchison. Seven years at Amazon and AWS, eight at New Relic,
+      and the author of
+      [Architecting for Scale](https://architectingforscale.com/)
+      (O'Reilly), which covers this problem in depth. More at
+      [leeatchison.com](https://leeatchison.com/).
 ---
 
 <%# The photo sits beside the headline because the top of the page was otherwise
@@ -19,6 +81,27 @@ description: A private half-day working session on service ownership and critica
 
   <img class="ownership-hero-photo" src="<%= relative_url '/images/lee-casual-vertical.jpeg' %>" width="640" height="962" alt="Lee Atchison">
 </header>
+
+<%# "At a glance" (WEB-12): the offer facts in one quotable block, so an answer
+    engine does not have to assemble them from the whole page. Plain facts, one
+    line each. The two links go to the two doors further down. %>
+<section class="ownership-glance" aria-labelledby="ownership-glance-heading">
+  <h2 id="ownership-glance-heading">At a glance</h2>
+  <dl>
+    <dt>What</dt>
+    <dd>A private, half-day service ownership and criticality workshop, run for one engineering team on its own services.</dd>
+    <dt>Who it&rsquo;s for</dt>
+    <dd>Directors and VPs of engineering, and heads of platform, at organizations with roughly 100 to 1,000 engineers.</dd>
+    <dt>What you leave with</dt>
+    <dd>A tier map of your actual services, a classification method your team can keep running, and the first thing to fix.</dd>
+    <dt>Format</dt>
+    <dd>About four hours, remote, up to 25 people. You pick the date.</dd>
+    <dt>Price</dt>
+    <dd>$6,000 for the session. One fee, not per seat.</dd>
+    <dt>How to start</dt>
+    <dd><a href="#ownership-door-call-button">Book a 20-minute call</a>, or <a href="#ownership-door-email-button">ask by email</a>.</dd>
+  </dl>
+</section>
 
 <div class="ownership-content">
 
@@ -216,6 +299,19 @@ description: A private half-day working session on service ownership and critica
     });
   })();
 </script>
+
+<%# FAQ (WEB-12), after the two doors. Same <dl> pattern as the sales-page FAQ.
+    Rendered from the front matter faq: list, which is also what _head.erb turns
+    into FAQPage JSON-LD. %>
+<section class="ownership-faq" aria-labelledby="ownership-faq-heading">
+  <h2 id="ownership-faq-heading">Questions people ask</h2>
+  <dl class="sales-faq">
+    <% data.faq.each do |item| %>
+      <dt><%= item.q %></dt>
+      <dd><%= markdownify item.a %></dd>
+    <% end %>
+  </dl>
+</section>
 
 <%# Bio, text only. The photo that used to sit here (Spec0026 §5) moved to the
     hero, where it also breaks up the top of the page. One portrait per page. %>

@@ -3100,6 +3100,57 @@ body.ownership-workshop .ownership-cta-embed {
   }
 }
 
+/* "At a glance" summary (WEB-12). Label/value rows in the same 42rem measure
+   as the prose; stacks label over value on narrow screens. */
+body.ownership-workshop .ownership-glance {
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+body.ownership-workshop .ownership-glance h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+}
+
+body.ownership-workshop .ownership-glance dl {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0.6rem 1rem;
+  margin: 0;
+}
+
+body.ownership-workshop .ownership-glance dt {
+  font-weight: 600;
+}
+
+body.ownership-workshop .ownership-glance dd {
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  body.ownership-workshop .ownership-glance dl {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+  body.ownership-workshop .ownership-glance dd {
+    margin-bottom: 0.6rem;
+  }
+}
+
+/* FAQ (WEB-12): reuses .sales-faq for the dt/dd look. */
+body.ownership-workshop .ownership-faq {
+  max-width: 42rem;
+  margin: 3rem auto 0;
+}
+
+body.ownership-workshop .ownership-faq dd p {
+  margin: 0;
+}
+
 /* Bio with photo (Spec0026 §5). Portrait photo beside the text on wide
    screens; stacked, photo first, on narrow ones. */
 /* Bio is text only since the portrait moved to the hero. */

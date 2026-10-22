@@ -83,6 +83,43 @@
 <script type="application/ld+json"><%== JSON.pretty_generate(course_ld) %></script>
 <% end %>
 
+<%
+  # Service/Offer and FAQPage structured data (WEB-12), only for pages whose
+  # front matter carries service: / faq:. The FAQ is the same list the page
+  # renders, so the markup cannot drift from the visible text. Answers are
+  # Markdown; links are reduced to their text.
+  if page_url && resource.data.service
+    svc = resource.data.service
+    service_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "Service",
+      "name" => svc.name.to_s,
+      "description" => page_description.to_s,
+      "url" => page_url,
+      "areaServed" => svc.area_served.to_s,
+      "provider" => { "@type" => "Person", "@id" => "https://leeatchison.com/#person", "name" => "Lee Atchison", "url" => "https://leeatchison.com/" },
+      "offers" => { "@type" => "Offer", "price" => svc.price.to_s, "priceCurrency" => svc.currency.to_s, "url" => page_url }
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(service_ld) %></script>
+<% end %>
+<%
+  if page_url && resource.data.faq.to_a.any?
+    faq_ld = {
+      "@context" => "https://schema.org",
+      "@type" => "FAQPage",
+      "mainEntity" => resource.data.faq.map do |item|
+        {
+          "@type" => "Question",
+          "name" => item.q.to_s,
+          "acceptedAnswer" => { "@type" => "Answer", "text" => item.a.to_s.gsub(/\[([^\]]+)\]\([^)]+\)/, '\1') }
+        }
+      end
+    }
+%>
+<script type="application/ld+json"><%== JSON.pretty_generate(faq_ld) %></script>
+<% end %>
+
 <link rel="icon" type="image/png" href="<%= relative_url '/images/favicon.png' %>" />
 
 <link rel="stylesheet" href="<%= asset_path :css %>" />
