@@ -97,7 +97,7 @@ To run a single site: `<Site>/bin/dev` (starts it on that site's port; see
 ## Development Process
 
 This project follows the `linear-dev-process` skill (Linear issue tracking,
-spec files, PR flow). Project parameters:
+the spec in the Linear issue, PR flow). Project parameters:
 
 - **Linear team:** Atchison Websites (`WEB`).
 - **Sites:** see `Projects/services.md`. A spec's **Systems Impacted** field
@@ -108,20 +108,25 @@ spec files, PR flow). Project parameters:
 - **Synchronized doc artifacts in-scope for specs:** none.
 - **Process overrides:** none.
 
-### Tracking
+### How work is tracked
 
-Every issue's status lives in Linear, never in git. `Projects/` holds:
+Every issue lives in Linear, team **Atchison Websites (WEB)**.
 
-| File | Purpose |
-|---|---|
-| `WEB-<n>.md` | The spec file for Linear issue WEB-<n>: content only, no status |
-| `services.md` | Site registry and dev ports |
-| `zArchive/` | Pre-Linear `Spec####`/`Bug####` files, kept as history |
+- **The spec is the Linear issue's description.** Don't create spec files.
+- **Status lives only in Linear.** Never record status in the repo.
+- `Projects/` holds `services.md` (the site registry and dev ports), old
+  spec files for closed issues (`WEB-<n>.md`) and the pre-Linear archive
+  (`Projects/zArchive/`). The old spec files and the archive are read-only
+  history until the final cleanup. Don't edit or add to them.
+- Building happens on the issue's branch (`gitBranchName`), only after Lee
+  says "ok to implement." Lee merges every pull request.
 
 To see the status of everything, query the Linear team, not the files.
 
 Reminders that matter most here: never change an issue's status without
 being asked; never commit, push, or open a PR without explicit permission.
+The one exception, a developer agent after Lee's "ok to implement," is in
+the skill.
 
 ## File deletion permission
 
