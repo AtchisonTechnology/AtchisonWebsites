@@ -114,10 +114,12 @@ Every issue lives in Linear, team **Atchison Websites (WEB)**.
 
 - **The spec is the Linear issue's description.** Don't create spec files.
 - **Status lives only in Linear.** Never record status in the repo.
-- `Projects/` holds `services.md` (the site registry and dev ports), old
-  spec files for closed issues (`WEB-<n>.md`) and the pre-Linear archive
-  (`Projects/zArchive/`). The old spec files and the archive are read-only
-  history until the final cleanup. Don't edit or add to them.
+- `Projects/` holds `services.md`: the site registry and dev ports.
+- The old spec files (`Projects/WEB-<n>.md`) and the pre-Linear `Spec####`/`Bug####`
+  archive were deleted on 2026-10-30. Every WEB spec is in its issue. A
+  `Spec####` or `Bug####` reference points at the archive, which is in git
+  history:
+  https://github.com/AtchisonTechnology/AtchisonWebsites/tree/c55040f22a06b89d5ab2c299c7ebffe2dc3ed6f9/Projects/zArchive
 - Building happens on the issue's branch (`gitBranchName`), only after Lee
   says "ok to implement." Lee merges every pull request.
 
