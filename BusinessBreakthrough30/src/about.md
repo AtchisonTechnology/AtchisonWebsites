@@ -8,3 +8,5 @@ This is the basic Bridgetown site template. You can find out more info about cus
 You can find the source code for Bridgetown at GitHub:
 [bridgetownrb](https://github.com/bridgetownrb) /
 [bridgetown](https://github.com/bridgetownrb/bridgetown)
+
+<!-- Developer setup test (throwaway). Never merge. -->
