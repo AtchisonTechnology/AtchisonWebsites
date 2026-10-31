@@ -132,6 +132,29 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
+// Kit signup forms on the coming-soon pages (WEB-17). Kit draws each form
+// into [data-kit-form] and, on a good submit, fills its success alert in
+// place (no redirect). Fire the form's Fathom event, once, when that
+// message appears.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-kit-form]").forEach((box) => {
+    const name = box.dataset.fathomEvent
+    let fired = false
+
+    const succeeded = () =>
+      [...box.querySelectorAll(".formkit-alert-success")]
+        .some((el) => el.textContent.trim() !== "")
+
+    const observer = new MutationObserver(() => {
+      if (fired || !succeeded()) return
+      fired = true
+      observer.disconnect()
+      if (name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+    })
+    observer.observe(box, { childList: true, subtree: true, characterData: true, attributes: true })
+  })
+})
+
 // Trailer (§A9). Captions on via texttrack in every case.
 //
 // [data-trailer-autoplay] (sales and offer page heroes): the player loads at

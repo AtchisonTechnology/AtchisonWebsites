@@ -1,0 +1,158 @@
+# Sales data for Architecting for AI Velocity (WEB-17).
+#
+# COMING-SOON STAGE: no price, no Buy button, no offer pages. The page offers a
+# free demo (Module 1, in Cedarras) and a waiting list. To open the course, set
+# `stage: open` and add `price`, `buy_url`, `buy_label`, `fathom_event` and
+# `price_section` as architecting-for-cost.yml has them, and add `price` to
+# `sections` in place of `waitlist`. The URL does not change.
+#
+# COPY SOURCE: "Page copy: Architecting for AI Velocity" (second draft, Editor's
+# review applied), Dropbox `Atchison Academy/architecting-for-ai-velocity/
+# Marketing/Course Page Copy.md`, copied 2026-10-30. Once the page ships, THIS
+# file is the source. Text fields go through `sales_text` (see
+# plugins/builders/offers.rb): *italic*, **bold**, {contact}.
+
+product: architecting-for-ai-velocity     # must match this file's name
+sales_url: /courses/architecting-for-ai-velocity/
+stage: coming_soon
+title: "Architecting for AI Velocity"
+hook: "Your team got faster. Some of the speed is leaking out."
+pitch: "AI is very good at exactly the work it defers. This course shows architects how to point it at that work, and keep the speed."
+# The line under the pitch, then the course's slogan under that.
+tagline: "A self-paced video course for software architects and engineering leaders on AI-assisted teams."
+slogan: "Keep the speed. Keep the system."
+# Meta and social description: the pitch line.
+description: "AI is very good at exactly the work it defers. This course shows architects how to point it at that work, and keep the speed."
+
+# Contact link for the copy's [Contact me].
+contact_url: "https://leeatchison.com/contact/"
+contact_label: "Contact me"
+
+# No hero_image, trailer poster or og_image yet: the trailer shows a plain
+# frame until it loads, and the social card is the site default.
+trailer:
+  vimeo_id: 1241010191   # https://vimeo.com/1241010191, public, approved (Lee, 2026-10-30)
+
+sections:
+  - problem
+  - quotes
+  - who
+  - demo
+  - modules
+  - includes
+  - about
+  - waitlist
+  - faq
+
+problem:
+  heading: "More code, less system"
+  paragraphs:
+    - "The AI tools work. More pull requests, shorter cycle times, and a backlog that finally shrinks. Nobody wants to give that back."
+    - "But reviews take longer. Incidents start in places nobody expected. The new hire is still asking where things live."
+    - text: "GitClear has measured this across hundreds of millions of code changes. Developers who lean on AI are about 25% faster. Over the same years, refactoring fell from about 21% of changed code to 3.8%, and duplicated code went up 81%."
+      small: "Source: GitClear."
+    - "The data shows these trends moving together. It doesn't prove AI caused them. But the timing is hard to ignore."
+    - "Refactoring, removing duplicates, and wiring new code into what's already there are all things AI does well. Nobody asks it to, so it doesn't."
+    - "Your codebase is a road built for sixty. Your team is driving it at a hundred and twenty."
+    - "That's a direction problem, and direction is an architect's job."
+
+# No peer quote yet. A quote from Ken Gavranovic goes in once he approves it;
+# the section stays hidden until then. Shape:
+# - { quote: "...", name: "...", role: "..." }
+quotes: []
+
+who:
+  heading: "Who this course is for"
+  items:
+    - "**Architects and senior engineers** on teams that already use AI coding tools. Velocity looks great. The codebase feels worse, and you want to fix that without giving the speed back."
+    - "**Engineering leaders and CTOs** who bought the AI tooling and are watching review load, incident rate and onboarding time climb. You need language for where the gains are going, and a plan your architects can run."
+  not_for: "*Not for:* anyone looking for prompting tips, agent setup or a tool comparison. And if your team hasn't adopted AI yet, this course is early for you."
+
+# Kit forms: Lee creates them in Kit. The demo form tags `course-architecting-
+# for-ai-velocity-demo` (Cedarras reads it to enroll the person in Module 1);
+# the waiting-list form tags `course-architecting-for-ai-velocity-waitlist`.
+# The tags stay separate. On both forms: first name (optional) and email.
+# Button and inline success message are set on the form in Kit:
+#   demo      "Get the free demo"      / "Check your email. Your demo link is on its way."
+#   waitlist  "Join the waiting list"  / "You're on the list. I'll email you when the full course opens."
+# kit_form_id is the uid in the form's embed code (data-uid). TBD shows a
+# placeholder, and a production build refuses it.
+demo:
+  heading: "Watch Module 1 free"
+  intro: "The free demo is the course introduction and all of Module 1, *Faster, and Leaking*. That's four videos and a short quiz."
+  lessons:
+    - title: "Faster, and leaking."
+      summary: "What the data shows: velocity up, maintenance collapsing."
+    - title: "The next level up."
+      summary: "We moved from assembly to compilers, and now to AI. This time the tool isn't reliable by design."
+    - title: "AI is best at the work it defers."
+      summary: "The idea the whole course is built on."
+    - title: "Design speed, and the road ahead."
+      summary: "The speed your system was built for, against the speed your team runs at today."
+  closing: "Each video runs about nine minutes. Sign up, and I'll email you a link to get in."
+  kit_form_id: TBD   # Lee creates the form in Kit
+  fathom_event: demo-signup-architecting-for-ai-velocity
+
+modules:
+  heading: "What you'll learn"
+  items:
+    - title: "Faster, and Leaking"
+      summary: "Velocity is up and structural maintenance is collapsing. Why it's happening now, and the design speed your system was built for."
+    - title: "AI Just Wants to Pass Tests"
+      summary: "AI optimizes for the thing you asked for. Why tests and code share the same blind spot, and the design work that closes it."
+    - title: "AI Only Goes Where You Point It"
+      summary: "Nobody asks AI to refactor, touch legacy code or integrate, so none of it happens. How to assign that work on purpose, and lower its risk."
+    - title: "DRY, and AI Does the Opposite"
+      summary: "Duplication climbs and the code becomes a pile of features. How to make existing code findable, for AI and humans alike."
+    - title: "Changed Code Is Destabilized Code"
+      summary: "More change means more code that breaks. Why waiting it out doesn't work, and the two levers that do: less code, and simpler code."
+    - title: "The Code Is Becoming a Stranger"
+      summary: "Less time in the code, and code that changes underneath you. Keeping your team able to fix what AI can't."
+    - title: "The Human Layer"
+      summary: "What AI can't own. And where tomorrow's senior engineers come from when AI takes the work juniors used to learn on."
+    - title: "Making It Stick"
+      summary: "Talking to developers, making the case to management, and building guardrails that stay on when a deadline pushes back."
+
+includes:
+  heading: "What you get"
+  items:
+    - "**33 video lessons** across eight modules."
+    - "**Readings** with ten of the lessons, for the templates, checklists and figures you'll want to come back to."
+    - "**Exercises** you run against a system your team works on with AI every day."
+    - "**A quiz at the end of each module**, and a final quiz. Finish it to get your certificate."
+    - "**A business case written for your VP.** It makes the argument for the cleanup work when you aren't in the room."
+  closing: "Self-paced. Start any time, and go at your own speed."
+
+about:
+  heading: "About your instructor"
+  photo: /images/lee-casual-vertical.jpeg
+  photo_width: 640
+  photo_height: 962
+  paragraphs:
+    - "Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He wrote *Architecting for Scale* (O'Reilly), and more than 180,000 learners have taken his courses."
+    - "This course takes what he learned running systems at scale and applies it to the fastest change in how software gets written."
+
+waitlist:
+  heading: "The full course is coming soon"
+  paragraphs:
+    - "The full course isn't open yet. Join the list, and I'll email you the day it opens."
+  kit_form_id: TBD   # Lee creates the form in Kit
+  fathom_event: waitlist-architecting-for-ai-velocity
+
+faq:
+  heading: "Questions"
+  items:
+    - q: "When does the full course open?"
+      a: "Soon. Join the waiting list and I'll email you the day it does."
+    - q: "Is the demo free?"
+      a: "Yes. The introduction, all four Module 1 videos and the Module 1 quiz. No card, and nothing to buy."
+    - q: "How do I get into the demo?"
+      a: "Sign up above. I'll email you a link, and you'll watch it at courses.atchisonacademy.com with the same email address."
+    - q: "Is this a course on using AI coding tools?"
+      a: "No. There are no prompting tips, no agent setup and no tool comparisons. This course is about the system your team is building with those tools, and keeping it healthy at the speed you now run."
+    - q: "Will it tell my team to slow down?"
+      a: "No. Slowing down throws away the reason you bought the AI tools in the first place. Every lesson is about keeping the speed."
+    - q: "Is it about systems that call AI models?"
+      a: "No. That's a different course, *Architecting Systems That Use AI*. This one is about the code your team writes with AI."
+    - q: "Can I buy it for my team?"
+      a: "Yes, once it opens. There will be a five-seat pack. Need more seats? {contact}."

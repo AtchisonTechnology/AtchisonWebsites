@@ -1,3 +1,7 @@
+<%# Modules, numbered by CSS. A module may carry `group:` (WEB-17): consecutive
+    modules with the same group sit under one small subheading, and the
+    numbering runs on across groups. Without any `group:` it is the one flat
+    list it always was. %>
 <% modules = page.sales.modules %>
 <% if modules && modules.items.to_a.any? %>
 <section class="sales-section">
@@ -6,14 +10,32 @@
     <% if modules.intro %>
       <p class="sales-intro"><%= sales_text modules.intro, page.sales %></p>
     <% end %>
-    <ol class="sales-modules">
-      <% modules.items.each do |mod| %>
-        <li>
-          <h3><%= mod.title %></h3>
-          <p><%= sales_text mod.summary, page.sales %></p>
-        </li>
-      <% end %>
-    </ol>
+    <% if modules.items.any? { |mod| mod.group } %>
+      <div class="sales-module-groups">
+        <% modules.items.chunk_while { |a, b| a.group == b.group }.each do |chunk| %>
+          <% if chunk.first.group %>
+            <h3 class="sales-module-group"><%= chunk.first.group %></h3>
+          <% end %>
+          <ol class="sales-modules sales-modules--grouped">
+            <% chunk.each do |mod| %>
+              <li>
+                <h4><%= mod.title %></h4>
+                <p><%= sales_text mod.summary, page.sales %></p>
+              </li>
+            <% end %>
+          </ol>
+        <% end %>
+      </div>
+    <% else %>
+      <ol class="sales-modules">
+        <% modules.items.each do |mod| %>
+          <li>
+            <h3><%= mod.title %></h3>
+            <p><%= sales_text mod.summary, page.sales %></p>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
   </div>
 </section>
 <% end %>

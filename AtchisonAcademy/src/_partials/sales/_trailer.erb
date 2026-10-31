@@ -11,8 +11,12 @@
 <% trailer_autoplay = (defined?(autoplay) && autoplay) ? true : false %>
 <% if page.trailer_id %>
   <div class="sales-trailer" data-trailer data-vimeo-id="<%= page.trailer_id %>"<% if trailer_autoplay %> data-trailer-autoplay<% end %>>
-    <button type="button" class="sales-trailer-play" aria-label="Play the trailer">
-      <img src="<%= relative_url(sales.trailer.poster || sales.hero_image) %>" width="1280" height="720" alt="" />
+    <% poster = sales.trailer&.poster || sales.hero_image %>
+    <%# No poster image yet (a new course): a plain brand-blue 16:9 frame stands in. %>
+    <button type="button" class="sales-trailer-play<%= " sales-trailer-play--blank" unless poster %>" aria-label="Play the trailer">
+      <% if poster %>
+        <img src="<%= relative_url poster %>" width="1280" height="720" alt="" />
+      <% end %>
       <span class="sales-trailer-icon" aria-hidden="true">&#9654;</span>
     </button>
   </div>

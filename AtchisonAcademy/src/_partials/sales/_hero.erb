@@ -1,6 +1,7 @@
 <%# Wide screens: headline, pitch, price and Buy on the left, the trailer on
     the right. Phones: headline, trailer, Buy — the grid areas in index.css
-    reorder the same three blocks. On an offer page the offer's intro takes
+    reorder the same three blocks. A coming-soon page (`stage: coming_soon`)
+    swaps the price and Buy for two jump buttons. On an offer page the offer's intro takes
     the pitch's place under the headline. On phones the tagline is dropped
     so Buy stays above the fold. %>
 <% sales = page.sales %>
@@ -17,12 +18,24 @@
       <% if sales.tagline %>
         <p class="sales-tagline"><%= sales_text sales.tagline, sales %></p>
       <% end %>
+      <%# The course's own slogan, a line of its own under the tagline. Coming-soon pages only so far. %>
+      <% if sales.slogan %>
+        <p class="sales-slogan"><%= sales_text sales.slogan, sales %></p>
+      <% end %>
     </div>
     <div class="sales-hero-media">
       <%= render "sales/trailer", page: page, autoplay: true %>
     </div>
     <div class="sales-hero-buy">
-      <%= render "sales/buy", page: page, content: "hero" %>
+      <% if page.coming_soon? %>
+        <%# Coming soon: no price and no Buy button. Two jumps instead (WEB-17). %>
+        <div class="sales-cta-row">
+          <a href="#demo" class="btn btn-primary">Try Module 1 free</a>
+          <a href="#waitlist" class="btn btn-outline btn-outline--dark">Join the waiting list</a>
+        </div>
+      <% else %>
+        <%= render "sales/buy", page: page, content: "hero" %>
+      <% end %>
     </div>
   </div>
 </section>

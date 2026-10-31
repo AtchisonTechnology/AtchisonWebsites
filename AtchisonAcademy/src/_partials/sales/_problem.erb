@@ -3,8 +3,15 @@
 <section class="sales-section">
   <div class="sales-inner">
     <h2><%= problem.heading %></h2>
+    <%# A paragraph is a string, or { text:, small: } for one with a small
+        source line under it (WEB-17). %>
     <% problem.paragraphs.each do |para| %>
-      <p><%= sales_text para, page.sales %></p>
+      <% if para.is_a?(String) %>
+        <p><%= sales_text para, page.sales %></p>
+      <% else %>
+        <p><%= sales_text para.text, page.sales %></p>
+        <p class="sales-source"><%= sales_text para.small, page.sales %></p>
+      <% end %>
     <% end %>
   </div>
 </section>

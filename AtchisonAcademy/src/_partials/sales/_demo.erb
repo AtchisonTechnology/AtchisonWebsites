@@ -1,0 +1,26 @@
+<%# The free demo section (WEB-17): the course's Module 1, offered free through
+    an inline signup form. Driven by the optional `demo:` block, and it stays
+    after launch, since the demo is a sales tool then too. The anchor is the
+    hero's "Try Module 1 free" button. %>
+<% demo = page.sales.demo %>
+<% if demo %>
+<section class="sales-section sales-section--alt sales-demo" id="demo">
+  <div class="sales-inner">
+    <h2><%= demo.heading %></h2>
+    <% if demo.intro %>
+      <p><%= sales_text demo.intro, page.sales %></p>
+    <% end %>
+    <% if demo.lessons.to_a.any? %>
+      <ol class="sales-demo-lessons">
+        <% demo.lessons.each do |lesson| %>
+          <li><strong><%= lesson.title %></strong> <%= sales_text lesson.summary, page.sales %></li>
+        <% end %>
+      </ol>
+    <% end %>
+    <% if demo.closing %>
+      <p><%= sales_text demo.closing, page.sales %></p>
+    <% end %>
+    <%= render "sales/kit_form", form: demo %>
+  </div>
+</section>
+<% end %>
