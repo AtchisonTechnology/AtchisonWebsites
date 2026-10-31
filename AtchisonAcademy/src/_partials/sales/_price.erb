@@ -9,5 +9,14 @@
     <% if price&.note %>
       <p class="sales-price-note"><%= sales_text price.note, page.sales %></p>
     <% end %>
+    <%# 5-seat pack: main sales page only. Every offer page hides it. %>
+    <% team = page.sales.team_pack %>
+    <% if team && !page.offer? %>
+      <div class="sales-team-pack">
+        <p class="sales-team-line"><%= sales_text team.line, page.sales %></p>
+        <a href="<%= buy_link team.buy_url, content: "price-team" %>" class="btn btn-deep-outline btn-team" data-buy data-commerce
+           data-fathom-event="<%= team.fathom_event %>"><%= team.buy_label %></a>
+      </div>
+    <% end %>
   </div>
 </section>

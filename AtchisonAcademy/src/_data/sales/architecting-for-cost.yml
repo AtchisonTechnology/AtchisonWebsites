@@ -127,6 +127,15 @@ price_section:
   refund: "30-day refund, no questions asked."
   note: "Paying for this yourself, or a student? {contact} and tell me about it. I'll make it work."
 
+# Optional 5-seat pack (WEB-16; Lee, 2026-10-30). Shown in the price section
+# of the MAIN sales page only; every offer page hides it so no page shows
+# conflicting price points. A product with no team_pack shows nothing.
+team_pack:
+  line: "**For a team:** $2,475 for 5 seats — $495 each."
+  buy_url: "https://softwarearchitectureinsights.kit.com/products/architecting-for-cost-5seat"
+  buy_label: "Buy 5 seats"
+  fathom_event: buy-architecting-for-cost-5-seats
+
 # Real quotes only, never invented. The section hides while this is empty.
 # Shape: - { quote: "...", name: "...", role: "..." }
 quotes:
@@ -151,3 +160,6 @@ faq:
       a: "Email within 30 days for a full refund. No questions asked."
     - q: "Can I buy it for my team?"
       a: "Yes. {contact} and tell me how many people. Team pricing is per seat."
+      # Shown instead of `a` on the main sales page when team_pack is set.
+      # Offer pages always show `a`.
+      a_team_pack: "Yes. Five seats are $2,475, $495 each. After you buy, you'll get an email asking for your team's five addresses, and I'll get everyone in. Need more than five? {contact} and tell me how many."

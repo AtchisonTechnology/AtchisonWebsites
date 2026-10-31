@@ -3659,6 +3659,19 @@ body.selling a:focus-visible {
 .sales-buy-detail { margin: 0; }
 .sales-refund { margin: 1rem 0 0; font-weight: 600; }
 .sales-price-note { margin: 0.5rem 0 0; color: var(--aa-ink-muted); }
+
+/* 5-seat pack under the price block: a secondary button, so the
+   single-seat Buy stays the main action (WEB-16). */
+.sales-team-pack {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--aa-rule);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.sales-team-line { margin: 0; }
 .sales-muted { color: var(--aa-ink-muted); }
 .sales-closing-line { margin: 1.25rem 0 0; font-weight: 600; }
 .sales-artifacts { margin-bottom: 0.5rem !important; }
