@@ -6,7 +6,7 @@
     <dl class="sales-faq">
       <% faq.items.each do |item| %>
         <dt><%= item.q %></dt>
-        <dd><%= sales_text item.a, page.sales %></dd>
+        <dd><%= sales_text((item.a_team_pack && page.sales.team_pack && !page.offer?) ? item.a_team_pack : item.a, page.sales) %></dd>
       <% end %>
     </dl>
   </div>
