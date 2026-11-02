@@ -2,7 +2,7 @@
 title: "Redundancy Assumes Independence"
 slug: teardown-redundancy-assumes-independence
 date: 2026-11-24
-episode_number: 17
+episode_number: 19
 category: Teardown
 tags: []
 description: "A Google Cloud zone went dark for four hours. The redundancy was real, it was working, and none of it helped."

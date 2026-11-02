@@ -2,7 +2,7 @@
 title: "What Gives Me Hope..."
 slug: what-gives-me-hope
 date: 2026-12-22
-episode_number: 21
+episode_number: 23
 category: Questions I Get Asked
 tags: []
 description: "Lee is still worried about AI. Here are four things from 2026 that give him real hope, and one small thing to try in January for each."

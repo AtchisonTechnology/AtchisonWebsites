@@ -2,7 +2,7 @@
 title: "AI Closes the Ticket. But Who Builds the System?"
 slug: ai-closes-the-ticket-but-who-builds-the-system
 date: 2026-12-15
-episode_number: 20
+episode_number: 22
 category: Beyond the Article
 tags: []
 description: "What a team lead actually does when AI closes the tickets and nobody builds the system."

@@ -2,7 +2,7 @@
 title: "What I Actually Mean by AI-Native"
 slug: what-i-mean-by-ai-native
 date: 2027-01-19
-episode_number: 24
+episode_number: 26
 category: Questions I Get Asked
 tags: [Series]
 description: "A precise definition of AI-native, the four properties it rests on, and what it doesn't mean."
@@ -29,7 +29,7 @@ After the Level 2 episode, Lee got a lot of requests to define the term. This ep
 - [What AI-native means, with the 16-question self-assessment](https://leeatchison.com/ainative?utm_source=sai-web&utm_medium=referral&utm_campaign=what-i-mean-by-ai-native&utm_content=cta)
 - [The AI-Native Architecture series](https://softwarearchitectureinsights.com/series/ai-native-architecture/)
 - [You're at Level 2 and You Think You're at Level 4 (episode 16)](https://softwarearchitectureinsights.com/podcast/beyond-youre-at-level-2/)
-- [Your Function Call Was Free. This One Isn't. (episode 18)](https://softwarearchitectureinsights.com/podcast/your-function-call-was-free/)
+- [Your Function Call Was Free. This One Isn't. (episode 20)](https://softwarearchitectureinsights.com/podcast/your-function-call-was-free/)
 
 ## Transcript
 
