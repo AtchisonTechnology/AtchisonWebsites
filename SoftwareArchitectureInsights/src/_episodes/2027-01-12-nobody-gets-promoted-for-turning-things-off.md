@@ -2,7 +2,7 @@
 title: "Nobody Gets Promoted for Turning Things Off"
 slug: nobody-gets-promoted-for-turning-things-off
 date: 2027-01-12
-episode_number: 23
+episode_number: 25
 category: Beyond the Article
 tags: []
 description: "Finding the systems nobody owns, turning them off without getting burned, and getting the time to do it."

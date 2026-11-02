@@ -2,7 +2,7 @@
 title: "You Can't Afford Not to Be in the Cloud"
 slug: cant-afford-not-to-be-in-the-cloud
 date: 2026-12-08
-episode_number: 19
+episode_number: 21
 category: Then vs. Now
 tags: []
 description: "Almost three years after arguing the cloud costs less than it looks, Lee checks what held up and what he understated."

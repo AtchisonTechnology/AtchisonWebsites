@@ -2,7 +2,7 @@
 title: "Your Function Call Was Free. This One Isn't."
 slug: your-function-call-was-free
 date: 2026-12-01
-episode_number: 18
+episode_number: 20
 category: Beyond the Article
 tags: [Series]
 description: "Agents with no step limit, cost in the design review, and the latency half of inference economics."

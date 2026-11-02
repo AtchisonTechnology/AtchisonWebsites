@@ -2,7 +2,7 @@
 title: "What I Actually Mean by AI-Native"
 slug: what-i-mean-by-ai-native
 date: 2027-01-19
-episode_number: 24
+episode_number: 26
 category: Questions I Get Asked
 tags: [Series]
 description: "A precise definition of AI-native, the four properties it rests on, and what it doesn't mean."

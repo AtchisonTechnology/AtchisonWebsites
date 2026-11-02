@@ -2,7 +2,7 @@
 title: "The Platform Under Your AI"
 slug: the-platform-under-your-ai
 date: 2027-01-05
-episode_number: 22
+episode_number: 24
 category: Beyond the Article
 tags: [Series]
 description: "How to turn one team's AI gateway into a shared platform: start from the copy with the scars, keep only what's general, and hand over cost first."
