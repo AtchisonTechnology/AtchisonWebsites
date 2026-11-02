@@ -3646,6 +3646,55 @@ body.selling a:focus-visible {
 .sales-modules h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
 .sales-modules p { margin: 0; color: var(--aa-ink-muted); line-height: 1.55; }
 
+/* ---- Coming-soon stage (WEB-17): jump buttons, free demo, waiting list ---- */
+.sales-cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.sales-slogan {
+  margin: 0.6rem 0 0;
+  font-weight: 700;
+  color: var(--aa-deep);
+}
+
+.sales-source {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--aa-ink-muted);
+}
+
+/* The anchors the hero buttons jump to. */
+#demo,
+#waitlist { scroll-margin-top: 1rem; }
+
+.sales-demo-lessons {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+  line-height: 1.7;
+}
+.sales-demo-lessons li { margin-bottom: 0.5rem; }
+
+.sales-kit-form { margin-top: 1.25rem; }
+
+/* Modules grouped under small subheadings: one counter runs across the
+   groups, so the numbers keep climbing. */
+.sales-module-groups { counter-reset: module; }
+.sales-modules--grouped { counter-reset: none; margin-bottom: 0.5rem; }
+.sales-section h3.sales-module-group {
+  margin: 1.75rem 0 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--aa-teal);
+}
+.sales-module-groups > .sales-module-group:first-child { margin-top: 0; }
+.sales-modules h4 { margin: 0 0 0.25rem; font-size: 1.05rem; font-weight: 600; color: var(--aa-deep); }
+
+/* A trailer with no poster image yet. */
+.sales-trailer-play--blank {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, var(--aa-deep) 0%, var(--aa-blue) 100%);
+}
+
 .sales-about { display: flex; gap: 2rem; align-items: center; }
 
 .sales-about-photo {
@@ -3744,7 +3793,8 @@ body.selling a:focus-visible {
 
   .sales-hero h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
   .sales-lede { font-size: 1.05rem; margin-bottom: 0.35rem; }
-  .sales-tagline { display: none; }
+  .sales-tagline,
+  .sales-slogan { display: none; }
   .sales-offer-intro { font-size: 0.95rem; margin-bottom: 0; }
   .sales-eyebrow { margin-bottom: 0.4rem; }
   .sales-price-amount { font-size: 1.6rem; }

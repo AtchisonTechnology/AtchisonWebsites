@@ -1,0 +1,187 @@
+# Sales data for Architecting Systems That Use AI (WEB-17).
+#
+# The file and URL keep the slug `architecting-systems-with-ai` even though the
+# title says "That Use AI": the URL was already live and linked, and the slug
+# matches the course's id in Kit and Cedarras.
+#
+# COMING-SOON STAGE: no price, no Buy button, no offer pages. The page offers a
+# free demo (Module 1, in Cedarras) and a waiting list. To open the course, set
+# `stage: open` and add `price`, `buy_url`, `buy_label`, `fathom_event` and
+# `price_section` as architecting-for-cost.yml has them, and add `price` to
+# `sections` in place of `waitlist`. The URL does not change.
+#
+# COPY SOURCE: "Page copy: Architecting Systems That Use AI" (second draft,
+# Editor's review applied), Dropbox `Atchison Academy/architecting-systems-with-
+# ai/Marketing/Course Page Copy.md`, copied 2026-10-30. Once the page ships,
+# THIS file is the source. Text fields go through `sales_text` (see
+# plugins/builders/offers.rb): *italic*, **bold**, {contact}.
+
+product: architecting-systems-with-ai     # must match this file's name
+sales_url: /courses/architecting-systems-with-ai/
+stage: coming_soon
+title: "Architecting Systems That Use AI"
+hook: "Your AI feature worked in the demo. Now it's on call."
+pitch: "An AI feature is a distributed system with a badly behaved dependency. This course teaches you to architect around it."
+# The line under the pitch, then the course's slogan under that.
+tagline: "A self-paced video course for software architects, senior engineers and engineering leaders."
+slogan: "Wrong is not the same as down."    # kept (Lee, 2026-10-30)
+# Meta and social description: the pitch line.
+description: "An AI feature is a distributed system with a badly behaved dependency. This course teaches you to architect around it."
+
+# Contact link for the copy's [Contact me].
+contact_url: "https://leeatchison.com/contact/"
+contact_label: "Contact me"
+
+# No hero_image, trailer poster or og_image yet: the trailer shows a plain
+# frame until it loads, and the social card is the site default.
+trailer:
+  vimeo_id: 1241465881   # https://vimeo.com/1241465881, public, approved (Lee, 2026-10-30)
+
+sections:
+  - problem
+  - quotes
+  - who
+  - demo
+  - modules
+  - includes
+  - about
+  - waitlist
+  - faq
+
+problem:
+  heading: "It fails successfully"
+  paragraphs:
+    - "Say your feature summarizes support tickets. This morning it got one wrong."
+    - "The summary was fluent, well-formed, and named the wrong account. A support agent read it and acted on it."
+    - "Your monitoring saw a status code of 200. Latency normal. Error rate flat. The provider's status page all green."
+    - "None of those signals is lying. They were built for a dependency that's either up or down. This one is routinely neither."
+    - "You already know how to run a service you don't own. Timeouts, retries, tiers, a plan for when the call fails. All of it still applies."
+    - "The trouble is that four of this dependency's properties are worse than anything you've integrated before."
+    - "It gives different answers to the same input. It's slow, and the time varies. It's priced per use, so the bill grows with your success. And it can fail successfully, returning a well-formed answer that is just plain wrong."
+
+# No peer quote yet. A quote from Ken Gavranovic goes in once he approves it;
+# the section stays hidden until then. Shape:
+# - { quote: "...", name: "...", role: "..." }
+quotes: []
+
+who:
+  heading: "Who this course is for"
+  items:
+    - "**Senior engineers, staff engineers and architects** whose company has shipped an AI feature, or is about to. If you've kept a production system running through a bad night, you have the background this course assumes."
+    - "**Engineering leaders** whose on-call rotation the AI feature now lives in. You need a p99 you can defend, a spend ceiling that holds, and a team that can tell \"the model is down\" from \"the model is wrong.\""
+  not_for: "*Not for:* anyone who wants to learn how models work, prompt craft or fine-tuning. This course looks at AI the way you'd look at any dependency you don't own. There's no machine learning in it."
+
+# Kit forms: Lee creates them in Kit. The demo form tags `course-architecting-
+# systems-with-ai-demo` (Cedarras reads it to enroll the person in Module 1);
+# the waiting-list form tags `course-architecting-systems-with-ai-waitlist`.
+# The tags stay separate. On both forms: first name (optional) and email.
+# Button and inline success message are set on the form in Kit:
+#   demo      "Get the free demo"      / "Check your email. Your demo link is on its way."
+#   waitlist  "Join the waiting list"  / "You're on the list. I'll email you when the full course opens."
+# kit_form_id is the uid in the form's embed code (data-uid). TBD shows a
+# placeholder, and a production build refuses it.
+demo:
+  heading: "Watch Module 1 free"
+  intro: "The free demo is the course introduction and all of Module 1, *Your AI Feature Is a Distributed System*. That's four videos and a short quiz."
+  lessons:
+    - title: "The demo worked, and then it shipped."
+      summary: "The feature delighted everyone, and now it owns an on-call rotation nobody knows how to staff."
+    - title: "An AI service is just a dependency, and a badly behaved one."
+      summary: "What still applies, and the four properties that are worse."
+    - title: "The six questions nobody asked."
+      summary: "Tier, degradation, latency, cost, wrongness and blast radius. Score a service of your own against them."
+    - title: "Why your reliability model doesn't survive contact."
+      summary: "Retries, health checks and SLOs assume a dependency that's up or down."
+  closing: "Each video runs about seven minutes. Sign up, and I'll email you a link to get in."
+  kit_form_id: TBD   # Lee creates the form in Kit
+  fathom_event: demo-signup-architecting-systems-with-ai
+
+# Ten modules under five small headings (`group:`). Numbering runs straight
+# through the groups.
+modules:
+  heading: "What you'll learn"
+  items:
+    - group: "The premise"
+      title: "Your AI Feature Is a Distributed System"
+      summary: "It's a dependency, it's worse behaved than any you've integrated, and the six questions most teams can't answer."
+    - group: "The premise"
+      title: "Tiering the Dependency"
+      summary: "Risk matrices applied to AI, what the provider actually promises, and the gap between your feature's tier and the dependency's."
+    - group: "Correctness"
+      title: "What \"Correct\" Means for an AI System"
+      summary: "The test you can't write. Confidently wrong as a failure mode, and drift in a dependency you don't control."
+    - group: "Correctness"
+      title: "Living With Non-Determinism"
+      summary: "Evaluations as your new test suite, checking the answer before you use it, and catching wrong answers in production."
+    - group: "Availability and budgets"
+      title: "Designing the Degradation Path"
+      summary: "What the feature does when the model is down. A fallback ladder chosen at design time, instead of at 2am."
+    - group: "Availability and budgets"
+      title: "The Latency Budget"
+      summary: "Where the time goes, a p99 you can defend, and timeouts and retries that don't start a storm."
+    - group: "Availability and budgets"
+      title: "Cost as a Reliability Control"
+      summary: "Spend ceilings per request, per user and per day, and what happens the moment you hit one."
+    - group: "Blast radius"
+      title: "Blast Radius: What Leaves Your System"
+      summary: "What data leaves with every call, what the provider keeps, and the incident you plan before it happens."
+    - group: "Blast radius"
+      title: "Blast Radius: What the Model Can Do"
+      summary: "Prompt injection as a boundary problem, what the model is allowed to touch, and approval gates for actions you can't undo."
+    - group: "The practice"
+      title: "Making It Stick"
+      summary: "The AI dependency review, six fields in your ADR, a runbook for a dependency that fails successfully, and the case for funding it."
+
+includes:
+  heading: "What you get"
+  items:
+    - "**41 video lessons** across ten modules."
+    - "**Readings** with ten of the lessons, for the tables and worked examples that work better on a page."
+    - text: "**Worksheets and templates** you fill in for your own system:"
+      list:
+        - "AI Dependency Risk Assessment"
+        - "AI dependency risk matrix"
+        - "Dependency tier assignment template"
+        - "Eval and drift monitoring plan"
+        - "Degradation playbook"
+        - "Latency budget worksheet"
+        - "Cost ceiling template"
+        - "Data flow and blast radius map"
+        - "AI dependency ADR template and review checklist"
+    - "**The Current Landscape appendix.** No module names a model, a provider or a price, because those change too fast. Today's specifics live in a dated appendix that's reissued on its own schedule."
+    - "**A quiz at the end of each module**, and a final quiz. Finish it to get your certificate."
+  closing: "Self-paced. Start any time, and go at your own speed."
+
+about:
+  heading: "About your instructor"
+  photo: /images/lee-casual-vertical.jpeg
+  photo_width: 640
+  photo_height: 962
+  paragraphs:
+    - "Lee Atchison spent seven years at Amazon and AWS and eight at New Relic, building and running systems at scale. He wrote *Architecting for Scale* (O'Reilly), and more than 180,000 learners have taken his courses."
+    - "This course treats AI the way he's always treated a dependency. Tier it, budget it, and decide what happens when it fails."
+
+waitlist:
+  heading: "The full course is coming soon"
+  paragraphs:
+    - "The full course isn't open yet. Join the list, and I'll email you the day it opens."
+  kit_form_id: TBD   # Lee creates the form in Kit
+  fathom_event: waitlist-architecting-systems-with-ai
+
+faq:
+  heading: "Questions"
+  items:
+    - q: "When does the full course open?"
+      a: "Soon. Join the waiting list and I'll email you the day it does."
+    - q: "Is the demo free?"
+      a: "Yes. The introduction, all four Module 1 videos and the Module 1 quiz. No card, and nothing to buy."
+    - q: "How do I get into the demo?"
+      a: "Sign up above. I'll email you a link, and you'll watch it at courses.atchisonacademy.com with the same email address."
+    - q: "Do I need to know machine learning?"
+      a: "No. This course is about availability, latency, cost and risk. Model behavior comes up only where it breaks something in your architecture."
+    - q: "Does it cover a particular AI provider?"
+      a: "No. The lessons work with any provider. The Current Landscape appendix covers today's specifics, with a date on it."
+    - q: "Does it cover agents?"
+      a: "Up to the edge. Module 9 covers what the model is allowed to do, and where AI as a dependency ends and AI as an orchestrator begins."
+    - q: "Can I buy it for my team?"
+      a: "Yes, once it opens. There will be a five-seat pack. Need more seats? {contact}."

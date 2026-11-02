@@ -1,0 +1,17 @@
+<%# One Kit inline form (WEB-17), embedded the way free/cost-attribution-worksheet
+    embeds its form. `form` is a `demo:` or `waitlist:` block: `kit_form_id`
+    (the uid in Kit's embed code) and `fathom_event`. The button text and the
+    inline success message are set on the form in Kit, not here.
+
+    While the id is still TBD the page shows a marked placeholder instead (a
+    production build refuses that: see Builders::Offers#validate_sales_data!).
+    frontend/javascript/index.js fires `data-fathom-event` once Kit shows its
+    success message. %>
+<% form_id = form.kit_form_id.to_s.strip %>
+<% if form_id != "" && form_id.downcase != "tbd" %>
+  <div class="sales-kit-form" data-kit-form data-fathom-event="<%= form.fathom_event %>">
+    <script async data-uid="<%= form_id %>" src="https://softwarearchitectureinsights.kit.com/<%= form_id %>/index.js"></script>
+  </div>
+<% else %>
+  <p class="selling-placeholder">Signup form not configured yet: set <code>kit_form_id</code> in this product's sales data file.</p>
+<% end %>

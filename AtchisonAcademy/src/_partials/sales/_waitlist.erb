@@ -1,0 +1,16 @@
+<%# The waiting list (WEB-17). Takes the price section's place while the
+    product is `stage: coming_soon`: a heading, a line or two, and the inline
+    signup form. No price and no date. The anchor is the hero's "Join the
+    waiting list" button. %>
+<% waitlist = page.sales.waitlist %>
+<% if page.coming_soon? && waitlist %>
+<section class="sales-section sales-waitlist" id="waitlist">
+  <div class="sales-inner">
+    <h2><%= waitlist.heading %></h2>
+    <% waitlist.paragraphs.to_a.each do |para| %>
+      <p><%= sales_text para, page.sales %></p>
+    <% end %>
+    <%= render "sales/kit_form", form: waitlist %>
+  </div>
+</section>
+<% end %>

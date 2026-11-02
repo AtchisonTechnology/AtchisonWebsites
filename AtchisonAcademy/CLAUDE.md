@@ -330,6 +330,28 @@ section of `index.css` is copied verbatim from BRAND.md. Selling pages use
 only those tokens. The rest of the site still uses the LeeAtchison-derived
 tokens.
 
+**Coming-soon stage (WEB-17).** A sales data file may set `stage: coming_soon`
+(missing means `open`, which is Architecting for Cost and changes nothing). The
+page has no price and no Buy button anywhere (hero, price, footer), and the
+builder refuses an offer for it. In place of Buy, the hero has "Try Module 1
+free" (jumps to `#demo`) and "Join the waiting list" (jumps to `#waitlist`),
+and the footer repeats the waiting-list button. `sections:` lists the `demo`
+partial (driven by a `demo:` block: heading, intro, numbered `lessons`,
+closing, form) and the `waitlist` partial (a `waitlist:` block) in place of
+`price`. Both embed a Kit inline form through `sales/_kit_form.erb`, from
+`kit_form_id` (the `data-uid` in Kit's embed code) and `fathom_event`;
+`index.js` fires the event once Kit's success message appears. A `TBD` form id
+shows a marked placeholder in dev and on deploy previews, and **a production
+build fails on it**, so the page cannot go live without its forms. Related
+optional fields: `slogan:` (a line under `tagline:`), a module's `group:`
+(subheadings, numbering runs on), a problem paragraph written as
+`{ text:, small: }` (source line), an `includes` item written as
+`{ text:, list: [...] }` (paragraph with its own bulleted list), and a
+trailer with no `poster:` (plain frame). The course listings show "Coming
+Soon" for any course whose data file is `coming_soon` (`coming_soon_course?`).
+To open the course: set `stage: open`, add the price block as Cost has it, and
+put `price` in `sections` in place of `waitlist`. The URL never changes.
+
 > **To add an offer page:**
 > 1. Create the coupon link in Kit.
 > 2. Add `src/_offers/<product>-<offer-slug>.md` with `product`, `permalink`,

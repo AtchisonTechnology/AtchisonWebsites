@@ -30,6 +30,7 @@ class Builders::Offers < SiteBuilder
 
   def build
     hook :site, :post_read, priority: :high do |site|
+      validate_sales_data!(site)
       offers = site.collections["offers"]&.resources || []
       offers.each { |offer| prepare_offer!(site, offer) }
 
@@ -49,6 +50,13 @@ class Builders::Offers < SiteBuilder
     # offer (`product:`); nil for any other page.
     helper :sales_data_for do |resource|
       sales_for(resource)
+    end
+
+    # True when the course's sales data file says `stage: coming_soon`. The
+    # course listings use it for the "Coming Soon" label, so the label goes
+    # away on its own when the page flips to `stage: open`.
+    helper :coming_soon_course? do |resource|
+      sales_for(resource)&.stage == "coming_soon"
     end
 
     # Everything a selling-page partial needs, with the offer's overrides
@@ -127,6 +135,39 @@ class Builders::Offers < SiteBuilder
     key && site.data.sales && site.data.sales[key]
   end
 
+  STAGES = %w[open coming_soon].freeze
+  PLACEHOLDER_FORM_IDS = ["", "tbd"].freeze
+
+  # Checks every sales data file's `stage:` (WEB-17). A `coming_soon` product
+  # has no price, so it can have no offer (prepare_offer! checks that), and
+  # each of its two signup forms (`demo:`, `waitlist:`) needs a Kit form id.
+  # While an id is still the placeholder (`TBD`), the page may build in dev and
+  # on a Netlify deploy preview, where it shows a marked placeholder, but a
+  # production build fails, so the page cannot go live without its forms.
+  def validate_sales_data!(site)
+    (site.data.sales || {}).each do |key, sales|
+      stage = sales["stage"] || "open"
+      unless STAGES.include?(stage)
+        raise "src/_data/sales/#{key}.yml: stage: #{stage} is not valid — " \
+              "expected one of #{STAGES.join(", ")}"
+      end
+      next unless stage == "coming_soon"
+
+      %w[demo waitlist].each do |block|
+        form = sales[block]
+        unless form
+          raise "src/_data/sales/#{key}.yml: stage: coming_soon requires a #{block}: block"
+        end
+
+        next unless PLACEHOLDER_FORM_IDS.include?(form["kit_form_id"].to_s.strip.downcase)
+        next unless Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
+
+        raise "src/_data/sales/#{key}.yml: #{block}.kit_form_id is still a placeholder — " \
+              "put the real Kit form id in before this page goes live"
+      end
+    end
+  end
+
   def prepare_offer!(site, offer)
     where = offer.relative_path.to_s
     data = offer.data
@@ -139,6 +180,11 @@ class Builders::Offers < SiteBuilder
     unless sales
       raise "#{where}: product: #{data.product} has no sales data file — expected " \
             "src/_data/sales/#{data.product}.yml"
+    end
+
+    if sales["stage"] == "coming_soon"
+      raise "#{where}: product: #{data.product} is stage: coming_soon, which has no price — " \
+            "a coming-soon product cannot have an offer page"
     end
 
     # Rule 2: the permalink is the sales page URL plus exactly one segment.
@@ -206,6 +252,10 @@ class Builders::Offers < SiteBuilder
     end
 
     def offer? = !offer.nil?
+    # "open" (the default) or "coming_soon": no price, no Buy button, a free
+    # demo and a waiting list instead (WEB-17).
+    def stage = sales.stage || "open"
+    def coming_soon? = stage == "coming_soon"
     def price = offer? ? offer.data.price : sales.price
     def standard_price = sales.price
     def headline = (offer? && offer.data.headline) || sales.hook
