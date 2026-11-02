@@ -90,7 +90,7 @@ demo:
     - title: "Design speed, and the road ahead."
       summary: "The speed your system was built for, against the speed your team runs at today."
   closing: "Each video runs about nine minutes. Sign up, and I'll email you a link to get in."
-  kit_form_id: 10133852
+  kit_form_id: "3b21d7c359"
   fathom_event: demo-signup-architecting-for-ai-velocity
 
 modules:
@@ -136,7 +136,7 @@ waitlist:
   heading: "The full course is coming soon"
   paragraphs:
     - "The full course isn't open yet. Join the list, and I'll email you the day it opens."
-  kit_form_id: 10133859
+  kit_form_id: "38809eb2d0"
   fathom_event: waitlist-architecting-for-ai-velocity
 
 faq:
