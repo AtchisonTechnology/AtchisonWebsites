@@ -30,12 +30,12 @@ fathom_site_id: "QZJQFDMY"
 # webinar forms, plus the old subscribe-page uid) are gone: confirmed
 # 2026-09-03 via Kit's API that all three are `type: "hosted"` with
 # `embed_js: null`, not embeddable script-tag forms the way
-# kit_inline_form_uid above is. Rather than ship dead embeds,
-# src/service-ownership-diagnostic.erb and src/architecting-with-ai.erb
-# were removed at Lee's direction; netlify.toml now redirects both paths
-# straight to Kit's still-working hosted pages (temporary, see the
-# redirect rules' own comment). Rebuilding these as real Bridgetown pages
-# later needs matching embed-type Kit forms first.
+# kit_inline_form_uid above is. A hosted form can still be posted to
+# directly by its numeric form ID: src/_partials/_free_signup_form.erb does
+# that for the /free/ pages (WEB-15, WEB-21), each of which keeps its form
+# ID in its own front matter. The Ownership Gap Diagnostic is back as
+# src/free/ownership-gap-diagnostic.erb; /architecting-with-ai still
+# redirects to Kit (netlify.toml).
 
 # Podcast (Spec0027). Hosting is Captivate, RSS feed https://feeds.captivate.fm/sai/.
 # Listed on Apple Podcasts (id 1630667647) and Spotify.
