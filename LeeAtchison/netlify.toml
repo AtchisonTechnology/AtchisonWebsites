@@ -439,3 +439,43 @@
   to = "https://softwarearchitectureinsights.com/"
   status = 301
   force = true
+
+
+# Guest podcast short links (WEB-20, Lee 2026-11-12). When Lee is a guest on
+# someone else's show he says a short URL out loud, like
+# leeatchison.com/archtalk, and the host puts the same link in the show notes.
+# Each rule 302-redirects that path to the page for the ask on that
+# appearance, adding UTM tags so Fathom reports the visit by show instead of
+# as "direct" traffic. Registry of every show's path, appearance date and
+# destination: "Guest Podcast Short Links" in the UTM Standard (Dropbox:
+# Marketing/Social Media/UTM Standard.md); each is also a row in
+# Marketing/Landing Pages.md.
+#
+# Adding a show (only once the appearance is confirmed) is one rule, below:
+#
+#   [[redirects]]
+#     from = "/<show>"
+#     to = "<destination>?utm_source=<show>&utm_medium=podcast-guest&utm_campaign=visibility&utm_content=<cta|subscribe>"
+#     status = 302
+#
+# - <show> is the show's short name: lowercase, hyphens only, no numbers, easy
+#   to say aloud, named for the show not the host. It is also the utm_source.
+# - Tags in this order: utm_source, utm_medium, utm_campaign, utm_content.
+#   utm_content is "subscribe" when the ask is the newsletter, "cta" otherwise.
+# - 302, not 301, so the destination can change without browsers caching the
+#   old one; the episode keeps playing for years.
+# - One rule per show. Netlify normalizes the trailing slash, so "/<show>"
+#   also catches "/<show>/".
+# - Never add force = true. Without it Netlify skips a rule whose path is a
+#   real page, so the fix for a clash is a different path, never force. Before
+#   adding a path, check it against: every real page here (/, /about, /ainative,
+#   /books, /contact, /courses, /schedule and everything under them), every
+#   "from" in this file, the SAI podcast house-ad paths (/scale, /conductor,
+#   /academy, /join, /cost, /worksheet), and every utm_source in the UTM
+#   Standard. A path used for one show is never reused for another.
+
+# TEST RULE: remove before merging WEB-20.
+[[redirects]]
+  from = "/podcast-test"
+  to = "/?utm_source=podcast-test&utm_medium=podcast-guest&utm_campaign=visibility&utm_content=cta"
+  status = 302
