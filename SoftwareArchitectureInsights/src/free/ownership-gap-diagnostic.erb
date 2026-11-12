@@ -14,19 +14,13 @@ description: "When everything is critical, nothing is. Twenty questions on who o
 # diagnostic-signup and shows the success line in place: Kit emails the
 # spreadsheet. Two forms, top and bottom, like the Kit page.
 kit_form_id: 9818250
-# The two images on the Kit page. Each shows from src/images/free/ once the
-# file is there; until then, from Kit's own CDN, where the Kit page serves it.
+# The two images on the Kit page, hosted here so nothing loads from Kit's CDN.
 hero_image: /images/free/ownership-gap-diagnostic-hero.png
-hero_image_kit: https://embed.filekitcdn.com/e/g8RtC4MRhUXatmA4STpkpZ/o3ksCFTMpQT5T2dzoWAqxK
 preview_image: /images/free/ownership-gap-diagnostic-preview.png
-preview_image_kit: https://embed.filekitcdn.com/e/g8RtC4MRhUXatmA4STpkpZ/dZNZpoEvBBmHAkdpgiVJvY
 ---
 <%
-  local_or_kit = ->(local, kit) {
-    File.exist?(File.join(site.source, local)) ? relative_url(local) : kit
-  }
-  hero = local_or_kit.(data.hero_image, data.hero_image_kit)
-  preview = local_or_kit.(data.preview_image, data.preview_image_kit)
+  hero = relative_url(data.hero_image)
+  preview = relative_url(data.preview_image)
   form = {
     form_id: data.kit_form_id,
     button: "Send me the diagnostic",
