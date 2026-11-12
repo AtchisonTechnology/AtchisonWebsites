@@ -1081,3 +1081,152 @@ body.episode main {
   padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
 }
+
+/* ---------------------------------------------------------------- */
+/* Free resource pages (WEB-15, WEB-21): /free/<resource>/           */
+/* ---------------------------------------------------------------- */
+
+.free-page main {
+  max-width: 46rem;
+}
+
+.free-eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--brand-blue);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+}
+
+.free-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.free-hero .free-mark {
+  display: block;
+  width: 4.5rem;
+  margin: 0 auto 1rem;
+}
+
+.free-hero h1 {
+  font-size: 2.4rem;
+}
+
+.free-subhead {
+  font-size: 1.25rem;
+  color: var(--steel);
+}
+
+.free-image {
+  display: block;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(26, 35, 48, 0.12);
+}
+
+.free-byline {
+  color: var(--stone-600);
+  font-size: 0.95rem;
+}
+
+.free-closing {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.free-closing h2 {
+  margin-top: 0;
+}
+
+/* The form itself: one email field and a button, side by side when
+   there is room, stacked on a phone. */
+.free-signup {
+  margin: 1.75rem auto;
+  max-width: 34rem;
+  text-align: left;
+}
+
+.free-signup-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.free-signup-email {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+}
+
+.free-signup-email:focus {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 1px;
+}
+
+.free-signup-button,
+.free-download {
+  flex: 0 0 auto;
+  padding: 0.75rem 1.25rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--brand-blue);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.free-signup-button:hover,
+.free-download:hover {
+  background: var(--steel);
+  color: #fff;
+}
+
+.free-signup-button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.free-signup-status {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+.free-signup-status:empty {
+  display: none;
+}
+
+.free-signup-status[data-kind="success"] { color: var(--success); font-weight: 700; }
+.free-signup-status[data-kind="error"] { color: var(--error); }
+
+.free-signup.is-done .free-signup-row {
+  display: none;
+}
+
+.free-signup-disclaimer {
+  margin: 0.5rem 0 0;
+  color: var(--stone-600);
+  font-size: 0.85rem;
+}
+
+.free-download {
+  display: inline-block;
+  margin: 1rem 0 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .free-hero h1 { font-size: 1.9rem; }
+  .free-signup-row { flex-direction: column; }
+  .free-signup-button { width: 100%; }
+}
