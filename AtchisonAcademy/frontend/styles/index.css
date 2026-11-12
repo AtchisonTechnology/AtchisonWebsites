@@ -3322,6 +3322,32 @@ body.webinar .webinar-clip-meta {
   color: var(--text-muted);
 }
 
+/* The replay email gate (WEB-23), used only when the page sets kit_form_uid.
+   The gated pieces carry the hidden attribute until Kit reports a good
+   submit; this rule keeps .webinar-actions' display: flex from overriding it. */
+body.webinar [data-webinar-unlock][hidden],
+body.webinar [data-webinar-gate][hidden] { display: none; }
+
+body.webinar .webinar-gate { max-width: 560px; }
+
+body.webinar .webinar-gate-line {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--white);
+  margin: 0 0 1rem;
+}
+
+body.webinar .webinar-gate-note {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.75);
+  margin: 0.75rem 0 0;
+}
+
+/* Revealed Resources: its heading is the wrapper's first child, so restore
+   the gap .course-body-inner h2:first-child removes. */
+body.webinar .course-body-inner [data-webinar-unlock] > h2:first-child { margin-top: 2.5rem; }
+
 /* ============================================
    Selling pages (Spec0031): sales pages, offer pages, and supporting pages
    (welcome, free lead magnet, webinar), plus the home page's featured-course
