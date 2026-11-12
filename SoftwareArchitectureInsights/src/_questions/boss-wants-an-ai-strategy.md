@@ -1,6 +1,14 @@
 ---
 title: "My Boss Wants an AI Strategy. Where Do I Start?"
 order: 5
+lead_magnet:
+  name: "AI Maturity Self-Check"
+  pitch: "Which level is your AI system really at? A one-page self-check."
+  button: "Get the free self-check"
+  # Kit-hosted for now. Switch to the SAI-site page when WEB-15 ships; an
+  # on-site url is linked untagged, so campaign then stops mattering.
+  url: "https://softwarearchitectureinsights.kit.com/ai-maturity-self-check"
+  campaign: "ai-maturity"
 description: >-
   When leadership asks for an AI strategy, start with the business goal behind
   the request. Four questions to ask before anyone writes a line of code.
