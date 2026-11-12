@@ -473,9 +473,3 @@
 #   "from" in this file, the SAI podcast house-ad paths (/scale, /conductor,
 #   /academy, /join, /cost, /worksheet), and every utm_source in the UTM
 #   Standard. A path used for one show is never reused for another.
-
-# TEST RULE: remove before merging WEB-20.
-[[redirects]]
-  from = "/podcast-test"
-  to = "/?utm_source=podcast-test&utm_medium=podcast-guest&utm_campaign=visibility&utm_content=cta"
-  status = 302
