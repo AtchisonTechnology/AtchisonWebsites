@@ -1,0 +1,27 @@
+<%# The webinar offer block (WEB-19: moved here from webinars/architecting-for-cost.erb
+    so the replay page shows the same block). Changes with the run's offer:
+    `offer_page` is the run's live offer page, or nil once it has ended, when
+    the block falls back to the standard price and the sales page. %>
+<div class="webinar-offer">
+  <h2>Go deeper: Architecting for Cost</h2>
+  <p>The webinar comes from my course, Architecting for Cost. It works through the decisions that drive the bill, one at a time: multi-tenancy, data movement, recovery targets and AI inference. And it ends with how to make the cost case to the people who fund the fix.</p>
+  <p>8 modules, 33 short video lessons, and 8 worksheets and templates you use on your own systems.</p>
+  <div class="sales-buy">
+    <% if offer_page %>
+      <script src="https://<%= URI.parse(offer.data.buy_url).host %>/commerce.js" async defer></script>
+      <p class="sales-price">
+        <span class="sales-price-amount"><%= offer_page.money(offer_page.price) %></span>
+        <span class="sales-price-regular">(regularly <%= offer_page.money(offer_page.standard_price) %>)</span>
+      </p>
+      <% if offer_page.end_line %>
+        <p class="sales-end"><%= offer_page.end_line %></p>
+      <% end %>
+      <a href="<%= offer_page.buy_url("price") %>" class="btn btn-buy" data-buy data-commerce
+         data-fathom-event="<%= sales.fathom_event %>-webinar"><%= offer_page.buy_label %></a>
+    <% else %>
+      <p class="sales-price"><span class="sales-price-amount">$<%= sales.price %></span></p>
+      <a href="<%= relative_url sales.sales_url %>" class="btn btn-deep">See the course</a>
+    <% end %>
+    <p class="sales-refund">30-day refund, no questions asked.</p>
+  </div>
+</div>

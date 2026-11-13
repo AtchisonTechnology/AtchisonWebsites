@@ -3248,6 +3248,38 @@ body.webinar .webinar-actions {
   gap: 1rem;
 }
 
+/* The replay gate (WEB-19): the email form in the webinar hero, in place of
+   the Watch the replay button. Kit draws the field and button. */
+body.webinar .webinar-replay-form { max-width: 520px; }
+body.webinar .webinar-replay-lead {
+  color: var(--white);
+  margin: 0 0 0.75rem;
+}
+body.webinar .webinar-replay-form .sales-kit-form { margin-top: 0; }
+body.webinar .webinar-form-note {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.75);
+  margin: 0.75rem 0 0;
+}
+
+/* The unlisted replay page's video: 16:9, full column width. */
+body.webinar .webinar-replay-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 2.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+body.webinar .webinar-replay-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* The title slide is near-white, so it needs a border to separate it from
    the page background. */
 body.webinar .webinar-title-slide {
