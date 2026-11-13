@@ -1,0 +1,18 @@
+<%
+  # The lead magnet call to action (WEB-18): name, pitch, one button. Takes
+  # the `cta` hash the SaiContent builder stamps on a question page and on
+  # each article tagged to a question with a `lead_magnet:` (the href is
+  # already tagged, or relative for an on-site magnet). Renders nothing when
+  # cta is nil. Quieter than the subscribe block on purpose: an outlined
+  # card and button, not a filled one.
+%>
+<% if cta %>
+  <aside class="lead-magnet-cta" aria-label="<%= cta["name"] %>">
+    <p class="lead-magnet-cta-eyebrow">Free resource</p>
+    <h2 class="lead-magnet-cta-name"><%= cta["name"] %></h2>
+    <% unless cta["pitch"].to_s.empty? %>
+      <p class="lead-magnet-cta-pitch"><%= cta["pitch"] %></p>
+    <% end %>
+    <a class="btn lead-magnet-cta-button" href="<%= cta["href"] %>"><%= cta["button"] %></a>
+  </aside>
+<% end %>

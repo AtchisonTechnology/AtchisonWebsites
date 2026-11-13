@@ -1,6 +1,12 @@
 ---
 title: "Why Does Our Cloud Bill Keep Growing?"
 order: 3
+lead_magnet:
+  name: "The Cost Attribution Worksheet"
+  pitch: "How much of your cloud bill can you explain? Take your five biggest line items and find the decision behind each one."
+  button: "Get the free worksheet"
+  url: "https://atchisonacademy.com/free/cost-attribution-worksheet/"
+  campaign: "cost-attribution-worksheet"
 description: >-
   Most cloud bills grow because nobody designed them. The three defaults
   behind the growth, and how to make cost a real requirement.
