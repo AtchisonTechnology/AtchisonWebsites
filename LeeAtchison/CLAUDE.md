@@ -149,3 +149,4 @@ flag is not set on that item. Those two rules are what stop a new item, or a fli
 flag, from silently re-creating duplicate pages across the two domains.
 
 **Amazon Associates**: Every link to amazon.com must include the query parameter `tag=leeatchison-20`. Example: `https://www.amazon.com/dp/XXXXXXXXX?tag=leeatchison-20`.
+**Guest podcast short links** (WEB-20): when Lee is a guest on another show, he says a short URL like `leeatchison.com/<show>`, and a `302` rule at the end of `netlify.toml` forwards it to that appearance's page with `utm_source=<show>&utm_medium=podcast-guest&utm_campaign=visibility&utm_content=<cta|subscribe>`. One rule per show, added only once the appearance is confirmed, never with `force = true`. The how-to and the collision checklist are in the comment above those rules in `netlify.toml`; the registry of shows is in the UTM Standard (Dropbox).
