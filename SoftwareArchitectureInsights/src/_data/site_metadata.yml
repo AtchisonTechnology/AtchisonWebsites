@@ -34,8 +34,8 @@ fathom_site_id: "QZJQFDMY"
 # directly by its numeric form ID: src/_partials/_free_signup_form.erb does
 # that for the /free/ pages (WEB-15, WEB-21), each of which keeps its form
 # ID in its own front matter. The Ownership Gap Diagnostic is back as
-# src/free/ownership-gap-diagnostic.erb; /architecting-with-ai still
-# redirects to Kit (netlify.toml).
+# src/free/ownership-gap-diagnostic.erb. Since WEB-23, /architecting-with-ai
+# 301s to the replay page on atchisonacademy.com (netlify.toml).
 
 # Podcast (Spec0027). Hosting is Captivate, RSS feed https://feeds.captivate.fm/sai/.
 # Listed on Apple Podcasts (id 1630667647) and Spotify.

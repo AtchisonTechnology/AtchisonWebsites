@@ -125,40 +125,37 @@
   status = 301
   force = true
 
-# TEMPORARY (added 2026-09-03, Lee's request) — /architecting-with-ai/ had a
-# real Bridgetown page here that embedded a dead Kit form (Open Question 14
-# follow-on: its uid is a hosted landing page, not an embeddable one).
-# Rather than ship a broken embed, Lee had the .erb source removed; the path
-# is now served entirely by redirecting to Kit's still-working hosted
-# version. 302/temporary, not 301, because this is not meant to be cached or
-# to transfer SEO weight. REMOVE these rules if/when a real page is rebuilt
-# here (src/_partials/_free_signup_form.erb can post to a hosted Kit form,
-# as the /free/ pages do).
+# The Sep 30, 2026 webinar ("Your AI Provider Will Fail. Design for It.").
+# /architecting-with-ai was its registration link, so it is in promo posts,
+# the LinkedIn Newsletter and a Kit send, and /webinar-architecting-systems-
+# with-ai is another URL in the wild for the same webinar. Both used to 302
+# to the Kit hosted page that gated the replay (softwarearchitectureinsights.
+# kit.com/4cad4660e5), which is being deleted. They now 301 to the replay
+# page on the Academy site, which has its own email gate (WEB-23). 301:
+# the move is permanent. Netlify passes the visitor's query string through
+# untouched (the rules match no query parameters), so old tagged links still
+# report their utm_ source on the Academy page. No force = true: no page
+# exists at any of these paths on this site (src/architecting-with-ai.erb was
+# removed 2026-09-03), so nothing can shadow them.
 [[redirects]]
   from = "/architecting-with-ai"
-  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
-  status = 302
-  force = true
+  to = "https://atchisonacademy.com/webinars/architecting-with-ai/"
+  status = 301
 
 [[redirects]]
   from = "/architecting-with-ai/"
-  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
-  status = 302
-  force = true
+  to = "https://atchisonacademy.com/webinars/architecting-with-ai/"
+  status = 301
 
-# /webinar-architecting-systems-with-ai is another URL in the wild for the
-# same webinar as /architecting-with-ai above — same Kit hosted landing page.
 [[redirects]]
   from = "/webinar-architecting-systems-with-ai"
-  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
-  status = 302
-  force = true
+  to = "https://atchisonacademy.com/webinars/architecting-with-ai/"
+  status = 301
 
 [[redirects]]
   from = "/webinar-architecting-systems-with-ai/"
-  to = "https://softwarearchitectureinsights.kit.com/4cad4660e5"
-  status = 302
-  force = true
+  to = "https://atchisonacademy.com/webinars/architecting-with-ai/"
+  status = 301
 
 # Podcast house-ad URLs (added 2026-10-06, Lee). A podcast ad can't carry a
 # link, so each ad says a short URL here and these rules forward it with UTM
