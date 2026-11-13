@@ -1,0 +1,55 @@
+---
+layout: default
+page_class: free-page
+title: "Free: The Ownership Gap Diagnostic"
+description: "When everything is critical, nothing is. Twenty questions on who owns what, and what it costs you when nobody does. A free spreadsheet diagnostic from Lee Atchison."
+# WEB-21. The Ownership Gap Diagnostic's signup page, moved off Kit
+# (softwarearchitectureinsights.kit.com/2e2d7fc0c1). Copy is the Kit page's,
+# as is (checked 2026-11-12). Not in the nav. Indexed: it's an evergreen
+# freebie. /service-ownership-diagnostic redirects here (netlify.toml).
+#
+# The Kit form behind it, "service-ownership-diagnostic" (ID 9818250), is a
+# hosted landing-page form, so it's posted to directly; see
+# _partials/_free_signup_form.erb. A good submit fires the Fathom event
+# diagnostic-signup and shows the success line in place: Kit emails the
+# spreadsheet. Two forms, top and bottom, like the Kit page.
+kit_form_id: 9818250
+# The two images on the Kit page, hosted here so nothing loads from Kit's CDN.
+hero_image: /images/free/ownership-gap-diagnostic-hero.png
+preview_image: /images/free/ownership-gap-diagnostic-preview.png
+---
+<%
+  hero = relative_url(data.hero_image)
+  preview = relative_url(data.preview_image)
+  form = {
+    form_id: data.kit_form_id,
+    button: "Send me the diagnostic",
+    disclaimer: "You'll get the spreadsheet, and you'll also get Software Architecture Insights, my newsletter, Tuesday mornings. Unsubscribe anytime.",
+    fathom_event: "diagnostic-signup",
+    success_message: "Thanks. The diagnostic is on its way to your inbox."
+  }
+%>
+<div class="free-hero">
+  <p class="free-eyebrow">Software Architecture Insights</p>
+  <h1>When everything is critical, nothing is</h1>
+  <p class="free-subhead">Twenty questions on who owns what, and what it costs you when nobody does.</p>
+
+  <%= render "free_signup_form", **form, position: 1 %>
+
+  <img class="free-image" src="<%= hero %>" alt="The Ownership Gap Diagnostic" />
+</div>
+
+<p><em>Think about the last time something broke at 3am.</em></p>
+<p>How long did it take to find the person who could actually fix it? Not the person who got paged. The person who could fix it.</p>
+<p>That gap is not a communication problem, and it is not a tooling problem. It comes from two decisions most organizations never actually made. What matters most, and who is accountable for keeping it up. A service catalog does not make either decision. It only records the ones you already made, which is why catalog rollouts stall out with metadata nobody trusts.</p>
+<p>This diagnostic scores where you stand on both, across five dimensions: inventory, ownership, criticality, alignment, and enforcement. Twenty questions, about ten minutes. You get a score out of 100, a breakdown showing which dimension is dragging, and one thing to fix first.</p>
+<p>It is a spreadsheet, so you can fill it in with your team and argue about the answers. The arguments are the useful part.</p>
+
+<img class="free-image" src="<%= preview %>" alt="A preview of the Ownership Gap Diagnostic spreadsheet" />
+
+<div class="free-closing">
+  <h2>How exposed are you?</h2>
+  <p>Twenty questions, about ten minutes, and you will know which dimension is costing you the most and what to fix first.</p>
+
+  <%= render "free_signup_form", **form, position: 2 %>
+</div>

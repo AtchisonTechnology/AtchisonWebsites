@@ -108,27 +108,21 @@
   status = 301
   force = true
 
-# TEMPORARY (added 2026-09-03, Lee's request) — /service-ownership-diagnostic/
-# had a real Bridgetown page here that embedded a dead Kit form (Open
-# Question 14 follow-on: the uid is a hosted landing page, not an embeddable
-# one). Rather than ship a broken embed, Lee had the .erb source removed; the
-# path is now served entirely by redirecting to Kit's still-working hosted
-# version. 302/temporary, not 301, because this is not meant to be cached or
-# to transfer SEO weight. force = true is belt-and-suspenders now that no
-# Bridgetown page exists at the path, but kept in case one is rebuilt later
-# without remembering to touch these rules. REMOVE these two rules (and
-# force = true stops mattering) if/when a real page is rebuilt here with a
-# working embed-type Kit form.
+# The Ownership Gap Diagnostic's old short path (WEB-21, 2026-11-12). It
+# used to forward to the Kit-hosted page; the diagnostic now has a real page
+# on this site, /free/ownership-gap-diagnostic/. 301: the move is permanent.
+# Netlify passes the incoming query string through, so old UTM-tagged links
+# still report their source.
 [[redirects]]
   from = "/service-ownership-diagnostic"
-  to = "https://softwarearchitectureinsights.kit.com/2e2d7fc0c1"
-  status = 302
+  to = "/free/ownership-gap-diagnostic/"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/service-ownership-diagnostic/"
-  to = "https://softwarearchitectureinsights.kit.com/2e2d7fc0c1"
-  status = 302
+  to = "/free/ownership-gap-diagnostic/"
+  status = 301
   force = true
 
 # The Sep 30, 2026 webinar ("Your AI Provider Will Fail. Design for It.").
