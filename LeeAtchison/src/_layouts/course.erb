@@ -54,6 +54,8 @@ layout: default
   </div>
 </section>
 
+<%= render "testimonials", slug: File.basename(resource.relative_url.to_s.chomp("/")) %>
+
 <section class="course-cta-section">
   <div class="course-cta-inner">
     <h2><%= data.title %></h2>

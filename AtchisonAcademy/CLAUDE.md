@@ -377,3 +377,7 @@ Traffic now flows the other way. `leeatchison.com/academy` no longer exists — 
 was deleted, and `/academy` and `/academy/*` 301 to `https://atchisonacademy.com/` from
 `LeeAtchison/netlify.toml`. Those rules live on that site because that is the site the
 requests arrive at; nothing here needs to know about them.
+
+## Quote form and testimonials (WEB-25)
+
+`/share-a-quote/` holds the `testimonial` Netlify form (honeypot, `required` consent checkbox, `action="/share-a-quote/thanks/"`), linked from the footer, same tab. It is the only quote page; leeatchison.com links here in a new tab. Netlify detects forms in the built HTML, so forms stay plain HTML, never injected by JavaScript. Netlify doesn't enforce `required`, so a quote without consent is never used. Approved quotes go in `src/_data/testimonials.yml` (field list in its header); `_partials/_testimonials.erb` shows up to three whose `slugs` include the page's slug on course pages (including sales and offer pages, via `sales/_page.erb`) and book pages. No match, no block. `index.js` fires `testimonial-submitted` in Fathom on the thank-you page, only after a real submit (a sessionStorage note set on submit).

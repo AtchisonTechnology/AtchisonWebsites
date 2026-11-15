@@ -56,6 +56,8 @@ layout: default
 </section>
 <% end %>
 
+<%= render "testimonials", slug: File.basename(resource.relative_url.to_s.chomp("/")) %>
+
 <section class="more-books-section">
   <div class="section-inner">
     <div class="section-header" style="text-align:left">

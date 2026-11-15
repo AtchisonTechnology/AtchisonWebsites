@@ -187,3 +187,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 })
+
+// Netlify form success events (WEB-25 §8). A form with
+// [data-fathom-success] notes its event name in sessionStorage on submit.
+// Netlify redirects to the form's thank-you page only once it has accepted
+// the submission, and that page carries [data-fathom-success-page]: if the
+// note is there, fire the Fathom event once and clear it. A direct visit to
+// the thank-you page fires nothing. Fathom's script is deferred, so wait for
+// window load before calling it.
+;(() => {
+  const KEY = "fathom-form-success"
+
+  document.addEventListener("submit", (e) => {
+    const name = e.target?.dataset?.fathomSuccess
+    if (!name) return
+    try { sessionStorage.setItem(KEY, name) } catch (_) { /* storage blocked */ }
+  })
+
+  const fire = () => {
+    const marker = document.querySelector("[data-fathom-success-page]")
+    if (!marker) return
+    const name = marker.dataset.fathomSuccessPage
+    let pending = null
+    try {
+      pending = sessionStorage.getItem(KEY)
+      sessionStorage.removeItem(KEY)
+    } catch (_) { /* storage blocked */ }
+    if (pending === name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+  }
+
+  if (document.readyState === "complete") fire()
+  else window.addEventListener("load", fire)
+})()

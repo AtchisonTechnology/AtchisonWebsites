@@ -1,0 +1,37 @@
+<%# Testimonial block (WEB-25 §7). Quotes come from src/_data/testimonials.yml.
+    Pass `slug:` (a course or book page slug) to show up to three quotes whose
+    `slugs` include it, or `featured: true` for up to three `featured` quotes.
+    No matching quote, no block: nothing renders at all.
+    `heading:` is optional and defaults to "What people say". %>
+<%
+  wanted_slug = defined?(slug) ? slug.to_s : ""
+  want_featured = defined?(featured) && featured
+  all_quotes = site.data.testimonials.is_a?(Array) ? site.data.testimonials : []
+  quotes = all_quotes.select do |t|
+    if want_featured
+      t["featured"] == true
+    else
+      wanted_slug != "" && Array(t["slugs"]).map(&:to_s).include?(wanted_slug)
+    end
+  end.first(3)
+%>
+<% if quotes.any? %>
+<section class="site-testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="section-title"><%= defined?(heading) && heading ? heading : "What people say" %></h2>
+    </div>
+    <div class="testimonials-grid">
+      <% quotes.each do |t| %>
+        <figure class="testimonial-card">
+          <blockquote class="testimonial-quote">&ldquo;<%= t["quote"].to_s.strip %>&rdquo;</blockquote>
+          <figcaption>
+            <span class="testimonial-author-name"><%= t["name"] %></span>
+            <span class="testimonial-author-title"><%= [t["title"], t["company"]].map(&:to_s).reject(&:empty?).join(", ") %></span>
+          </figcaption>
+        </figure>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>

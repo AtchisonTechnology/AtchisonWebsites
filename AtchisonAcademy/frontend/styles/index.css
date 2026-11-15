@@ -2075,6 +2075,93 @@ hr {
   margin-top: 0.5rem;
 }
 
+/* Quote and referral forms (WEB-25): single-column form page, selects,
+   radio and checkbox choices, and the contact page's one line under the form. */
+.contact-page-inner--single {
+  max-width: 40rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.form-group select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+}
+
+.form-group select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.form-choice-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.form-choice-group legend {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+
+.form-group .form-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 400;
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+.form-group .form-choice input {
+  padding: 0;
+  margin: 0.25rem 0 0;
+  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.contact-more {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Testimonial block from src/_data/testimonials.yml (WEB-25 §7) */
+.site-testimonials {
+  background: var(--bg-alt);
+  padding: 4.5rem 2rem;
+}
+
+.site-testimonials .testimonial-card {
+  margin: 0;
+}
+
+.site-testimonials blockquote.testimonial-quote {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
 /* ============================================
    Responsive
    ============================================ */

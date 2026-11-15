@@ -25,6 +25,9 @@
   <%= render "sales/#{name}", page: page %>
 <% end %>
 
+<%# Quotes from src/_data/testimonials.yml for this product's course page (WEB-25 §7). %>
+<%= render "testimonials", slug: File.basename(page.sales.sales_url.to_s.chomp("/")) %>
+
 <section class="sales-closing">
   <div class="sales-inner">
     <h2><%= page.sales.title %></h2>
