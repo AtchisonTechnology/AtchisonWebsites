@@ -1,0 +1,16 @@
+# Testimonials shown on this site (WEB-25 §7). Starts empty.
+#
+# Each entry:
+#   - quote: "The words, trimmed if needed, never changed in meaning."
+#     name: "Jane Doe"
+#     title: "Principal Engineer"
+#     company: "Example Corp"      # optional
+#     about: course                # course | book | talk | consulting | newsletter | other
+#     slugs: [cloud-architecture-for-scalable-systems]   # course/book page slugs it shows on
+#     featured: false              # true: eligible for the leeatchison.com home "What people say"
+#     date: 2026-11-15
+#     netlify_submission: 12       # Academy `testimonial` form submission number: the consent record
+#
+# Course and book pages show up to three entries whose `slugs` include the
+# page's slug, in file order. No match, no block.
+[]

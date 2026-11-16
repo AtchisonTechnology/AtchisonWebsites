@@ -1,0 +1,90 @@
+---
+layout: default
+page_class: homepage
+title: Can I quote you?
+description: "If something Lee Atchison wrote, taught or built helped you, share a quote."
+permalink: /share-a-quote/
+# WEB-25 §1, §2. The one quote page, on this site only; leeatchison.com links
+# here in a new tab (Lee, 2026-11-15). Linked from this site's footer.
+# Netlify detects the form in the built HTML, so it must stay plain HTML
+# here, never injected by JavaScript. Netlify does not enforce `required`,
+# so a quote that arrives without consent is never used.
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <h1>Can I quote you?</h1>
+    <p>If something I wrote, taught or built helped you, I&rsquo;d love to hear about it. With your OK, I may share your words on my sites.</p>
+  </div>
+</section>
+
+<section class="contact-page-body">
+  <div class="contact-page-inner contact-page-inner--single">
+    <div class="contact-form-wrap">
+      <form name="testimonial" method="POST" action="/share-a-quote/thanks/" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" data-fathom-success="testimonial-submitted">
+        <input type="hidden" name="form-name" value="testimonial" />
+        <p class="form-hidden">
+          <label>Don&rsquo;t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="form-group">
+          <label for="quote">Your quote <span class="form-required">*</span></label>
+          <textarea id="quote" name="quote" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="quote-name">Your name <span class="form-required">*</span></label>
+          <input type="text" id="quote-name" name="name" required autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="quote-title">Your title <span class="form-required">*</span></label>
+          <input type="text" id="quote-title" name="title" required autocomplete="organization-title" />
+        </div>
+
+        <div class="form-group">
+          <label for="quote-company">Company</label>
+          <input type="text" id="quote-company" name="company" autocomplete="organization" />
+        </div>
+
+        <div class="form-group">
+          <label for="quote-about">What&rsquo;s this about? <span class="form-required">*</span></label>
+          <select id="quote-about" name="about" required>
+            <option value="" disabled selected>Choose one</option>
+            <option>A course</option>
+            <option>A book</option>
+            <option>A talk or webinar</option>
+            <option>Consulting</option>
+            <option>The Software Architecture Insights newsletter</option>
+            <option>Something else</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quote-which">Which one?</label>
+          <input type="text" id="quote-which" name="which-one" placeholder="e.g. the course or book name" />
+        </div>
+
+        <div class="form-group">
+          <label for="quote-email">Your email <span class="form-required">*</span></label>
+          <input type="email" id="quote-email" name="email" required autocomplete="email" />
+          <span class="form-hint">Never published. Only so I can check with you.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="quote-linkedin">LinkedIn profile</label>
+          <input type="url" id="quote-linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/…" />
+        </div>
+
+        <div class="form-group form-choice-group">
+          <label class="form-choice form-consent">
+            <input type="checkbox" name="consent" value="yes" required />
+            <span>I give Lee Atchison and Atchison Technology permission to publish this quote, with the name, title and company I gave, on his websites and in his marketing. He may shorten it, but won&rsquo;t change what it says. <span class="form-required">*</span></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">Send my quote</button>
+      </form>
+    </div>
+  </div>
+</section>

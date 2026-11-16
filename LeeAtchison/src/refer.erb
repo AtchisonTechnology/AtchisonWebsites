@@ -1,0 +1,80 @@
+---
+layout: default
+page_class: homepage
+title: Know someone I could help?
+description: "Know someone who could use help with software architecture, cloud or AI platforms? Introduce them to Lee Atchison."
+permalink: /refer/
+# WEB-25 §1, §3. Linked only from the contact page's one line under the form,
+# never from a footer or the navigation (Lee, 2026-11-15). Nothing from this
+# form is ever published. Netlify detects the form in the built HTML, so it
+# must stay plain HTML here, never injected by JavaScript.
+---
+
+<section class="collection-hero">
+  <div class="collection-hero-inner">
+    <h1>Know someone I could help?</h1>
+    <p>If you know someone who could use help with software architecture, cloud or AI platforms, I&rsquo;d love an introduction. I&rsquo;ll take good care of them.</p>
+  </div>
+</section>
+
+<section class="contact-page-body">
+  <div class="contact-page-inner contact-page-inner--single">
+    <div class="contact-form-wrap">
+      <form name="referral" method="POST" action="/refer/thanks/" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" data-fathom-success="referral-submitted">
+        <input type="hidden" name="form-name" value="referral" />
+        <p class="form-hidden">
+          <label>Don&rsquo;t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="form-group">
+          <label for="referrer-name">Your name <span class="form-required">*</span></label>
+          <input type="text" id="referrer-name" name="your-name" required autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="referrer-email">Your email <span class="form-required">*</span></label>
+          <input type="email" id="referrer-email" name="your-email" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="their-name">Their name <span class="form-required">*</span></label>
+          <input type="text" id="their-name" name="their-name" required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="their-title-company">Their title and company</label>
+          <input type="text" id="their-title-company" name="their-title-and-company" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="their-contact">Their email or LinkedIn profile <span class="form-required">*</span></label>
+          <input type="text" id="their-contact" name="their-email-or-linkedin" required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="their-need">What might they need? <span class="form-required">*</span></label>
+          <select id="their-need" name="what-might-they-need" required>
+            <option value="" disabled selected>Choose one</option>
+            <option>Consulting</option>
+            <option>A talk or keynote</option>
+            <option>Training for a team</option>
+            <option>Something else</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="referral-notes">Anything I should know?</label>
+          <textarea id="referral-notes" name="anything-i-should-know"></textarea>
+        </div>
+
+        <fieldset class="form-group form-choice-group">
+          <legend>Do they know you&rsquo;re passing on their name? <span class="form-required">*</span></legend>
+          <label class="form-choice"><input type="radio" name="do-they-know" value="Yes" required /> Yes</label>
+          <label class="form-choice"><input type="radio" name="do-they-know" value="Not yet" /> Not yet</label>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary form-submit">Send the introduction</button>
+      </form>
+    </div>
+  </div>
+</section>
