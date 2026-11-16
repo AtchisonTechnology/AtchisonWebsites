@@ -3335,6 +3335,38 @@ body.webinar .webinar-actions {
   gap: 1rem;
 }
 
+/* The replay gate (WEB-19): the email form in the webinar hero, in place of
+   the Watch the replay button. Kit draws the field and button. */
+body.webinar .webinar-replay-form { max-width: 520px; }
+body.webinar .webinar-replay-lead {
+  color: var(--white);
+  margin: 0 0 0.75rem;
+}
+body.webinar .webinar-replay-form .sales-kit-form { margin-top: 0; }
+body.webinar .webinar-form-note {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.75);
+  margin: 0.75rem 0 0;
+}
+
+/* The unlisted replay page's video: 16:9, full column width. */
+body.webinar .webinar-replay-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 2.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+body.webinar .webinar-replay-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* The title slide is near-white, so it needs a border to separate it from
    the page background. */
 body.webinar .webinar-title-slide {
@@ -3408,6 +3440,32 @@ body.webinar .webinar-clip-meta {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+
+/* The replay email gate (WEB-23), used only when the page sets kit_form_uid.
+   The gated pieces carry the hidden attribute until Kit reports a good
+   submit; this rule keeps .webinar-actions' display: flex from overriding it. */
+body.webinar [data-webinar-unlock][hidden],
+body.webinar [data-webinar-gate][hidden] { display: none; }
+
+body.webinar .webinar-gate { max-width: 560px; }
+
+body.webinar .webinar-gate-line {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--white);
+  margin: 0 0 1rem;
+}
+
+body.webinar .webinar-gate-note {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.75);
+  margin: 0.75rem 0 0;
+}
+
+/* Revealed Resources: its heading is the wrapper's first child, so restore
+   the gap .course-body-inner h2:first-child removes. */
+body.webinar .course-body-inner [data-webinar-unlock] > h2:first-child { margin-top: 2.5rem; }
 
 /* ============================================
    Selling pages (Spec0031): sales pages, offer pages, and supporting pages

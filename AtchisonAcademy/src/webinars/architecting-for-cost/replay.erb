@@ -1,0 +1,71 @@
+---
+layout: default
+page_class: "course webinar selling"
+title: "When the Cloud Savings Stop"
+social_title: "When the Cloud Savings Stop | Webinar replay"
+description: "The replay of When the Cloud Savings Stop, a free 30-minute webinar from Lee Atchison."
+image: /images/webinars/architecting-for-cost-og.png
+permalink: /webinars/architecting-for-cost/replay/
+# The unlisted replay page (WEB-19). Reached only from the replay email that
+# Kit sends after someone signs up on the webinar page, so: noindex, out of
+# the sitemap, and linked from no page or nav. It is a soft gate: anyone with
+# the URL can watch, which is fine (Lee, 2026-11-12).
+#
+# This page has no settings of its own. The replay URL and the offer come
+# from the webinar page's front matter (webinars/architecting-for-cost.erb),
+# so each run is still set in one place.
+noindex: true
+sitemap_exclude: true
+---
+
+<%
+  webinar = site.collections.pages.resources.find { |r| r.relative_url == "/webinars/architecting-for-cost/" }
+  raise "#{resource.relative_path}: can't find the webinar page /webinars/architecting-for-cost/" unless webinar
+  settings = webinar.data
+  sales = site.data.sales[settings.product]
+  offer = current_offer(settings.product, settings.offer_slug)
+  offer_page = offer && selling_page(offer)
+
+  # The replay URL as an embeddable player: Vimeo (captions on, as for the
+  # trailer) or YouTube. Anything else gets a plain button instead.
+  replay_url = settings.replay_url.to_s.strip
+  embed_url =
+    case replay_url
+    when %r{\Ahttps?://(?:www\.|player\.)?vimeo\.com/(?:video/)?(\d+)(?:/([0-9a-f]+))?}
+      hash = Regexp.last_match(2) || replay_url[/[?&]h=([0-9a-f]+)/, 1]
+      "https://player.vimeo.com/video/#{Regexp.last_match(1)}?#{"h=#{hash}&" if hash}texttrack=en"
+    when %r{\Ahttps?://(?:www\.)?youtube\.com/(?:watch\?(?:.*&)?v=|live/|embed/|shorts/)([\w-]{11})},
+         %r{\Ahttps?://youtu\.be/([\w-]{11})}
+      "https://www.youtube-nocookie.com/embed/#{Regexp.last_match(1)}"
+    end
+%>
+
+<section class="course-header">
+  <div class="course-header-inner">
+    <div class="course-badge-row">
+      <span class="course-platform-badge">Webinar replay</span>
+    </div>
+    <h1><%= data.title %></h1>
+  </div>
+</section>
+
+<section class="course-body">
+  <div class="course-body-inner">
+    <% if embed_url %>
+      <div class="webinar-replay-video">
+        <iframe src="<%= embed_url %>" title="When the Cloud Savings Stop: webinar replay"
+                allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    <% elsif replay_url != "" %>
+      <div class="webinar-actions">
+        <a href="<%= replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the replay</a>
+      </div>
+    <% else %>
+      <p class="selling-placeholder">The replay isn't posted yet: set <code>replay_url</code> in webinars/architecting-for-cost.erb.</p>
+    <% end %>
+
+    <%= render "webinars/offer", sales: sales, offer: offer, offer_page: offer_page %>
+
+    <%= render "webinars/worksheet" %>
+  </div>
+</section>

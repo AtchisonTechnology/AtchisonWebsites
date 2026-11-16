@@ -21,7 +21,16 @@ image: /images/webinars/architecting-for-cost-og.png
 #   starts_at:          the run's date and time, shown exactly as written
 #   linkedin_event_url: the run's LinkedIn Event; blank shows "registration
 #                       opens soon" instead of the button
-#   replay_url:         the replay, for state: replay
+#   replay_url:         the replay video (Vimeo or YouTube), embedded on the
+#                       unlisted replay page, webinars/architecting-for-cost/replay/
+#                       (WEB-19). This page never links to it directly.
+#   replay_kit_form_uid: the Kit form "Webinar replay: When the Cloud Savings
+#                       Stop" (the data-uid in Kit's embed code), shown in
+#                       state: replay. Kit sends the replay link. While it is
+#                       KIT_FORM_ID_PENDING (or blank) the page shows a marked
+#                       placeholder, and a production build in state: replay
+#                       fails, so the form can't go live without its id.
+#                       Kit form 10183280, inline, email only (C.J., 2026-11-13).
 #   offer_slug:         the run's offer page (e.g. launch). While that offer
 #                       is live and active, the offer block shows its price,
 #                       end date and Buy button; otherwise it shows the
@@ -30,6 +39,7 @@ state: upcoming
 starts_at: "Thursday, November 19, 10am Pacific"
 linkedin_event_url: "https://www.linkedin.com/events/7512578068063125504/"
 replay_url: ""
+replay_kit_form_uid: "5c073a4bf9"
 product: architecting-for-cost
 offer_slug: launch
 ---
@@ -41,7 +51,13 @@ offer_slug: launch
   sales = site.data.sales[data.product]
   offer = current_offer(data.product, data.offer_slug)
   offer_page = offer && selling_page(offer)
-  worksheet_url = relative_url "/free/cost-attribution-worksheet/"
+  form_uid = data.replay_kit_form_uid.to_s.strip
+  form_ready = form_uid != "" && form_uid != "KIT_FORM_ID_PENDING"
+  if data.state == "replay" && !form_ready &&
+     Bridgetown.env.production? && ENV["CONTEXT"] != "deploy-preview"
+    raise "#{resource.relative_path}: replay_kit_form_uid is still a placeholder — " \
+          "put the real Kit form uid in before state: replay goes live"
+  end
 %>
 
 <section class="course-header">
@@ -69,11 +85,22 @@ offer_slug: launch
         </div>
       <% else %>
         <p class="webinar-date-line">Recorded webinar &middot; free to watch</p>
-        <% if data.replay_url.to_s != "" %>
-          <div class="webinar-actions">
-            <a href="<%= data.replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the replay</a>
-          </div>
-        <% end %>
+        <%# The replay gate (WEB-19): an email form in place of a direct link.
+            Kit draws the field and the "Send me the replay" button, and shows
+            the success message in place; both are set on the form in Kit.
+            index.js fires the Fathom event once that message appears. The
+            note under the form must show before submit (Lee, 2026-11-12). %>
+        <div class="webinar-replay-form">
+          <p class="webinar-replay-lead"><strong>Get the replay by email.</strong> Enter your email and I'll send you the link.</p>
+          <% if form_ready %>
+            <div class="sales-kit-form" data-kit-form data-fathom-event="webinar-replay-signup">
+              <script async data-uid="<%= form_uid %>" src="https://softwarearchitectureinsights.kit.com/<%= form_uid %>/index.js"></script>
+            </div>
+          <% else %>
+            <p class="selling-placeholder">Replay signup form not configured yet: set <code>replay_kit_form_uid</code> in this page's front matter.</p>
+          <% end %>
+          <p class="webinar-form-note">I'll send the link, plus a note about the course. You'll also join my weekly newsletter, Software Architecture Insights. Unsubscribe anytime.</p>
+        </div>
       <% end %>
     </div>
     <%# The illustration from the event cover, without its text (cut from
@@ -113,34 +140,9 @@ offer_slug: launch
     </div>
 
     <%# The offer block: changes with the run's offer (offer_slug). %>
-    <div class="webinar-offer">
-      <h2>Go deeper: Architecting for Cost</h2>
-      <p>The webinar comes from my course, Architecting for Cost. It works through the decisions that drive the bill, one at a time: multi-tenancy, data movement, recovery targets and AI inference. And it ends with how to make the cost case to the people who fund the fix.</p>
-      <p>8 modules, 33 short video lessons, and 8 worksheets and templates you use on your own systems.</p>
-      <div class="sales-buy">
-        <% if offer_page %>
-          <script src="https://<%= URI.parse(offer.data.buy_url).host %>/commerce.js" async defer></script>
-          <p class="sales-price">
-            <span class="sales-price-amount"><%= offer_page.money(offer_page.price) %></span>
-            <span class="sales-price-regular">(regularly <%= offer_page.money(offer_page.standard_price) %>)</span>
-          </p>
-          <% if offer_page.end_line %>
-            <p class="sales-end"><%= offer_page.end_line %></p>
-          <% end %>
-          <a href="<%= offer_page.buy_url("price") %>" class="btn btn-buy" data-buy data-commerce
-             data-fathom-event="<%= sales.fathom_event %>-webinar"><%= offer_page.buy_label %></a>
-        <% else %>
-          <p class="sales-price"><span class="sales-price-amount">$<%= sales.price %></span></p>
-          <a href="<%= relative_url sales.sales_url %>" class="btn btn-deep">See the course</a>
-        <% end %>
-        <p class="sales-refund">30-day refund, no questions asked.</p>
-      </div>
-    </div>
+    <%= render "webinars/offer", sales: sales, offer: offer, offer_page: offer_page %>
 
-    <h2>Start with your own bill</h2>
-    <p>Not ready for the course? Start with the exercise from the webinar.</p>
-    <p>The free Cost Attribution Worksheet walks you through your top five cloud costs, and the decision behind each one. Two out of five is a normal answer.</p>
-    <p><a href="<%= worksheet_url %>" class="btn btn-deep-outline">Get the free worksheet</a></p>
+    <%= render "webinars/worksheet" %>
 
     <%# The same every run. Both links open a new tab (Lee, 2026-10-03). %>
     <h2>Have a question?</h2>

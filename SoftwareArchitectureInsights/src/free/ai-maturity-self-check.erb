@@ -1,0 +1,49 @@
+---
+layout: default
+page_class: free-page
+title: "Free: The AI Maturity Self-Check"
+description: "Where is your AI system, really? A free one-page self-check from Lee Atchison. Five levels, a few yes-or-no questions each, about ten minutes."
+# WEB-15. The AI Maturity Self-Check's signup page, moved off Kit
+# (softwarearchitectureinsights.kit.com/ai-maturity-self-check, which stays
+# live for now). Copy is the Kit page's, as is (checked 2026-11-12). Not in
+# the nav. Indexed: it's an evergreen freebie.
+#
+# The Kit form behind it, "AI Maturity Self-Check" (ID 10031413), is a
+# hosted landing-page form, so it's posted to directly; see
+# _partials/_free_signup_form.erb. A good submit fires the Fathom event
+# self-check-signup and goes to the thank-you page, which hands over the PDF.
+kit_form_id: 10031413
+teaser_image: /images/free/ai-maturity-self-check-teaser.png
+---
+<%
+  # The teaser image comes from Dropbox (SAI Marketing/Free Resources/AI
+  # Maturity Self-Check/AI-Maturity-Self-Check-teaser.png). Shown only once
+  # the file is in src/images/free/, so the page never has a broken image.
+  teaser = File.exist?(File.join(site.source, data.teaser_image)) ? data.teaser_image : nil
+%>
+<div class="free-hero">
+  <img class="free-mark" src="<%= relative_url '/images/brand/sai-nav-mark.png' %>" alt="Software Architecture Insights conductor mark" />
+  <p class="free-eyebrow">Software Architecture Insights</p>
+  <h1>Where is your AI system, really?</h1>
+  <p>Most organizations grade their AI two levels higher than their architecture supports. The demo works at Level 2 and at Level 4, so the slide can't tell the difference.</p>
+  <p>This free one-page self-check can. Five levels, a few yes-or-no questions each, about ten minutes.</p>
+
+  <%= render "free_signup_form",
+        form_id: data.kit_form_id,
+        button: "Send me the self-check",
+        disclaimer: "You'll also get Software Architecture Insights every Tuesday morning. Unsubscribe anytime.",
+        fathom_event: "self-check-signup",
+        success_url: relative_url("/free/ai-maturity-self-check/thanks/") %>
+</div>
+
+<h3>What you get</h3>
+<ul>
+  <li>The five-level AI maturity self-check, as a one-page PDF.</li>
+  <li>Software Architecture Insights every Tuesday morning. Practical architecture thinking from someone still doing the work.</li>
+</ul>
+
+<% if teaser %>
+  <img class="free-image" src="<%= relative_url teaser %>" alt="A preview of the AI Maturity Self-Check, a one-page PDF" />
+<% end %>
+
+<p class="free-byline">From Lee Atchison, author of The Software Conductor and the O'Reilly book Architecting for Scale. Join 1,000+ architects and engineering leaders.</p>

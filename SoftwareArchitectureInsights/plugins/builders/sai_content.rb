@@ -19,7 +19,13 @@
 #   5. Validates article `questions:` keys against src/_questions, stamps
 #      sitemap values on each question page, and drops a question with no
 #      live article from a production build (WEB-11), same rule as series.
-#   6. Rewrites the sai-email/email UTM tags a pasted body and the rendered
+#   6. Validates each question's optional `lead_magnet:` and works out the
+#      one call to action each question page and each tagged article shows
+#      (WEB-18): the link tagged sai-web/referral/<campaign>/cta when the
+#      magnet is on another property, untagged and relative when it is on
+#      this site. An article shows the first of its questions that has a
+#      magnet — one ask per page.
+#   7. Rewrites the sai-email/email UTM tags a pasted body and the rendered
 #      bio both carry into sai-web/referral, and makes a self-link to this
 #      site relative and untagged — one pass, applied to every page's
 #      rendered HTML, so body content and the bio partial share one rule
@@ -68,7 +74,11 @@ class Builders::SaiContent < SiteBuilder
       questions = site.collections["questions"].resources
       question_keys = questions.map(&:basename_without_ext)
 
-      questions.each { |question| validate_question!(question) }
+      questions.each do |question|
+        validate_question!(question)
+        question.data[:lead_magnet_cta] = lead_magnet_cta(question)
+      end
+      magnets_by_key = questions.to_h { |q| [q.basename_without_ext, q.data[:lead_magnet_cta]] }
 
       resources.each do |resource|
         validate_slug!(resource)
@@ -81,6 +91,7 @@ class Builders::SaiContent < SiteBuilder
         strip_title_block!(resource)
         strip_bio!(resource, bio_template)
         resource.data[:bio_html] = render_bio(bio_template, resource.data.slug)
+        resource.data[:lead_magnet_cta] = Array(resource.data.questions).filter_map { |key| magnets_by_key[key] }.first
       end
 
       resources.reject! { |resource| future_dated?(resource) }
@@ -250,6 +261,78 @@ class Builders::SaiContent < SiteBuilder
       raise "#{question.relative_path}: missing required #{field}: — the page, the " \
             "meta description and the /questions/ index all read it"
     end
+  end
+
+  # ---------------------------------------------------------------------
+  # Lead magnet call to action (WEB-18). Optional on a question file:
+  #
+  #   lead_magnet:
+  #     name: "AI Maturity Self-Check"            # required
+  #     pitch: "One or two sentences."            # optional
+  #     button: "Get the free self-check"         # optional
+  #     url: "https://..."                        # required, untagged
+  #     campaign: "ai-maturity"                   # required off-site
+  #
+  # Returns nil when there is no magnet, so the layouts render nothing.
+  # ---------------------------------------------------------------------
+
+  LEAD_MAGNET_DEFAULT_BUTTON = "Get it free".freeze
+  CAMPAIGN_RE = /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/.freeze
+
+  def lead_magnet_cta(question)
+    magnet = question.model.data_attributes["lead_magnet"]
+    return nil if magnet.nil?
+
+    where = "#{question.relative_path}: lead_magnet:"
+    raise "#{where} must be a map of name, pitch, button, url and campaign" unless magnet.is_a?(Hash)
+
+    %w[name url].each do |field|
+      next unless magnet[field].to_s.strip.empty?
+
+      raise "#{where} missing required #{field}: — the call to action can't render without it"
+    end
+
+    url = magnet["url"].to_s.strip
+    uri = begin
+      URI.parse(url)
+    rescue URI::InvalidURIError
+      raise "#{where} url: #{url.inspect} is not a valid URL"
+    end
+    raise "#{where} url: #{url.inspect} must be a full https:// URL" unless uri.host
+
+    if uri.query.to_s.include?("utm_")
+      raise "#{where} url: #{url.inspect} already carries UTM tags — give it untagged; the site adds them"
+    end
+
+    {
+      "name" => magnet["name"].to_s.strip,
+      "pitch" => magnet["pitch"].to_s.strip,
+      "button" => magnet["button"].to_s.strip.then { |b| b.empty? ? LEAD_MAGNET_DEFAULT_BUTTON : b },
+      "href" => lead_magnet_href(uri, magnet["campaign"], where),
+    }
+  end
+
+  # UTM Standard: a link to another property is tagged sai-web/referral,
+  # the magnet's campaign, utm_content=cta, in that order. A link to this
+  # site is internal navigation: relative, never tagged.
+  def lead_magnet_href(uri, campaign, where)
+    if uri.host.sub(/\Awww\./, "") == SELF_HOST
+      path = uri.path.to_s.empty? ? "/" : uri.path
+      return path + (uri.fragment ? "##{uri.fragment}" : "")
+    end
+
+    campaign = campaign.to_s.strip
+    unless CAMPAIGN_RE.match?(campaign)
+      raise "#{where} campaign: #{campaign.inspect} is missing or not lowercase kebab-case " \
+            "— an off-site magnet needs it for utm_campaign"
+    end
+
+    tags = URI.encode_www_form(
+      utm_source: "sai-web", utm_medium: "referral", utm_campaign: campaign, utm_content: "cta"
+    )
+    tagged = uri.dup
+    tagged.query = [uri.query, tags].compact.reject(&:empty?).join("&")
+    tagged.to_s
   end
 
   def validate_sitemap_priority!(resource)

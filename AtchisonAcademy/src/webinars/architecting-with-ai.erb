@@ -3,6 +3,17 @@ layout: default
 page_class: "course webinar"
 title: "Your AI Provider Will Fail. Design for It."
 description: Watch the replay and download the slides from Lee Atchison's webinar on architecting systems that depend on AI components.
+# The email gate (WEB-23). kit_form_uid is the uid in the Kit form's embed
+# code (data-uid) for "Webinar replay: Your AI Provider Will Fail". Blank:
+# no gate, and the page shows the open replay and slides links exactly as it
+# did before WEB-23. Set: the replay and slides buttons, the title slide's
+# link and the Resources section wait behind the form, and appear in place
+# once Kit reports a good submit (frontend/javascript/index.js). It's a soft
+# gate: the links are still in the page source, which is fine for a free
+# replay. The form's button text ("Show me the replay") and its success
+# message are set on the form in Kit, not here. Kit form 10183149, inline,
+# email only, no confirmation email (C.J., 2026-11-12).
+kit_form_uid: "e193e4a2b8"
 ---
 
 <%# Replay and slides page for the Sept 30, 2026 webinar. The live deck is
@@ -18,6 +29,7 @@ description: Watch the replay and download the slides from Lee Atchison's webina
 
 <% slides_url = relative_url '/downloads/your-ai-provider-will-fail-slides.pdf' %>
 <% replay_url = "https://www.linkedin.com/events/7498845868494766080/" %>
+<% gated = data.kit_form_uid.to_s.strip != "" %>
 
 <section class="course-header">
   <div class="course-header-inner">
@@ -27,7 +39,19 @@ description: Watch the replay and download the slides from Lee Atchison's webina
     </div>
     <h1><%= data.title %></h1>
     <p class="webinar-lead">Six questions to ask about any AI dependency before it ships.</p>
-    <div class="webinar-actions">
+    <% if gated %>
+      <%# The gate. Kit draws its form into [data-kit-form]; index.js fires the
+          Fathom event on a good submit, then hides this block and reveals
+          every [data-webinar-unlock] on the page. %>
+      <div class="webinar-gate" data-webinar-gate>
+        <p class="webinar-gate-line"><strong>Get the replay and the slides.</strong> Enter your email and they're yours.</p>
+        <div class="webinar-gate-form" data-kit-form data-fathom-event="ai-webinar-replay-signup">
+          <script async data-uid="<%= data.kit_form_uid.to_s.strip %>" src="https://softwarearchitectureinsights.kit.com/<%= data.kit_form_uid.to_s.strip %>/index.js"></script>
+        </div>
+        <p class="webinar-gate-note">You'll also join my weekly newsletter, Software Architecture Insights. Unsubscribe anytime.</p>
+      </div>
+    <% end %>
+    <div class="webinar-actions"<% if gated %> data-webinar-unlock hidden<% end %>>
       <%# The replay is on LinkedIn, a third-party destination, so it opens in a new tab. %>
       <a href="<%= replay_url %>" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Watch the Replay &rarr;</a>
       <a href="<%= slides_url %>" class="btn btn-outline" download>Download the Slides</a>
@@ -42,12 +66,18 @@ description: Watch the replay and download the slides from Lee Atchison's webina
     <p>We covered six questions to ask about any AI dependency before it ships, and went deep on the two your existing toolkit gives you nothing for: how would you know an answer was wrong, and what can the model actually reach.</p>
 
     <%# Title slide, rendered from page 1 of the deck (source render in
-        assets_inbox/). Clicking it downloads the deck. %>
+        assets_inbox/). Ungated, clicking it downloads the deck; behind the
+        gate it's a plain image, so the deck is only a link away after signup. %>
     <figure class="webinar-title-slide">
+      <% if gated %>
+        <img src="<%= relative_url '/images/webinar-architecting-with-ai-title.jpg' %>" width="1280" height="721"
+             alt="Title slide: Your AI Provider Will Fail. Design for It.">
+      <% else %>
       <a href="<%= slides_url %>" download>
         <img src="<%= relative_url '/images/webinar-architecting-with-ai-title.jpg' %>" width="1280" height="721"
              alt="Title slide: Your AI Provider Will Fail. Design for It.">
       </a>
+      <% end %>
     </figure>
 
     <h2>Short clips</h2>
@@ -73,6 +103,8 @@ description: Watch the replay and download the slides from Lee Atchison's webina
       <% end %>
     </ul>
 
+    <%# Behind the gate, Resources shows only after a good submit. %>
+    <% if gated %><div data-webinar-unlock hidden><% end %>
     <h2>Resources</h2>
 
     <ul>
@@ -85,6 +117,7 @@ description: Watch the replay and download the slides from Lee Atchison's webina
         (PDF, 31 pages, 1.9 MB) &mdash; the full deck from the talk.
       </li>
     </ul>
+    <% if gated %></div><% end %>
 
     <%# One sentence of course interest, no link and no ask: the webinar's C20 rule,
         which keeps inbound course interest unprompted until the gate reads. %>

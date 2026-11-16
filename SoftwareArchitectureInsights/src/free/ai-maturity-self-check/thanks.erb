@@ -1,0 +1,33 @@
+---
+layout: default
+page_class: free-page
+title: "Your AI Maturity Self-Check"
+description: "Download the AI Maturity Self-Check."
+# WEB-15. Where the self-check's signup form lands after a good submit. It
+# hands over the PDF right away: no "check your email" step. Reached only
+# from the form, so unlisted.
+noindex: true
+sitemap_exclude: true
+pdf: /free/ai-maturity-self-check/AI-Maturity-Self-Check.pdf
+---
+<%
+  # The PDF comes from Dropbox (SAI Marketing/Free Resources/AI Maturity
+  # Self-Check/AI-Maturity-Self-Check.pdf) and lives next to this file.
+  # Until it's in the repo, the page points to the delivery email instead of
+  # showing a dead download button.
+  pdf = File.exist?(File.join(site.source, data.pdf)) ? data.pdf : nil
+%>
+<div class="free-hero">
+  <img class="free-mark" src="<%= relative_url '/images/brand/sai-nav-mark.png' %>" alt="Software Architecture Insights conductor mark" />
+  <p class="free-eyebrow">Software Architecture Insights</p>
+  <h1>Here's your self-check.</h1>
+  <% if pdf %>
+    <p>Five levels, a few yes-or-no questions each, about ten minutes.</p>
+    <a class="free-download" href="<%= relative_url pdf %>" download>Download the AI Maturity Self-Check (PDF)</a>
+    <p class="free-byline">Software Architecture Insights arrives every Tuesday morning.</p>
+  <% else %>
+    <p>It's on its way to your inbox now.</p>
+    <p class="free-byline">Software Architecture Insights arrives every Tuesday morning.</p>
+  <% end %>
+  <p><a href="<%= relative_url '/' %>">Read Software Architecture Insights &rarr;</a></p>
+</div>

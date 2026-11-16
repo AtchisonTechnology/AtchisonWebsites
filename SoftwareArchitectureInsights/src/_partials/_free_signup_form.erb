@@ -1,0 +1,42 @@
+<%
+  # Signup form for a free resource page under /free/ (WEB-15, WEB-21).
+  #
+  # The Kit forms behind these freebies are Kit-hosted landing pages
+  # (type "hosted", embed_js null), so Kit has no embed script for them and
+  # _kit_form.erb can't draw them. Instead this posts straight to the same
+  # Kit form's subscribe endpoint, the one Kit's own landing page posts to.
+  # Same form ID, so a signup gets the same tag and the same delivery email
+  # as one on the Kit page.
+  #
+  # frontend/javascript/index.js submits it in the background, fires the
+  # Fathom event on success, then either goes to `success_url` or shows
+  # `success_message` in place. Without JavaScript it is a plain form post,
+  # and Kit shows its own confirmation.
+  #
+  # Locals:
+  #   form_id          Kit form ID (number)
+  #   button           button label
+  #   disclaimer       line under the form
+  #   fathom_event     Fathom event name for a successful submit
+  #   success_url      optional: where to go after a successful submit
+  #   success_message  optional: shown in place when there is no success_url
+  #   position         optional: 1, 2, ... when a page has more than one form
+  go_to = defined?(success_url) ? success_url : nil
+  done_text = defined?(success_message) ? success_message : nil
+  # A page can carry the same form twice (top and bottom); `position` keeps
+  # each field's id unique.
+  field_id = "free-signup-email-#{form_id}-#{defined?(position) ? position : 1}"
+%>
+<form class="free-signup" action="https://app.kit.com/forms/<%= form_id %>/subscriptions" method="post"
+      data-free-signup data-fathom-event="<%= fathom_event %>"
+      <% if go_to %>data-success-url="<%= go_to %>"<% end %>
+      <% if done_text %>data-success-message="<%= done_text %>"<% end %>>
+  <div class="free-signup-row">
+    <label class="sr-only" for="<%= field_id %>">Email address</label>
+    <input id="<%= field_id %>" class="free-signup-email" type="email" name="email_address"
+           placeholder="Your email address" autocomplete="email" required />
+    <button class="free-signup-button" type="submit"><%= button %></button>
+  </div>
+  <p class="free-signup-status" role="status" aria-live="polite"></p>
+  <p class="free-signup-disclaimer"><%= disclaimer %></p>
+</form>

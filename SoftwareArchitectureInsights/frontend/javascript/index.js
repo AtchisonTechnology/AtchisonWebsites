@@ -47,3 +47,66 @@ document.addEventListener("DOMContentLoaded", () => {
   wide.addEventListener("change", syncToViewport)
   window.addEventListener("resize", syncToViewport)
 })
+
+// Free-resource signup forms (WEB-15, WEB-21): src/_partials/_free_signup_form.erb.
+// Each posts to a Kit-hosted form's own subscribe endpoint. Submit it in the
+// background so the reader stays on this site, fire the form's Fathom event
+// once Kit says it worked, then go to the thank-you page or show the
+// success message in place. If the background submit can't reach Kit at
+// all, fall back to the plain form post so the signup still goes through.
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-free-signup]").forEach((form) => {
+    const status = form.querySelector(".free-signup-status")
+    const button = form.querySelector("button[type=submit]")
+    let sending = false
+
+    const say = (text, kind) => {
+      if (!status) return
+      status.textContent = text
+      status.dataset.kind = kind || ""
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault()
+      if (sending) return
+      sending = true
+      if (button) button.disabled = true
+      say("Sending…")
+
+      let result
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        })
+        result = await response.json().catch(() => ({}))
+        if (!response.ok && !result.status) result.status = "failed"
+      } catch (_networkError) {
+        // Couldn't reach Kit from here: let the browser post it instead.
+        form.submit()
+        return
+      }
+
+      if (result.status === "success") {
+        const name = form.dataset.fathomEvent
+        if (name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+
+        const next = form.dataset.successUrl
+        if (next) {
+          // Give Fathom a moment to send the event before leaving the page.
+          setTimeout(() => { window.location.href = next }, 300)
+          return
+        }
+        form.classList.add("is-done")
+        say(form.dataset.successMessage || "Thanks. Check your inbox.", "success")
+        return
+      }
+
+      sending = false
+      if (button) button.disabled = false
+      const errors = Array.isArray(result.errors) ? result.errors.join(" ") : ""
+      say(errors || "That didn't go through. Check the email address and try again.", "error")
+    })
+  })
+})

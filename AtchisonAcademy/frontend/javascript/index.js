@@ -150,9 +150,25 @@ document.addEventListener("DOMContentLoaded", () => {
       fired = true
       observer.disconnect()
       if (name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+      box.dispatchEvent(new CustomEvent("kit-form-success", { bubbles: true }))
     })
     observer.observe(box, { childList: true, subtree: true, characterData: true, attributes: true })
   })
+})
+
+// Webinar replay email gate (WEB-23). Only on a page that set kit_form_uid:
+// a good submit on the form inside [data-webinar-gate] hides the gate and
+// reveals every [data-webinar-unlock] (the replay and slides buttons, and
+// Resources) in place. Focus moves to the first revealed link so keyboard
+// and screen reader users land on what they just unlocked.
+document.addEventListener("kit-form-success", (event) => {
+  const gate = event.target.closest("[data-webinar-gate]")
+  if (!gate) return
+
+  const unlocked = document.querySelectorAll("[data-webinar-unlock]")
+  unlocked.forEach((el) => { el.hidden = false })
+  gate.hidden = true
+  unlocked[0]?.querySelector("a")?.focus()
 })
 
 // Trailer (§A9). Captions on via texttrack in every case.
