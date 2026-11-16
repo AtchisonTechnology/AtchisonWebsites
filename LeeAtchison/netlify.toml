@@ -473,3 +473,9 @@
 #   "from" in this file, the SAI podcast house-ad paths (/scale, /conductor,
 #   /academy, /join, /cost, /worksheet), and every utm_source in the UTM
 #   Standard. A path used for one show is never reused for another.
+
+# Adventures in DevOps, recording Tue Dec 15, 2026 (WEB-26). Ask: the SAI newsletter.
+[[redirects]]
+  from = "/adventures"
+  to = "https://softwarearchitectureinsights.com/subscribe/?utm_source=adventures&utm_medium=podcast-guest&utm_campaign=visibility&utm_content=subscribe"
+  status = 302
