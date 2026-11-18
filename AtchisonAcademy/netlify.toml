@@ -80,3 +80,16 @@
   for = "/*.(png|jpg|js|css|svg|woff|ttf|eot|ico|woff2)"
   [headers.values]
     Cache-Control = "public, max-age=31536000, s-max-age=31536000"
+
+# WEB-25: the share-a-quote form page and its thank-you page must never be
+# reused from a browser's cache. The "*" rule above lets browsers keep any
+# page for 7 days, so a browser that had loaded /share-a-quote/ before the
+# hidden `subject` field was added kept posting the old form, without it,
+# and the notification email arrived with an empty subject. `no-cache` makes
+# the browser check with Netlify before reusing its copy (a cheap 304 when
+# nothing changed). It is safe whether Netlify replaces the "*" value or
+# joins the two, because `no-cache` overrides any max-age.
+[[headers]]
+  for = "/share-a-quote/*"
+  [headers.values]
+    Cache-Control = "no-cache"
