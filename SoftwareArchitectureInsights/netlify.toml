@@ -51,6 +51,12 @@
 [build.processing.html]
   pretty_urls = true
 
+# Browser caching (WEB-29). Netlify applies every rule whose path matches,
+# and where two set the same header the later rule wins, so the "*" rule
+# sets the page default first and the asset rules after it override it.
+# Pages must never get a long browser cache: a browser that keeps a page
+# doesn't ask again, so a change can take days to reach a returning reader.
+# This site's one-hour page rule is short enough and stays.
 [[headers]]
   for = "*"
   [headers.values]
@@ -65,10 +71,56 @@
     # what a returning reader actually sees, and this site publishes weekly.
     Cache-Control = "public, max-age=3600, s-max-age=604800"
 
+# esbuild's CSS and JS output (and anything it bundles, such as fonts). Each
+# file name carries a content hash (index.S3N7ETO4.css), so a changed file is
+# a new URL and the old copy can be cached for a year without going stale.
 [[headers]]
-  for = "/*.(png|jpg|js|css|svg|woff|woff2|ttf|eot|ico)"
+  for = "/_bridgetown/static/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, s-max-age=31536000"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Files whose name stays the same when we replace them: images, downloads
+# and the favicon and app icons. One hour, so a replaced file reaches
+# everyone the same day.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/apple-touch-icon.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-16x16.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-32x32.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-48x48.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-192x192.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/icon-512.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
 
 # Every redirect below replaces a Kit-hosted URL on this domain (Spec0024
 # Part 6 inventory, verified live 2026-09-03). 301, permanent, and force so a

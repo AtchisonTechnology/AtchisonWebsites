@@ -39,6 +39,17 @@
 [build.processing.html]
   pretty_urls = true
 
+# Browser caching (WEB-29, same as atchisonacademy.com in WEB-28). Netlify
+# applies every rule whose path matches, and where two set the same header
+# the later rule wins, so the "*" rule sets the page default first and the
+# asset rules after it override it.
+#
+# Pages must never get a long browser cache. A browser that keeps a page
+# reuses it without asking Netlify, so a changed page or form can take days
+# to reach a returning visitor; that is how a saved copy of atchisonacademy.com's
+# quote form kept posting an old version (WEB-25). `max-age=0, must-revalidate`
+# is Netlify's own default for HTML: the browser keeps its copy but checks it
+# on every visit, and Netlify answers 304 when nothing changed.
 [[headers]]
   for = "*"
   [headers.values]
@@ -47,9 +58,50 @@
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=15552000; includeSubDomains"
     Referrer-Policy = "no-referrer-when-downgrade"
-    Cache-Control = "public, max-age=604800, s-max-age=604800"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# esbuild's CSS and JS output (and anything it bundles, such as fonts). Each
+# file name carries a content hash (index.S3N7ETO4.css), so a changed file is
+# a new URL and the old copy can be cached for a year without going stale.
+[[headers]]
+  for = "/_bridgetown/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Files whose name stays the same when we replace them: images, downloads
+# and the favicon and app icons. One hour, so a replaced file reaches
+# everyone the same day.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
 
 [[headers]]
-  for = "/*.(png|jpg|js|css|svg|woff|ttf|eot|ico|woff2)"
+  for = "/favicon.ico"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, s-max-age=31536000"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/apple-touch-icon.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-16x16.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/favicon-32x32.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/android-chrome-192x192.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/android-chrome-512x512.png"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
