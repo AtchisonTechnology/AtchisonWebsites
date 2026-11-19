@@ -66,6 +66,17 @@
 [build.processing.html]
   pretty_urls = true
 
+# Browser caching (WEB-28). Netlify applies every rule whose path matches,
+# and where two set the same header the later rule wins, so the "*" rule
+# sets the page default first and the asset rules after it override it.
+#
+# Pages must never get a long browser cache. A browser that keeps a page
+# reuses it without asking Netlify, so a changed price, course page or form
+# can take days to reach a returning visitor: a browser's saved copy of
+# /share-a-quote/ kept posting the old form without its hidden `subject`
+# field (WEB-25). `max-age=0, must-revalidate` is Netlify's own default for
+# HTML: the browser keeps its copy but checks it on every visit, and Netlify
+# answers 304 when nothing changed, which costs almost nothing.
 [[headers]]
   for = "*"
   [headers.values]
@@ -74,22 +85,30 @@
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=15552000; includeSubDomains"
     Referrer-Policy = "no-referrer-when-downgrade"
-    Cache-Control = "public, max-age=604800, s-max-age=604800"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# esbuild's CSS and JS output. Each file name carries a content hash
+# (index.ZIN7W652.css), so a changed file is a new URL and the old copy can
+# be cached for a year without going stale.
+[[headers]]
+  for = "/_bridgetown/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Files whose name stays the same when we replace them: images (including
+# the shared book and course covers), downloads and the favicon. One hour,
+# so a replaced file reaches everyone the same day.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
 
 [[headers]]
-  for = "/*.(png|jpg|js|css|svg|woff|ttf|eot|ico|woff2)"
+  for = "/downloads/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, s-max-age=31536000"
+    Cache-Control = "public, max-age=3600"
 
-# WEB-25: the share-a-quote form page and its thank-you page must never be
-# reused from a browser's cache. The "*" rule above lets browsers keep any
-# page for 7 days, so a browser that had loaded /share-a-quote/ before the
-# hidden `subject` field was added kept posting the old form, without it,
-# and the notification email arrived with an empty subject. `no-cache` makes
-# the browser check with Netlify before reusing its copy (a cheap 304 when
-# nothing changed). It is safe whether Netlify replaces the "*" value or
-# joins the two, because `no-cache` overrides any max-age.
 [[headers]]
-  for = "/share-a-quote/*"
+  for = "/favicon.ico"
   [headers.values]
-    Cache-Control = "no-cache"
+    Cache-Control = "public, max-age=3600"
