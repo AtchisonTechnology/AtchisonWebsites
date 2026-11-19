@@ -7,6 +7,8 @@ A Bridgetown static site for Lee Atchison's book *The Software Conductor*. The s
 **Live URL:** thesoftwareconductor.com
 **Stack:** Bridgetown 2.1.2 (Ruby), ERB templates, plain CSS (no Tailwind, no external CSS framework), deployed on Netlify
 
+Pages must never get a long browser cache: `netlify.toml` sends them `max-age=0, must-revalidate`, because a browser that keeps a page doesn't ask again, so a changed page or form can take days to reach a returning visitor (WEB-29, as WEB-28 on atchisonacademy.com); only the hashed files under `/_bridgetown/static/` get a long cache, and fixed-name images, the favicon and app icons get one hour.
+
 ---
 
 ## Commands
