@@ -32,8 +32,11 @@ sitemap_exclude: true
   embed_url =
     case replay_url
     when %r{\Ahttps?://(?:www\.|player\.)?vimeo\.com/(?:video/)?(\d+)(?:/([0-9a-f]+))?}
+      # Read both groups before the h= lookup: that second regex resets
+      # Regexp.last_match, which dropped the video id from hash-less URLs.
+      video_id = Regexp.last_match(1)
       hash = Regexp.last_match(2) || replay_url[/[?&]h=([0-9a-f]+)/, 1]
-      "https://player.vimeo.com/video/#{Regexp.last_match(1)}?#{"h=#{hash}&" if hash}texttrack=en"
+      "https://player.vimeo.com/video/#{video_id}?#{"h=#{hash}&" if hash}texttrack=en"
     when %r{\Ahttps?://(?:www\.)?youtube\.com/(?:watch\?(?:.*&)?v=|live/|embed/|shorts/)([\w-]{11})},
          %r{\Ahttps?://youtu\.be/([\w-]{11})}
       "https://www.youtube-nocookie.com/embed/#{Regexp.last_match(1)}"
