@@ -2,11 +2,12 @@
 layout: default
 page_class: free-page
 title: "Free: The AI Maturity Self-Check"
-description: "Where is your AI system, really? A free one-page self-check from Lee Atchison. Five levels, a few yes-or-no questions each, about ten minutes."
+description: "How mature is your AI system, really? The free AI Maturity Self-Check from Lee Atchison fits on one page: five maturity levels, a few yes-or-no questions for each, about ten minutes."
 # WEB-15. The AI Maturity Self-Check's signup page, moved off Kit
 # (softwarearchitectureinsights.kit.com/ai-maturity-self-check, which stays
-# live for now). Copy is the Kit page's, as is (checked 2026-11-12). Not in
-# the nav. Indexed: it's an evergreen freebie.
+# live for now). Copy started as the Kit page's (checked 2026-11-12); the
+# eyebrow, headline and intro were rewritten in WEB-31 to say "maturity".
+# Not in the nav. Indexed: it's an evergreen freebie.
 #
 # The Kit form behind it, "AI Maturity Self-Check" (ID 10031413), is a
 # hosted landing-page form, so it's posted to directly; see
@@ -23,10 +24,11 @@ teaser_image: /images/free/ai-maturity-self-check-teaser.png
 %>
 <div class="free-hero">
   <img class="free-mark" src="<%= relative_url '/images/brand/sai-nav-mark.png' %>" alt="Software Architecture Insights conductor mark" />
-  <p class="free-eyebrow">Software Architecture Insights</p>
-  <h1>Where is your AI system, really?</h1>
-  <p>Most organizations grade their AI two levels higher than their architecture supports. The demo works at Level 2 and at Level 4, so the slide can't tell the difference.</p>
-  <p>This free one-page self-check can. Five levels, a few yes-or-no questions each, about ten minutes.</p>
+  <p class="free-eyebrow">Free: The AI Maturity Self-Check</p>
+  <h1>How mature is your AI system, really?</h1>
+  <p>Most organizations rate their AI maturity two levels higher than their architecture can support.</p>
+  <p>A demo works at Level 2. It also works at Level 4. The slide can't tell the difference.</p>
+  <p>The <strong>AI Maturity Self-Check</strong> can. It's free and fits on one page: five maturity levels, a few yes-or-no questions for each, about ten minutes.</p>
 
   <%= render "free_signup_form",
         form_id: data.kit_form_id,
