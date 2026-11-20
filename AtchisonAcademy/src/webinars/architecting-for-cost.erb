@@ -87,13 +87,15 @@ offer_slug: launch
         <p class="webinar-date-line">Recorded webinar &middot; free to watch</p>
         <%# The replay gate (WEB-19): an email form in place of a direct link.
             Kit draws the field and the "Send me the replay" button, and shows
-            the success message in place; both are set on the form in Kit.
-            index.js fires the Fathom event once that message appears. The
-            note under the form must show before submit (Lee, 2026-11-12). %>
+            its success alert in place. index.js swaps the alert's text for
+            data-success-message (the spec's text, not the message set in
+            Kit) and fires the Fathom event once it appears. The note under
+            the form must show before submit (Lee, 2026-11-12). %>
         <div class="webinar-replay-form">
           <p class="webinar-replay-lead"><strong>Get the replay by email.</strong> Enter your email and I'll send you the link.</p>
           <% if form_ready %>
-            <div class="sales-kit-form" data-kit-form data-fathom-event="webinar-replay-signup">
+            <div class="sales-kit-form" data-kit-form data-fathom-event="webinar-replay-signup"
+                 data-success-message="Check your inbox. The replay link is on its way.">
               <script async data-uid="<%= form_uid %>" src="https://softwarearchitectureinsights.kit.com/<%= form_uid %>/index.js"></script>
             </div>
           <% else %>

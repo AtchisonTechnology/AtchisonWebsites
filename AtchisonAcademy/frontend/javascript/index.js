@@ -132,24 +132,43 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
-// Kit signup forms on the coming-soon pages (WEB-17). Kit draws each form
-// into [data-kit-form] and, on a good submit, fills its success alert in
-// place (no redirect). Fire the form's Fathom event, once, when that
-// message appears.
+// Fire a Fathom event. Fathom's script is deferred and loads from its CDN,
+// so if it isn't ready yet, try again on window load rather than dropping
+// the event.
+const trackFathomEvent = (name) => {
+  if (!name) return
+  if (window.fathom?.trackEvent) {
+    window.fathom.trackEvent(name)
+  } else if (document.readyState !== "complete") {
+    window.addEventListener("load", () => window.fathom?.trackEvent?.(name), { once: true })
+  }
+}
+
+// Kit signup forms (WEB-17, WEB-19). Kit draws each form into
+// [data-kit-form] and, on a good submit, fills its success alert in place
+// (no redirect). When that message appears, once:
+// - if the box sets data-success-message, show that text instead of the
+//   message set on the form in Kit (WEB-19: Kit's default "confirm your
+//   subscription" text is wrong for a form with no double opt-in). The
+//   observer runs before the browser paints, so Kit's text never shows;
+// - fire the form's Fathom event (data-fathom-event).
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-kit-form]").forEach((box) => {
     const name = box.dataset.fathomEvent
+    const message = box.dataset.successMessage
     let fired = false
 
-    const succeeded = () =>
-      [...box.querySelectorAll(".formkit-alert-success")]
-        .some((el) => el.textContent.trim() !== "")
+    const successAlerts = () =>
+      [...box.querySelectorAll('.formkit-alert-success, [data-element="success"]')]
+        .filter((el) => el.textContent.trim() !== "")
 
     const observer = new MutationObserver(() => {
-      if (fired || !succeeded()) return
+      const alerts = successAlerts()
+      if (fired || alerts.length === 0) return
       fired = true
       observer.disconnect()
-      if (name && window.fathom?.trackEvent) window.fathom.trackEvent(name)
+      if (message) alerts.forEach((el) => { el.textContent = message })
+      trackFathomEvent(name)
       box.dispatchEvent(new CustomEvent("kit-form-success", { bubbles: true }))
     })
     observer.observe(box, { childList: true, subtree: true, characterData: true, attributes: true })
