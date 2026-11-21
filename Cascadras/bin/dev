@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Start this site's Bridgetown dev server on its dev port.
+#
+# Each site has its own fixed dev port so all of them can run at once
+# (see ../Projects/services.md). Set BRIDGETOWN_PORT to override it.
+set -euo pipefail
+
+cd "$(cd "$(dirname "$0")/.." && pwd)"
+SITE="$(basename "$PWD")"
+
+# foreman injects its own PORT (5000) into the first process, which would
+# override this site's port.
+unset PORT
+
+export BRIDGETOWN_PORT="${BRIDGETOWN_PORT:-18000}"
+
+echo "==> $SITE http://localhost:$BRIDGETOWN_PORT"
+exec bin/bridgetown start "$@"

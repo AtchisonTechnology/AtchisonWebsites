@@ -1269,6 +1269,70 @@ body.episode main {
   display: none;
 }
 
+/* The Cascadras form (WEB-32, /free/cascadras/): several fields, stacked,
+   and a thank-you panel that replaces them on success. */
+.free-signup.is-done .free-signup-fields {
+  display: none;
+}
+
+.cascadras-field {
+  margin: 0 0 1rem;
+}
+
+.cascadras-field label,
+.cascadras-field legend {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.cascadras-field input[type="text"],
+.cascadras-field input[type="email"],
+.cascadras-field select {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+}
+
+.cascadras-field input:focus,
+.cascadras-field select:focus {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 1px;
+}
+
+.cascadras-choice {
+  border: 0;
+  padding: 0;
+}
+
+.cascadras-choice label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 1.5rem;
+  font-weight: 400;
+}
+
+.cascadras-form {
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.cascadras-thanks p {
+  margin: 0;
+}
+
+.cascadras-thanks:focus {
+  outline: none;
+}
+
 .free-signup-disclaimer {
   margin: 0.5rem 0 0;
   color: var(--stone-600);

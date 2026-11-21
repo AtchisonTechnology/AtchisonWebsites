@@ -1,0 +1,71 @@
+---
+layout: default
+# WEB-32. The one page on cascadras.com, for the Cascadras demand test.
+# Copy is "Cascadras page copy.md" (Page 1), word for word, edited by Toby
+# (Editor), 2026-11-20. Sections in the copy file's order.
+---
+<section class="hero">
+  <div class="wrap">
+    <h1>Your team made that decision. Can anyone find out why?</h1>
+    <p class="lede">Cascadras will be one place for your team's architecture decisions. Write them, review them, approve them, and find them again, across every repo. Your risk matrix and your service tiers live right beside them.</p>
+    <p><a class="button" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a></p>
+    <p class="price-line">$19 per architect a month. Everyone else reads for free.</p>
+    <p class="not-built"><em>Cascadras isn't built yet. Founding seats get first access if it launches. We don't take any money now.</em></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>The problem</h2>
+    <p>Decisions get made in meetings, Slack threads and pull requests. Then they get lost.</p>
+    <p>Six months later, someone asks why the system works this way. Nobody knows. The person who decided has moved on, and the reasons went with them.</p>
+    <p>Some teams keep decision records. Most keep them as markdown files spread across a dozen repos, or as wiki pages nobody can find. Free tools help you write a record. Few help your team review it, approve it, and find it again.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <h2>What Cascadras will do</h2>
+    <div class="features">
+      <p><strong>Decision records.</strong> Write, review, approve and search. Every repo, one place. Start from Lee Atchison's templates, or bring your own.</p>
+      <p><strong>Risk matrices, linked to the decisions.</strong> A risk spreadsheet gets filed away and goes stale. In Cascadras, each risk links to the decisions that create it or reduce it, and to the service it lives in.</p>
+      <p><strong>Service tiers.</strong> Tag each service Tier 1 to Tier 4, or name your own tiers. The tier shows on every decision, every risk, and the map.</p>
+      <p><strong>A map of who owns what.</strong> Which team owns which service, who's on call, and where the runbook is. It comes free with the records.</p>
+      <p><strong>Your records stay yours.</strong> Git is the backend. Clone, pull and push. Export everything, any time. Already keep records in Nygard or MADR format? Cascadras will import them on day one.</p>
+      <p><strong>Your AI tools can read them.</strong> A built-in MCP server lets Claude Code, Cursor and the rest read your decisions while they work.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Who it's for</h2>
+    <p>Engineering teams of about 10 to 50 engineers. Big enough to lose track of why things were built the way they were. Too small for a heavyweight developer portal.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <h2>The price</h2>
+    <p><strong>$19 per architect a month.</strong> You pay for the people who write the records, usually one to three per team. Everyone else reads and comments for free.</p>
+    <p><a class="button" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>From Lee Atchison</h2>
+    <blockquote class="from-lee">
+      <p>I've spent years writing and teaching about architecture decisions and risk. Cascadras would put that thinking into a tool your team uses every day. Its risk matrix is the one from <em>Architecting for Scale</em>.</p>
+      <p class="byline">Lee Atchison, author of <em>Architecting for Scale</em> and <em>The Software Conductor</em>, and the Software Architecture Insights newsletter</p>
+    </blockquote>
+  </div>
+</section>
+
+<section class="section section-form" id="reserve">
+  <div class="wrap">
+    <h2>Reserve a founding seat</h2>
+    <p>Cascadras isn't built yet. Reserve a seat and you'll get first access if it launches. No payment, no card.</p>
+    <%= render "reserve_form", form_id: site.metadata.kit_form_id %>
+  </div>
+</section>
