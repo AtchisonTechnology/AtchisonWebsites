@@ -1,0 +1,35 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<% resource_title = strip_html(strip_newlines(title.to_s)) %>
+<% page_title = resource_title.empty? || resource_title == "Index" ? metadata.title : resource_title %>
+<title><%= page_title %></title>
+<%
+  page_description = strip_newlines(defined?(description) && description ? description : metadata.description)
+  # Only pretty URLs (ending in a slash) are real pages; 404.html gets no
+  # canonical or og:url.
+  page_url = if defined?(resource) && resource && resource.relative_url.to_s.end_with?("/")
+    absolute_url(resource.relative_url)
+  end
+%>
+<meta name="description" content="<%= page_description %>" />
+<% if page_url %>
+<link rel="canonical" href="<%= page_url %>" />
+<meta property="og:url" content="<%= page_url %>" />
+<% end %>
+<meta property="og:title" content="<%= page_title %>" />
+<meta property="og:description" content="<%= page_description %>" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" type="image/svg+xml" href="<%= relative_url '/favicon.svg' %>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="<%= asset_path :css %>" />
+<script src="<%= asset_path :js %>" defer></script>
+<%= live_reload_dev_js %>
+<% if metadata.fathom_site_id.to_s != "" %>
+<script src="https://cdn.usefathom.com/script.js" data-site="<%= metadata.fathom_site_id %>" defer></script>
+<% end %>

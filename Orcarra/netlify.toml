@@ -1,0 +1,60 @@
+# orcarra.com (WEB-33). Netlify site settings to match:
+#   Base directory:     Orcarra
+#   Build command:      (from this file) bin/bridgetown deploy
+#   Publish directory:  (from this file) output, relative to the base
+# Same build as the other Bridgetown sites in this repo.
+
+[build]
+  command = "bin/bridgetown deploy"
+  publish = "output"
+
+[build.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+# Deploy Previews build exactly like production. The site URL is made
+# preview-aware in config/initializers.rb, not here (Spec0004).
+[context.deploy-preview]
+  command = "bin/bridgetown deploy"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+  BRIDGETOWN_ENV = "production"
+
+[build.processing.html]
+  pretty_urls = true
+
+# www to the bare domain, keeping the path and the query string (WEB-33).
+# Netlify passes the incoming query string through on a redirect whose
+# `from` has no query parameters, so the ad-click UTM tags survive. Ad
+# final URLs use https://orcarra.com/ with the trailing slash, so no
+# trailing-slash redirect is involved for the one page. Netlify also does
+# this on its own once orcarra.com is the primary domain and www is an
+# alias; this rule makes it explicit.
+[[redirects]]
+  from = "https://www.orcarra.com/*"
+  to = "https://orcarra.com/:splat"
+  status = 301
+  force = true
+
+# Pages: no long browser cache (same as the other sites, WEB-29).
+[[headers]]
+  for = "*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=15552000; includeSubDomains"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# esbuild output carries a content hash in each file name.
+[[headers]]
+  for = "/_bridgetown/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
