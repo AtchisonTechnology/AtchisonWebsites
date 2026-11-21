@@ -4,7 +4,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 ## What this repo is
 
-Seven independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
+Independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
 development process:
 
@@ -17,6 +17,7 @@ development process:
 | `ArchitectingForScale` | Architecting for Scale (book site) | architectingforscale.com |
 | `AtchisonAcademy` | Atchison Academy | atchisonacademy.com |
 | `SoftwareArchitectureInsights` | Software Architecture Insights (weekly newsletter site; email stays on Kit; does not join `shared/`) | softwarearchitectureinsights.com |
+| `Orcarra` | Orcarra demand-test page (one page, its own look; no link to Lee's sites; does not join `shared/`) | orcarra.com |
 
 Each site has its own `CLAUDE.md` with its architecture, layouts, CSS tokens,
 and content conventions. **Read the site's own CLAUDE.md before changing
@@ -87,7 +88,7 @@ not marketing metadata need not join at all: `AtchisonAcademyCourses`
 
 ```bash
 make            # list targets
-make dev        # foreman: run all seven sites at once, each on its own port
+make dev        # foreman: run every site at once, each on its own port
 make clean      # remove stray .DS_Store files
 ```
 

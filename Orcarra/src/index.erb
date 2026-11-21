@@ -1,0 +1,74 @@
+---
+layout: default
+# WEB-33. The one page on orcarra.com, for the Orcarra demand test.
+# Copy is "Orcarra page copy.md" ("The page: orcarra.com"), word for word,
+# edited by Toby (Editor), 2026-11-20. Sections in the copy file's order.
+# No Lee bio and no link to Lee's sites (Lee, 2026-11-20).
+#
+# Traffic comes from Google Ads with utm_* tags on the URL. Nothing here
+# reads or changes them; Fathom picks them up from the visit.
+---
+<section class="hero">
+  <div class="wrap">
+    <h1>Every election, your club loses its memory. It doesn't have to.</h1>
+    <p class="lede">We're building Orcarra so everything your board needs lives in officer seats, not in people's personal accounts. When officers change, the seat passes to the next person with its inbox, documents and handbook inside.</p>
+    <p><a class="button" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot for your club</a></p>
+    <p class="price-line">$29 a month for clubs up to 100 members. $49 up to 200. Members are always free.</p>
+    <p class="not-built"><em>Orcarra isn't built yet. Clubs who reserve get first access if it launches. We don't take any money now.</em></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>The problem</h2>
+    <p>The new treasurer gets a password on a sticky note, if that. The club's email lives in the old president's personal inbox. The bylaws are in someone's Google Drive, and nobody's sure whose.</p>
+    <p>Elections run on paper, a show of hands, or a one-off voting site. Secret ballots, who's eligible, and whether you have a quorum all get worked out by hand.</p>
+    <p>Club software handles members and dues. Board software costs thousands a year and leaves your members out. Nothing we've found passes an officer's job on, intact, to the next person.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <h2>What Orcarra will do</h2>
+    <div class="features">
+      <p><strong>Officer seats.</strong> Every role is a seat, not a person. The seat holds the inbox, the documents, the handbook and the logins. When officers change, the whole seat passes on in one step.</p>
+      <p><strong>Real elections.</strong> Secret ballots, eligibility and quorum, set up to fit your bylaws.</p>
+      <p><strong>Board records.</strong> Agendas, minutes, motions and documents, all in one place, and still there after the next election.</p>
+      <p><strong>A shared board inbox.</strong> Members write to the board, not to someone's personal email. The inbox passes with the seats.</p>
+      <p><strong>Your members, included.</strong> A member list that shows who can vote. Announcements to members by email and in the app. A new member guide. Members log in free.</p>
+      <p><strong>Keep your membership tool.</strong> Orcarra won't do dues or your public website. Use it alongside the tools you already have.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Who it's for</h2>
+    <p>Volunteer clubs and small nonprofits with about 30 to 200 members: user groups, hobby clubs, societies, associations, HOAs.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <h2>The price</h2>
+    <p>One flat price for the whole club. Members are always free.</p>
+    <table class="price-table">
+      <thead>
+        <tr><th scope="col">Club size</th><th scope="col">Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Up to 100 members</td><td>$29 a month</td></tr>
+        <tr><td>Up to 200 members</td><td>$49 a month</td></tr>
+      </tbody>
+    </table>
+    <p><a class="button" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot for your club</a></p>
+  </div>
+</section>
+
+<section class="section section-form" id="reserve">
+  <div class="wrap">
+    <h2>Reserve a spot for your club</h2>
+    <p>Orcarra isn't built yet. Reserve a spot and your club gets first access if it launches. No payment, no card.</p>
+    <%= render "reserve_form", form_id: site.metadata.kit_form_id %>
+  </div>
+</section>
