@@ -177,6 +177,22 @@
   status = 301
   force = true
 
+# The Cascadras demand test's short path (WEB-32, 2026-11-21), so a spoken
+# or typed link still works. 301 to the SAI page. Netlify passes the
+# incoming query string through on a rule whose `from` has no query
+# parameters, so /cascadras?utm_source=x lands on /free/cascadras/?utm_source=x.
+[[redirects]]
+  from = "/cascadras"
+  to = "/free/cascadras/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cascadras/"
+  to = "/free/cascadras/"
+  status = 301
+  force = true
+
 # The Sep 30, 2026 webinar ("Your AI Provider Will Fail. Design for It.").
 # /architecting-with-ai was its registration link, so it is in promo posts,
 # the LinkedIn Newsletter and a Kit send, and /webinar-architecting-systems-

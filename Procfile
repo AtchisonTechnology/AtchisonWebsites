@@ -3,6 +3,7 @@
 leeatchison: LeeAtchison/bin/dev
 tsc: TheSoftwareConductor/bin/dev
 stosa: stosa/bin/dev
+cascadras: Cascadras/bin/dev
 bb30: BusinessBreakthrough30/bin/dev
 afs: ArchitectingForScale/bin/dev
 academy: AtchisonAcademy/bin/dev

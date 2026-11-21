@@ -1,0 +1,37 @@
+---
+layout: default
+page_class: free-page
+title: "Cascadras: a home for your team's architecture decisions"
+description: "I'm thinking about building Cascadras: one place for your team's decisions, risk matrix and service tiers, across every repo. It isn't built yet. Reserve a founding seat."
+# WEB-32. The SAI page for the Cascadras demand test. Copy is "Cascadras
+# page copy.md", Page 2, word for word (headline picked by C.J. at Lee's
+# ask, 2026-11-20; Lee may revise it). Not in the nav.
+#
+# Noindex while it's a test (Lee, 2026-11-20): the head partial adds
+# <meta name="robots" content="noindex">, and the sitemap leaves it out.
+# /cascadras redirects here, keeping the query string (netlify.toml).
+#
+# The form posts to the one Kit form both Cascadras pages share (ID
+# 10221598, SAI Kit account); see _partials/_cascadras_form.erb. A good
+# submit fires the Fathom event cascadras-signup. This page sits under
+# /free/, so it's already in the Fathom "Landing pages" view.
+noindex: true
+kit_form_id: 10221598
+# The link to cascadras.com carries the campaign's UTM tags (WEB-32, step 6).
+cascadras_url: "https://cascadras.com/?utm_source=sai-web&utm_medium=referral&utm_campaign=cascadras&utm_content=sai-page"
+---
+<div class="free-hero">
+  <p class="free-eyebrow">Software Architecture Insights</p>
+  <h1>I want to build a home for your team's architecture decisions. Want in?</h1>
+</div>
+
+<p>You've heard me talk about risk matrices for years. Lately I've been writing about decision records too. Most teams I talk to keep both somewhere nobody can find, if they keep them at all.</p>
+<p>So I'm thinking about building Cascadras. It would be one place for your team's decisions, risk matrix and service tiers, across every repo, backed by git.</p>
+<p>It isn't built yet. Before I write a line of code, I want to know if your team would use it.</p>
+<p>$19 per architect a month. Everyone else on the team reads for free. Reserve a founding seat and you'll get first access if it launches. No payment, no card.</p>
+
+<%= render "cascadras_form", form_id: data.kit_form_id %>
+
+<p><a href="<%= data.cascadras_url %>">See the full details at cascadras.com →</a></p>
+
+<p>Lee</p>
