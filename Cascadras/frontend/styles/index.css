@@ -1,0 +1,187 @@
+/* cascadras.com (WEB-32). One page, its own look: plain and clean. */
+
+:root {
+  --ink: #17242e;
+  --ink-soft: #4b5b66;
+  --slate: #1f3a4d;
+  --accent: #2f7d72;
+  --accent-dark: #23625a;
+  --mint: #7cc4b8;
+  --bg: #ffffff;
+  --bg-alt: #f3f6f7;
+  --line: #d7dfe3;
+  --error: #b3261e;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --max-width: 760px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+h1, h2 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.75rem; margin: 0 0 1.25rem; }
+h2 { font-size: 1.75rem; margin: 0 0 1rem; color: var(--slate); }
+
+p { margin: 0 0 1rem; }
+a { color: var(--accent); }
+
+/* Header: the wordmark only. No nav. */
+.site-header {
+  background: var(--slate);
+  padding: 1rem 0;
+}
+.wordmark {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.wordmark::before {
+  content: "";
+  display: inline-block;
+  width: 1.1rem;
+  height: 0.8rem;
+  margin-right: 0.5rem;
+  background: var(--mint);
+  clip-path: polygon(0 100%, 40% 0, 62% 45%, 75% 25%, 100% 100%);
+}
+
+/* Hero */
+.hero {
+  background: var(--slate);
+  color: #fff;
+  padding: 3.5rem 0 4rem;
+}
+.hero h1 { color: #fff; }
+.hero .lede { font-size: 1.2rem; color: #dce7ec; }
+.hero .price-line { font-weight: 600; margin-top: 1.25rem; }
+.hero .not-built { color: #c4d4db; font-size: 0.975rem; }
+
+/* Sections */
+.section { padding: 3.5rem 0; }
+.section-alt { background: var(--bg-alt); }
+
+.features p {
+  padding-left: 1rem;
+  border-left: 3px solid var(--mint);
+  margin-bottom: 1.25rem;
+}
+
+.from-lee {
+  margin: 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid var(--accent);
+  background: var(--bg-alt);
+  border-radius: 0 8px 8px 0;
+}
+.from-lee .byline { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+
+/* Buttons */
+.button {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover { background: var(--accent-dark); }
+.button:disabled { opacity: 0.6; cursor: default; }
+.hero .button { background: var(--mint); color: var(--slate); }
+.hero .button:hover { background: #a3d8cf; }
+
+/* The form */
+.section-form { background: var(--bg-alt); border-top: 1px solid var(--line); }
+
+.reserve-form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.75rem;
+  margin-top: 1.5rem;
+}
+.field { margin: 0 0 1.1rem; }
+.field label, .field legend {
+  display: block;
+  font-weight: 600;
+  font-size: 0.975rem;
+  margin-bottom: 0.35rem;
+}
+.field input[type="text"],
+.field input[type="email"],
+.field select {
+  width: 100%;
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+}
+.field input:focus, .field select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+.field-choice { border: 0; padding: 0; }
+.field-choice label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+  margin-right: 1.5rem;
+}
+.reserve-status { margin: 0.75rem 0 0; font-size: 0.95rem; }
+.reserve-status:empty { display: none; }
+.reserve-status[data-kind="error"] { color: var(--error); }
+.small-print { color: var(--ink-soft); font-size: 0.9rem; margin: 0.75rem 0 0; }
+.reserve-thanks { font-size: 1.1rem; }
+.reserve-thanks p { margin: 0; }
+.reserve-thanks:focus { outline: none; }
+
+/* Footer */
+.site-footer {
+  background: var(--slate);
+  color: #c4d4db;
+  font-size: 0.9rem;
+  padding: 1.75rem 0;
+}
+.site-footer p { margin: 0; }
+
+@media (max-width: 680px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.45rem; }
+  .hero { padding: 2.5rem 0 3rem; }
+  .section { padding: 2.5rem 0; }
+  .reserve-form { padding: 1.25rem; }
+  .button { width: 100%; text-align: center; }
+}

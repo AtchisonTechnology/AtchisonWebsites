@@ -99,6 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
           return
         }
         form.classList.add("is-done")
+        // A form with its own thank-you panel (the Cascadras form, WEB-32)
+        // swaps it in for its fields. The rest show the success line.
+        const panel = form.querySelector("[data-success-panel]")
+        if (panel) {
+          say("")
+          panel.hidden = false
+          panel.focus()
+          return
+        }
         say(form.dataset.successMessage || "Thanks. Check your inbox.", "success")
         return
       }

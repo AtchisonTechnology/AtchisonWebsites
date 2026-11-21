@@ -4,7 +4,7 @@ Guidance for Claude Code when working in the **AtchisonWebsites** monorepo.
 
 ## What this repo is
 
-Seven independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
+Independent [Bridgetown](https://www.bridgetownrb.com) static sites, each
 deployed separately to Netlify, sharing one repo, one dev workflow, and one
 development process:
 
@@ -13,6 +13,7 @@ development process:
 | `LeeAtchison` | Lee Atchison personal site | leeatchison.com |
 | `TheSoftwareConductor` | The Software Conductor | thesoftwareconductor.com |
 | `stosa` | STOSA framework | stosa.org |
+| `Cascadras` | Cascadras demand-test page (one page, its own look; does not join `shared/`) | cascadras.com |
 | `BusinessBreakthrough30` | Business Breakthrough 30 | businessbreakthrough30.com |
 | `ArchitectingForScale` | Architecting for Scale (book site) | architectingforscale.com |
 | `AtchisonAcademy` | Atchison Academy | atchisonacademy.com |
@@ -87,7 +88,7 @@ not marketing metadata need not join at all: `AtchisonAcademyCourses`
 
 ```bash
 make            # list targets
-make dev        # foreman: run all seven sites at once, each on its own port
+make dev        # foreman: run every site at once, each on its own port
 make clean      # remove stray .DS_Store files
 ```
 
