@@ -31,5 +31,8 @@
 <script src="<%= asset_path :js %>" defer></script>
 <%= live_reload_dev_js %>
 <% if metadata.fathom_site_id.to_s != "" %>
-<script src="https://cdn.usefathom.com/script.js" data-site="<%= metadata.fathom_site_id %>" defer></script>
+<%# data-canonical="false": Fathom otherwise records the canonical URL above,
+    which has no query string, so the ad-click utm_ tags were lost. The
+    canonical link stays for search engines. %>
+<script src="https://cdn.usefathom.com/script.js" data-site="<%= metadata.fathom_site_id %>" data-canonical="false" defer></script>
 <% end %>
