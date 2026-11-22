@@ -1269,60 +1269,237 @@ body.episode main {
   display: none;
 }
 
-/* The Cascadras form (WEB-32, /free/cascadras/): several fields, stacked,
-   and a thank-you panel that replaces them on success. */
+/* The Cascadras page (WEB-32, redesigned in WEB-34, /free/cascadras/).
+   SAI's look; Mandy's layout: a kicker with the Cascadras glyph, an offer
+   box, then a form card with several fields and a thank-you panel that
+   replaces them on success. */
 .free-signup.is-done .free-signup-fields {
   display: none;
 }
 
-.cascadras-field {
+.cascadras-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   margin: 0 0 1rem;
+  color: #2e8b80;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cascadras-offer {
+  margin: 1.75rem 0 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--rule);
+  border-left: 4px solid #2e8b80;
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.cascadras-offer-price {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cascadras-offer-price span {
+  color: var(--stone-600);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.cascadras-offer-planned {
+  margin: 0.15rem 0 0.75rem;
+  color: var(--stone-600);
+  font-size: 0.9rem;
+}
+
+.cascadras-offer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+}
+
+.cascadras-offer li::before {
+  content: "✓ ";
+  color: #2e8b80;
+  font-weight: 700;
+}
+
+.cascadras-more {
+  font-size: 1rem;
+}
+
+.cascadras-sig {
+  font-style: italic;
+}
+
+.cascadras-form {
+  max-width: none;
+  margin: 1.75rem 0 0;
+  padding: 1.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--card);
+}
+
+.cascadras-form h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.cascadras-lead {
+  margin: 0 0 1.25rem;
+  color: var(--stone-600);
+  font-size: 1rem;
+}
+
+.cascadras-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1rem;
+}
+
+.cascadras-field {
+  margin: 0;
+  min-width: 0;
+}
+
+.cascadras-optional .cascadras-field {
+  margin-bottom: 1rem;
 }
 
 .cascadras-field label,
 .cascadras-field legend {
   display: block;
   margin-bottom: 0.3rem;
+  padding: 0;
   font-weight: 700;
   font-size: 0.95rem;
 }
 
 .cascadras-field input[type="text"],
 .cascadras-field input[type="email"],
-.cascadras-field select {
+.cascadras-field select,
+.cascadras-field textarea {
   width: 100%;
   padding: 0.65rem 0.8rem;
   border: 1px solid var(--rule);
   border-radius: 6px;
-  background: var(--card);
+  background: #fff;
   color: var(--ink);
   font: inherit;
+  font-size: 1rem;
+}
+
+.cascadras-field textarea {
+  min-height: 4.4rem;
+  resize: vertical;
 }
 
 .cascadras-field input:focus,
-.cascadras-field select:focus {
+.cascadras-field select:focus,
+.cascadras-field textarea:focus {
   outline: 2px solid var(--brand-blue);
   outline-offset: 1px;
 }
 
+.cascadras-optional {
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--rule);
+}
+
+.cascadras-optional h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.cascadras-optional h3 span {
+  color: var(--stone-600);
+  font-weight: 400;
+}
+
+.cascadras-hint {
+  margin: 0 0 0.75rem;
+  color: var(--stone-600);
+  font-size: 1rem;
+}
+
+/* The choice question: real radios in a fieldset, drawn as a segmented
+   pill about 48px tall. Never full width. */
 .cascadras-choice {
   border: 0;
   padding: 0;
 }
 
-.cascadras-choice label {
+.cascadras-seg {
   display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-right: 1.5rem;
-  font-weight: 400;
+  width: auto;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: #fff;
 }
 
-.cascadras-form {
-  padding: 1.5rem;
-  border: 1px solid var(--rule);
+.cascadras-field .cascadras-seg label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  border-left: 1px solid var(--rule);
+  font-weight: 400;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cascadras-field .cascadras-seg label:first-child {
+  border-left: 0;
+}
+
+.cascadras-seg input {
+  margin: 0;
+  accent-color: var(--brand-blue);
+}
+
+.cascadras-seg label:has(input:checked) {
+  background: var(--highlight);
+}
+
+.cascadras-seg label:has(input:focus-visible) {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: -2px;
+}
+
+.cascadras-form .free-signup-button {
+  margin-top: 0.5rem;
+}
+
+/* On success the script holds the card at its height, so nothing moves. */
+.cascadras-form.is-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cascadras-thanks {
+  max-width: 34rem;
+  padding: 1rem 1.25rem;
   border-radius: 8px;
-  background: var(--card);
+  background: var(--paper);
 }
 
 .cascadras-thanks p {
@@ -1331,6 +1508,12 @@ body.episode main {
 
 .cascadras-thanks:focus {
   outline: none;
+}
+
+@media (max-width: 600px) {
+  .cascadras-grid { grid-template-columns: 1fr; }
+  .cascadras-form { padding: 1.25rem; }
+  .cascadras-form .free-signup-button { width: 100%; }
 }
 
 .free-signup-disclaimer {

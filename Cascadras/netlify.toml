@@ -56,3 +56,9 @@
   for = "/favicon.svg"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# Lee's headshot on the bio card (WEB-34): a fixed file name, so one hour.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

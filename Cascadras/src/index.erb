@@ -1,71 +1,173 @@
 ---
 layout: default
-# WEB-32. The one page on cascadras.com, for the Cascadras demand test.
-# Copy is "Cascadras page copy.md" (Page 1), word for word, edited by Toby
-# (Editor), 2026-11-20. Sections in the copy file's order.
+# WEB-34. The one page on cascadras.com, for the Cascadras demand test,
+# rebuilt to Mandy's (Art & Design Director) approved mockup. Copy is the
+# WEB-34 spec's, word for word (Lee's calls, 2026-11-21): no founders'
+# price, "Planned price" next to every price, no date anywhere.
 ---
-<section class="hero">
+<header class="hero">
   <div class="wrap">
-    <h1>Your team made that decision. Can anyone find out why?</h1>
-    <p class="lede">Cascadras will be one place for your team's architecture decisions. Write them, review them, approve them, and find them again, across every repo. Your risk matrix and your service tiers live right beside them.</p>
-    <p><a class="button" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a></p>
-    <p class="price-line">$19 per architect a month. Everyone else reads for free.</p>
-    <p class="not-built"><em>Cascadras isn't built yet. Founding seats get first access if it launches. We don't take any money now.</em></p>
+    <nav class="nav">
+      <a class="brand" href="/">
+        <svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><path d="M1 19 L9 6 L13 12 L17 3 L25 19 Z" fill="#8FD3C5"/><path d="M15.2 6.6 L17 3 L18.8 6.6 L17.6 6 L17 7 L16.4 6 Z" fill="#fff"/></svg>
+        Cascadras
+      </a>
+      <a class="nav-cta" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat →</a>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span>Under development · Founding seats open</div>
+        <h1>Your team made that decision. Can anyone find out why?</h1>
+        <p class="lede">We're building Cascadras: one place for your team's architecture decisions. Write them, review them, approve them, and find them again, across every repo. Your risk matrix and service tiers live right beside them.</p>
+        <div class="cta-row">
+          <a class="btn" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a>
+          <div class="price-block">
+            <div class="price-line">$19 per architect a month <span>· everyone else reads free</span></div>
+            <span class="planned">Planned price. We'll never charge you without your OK.</span>
+          </div>
+        </div>
+        <p class="founding-note">Founding seats are the first to try it, and their feedback shapes what we build. No card, and nothing starts without your OK.</p>
+      </div>
+
+      <div class="sketch" role="img" aria-label="An early sketch of a Cascadras decision record">
+        <div class="sketch-label">EARLY SKETCH · UNDER DEVELOPMENT</div>
+        <div class="card" aria-hidden="true">
+          <div class="top"><span class="id">ADR-014 · payments-api</span><span class="tag ok">Accepted</span></div>
+          <h4>Move session state to Redis</h4>
+          <div class="meta"><span class="tag">Tier 1</span><span class="tag">Owner: Platform team</span><span class="tag">Reviewed by 3</span></div>
+          <div class="why">Sticky sessions block scaling past four nodes. Redis lets any node serve any request.</div>
+          <div class="links">
+            <div class="row"><span>Reduces <b>R-07</b> Session loss on deploy</span><span class="tag hi">High → Low</span></div>
+            <div class="row"><span>Creates <b>R-12</b> Redis is a new single point</span><span class="tag">Medium</span></div>
+          </div>
+          <div class="foot"><span class="mono">docs/adr/0014-redis-sessions.md</span><span>Supersedes ADR-006</span></div>
+        </div>
+        <div class="card2" aria-hidden="true">
+          <div class="row"><span class="mono muted">Risk matrix</span><span class="tag hi">3 High</span></div>
+          <div class="row" style="margin-top:6px"><span>Each risk linked to its decisions</span></div>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</header>
 
 <section class="section">
-  <div class="wrap">
-    <h2>The problem</h2>
-    <p>Decisions get made in meetings, Slack threads and pull requests. Then they get lost.</p>
-    <p>Six months later, someone asks why the system works this way. Nobody knows. The person who decided has moved on, and the reasons went with them.</p>
-    <p>Some teams keep decision records. Most keep them as markdown files spread across a dozen repos, or as wiki pages nobody can find. Free tools help you write a record. Few help your team review it, approve it, and find it again.</p>
+  <div class="wrap problem-grid">
+    <div>
+      <div class="eyebrow">The problem</div>
+      <h2>Decisions get made in meetings, Slack threads and pull requests. Then they get lost.</h2>
+    </div>
+    <div>
+      <p class="quote">Six months later, someone asks why the system works this way. Nobody knows.</p>
+      <p>The person who decided has moved on, and the reasons went with them.</p>
+      <p>Some teams keep decision records. Most keep them as markdown files spread across a dozen repos, or as wiki pages nobody can find. Free tools help you write a record. Few help your team review it, approve it, and find it again.</p>
+    </div>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section band">
   <div class="wrap">
-    <h2>What Cascadras will do</h2>
-    <div class="features">
-      <p><strong>Decision records.</strong> Write, review, approve and search. Every repo, one place. Start from Lee Atchison's templates, or bring your own.</p>
-      <p><strong>Risk matrices, linked to the decisions.</strong> A risk spreadsheet gets filed away and goes stale. In Cascadras, each risk links to the decisions that create it or reduce it, and to the service it lives in.</p>
-      <p><strong>Service tiers.</strong> Tag each service Tier 1 to Tier 4, or name your own tiers. The tier shows on every decision, every risk, and the map.</p>
-      <p><strong>A map of who owns what.</strong> Which team owns which service, who's on call, and where the runbook is. It comes free with the records.</p>
-      <p><strong>Your records stay yours.</strong> Git is the backend. Clone, pull and push. Export everything, any time. Already keep records in Nygard or MADR format? Cascadras will import them on day one.</p>
-      <p><strong>Your AI tools can read them.</strong> A built-in MCP server lets Claude Code, Cursor and the rest read your decisions while they work.</p>
+    <div class="eyebrow">What you'll get</div>
+    <h2>Records first. Everything else links to them.</h2>
+    <div class="grid3">
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        <h3>Decision records <span class="lees">Lee's templates</span></h3>
+        <p>Write, review, approve and search. Every repo, one place. Start from Lee Atchison's templates, or bring your own.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+        <h3>Risk matrices, linked <span class="lees">From Lee's book</span></h3>
+        <p>Each risk links to the decisions that create it or reduce it, and to the service it lives in. No more stale spreadsheet.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M6 14h12M8 10h8M10 6h4"/></svg>
+        <h3>Service tiers</h3>
+        <p>Tag each service Tier 1 to Tier 4, or name your own. The tier shows on every decision, every risk, and the map.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l3 9M16 7l-3 9M8.5 6h7"/></svg>
+        <h3>Who owns what</h3>
+        <p>Which team owns which service, who's on call, and where the runbook is. It comes free with the records.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 7v10M6 12h10"/></svg>
+        <h3>Your records stay yours</h3>
+        <p>Git is the backend. Clone, pull, push, export. Already keep Nygard or MADR records? Import them on day one.</p>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg>
+        <h3>Your AI tools can read them</h3>
+        <p>A built-in MCP server lets Claude Code, Cursor and the rest read your decisions while they work.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <h2>Who it's for</h2>
-    <p>Engineering teams of about 10 to 50 engineers. Big enough to lose track of why things were built the way they were. Too small for a heavyweight developer portal.</p>
+    <div class="eyebrow">Why reserve now</div>
+    <h2>Cascadras is under development. Help us get it right.</h2>
+    <div class="founding">
+      <div class="fitem">
+        <span class="num">01</span>
+        <h3>Be among the first to try it</h3>
+        <p>Founding seats get early versions before anyone else.</p>
+      </div>
+      <div class="fitem">
+        <span class="num">02</span>
+        <h3>Shape where it goes</h3>
+        <p>Tell us how your team works. Founding members' feedback shapes what gets built first.</p>
+      </div>
+      <div class="fitem">
+        <span class="num">03</span>
+        <h3>No commitment</h3>
+        <p>No card, no payment, and nothing happens automatically. When it's ready, you decide whether to sign up.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section section-alt">
-  <div class="wrap">
-    <h2>The price</h2>
-    <p><strong>$19 per architect a month.</strong> You pay for the people who write the records, usually one to three per team. Everyone else reads and comments for free.</p>
-    <p><a class="button" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a></p>
-  </div>
-</section>
+<div class="wrap">
+  <div class="who"><span><strong>Made for engineering teams of about 10 to 50 engineers.</strong> Big enough to lose track of why things were built the way they were. Too small for a heavyweight developer portal.</span></div>
+</div>
 
 <section class="section">
-  <div class="wrap">
-    <h2>From Lee Atchison</h2>
-    <blockquote class="from-lee">
-      <p>I've spent years writing and teaching about architecture decisions and risk. Cascadras would put that thinking into a tool your team uses every day. Its risk matrix is the one from <em>Architecting for Scale</em>.</p>
-      <p class="byline">Lee Atchison, author of <em>Architecting for Scale</em> and <em>The Software Conductor</em>, and the Software Architecture Insights newsletter</p>
-    </blockquote>
+  <div class="wrap price-wrap">
+    <div>
+      <div class="eyebrow">The price</div>
+      <h2>Pay for the people who write the records.</h2>
+      <p>Usually one to three architects per team. Everyone else reads and comments for free.</p>
+    </div>
+    <div class="price-card">
+      <div class="big">$19 <small>per architect a month</small></div>
+      <span class="planned">Planned price. We'll never charge you without your OK.</span>
+      <ul>
+        <li>Readers and commenters free</li>
+        <li>Git-backed, export any time</li>
+        <li>Founding seats try it first</li>
+      </ul>
+      <a class="btn dark" href="#reserve" data-fathom-click="cascadras-reserve-click">Reserve a founding seat</a>
+    </div>
   </div>
 </section>
 
-<section class="section section-form" id="reserve">
+<section class="section band">
+  <div class="wrap lee-wrap">
+    <div class="lee">
+      <img class="photo" src="/images/lee-atchison.png" alt="Lee Atchison" width="120" height="120" loading="lazy" />
+      <div>
+        <div class="eyebrow">From Lee Atchison</div>
+        <p>I've spent years writing and teaching about architecture decisions and risk. I'm building Cascadras to put that thinking into a tool your team can use every day. Its risk matrix is the one from <i>Architecting for Scale</i>.</p>
+        <p class="sig">Lee Atchison · author of <i>Architecting for Scale</i> and <i>The Software Conductor</i>, and the Software Architecture Insights newsletter</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reserve">
   <div class="wrap">
-    <h2>Reserve a founding seat</h2>
-    <p>Cascadras isn't built yet. Reserve a seat and you'll get first access if it launches. No payment, no card.</p>
     <%= render "reserve_form", form_id: site.metadata.kit_form_id %>
   </div>
 </section>
