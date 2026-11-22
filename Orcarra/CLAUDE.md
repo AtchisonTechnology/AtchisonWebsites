@@ -81,7 +81,9 @@ Its own Fathom site; the ID is `fathom_site_id` in
 - `orcarra-signup` — a successful submit.
 
 Fathom reads `utm_content` from the ad links, so visits and signups split
-by ad group. Nothing on the page depends on the ad-group values.
+by ad group. The script tag carries `data-canonical="false"`: without it,
+Fathom records the canonical URL (no query string) and drops every `utm_`
+tag. **Keep it** while the page has a canonical link. Nothing on the page depends on the ad-group values.
 
 ## Redirects
 
