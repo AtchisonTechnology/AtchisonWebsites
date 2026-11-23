@@ -1284,9 +1284,11 @@ body.episode main {
   gap: 0.6rem;
   margin: 0 0 1rem;
   color: #2e8b80;
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 700;
+  /* SAI loads no monospace web font, so this is the Cascadras site's
+     monospace stack (Mandy's mockup: IBM Plex Mono 500, 13px). */
+  font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  font-size: 13px;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

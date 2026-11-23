@@ -147,6 +147,10 @@ a { color: var(--kelp); }
 /* Choice questions: real radios in a fieldset, drawn as a segmented pill
    about 48px tall. Never full width. */
 .choice { border: 0; border-top: 1px solid var(--foam); margin: 0; padding: 16px 0; }
+/* A floated legend leaves the fieldset's border, so the rule runs full
+   width above the question instead of beside a short legend. */
+.choice legend { float: left; width: 100%; }
+.choice .seg { clear: both; }
 .seg { display: inline-flex; width: auto; border: 1.5px solid var(--edge); border-radius: 999px; overflow: hidden; background: #fff; }
 .f .seg label { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 10px 20px; margin: 0; font-size: 17px; font-weight: 400; color: var(--body); border-left: 1.5px solid var(--edge); cursor: pointer; }
 .f .seg label:first-child { border-left: 0; }
