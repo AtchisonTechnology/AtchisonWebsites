@@ -53,7 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // background so the reader stays on this site, fire the form's Fathom event
 // once Kit says it worked, then go to the thank-you page or show the
 // success message in place. If the background submit can't reach Kit at
-// all, fall back to the plain form post so the signup still goes through.
+// all, or Kit answers with anything but a clear success, fall back to the
+// plain form post so the signup still goes through and Kit shows its own
+// page (AGENT-1059 follow-up to WEB-34: the Cascadras form here got HTTP
+// 200 with no subscriber and showed an error, so the signup was lost).
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-free-signup]").forEach((form) => {
     const status = form.querySelector(".free-signup-status")
@@ -70,6 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault()
       if (sending) return
       sending = true
+      // Measure the form before "Sending…" adds a line to it, so the
+      // thank-you swap holds the form's own height (WEB-34).
+      const formHeight = form.offsetHeight
       if (button) button.disabled = true
       say("Sending…")
 
@@ -103,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const panel = form.querySelector("[data-success-panel]")
         // Hold the panel form at its height so nothing below it moves
         // (WEB-34).
-        if (panel) form.style.minHeight = `${form.offsetHeight}px`
+        if (panel) form.style.minHeight = `${formHeight}px`
         form.classList.add("is-done")
         if (panel) {
           say("")
@@ -115,10 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return
       }
 
-      sending = false
-      if (button) button.disabled = false
-      const errors = Array.isArray(result.errors) ? result.errors.join(" ") : ""
-      say(errors || "That didn't go through. Check the email address and try again.", "error")
+      // Not a clear success: Kit may answer 200 with a failure body or a
+      // page we can't read. Post the form the plain way and let Kit handle
+      // it, rather than drop the signup behind an error line.
+      console.warn("Kit did not confirm the signup; posting the form directly.", result)
+      form.submit()
     })
   })
 })
