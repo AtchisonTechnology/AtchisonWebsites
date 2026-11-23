@@ -166,7 +166,7 @@
 <%= live_reload_dev_js %>
 <% if site.metadata.fathom_site_id.to_s != "" %>
 <!-- Fathom - beautiful, simple website analytics -->
-<script src="https://cdn.usefathom.com/script.js" data-site="<%= site.metadata.fathom_site_id %>" defer></script>
+<script src="https://cdn.usefathom.com/script.js" data-site="<%= site.metadata.fathom_site_id %>" data-canonical="false" defer></script>
 <!-- / Fathom -->
 <% end %>
 <!-- ConvertKit Insights -->
