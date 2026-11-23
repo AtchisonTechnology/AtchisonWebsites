@@ -1,75 +1,101 @@
 <%
-  # The "Reserve a spot for your club" form (WEB-33). Our own HTML, posting
-  # straight to one Kit form's subscribe endpoint (SAI Kit account), because
-  # Kit's form builder only does text fields. Each answer goes into the
-  # matching Kit custom field, `fields[<key>]`. A Kit rule adds the tags
-  # Orcarra and no-auto-sai, so the page sends no tags.
+  # The "Reserve a spot for your club" form (WEB-33, redesigned in WEB-34).
+  # Our own HTML, posting straight to one Kit form's subscribe endpoint (SAI
+  # Kit account), because Kit's form builder only does text fields. Each
+  # answer goes into the matching Kit custom field, `fields[<key>]`. A Kit
+  # rule adds the tags Orcarra and no-auto-sai, so the page sends no tags.
+  # Only name and email are required; the "Help shape Orcarra" block is
+  # optional. orcarra_price_ok (Yes / Maybe / No) is new in WEB-34 (Kit
+  # custom field ID 1441280).
   #
   # frontend/javascript/index.js submits it in the background, fires the
   # Fathom event orcarra-signup on success, and swaps in the thank-you text
   # in place, with no page change, so the ad-click tags stay on the visit.
-  # Without JavaScript it's a plain post to Kit.
+  # It holds the card's height so nothing moves. Without JavaScript it's a
+  # plain post to Kit.
 %>
-<form class="reserve-form" action="https://app.kit.com/forms/<%= form_id %>/subscriptions" method="post"
+<form class="form-card" action="https://app.kit.com/forms/<%= form_id %>/subscriptions" method="post"
       data-reserve-form data-fathom-event="orcarra-signup">
   <div class="reserve-fields">
-    <div class="field">
-      <label for="reserve-name">Name</label>
-      <input id="reserve-name" type="text" name="fields[first_name]" autocomplete="name" required />
-    </div>
-    <div class="field">
-      <label for="reserve-email">Email</label>
-      <input id="reserve-email" type="email" name="email_address" autocomplete="email" required />
-    </div>
-    <div class="field">
-      <label for="reserve-club-type">Type of club</label>
-      <select id="reserve-club-type" name="fields[orcarra_club_type]">
-        <option value="">Choose one</option>
-        <option>User group</option>
-        <option>Hobby or sports club</option>
-        <option>Society or association</option>
-        <option>HOA</option>
-        <option>Other nonprofit</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="reserve-members">Number of members</label>
-      <select id="reserve-members" name="fields[orcarra_members]">
-        <option value="">Choose one</option>
-        <option>Under 30</option>
-        <option>30–100</option>
-        <option>101–200</option>
-        <option>Over 200</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="reserve-role">Your role</label>
-      <select id="reserve-role" name="fields[orcarra_officer_role]">
-        <option value="">Choose one</option>
-        <option>President or chair</option>
-        <option>Secretary</option>
-        <option>Treasurer</option>
-        <option>Other officer or board member</option>
-        <option>Member</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="reserve-tool">What does your club use today for email, documents and elections?</label>
-      <input id="reserve-tool" type="text" name="fields[orcarra_tool_today]" />
-    </div>
-    <fieldset class="field field-choice">
-      <legend>May we talk with you for 30 minutes about how your club runs?</legend>
-      <label><input type="radio" name="fields[orcarra_talk_ok]" value="Yes" /> Yes</label>
-      <label><input type="radio" name="fields[orcarra_talk_ok]" value="No" /> No</label>
-    </fieldset>
+    <h2>Reserve a spot for your club</h2>
+    <p class="intro">Orcarra is under development. Reserve a spot and your club is among the first to try it, and helps shape it. No card, no payment, and no commitment.</p>
 
-    <button class="button" type="submit">Reserve a spot for your club</button>
-    <p class="reserve-status" role="status" aria-live="polite"></p>
-    <p class="small-print"><em>We'll use your email only for news about Orcarra and, if you said yes, to set up a conversation. Nothing else.</em></p>
+    <div class="fields">
+      <div class="f">
+        <label for="reserve-name">Your name</label>
+        <input id="reserve-name" type="text" name="fields[first_name]" autocomplete="name" required />
+      </div>
+      <div class="f">
+        <label for="reserve-email">Email</label>
+        <input id="reserve-email" type="email" name="email_address" autocomplete="email" required />
+      </div>
+      <div class="f">
+        <label for="reserve-club-type">Type of club</label>
+        <select id="reserve-club-type" name="fields[orcarra_club_type]">
+          <option value="">Choose one</option>
+          <option>User group</option>
+          <option>Hobby or sports club</option>
+          <option>Society or association</option>
+          <option>HOA</option>
+          <option>Other nonprofit</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="f">
+        <label for="reserve-members">Number of members</label>
+        <select id="reserve-members" name="fields[orcarra_members]">
+          <option value="">Choose one</option>
+          <option>Under 30</option>
+          <option>30–100</option>
+          <option>101–200</option>
+          <option>Over 200</option>
+        </select>
+      </div>
+      <div class="f full">
+        <label for="reserve-role">Your role</label>
+        <select id="reserve-role" name="fields[orcarra_officer_role]">
+          <option value="">Choose one</option>
+          <option>President or chair</option>
+          <option>Secretary</option>
+          <option>Treasurer</option>
+          <option>Other officer or board member</option>
+          <option>Member</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h3>Help shape Orcarra <span class="opt-note">(optional)</span></h3>
+      <p class="hint">A few quick questions, so we build for the way your club runs.</p>
+      <div class="f q">
+        <label for="reserve-tool">What does your club use today for email, documents and elections?</label>
+        <textarea id="reserve-tool" name="fields[orcarra_tool_today]" rows="2"></textarea>
+      </div>
+      <fieldset class="f q choice">
+        <legend>Would the price for your club's size work for you? ($29 a month up to 100 members, $49 up to 200. Planned prices.)</legend>
+        <div class="seg">
+          <label><input type="radio" name="fields[orcarra_price_ok]" value="Yes" /> Yes</label>
+          <label><input type="radio" name="fields[orcarra_price_ok]" value="Maybe" /> Maybe</label>
+          <label><input type="radio" name="fields[orcarra_price_ok]" value="No" /> No</label>
+        </div>
+      </fieldset>
+      <fieldset class="f q choice">
+        <legend>May we talk with you for 30 minutes about how your club runs?</legend>
+        <div class="seg">
+          <label><input type="radio" name="fields[orcarra_talk_ok]" value="Yes" /> Yes</label>
+          <label><input type="radio" name="fields[orcarra_talk_ok]" value="No" /> No</label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="submit">
+      <button class="btn" type="submit">Reserve a spot for your club</button>
+      <p class="reserve-status" role="status" aria-live="polite"></p>
+    </div>
+    <p class="fine">We'll use your email only for news about Orcarra and, if you said yes, to set up a conversation. Nothing else.</p>
   </div>
 
   <div class="reserve-thanks" data-reserve-thanks hidden tabindex="-1">
-    <p><strong>Your club's spot is reserved.</strong> We'll send you news about Orcarra, and first access if it launches. If you said yes to a conversation, we'll be in touch to set one up.</p>
+    <p><strong>Your club's spot is reserved.</strong> Your club will be among the first to try Orcarra, and we'll ask what you think. If you said yes to a conversation, we'll be in touch to set one up.</p>
   </div>
 </form>

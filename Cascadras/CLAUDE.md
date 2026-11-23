@@ -82,6 +82,10 @@ Its own Fathom site; the ID is `fathom_site_id` in
   jumps to the form (`data-fathom-click` on the link).
 - `cascadras-signup` — a successful submit.
 
+The script tag carries `data-canonical="false"`: without it, Fathom records
+the canonical URL (no query string) and drops every `utm_` tag. **Keep it**
+while the page has a canonical link.
+
 ## Redirects
 
 `www.cascadras.com` 301s to `cascadras.com`, keeping the path and the query

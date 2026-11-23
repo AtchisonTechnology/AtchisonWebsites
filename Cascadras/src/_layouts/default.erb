@@ -4,12 +4,8 @@
     <%= render "head", metadata: site.metadata, title: data.title, description: data.description, resource: resource %>
   </head>
   <body>
-    <header class="site-header">
-      <div class="wrap">
-        <a class="wordmark" href="/">Cascadras</a>
-      </div>
-    </header>
-
+    <%# The page draws its own header: the nav sits inside the dark hero
+        (WEB-34). %>
     <main>
       <%= yield %>
     </main>

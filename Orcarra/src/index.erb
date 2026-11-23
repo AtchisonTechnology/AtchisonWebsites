@@ -1,74 +1,119 @@
 ---
 layout: default
-# WEB-33. The one page on orcarra.com, for the Orcarra demand test.
-# Copy is "Orcarra page copy.md" ("The page: orcarra.com"), word for word,
-# edited by Toby (Editor), 2026-11-20. Sections in the copy file's order.
-# No Lee bio and no link to Lee's sites (Lee, 2026-11-20).
+# WEB-34. The one page on orcarra.com, for the Orcarra demand test, rebuilt
+# to Mandy's (Art & Design Director) approved mockup. Copy is the WEB-34
+# spec's, word for word (Lee's calls, 2026-11-21): no founders' price,
+# "Planned price" next to every price, no date anywhere. Orcarra's voice:
+# no Lee bio and no link to Lee's sites (Lee, 2026-11-20).
 #
 # Traffic comes from Google Ads with utm_* tags on the URL. Nothing here
 # reads or changes them; Fathom picks them up from the visit.
 ---
-<section class="hero">
+<header class="hero">
   <div class="wrap">
-    <h1>Every election, your club loses its memory. It doesn't have to.</h1>
-    <p class="lede">We're building Orcarra so everything your board needs lives in officer seats, not in people's personal accounts. When officers change, the seat passes to the next person with its inbox, documents and handbook inside.</p>
-    <p><a class="button" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot for your club</a></p>
-    <p class="price-line">$29 a month for clubs up to 100 members. $49 up to 200. Members are always free.</p>
-    <p class="not-built"><em>Orcarra isn't built yet. Clubs who reserve get first access if it launches. We don't take any money now.</em></p>
+    <nav class="nav">
+      <a class="brand" href="/">
+        <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><path d="M15 2 C 14 8 10 12 3 13 C 8 15 12 14 15 11 C 18 14 22 15 27 13 C 20 12 16 8 15 2Z" fill="#fff"/><path d="M1 19 C 6 16 10 22 15 19 S 24 16 29 19" stroke="#E0573E" stroke-width="2" fill="none"/></svg>
+        Orcarra
+      </a>
+      <a class="nav-cta" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot →</a>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span>Under development · Early spots open</div>
+        <h1>Every election, your club loses its memory. It doesn't have to.</h1>
+        <p class="lede">We're building Orcarra so your board's email, documents and handbook live in officer seats, not in people's personal accounts. When officers change, the seat passes to the next person with everything inside.</p>
+        <a class="btn" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot for your club</a>
+        <div class="price-line">From $29 a month for the whole club. <span>Members always free.</span></div>
+        <span class="planned">Planned price. We'll never charge you without your OK.</span>
+        <p class="dev-note">Clubs who reserve now are among the first to try Orcarra, and help decide how it works. No card, and nothing starts without your OK.</p>
+      </div>
+      <div class="sketch" role="img" aria-label="An early sketch of an Orcarra officer seat">
+        <div class="sketch-label">Early sketch · under development</div>
+        <div class="seat" aria-hidden="true">
+          <div class="head"><span class="role">Treasurer seat</span><span class="who">Held by Sam</span></div>
+          <div class="row"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>treasurer@yourclub.org<span class="n">inbox</span></div>
+          <div class="row"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></svg>Documents<span class="n">budgets, receipts</span></div>
+          <div class="row"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h11"/></svg>Treasurer's handbook<span class="n">how we do it here</span></div>
+          <div class="row"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/></svg>Logins<span class="n">bank, PayPal, insurer</span></div>
+          <div class="handover"><span>Pat</span><span class="arrow">→</span><span>Sam</span></div>
+          <div class="handover handover-note"><small>The whole seat passed on in one step after the election.</small></div>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</header>
+
+<div class="chips-sec">
+  <div class="wrap">
+    <p>Made for volunteer-run clubs of about 30 to 200 members:</p>
+    <div class="chips"><span class="chip">User groups</span><span class="chip">Hobby &amp; sports clubs</span><span class="chip">Societies &amp; associations</span><span class="chip">HOAs</span><span class="chip">Small nonprofits</span></div>
+  </div>
+</div>
 
 <section class="section">
   <div class="wrap">
-    <h2>The problem</h2>
-    <p>The new treasurer gets a password on a sticky note, if that. The club's email lives in the old president's personal inbox. The bylaws are in someone's Google Drive, and nobody's sure whose.</p>
-    <p>Elections run on paper, a show of hands, or a one-off voting site. Secret ballots, who's eligible, and whether you have a quorum all get worked out by hand.</p>
-    <p>Club software handles members and dues. Board software costs thousands a year and leaves your members out. Nothing we've found passes an officer's job on, intact, to the next person.</p>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="wrap">
-    <h2>What Orcarra will do</h2>
-    <div class="features">
-      <p><strong>Officer seats.</strong> Every role is a seat, not a person. The seat holds the inbox, the documents, the handbook and the logins. When officers change, the whole seat passes on in one step.</p>
-      <p><strong>Real elections.</strong> Secret ballots, eligibility and quorum, set up to fit your bylaws.</p>
-      <p><strong>Board records.</strong> Agendas, minutes, motions and documents, all in one place, and still there after the next election.</p>
-      <p><strong>A shared board inbox.</strong> Members write to the board, not to someone's personal email. The inbox passes with the seats.</p>
-      <p><strong>Your members, included.</strong> A member list that shows who can vote. Announcements to members by email and in the app. A new member guide. Members log in free.</p>
-      <p><strong>Keep your membership tool.</strong> Orcarra won't do dues or your public website. Use it alongside the tools you already have.</p>
+    <div class="center">
+      <h2>Three things that go wrong every year</h2>
+      <p>Club software handles members and dues. Board software costs thousands a year and leaves your members out. Nothing we've found passes an officer's job on, intact, to the next person.</p>
+    </div>
+    <div class="pains">
+      <div class="pain">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/></svg></div>
+        <h3>Handover</h3>
+        <p class="today">The new treasurer gets a password on a sticky note, if that.</p>
+        <p class="fix"><b>Officer seats.</b> Every role is a seat, not a person. The inbox, documents, handbook and logins pass on in one step.</p>
+      </div>
+      <div class="pain">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16v9H4z"/><path d="M8 11V5h8v6M10 8l1.5 1.5L14 7"/></svg></div>
+        <h3>Elections</h3>
+        <p class="today">Paper ballots, a show of hands, or a one-off voting site.</p>
+        <p class="fix"><b>Real elections.</b> Secret ballots, eligibility and quorum, set up to fit your bylaws.</p>
+      </div>
+      <div class="pain">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
+        <h3>Minutes</h3>
+        <p class="today">The bylaws are in someone's Google Drive, and nobody's sure whose.</p>
+        <p class="fix"><b>Board records.</b> Agendas, minutes, motions and documents, still there after the next election.</p>
+      </div>
+    </div>
+    <div class="also">
+      <div><b>A shared board inbox.</b> Members write to the board, not someone's personal email.</div>
+      <div><b>Your members, included.</b> Who can vote, announcements by email, a new member guide. Members log in free.</div>
+      <div><b>Keep your membership tool.</b> Orcarra won't handle dues or your public website. Use it alongside what you have.</div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-tight">
   <div class="wrap">
-    <h2>Who it's for</h2>
-    <p>Volunteer clubs and small nonprofits with about 30 to 200 members: user groups, hobby clubs, societies, associations, HOAs.</p>
+    <div class="early">
+      <div>
+        <h2>Orcarra is under development. Help us build it right.</h2>
+        <p>Every club runs a little differently. We'd rather build it with you than guess.</p>
+      </div>
+      <ol>
+        <li><span class="num">1</span><div><b>Be among the first to try it</b>Clubs who reserve try it before anyone else.</div></li>
+        <li><span class="num">2</span><div><b>Shape how it works</b>Tell us how your club runs its elections and handovers, and we'll build around it.</div></li>
+        <li><span class="num">3</span><div><b>No commitment</b>No card, no payment, and nothing happens automatically. When it's ready, your club decides whether to sign up.</div></li>
+      </ol>
+    </div>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section section-tight">
   <div class="wrap">
-    <h2>The price</h2>
-    <p>One flat price for the whole club. Members are always free.</p>
-    <table class="price-table">
-      <thead>
-        <tr><th scope="col">Club size</th><th scope="col">Price</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Up to 100 members</td><td>$29 a month</td></tr>
-        <tr><td>Up to 200 members</td><td>$49 a month</td></tr>
-      </tbody>
-    </table>
-    <p><a class="button" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot for your club</a></p>
+    <div class="center"><h2>One flat price for the whole club</h2><p>Members are always free.</p></div>
+    <div class="prices">
+      <div class="pc"><div class="size">Up to 100 members</div><div class="amt">$29 <small>a month</small></div><div class="free">Members always free</div><a class="btn" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot</a></div>
+      <div class="pc"><div class="size">Up to 200 members</div><div class="amt">$49 <small>a month</small></div><div class="free">Members always free</div><a class="btn" href="#reserve" data-fathom-click="orcarra-reserve-click">Reserve a spot</a></div>
+    </div>
+    <p class="prices-note">Planned prices. We'll never charge you without your OK.</p>
   </div>
 </section>
 
-<section class="section section-form" id="reserve">
+<section class="section" id="reserve">
   <div class="wrap">
-    <h2>Reserve a spot for your club</h2>
-    <p>Orcarra isn't built yet. Reserve a spot and your club gets first access if it launches. No payment, no card.</p>
     <%= render "reserve_form", form_id: site.metadata.kit_form_id %>
   </div>
 </section>

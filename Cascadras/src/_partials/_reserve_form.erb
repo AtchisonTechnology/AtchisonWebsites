@@ -1,68 +1,86 @@
 <%
-  # The "Reserve a founding seat" form (WEB-32). Our own HTML, posting
-  # straight to one Kit form's subscribe endpoint (SAI Kit account), because
-  # Kit's form builder only does text fields. Each answer goes into the
-  # matching Kit custom field, `fields[<key>]`. A Kit rule adds the tags
-  # Cascadras and no-auto-sai, so the page sends no tags.
+  # The "Reserve your founding seat" form (WEB-32, redesigned in WEB-34).
+  # Our own HTML, posting straight to one Kit form's subscribe endpoint (SAI
+  # Kit account), because Kit's form builder only does text fields. Each
+  # answer goes into the matching Kit custom field, `fields[<key>]`. A Kit
+  # rule adds the tags Cascadras and no-auto-sai, so the page sends no tags.
+  # Only name and email are required; the "Help shape Cascadras" block is
+  # optional.
   #
   # frontend/javascript/index.js submits it in the background, fires the
   # Fathom event cascadras-signup on success, and swaps in the thank-you
-  # text in place. Without JavaScript it's a plain post to Kit.
+  # text in place, holding the card's height so nothing moves. Without
+  # JavaScript it's a plain post to Kit.
   #
   # The same form, field for field, is on the SAI page:
   # SoftwareArchitectureInsights/src/_partials/_cascadras_form.erb.
   # Keep the two in step.
 %>
-<form class="reserve-form" action="https://app.kit.com/forms/<%= form_id %>/subscriptions" method="post"
+<form class="form-card" action="https://app.kit.com/forms/<%= form_id %>/subscriptions" method="post"
       data-reserve-form data-fathom-event="cascadras-signup">
   <div class="reserve-fields">
-    <div class="field">
-      <label for="reserve-name">Name</label>
-      <input id="reserve-name" type="text" name="fields[first_name]" autocomplete="name" required />
-    </div>
-    <div class="field">
-      <label for="reserve-email">Email</label>
-      <input id="reserve-email" type="email" name="email_address" autocomplete="email" required />
-    </div>
-    <div class="field">
-      <label for="reserve-role">Your role</label>
-      <select id="reserve-role" name="fields[cascadras_role]">
-        <option value="">Choose one</option>
-        <option>Architect</option>
-        <option>Engineering manager</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="reserve-team-size">Team size (engineers)</label>
-      <select id="reserve-team-size" name="fields[cascadras_team_size]">
-        <option value="">Choose one</option>
-        <option>Under 10</option>
-        <option>10–25</option>
-        <option>26–50</option>
-        <option>Over 50</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="reserve-decisions">How does your team keep architecture decisions today?</label>
-      <input id="reserve-decisions" type="text" name="fields[cascadras_decisions_today]" />
-    </div>
-    <div class="field">
-      <label for="reserve-risk">How does your team track risk today?</label>
-      <input id="reserve-risk" type="text" name="fields[cascadras_risk_today]" />
-    </div>
-    <fieldset class="field field-choice">
-      <legend>May we call you for 30 minutes about how your team works?</legend>
-      <label><input type="radio" name="fields[cascadras_call_ok]" value="Yes" /> Yes</label>
-      <label><input type="radio" name="fields[cascadras_call_ok]" value="No" /> No</label>
-    </fieldset>
+    <div class="eyebrow">Founding seats</div>
+    <h2>Reserve your founding seat</h2>
+    <p class="intro">Cascadras is under development. Reserve a seat to be among the first to try it, and help shape what we build. No card, no payment, and no commitment.</p>
 
-    <button class="button" type="submit">Reserve a founding seat</button>
-    <p class="reserve-status" role="status" aria-live="polite"></p>
-    <p class="small-print"><em>We'll use your email only for news about Cascadras and, if you said yes, to set up a call. Nothing else.</em></p>
+    <div class="fields">
+      <div class="field">
+        <label for="reserve-name">Name</label>
+        <input id="reserve-name" type="text" name="fields[first_name]" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="reserve-email">Email</label>
+        <input id="reserve-email" type="email" name="email_address" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="reserve-role">Your role</label>
+        <select id="reserve-role" name="fields[cascadras_role]">
+          <option value="">Choose one</option>
+          <option>Architect</option>
+          <option>Engineering manager</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="reserve-team-size">Team size (engineers)</label>
+        <select id="reserve-team-size" name="fields[cascadras_team_size]">
+          <option value="">Choose one</option>
+          <option>Under 10</option>
+          <option>10–25</option>
+          <option>26–50</option>
+          <option>Over 50</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="optional">
+      <h3>Help shape Cascadras <span class="opt-note">(optional, but it helps)</span></h3>
+      <p class="hint">Two quick questions, so we build for the way your team works today.</p>
+      <div class="field">
+        <label for="reserve-decisions">How does your team keep architecture decisions today?</label>
+        <textarea id="reserve-decisions" name="fields[cascadras_decisions_today]" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label for="reserve-risk">How does your team track risk today?</label>
+        <textarea id="reserve-risk" name="fields[cascadras_risk_today]" rows="2"></textarea>
+      </div>
+      <fieldset class="field choice">
+        <legend>May we call you for 30 minutes about how your team works?</legend>
+        <div class="seg">
+          <label><input type="radio" name="fields[cascadras_call_ok]" value="Yes" /> Yes</label>
+          <label><input type="radio" name="fields[cascadras_call_ok]" value="No" /> No</label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="submit">
+      <button class="btn dark" type="submit">Reserve a founding seat</button>
+      <p class="reserve-status" role="status" aria-live="polite"></p>
+      <span class="fine">We'll use your email only for news about Cascadras and, if you said yes, to set up a call. Nothing else.</span>
+    </div>
   </div>
 
   <div class="reserve-thanks" data-reserve-thanks hidden tabindex="-1">
-    <p><strong>Your founding seat is reserved.</strong> We'll be in touch if Cascadras launches. If you said yes to a call, Lee may email you to set one up.</p>
+    <p><strong>Your founding seat is reserved.</strong> You'll be among the first to try Cascadras, and we'll ask what you think. If you said yes to a call, we'll be in touch to set one up.</p>
   </div>
 </form>

@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (result.status === "success") {
         track(form.dataset.fathomEvent)
+        // Hold the card at its current height so nothing below it moves
+        // when the thank-you text replaces the fields (WEB-34).
+        form.style.minHeight = `${form.offsetHeight}px`
+        form.classList.add("is-done")
         if (fields) fields.hidden = true
         if (thanks) {
           thanks.hidden = false

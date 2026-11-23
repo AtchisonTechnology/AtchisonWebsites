@@ -98,10 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => { window.location.href = next }, 300)
           return
         }
-        form.classList.add("is-done")
         // A form with its own thank-you panel (the Cascadras form, WEB-32)
         // swaps it in for its fields. The rest show the success line.
         const panel = form.querySelector("[data-success-panel]")
+        // Hold the panel form at its height so nothing below it moves
+        // (WEB-34).
+        if (panel) form.style.minHeight = `${form.offsetHeight}px`
+        form.classList.add("is-done")
         if (panel) {
           say("")
           panel.hidden = false
