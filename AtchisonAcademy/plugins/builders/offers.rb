@@ -258,7 +258,17 @@ class Builders::Offers < SiteBuilder
     def coming_soon? = stage == "coming_soon"
     def price = offer? ? offer.data.price : sales.price
     def standard_price = sales.price
-    def headline = (offer? && offer.data.headline) || sales.hook
+    # The sales page may carry its own `headline:`, `lede:` and `roi_line:`
+    # (WEB-36). Offers never read them: an offer's hero is its own `headline`
+    # or the product's `hook`, with its `intro` in the pitch's place. The home
+    # page's featured course reads `hook` and `pitch` directly.
+    def headline
+      return offer.data.headline || sales.hook if offer?
+
+      sales.headline || sales.hook
+    end
+    def pitch = (!offer? && sales.lede) || sales.pitch
+    def roi_line = offer? ? nil : sales.roi_line
     # An offer's short paragraph under the headline; nil on a sales page.
     def intro = offer? ? offer.data.intro : nil
     def buy_label = (offer? && offer.data.buy_label) || sales.buy_label

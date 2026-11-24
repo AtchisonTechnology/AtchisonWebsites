@@ -2,10 +2,11 @@
     the right. Phones: headline, trailer, Buy — the grid areas in index.css
     reorder the same three blocks. A coming-soon page (`stage: coming_soon`)
     swaps the price and Buy for two jump buttons. On an offer page the offer's intro takes
-    the pitch's place under the headline. On phones the tagline is dropped
+    the pitch's place under the headline. A sales page's `roi_line:` is a callout under the pitch
+    (WEB-36). On phones the tagline is dropped
     so Buy stays above the fold. %>
 <% sales = page.sales %>
-<section class="sales-hero<%= " sales-hero--offer" if page.offer? %>">
+<section class="sales-hero<%= " sales-hero--offer" if page.offer? %><%= " sales-hero--roi" if page.roi_line %>">
   <div class="sales-hero-inner">
     <div class="sales-hero-head">
       <p class="sales-eyebrow"><%= sales.title %></p>
@@ -13,7 +14,11 @@
       <% if page.intro %>
         <p class="sales-offer-intro"><%= sales_text page.intro, sales %></p>
       <% else %>
-        <p class="sales-lede"><%= sales_text sales.pitch, sales %></p>
+        <p class="sales-lede"><%= sales_text page.pitch, sales %></p>
+      <% end %>
+      <%# ROI callout: the sales page only (WEB-36). %>
+      <% if page.roi_line %>
+        <p class="sales-roi"><span class="sales-roi-badge" aria-hidden="true">$</span><span><%= sales_text page.roi_line, sales %></span></p>
       <% end %>
       <% if sales.tagline %>
         <p class="sales-tagline"><%= sales_text sales.tagline, sales %></p>

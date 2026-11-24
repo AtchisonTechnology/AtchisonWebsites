@@ -1,0 +1,24 @@
+<%# Credibility box right under the hero (WEB-36): headshot, name, two short
+    lines, book cover. Sales page only; an offer page renders nothing. Every
+    word comes from the data file's `credibility:` block. %>
+<% cred = page.sales.credibility %>
+<% if cred && !page.offer? %>
+<section class="sales-section sales-cred-section">
+  <div class="sales-inner">
+    <div class="sales-cred">
+      <img src="<%= relative_url cred.photo %>" width="88" height="88" alt="<%= cred.name %>" class="sales-cred-photo" />
+      <div class="sales-cred-text">
+        <p class="sales-cred-name"><%= cred.name %></p>
+        <div class="sales-cred-lines">
+          <% cred.lines.each do |line| %>
+            <p class="sales-cred-line"><%= sales_text line, page.sales %></p>
+          <% end %>
+        </div>
+      </div>
+      <% if cred.cover %>
+        <img src="<%= relative_url cred.cover %>" width="76" height="100" alt="<%= cred.cover_alt %>" class="sales-cred-cover" />
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>

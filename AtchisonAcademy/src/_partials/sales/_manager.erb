@@ -1,0 +1,45 @@
+<%# "Need your manager's yes?" (WEB-36): a message to forward, with a Copy
+    button, then the team price. Sales page only; an offer page renders
+    nothing. The Copy button (frontend/javascript/index.js) copies the
+    message paragraphs joined by blank lines, and stays hidden when the
+    browser has no clipboard API. %>
+<% mgr = page.sales.manager %>
+<% if mgr && !page.offer? %>
+<section class="sales-section sales-manager" id="manager">
+  <div class="sales-inner">
+    <h2><%= mgr.heading %></h2>
+    <% if mgr.subhead %>
+      <p class="sales-manager-sub"><%= sales_text mgr.subhead, page.sales %></p>
+    <% end %>
+    <div class="sales-message" data-copy-box>
+      <div class="sales-message-head">
+        <span class="sales-message-label"><%= mgr.box_label %></span>
+        <button type="button" class="btn btn-deep-outline sales-copy-btn" data-copy-button hidden>Copy</button>
+      </div>
+      <div class="sales-message-body" data-copy-text="<%= ERB::Util.html_escape(mgr.message.join("\n\n")) %>">
+        <% mgr.message.each do |para| %>
+          <% if para.match?(%r{\Ahttps?://\S+\z}) %>
+            <p><a href="<%= ERB::Util.html_escape(para) %>" class="sales-message-url"><%= ERB::Util.html_escape(para) %></a></p>
+          <% else %>
+            <p><%= ERB::Util.html_escape(para) %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if mgr.after %>
+      <p class="sales-manager-after"><%= sales_text mgr.after, page.sales %></p>
+    <% end %>
+    <% team = page.sales.team_pack %>
+    <% if team %>
+      <p class="sales-manager-team">
+        <%= mgr.team_before %>
+        <a href="<%= buy_link team.buy_url, content: "manager-team" %>" data-buy data-commerce
+           data-fathom-event="<%= team.fathom_event %>"><strong><%= team.buy_label %></strong></a>.
+        <%= mgr.team_middle %>
+        <a href="<%= mgr.team_contact_url %>"><strong><%= mgr.team_contact_label %></strong></a>
+        <%= mgr.team_after %>
+      </p>
+    <% end %>
+  </div>
+</section>
+<% end %>
