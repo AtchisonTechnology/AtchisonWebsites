@@ -1,0 +1,67 @@
+---
+layout: none
+permalink: /webinars/architecting-for-cost/webinar.ics
+# The Add to calendar file for the run's webinar (WEB-22), linked from the
+# registration form's success message. Like replay.erb, it has no settings of
+# its own: the date and join link come from the webinar page's front matter
+# (webinars/architecting-for-cost.erb), so each run is set in one place.
+#
+# The time is written as Pacific wall-clock time with a TZID and a VTIMEZONE
+# block, so every calendar app shows the right time wherever the person is.
+# With no starts_at_iso (no run set up yet) the file is an empty calendar.
+sitemap_exclude: true
+noindex: true
+---
+<%
+  webinar = site.collections.pages.resources.find { |r| r.relative_url == "/webinars/architecting-for-cost/" }
+  raise "#{resource.relative_path}: can't find the webinar page /webinars/architecting-for-cost/" unless webinar
+  settings = webinar.data
+  starts_iso = settings.starts_at_iso.to_s.strip
+
+  # Calendar files need CRLF line endings.
+  lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Atchison Academy//Webinar//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"]
+
+  if starts_iso != ""
+    unless starts_iso.match?(/\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}\z/)
+      raise "#{resource.relative_path}: starts_at_iso must be \"YYYY-MM-DD HH:MM\" in Pacific time, got #{starts_iso.inspect}"
+    end
+
+    # Wall-clock arithmetic only: Time.utc here is a calculator, not a zone.
+    wall = Time.utc(*starts_iso.scan(/\d+/).map(&:to_i))
+    start_local = wall.strftime("%Y%m%dT%H%M%S")
+    end_local = (wall + 30 * 60).strftime("%Y%m%dT%H%M%S")
+    join_url = settings.join_url.to_s.strip
+
+    lines += [
+      "BEGIN:VTIMEZONE",
+      "TZID:America/Los_Angeles",
+      "BEGIN:DAYLIGHT",
+      "TZOFFSETFROM:-0800",
+      "TZOFFSETTO:-0700",
+      "TZNAME:PDT",
+      "DTSTART:19700308T020000",
+      "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+      "END:DAYLIGHT",
+      "BEGIN:STANDARD",
+      "TZOFFSETFROM:-0700",
+      "TZOFFSETTO:-0800",
+      "TZNAME:PST",
+      "DTSTART:19701101T020000",
+      "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+      "END:STANDARD",
+      "END:VTIMEZONE",
+      "BEGIN:VEVENT",
+      "UID:webinar-architecting-for-cost-#{start_local}@atchisonacademy.com",
+      "DTSTAMP:#{Time.now.utc.strftime("%Y%m%dT%H%M%SZ")}",
+      "DTSTART;TZID=America/Los_Angeles:#{start_local}",
+      "DTEND;TZID=America/Los_Angeles:#{end_local}",
+      "SUMMARY:When the Cloud Savings Stop (free webinar with Lee Atchison)",
+      "DESCRIPTION:A free 30-minute webinar from Lee Atchison.#{" Join: #{join_url}" unless join_url.empty?}"
+    ]
+    lines << "LOCATION:#{join_url}" unless join_url.empty?
+    lines << "URL:#{join_url}" unless join_url.empty?
+    lines << "END:VEVENT"
+  end
+
+  lines << "END:VCALENDAR"
+%><%# The "\r" plus this file's final newline make the last CRLF. %><%= lines.join("\r\n") + "\r" %>
