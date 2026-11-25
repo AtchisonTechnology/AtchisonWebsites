@@ -3349,6 +3349,11 @@ body.webinar .webinar-form-note {
   color: rgba(255,255,255,0.75);
   margin: 0.75rem 0 0;
 }
+/* The Add to calendar link (WEB-22): hidden until the registration form
+   succeeds. The [hidden] rule keeps this block's own display from beating it. */
+body.webinar .webinar-calendar { margin: 0.75rem 0 0; font-weight: 600; }
+body.webinar .webinar-calendar[hidden] { display: none; }
+body.webinar .webinar-calendar a { color: var(--white); text-decoration: underline; }
 
 /* The unlisted replay page's video: 16:9, full column width. */
 body.webinar .webinar-replay-video {

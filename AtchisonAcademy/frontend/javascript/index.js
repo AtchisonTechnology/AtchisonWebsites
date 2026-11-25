@@ -190,6 +190,16 @@ document.addEventListener("kit-form-success", (event) => {
   unlocked[0]?.querySelector("a")?.focus()
 })
 
+// Webinar registration (WEB-22). A good submit on the form inside
+// [data-webinar-register] reveals its Add to calendar link in place. The
+// success text itself is set by the generic Kit handler above.
+document.addEventListener("kit-form-success", (event) => {
+  const register = event.target.closest("[data-webinar-register]")
+  if (!register) return
+
+  register.querySelector("[data-webinar-calendar]")?.removeAttribute("hidden")
+})
+
 // Trailer (§A9). Captions on via texttrack in every case.
 //
 // [data-trailer-autoplay] (sales and offer page heroes): the player loads at
