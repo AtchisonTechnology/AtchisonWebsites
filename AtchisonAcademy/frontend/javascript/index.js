@@ -264,3 +264,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.readyState === "complete") fire()
   else window.addEventListener("load", fire)
 })()
+
+// "Need your manager's yes?" Copy button (WEB-36). Copies the message's
+// plain text (paragraphs joined by blank lines) from [data-copy-text]. The
+// button ships hidden and is shown only when the clipboard API exists;
+// without it, the text is still there to select.
+document.addEventListener("DOMContentLoaded", () => {
+  if (!navigator.clipboard?.writeText) return
+  document.querySelectorAll("[data-copy-box]").forEach((box) => {
+    const button = box.querySelector("[data-copy-button]")
+    const source = box.querySelector("[data-copy-text]")
+    if (!button || !source) return
+    button.hidden = false
+    button.addEventListener("click", () => {
+      navigator.clipboard.writeText(source.dataset.copyText).then(() => {
+        button.textContent = "Copied"
+        button.classList.add("is-copied")
+        setTimeout(() => {
+          button.textContent = "Copy"
+          button.classList.remove("is-copied")
+        }, 2000)
+      }).catch(() => {})
+    })
+  })
+})

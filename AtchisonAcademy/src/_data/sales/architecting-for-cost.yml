@@ -21,6 +21,13 @@ title: "Architecting for Cost"
 hook: "Finance can't fix your cloud bill."
 pitch: "Your architecture caused it, and only architecture decisions can change it."
 tagline: "A self-paced video course for software architects and engineering leaders."
+# The SALES PAGE's own hero (WEB-36; headline B, Lee 2026-11-24). Offer
+# pages never read these three: they keep `hook` (or their own `headline`)
+# and show their `intro` in the pitch's place. The home page's featured
+# course still reads `hook` and `pitch`.
+headline: "Find the cloud savings finance can't reach."
+lede: "Finance already took the easy savings. The rest are locked in your architecture. This course shows you how to find them, price them and get the change approved."
+roi_line: "On a **$50,000** monthly cloud bill, a **1%** saving pays for this course in **six weeks**."
 # The page's meta and social description: hook, pitch and tagline together.
 description: "Finance can't fix your cloud bill. Your architecture caused it, and only architecture decisions can change it. A self-paced video course for software architects and engineering leaders."
 
@@ -51,11 +58,13 @@ og_image: /images/sales/architecting-for-cost/og.png   # 1200×630
 # ORDER and PRESENCE of the sections below the hero. An optional section with
 # no content (quotes) hides itself.
 sections:
+  - credibility        # sales page only (WEB-36)
   - problem
   - quotes
   - who
   - modules
   - includes
+  - manager            # sales page only (WEB-36)
   - about
   - price
   - faq
@@ -73,8 +82,24 @@ who:
   heading: "Who this course is for"
   items:
     - "**Architects and senior engineers** who've been handed a cost target. You can name your five biggest line items. You can't yet say which design decision caused any of them."
+    - "**Engineering leaders and CTOs** who ran the finance playbook, hit its floor, and watched the bill keep climbing. You need your architects to own the next round, and a number to show finance it's working."
+  # Offer pages show these instead of `items`, so the $495 launch page keeps
+  # the wording it launched with (WEB-36 left it alone). Delete this once
+  # the launch offer has ended (Dec 4, 2026).
+  offer_items:
+    - "**Architects and senior engineers** who've been handed a cost target. You can name your five biggest line items. You can't yet say which design decision caused any of them."
     - "**Engineering leaders and CTOs** who ran the finance playbook, hit its floor, and watched the bill keep climbing. You need your architects to own the next round, and a way to show finance it's working."
   not_for: "*Not for:* anyone looking for a console tour or a list of cost-cutting tips. This course is about the decisions, not the dashboards."
+
+# Credibility box right under the hero (WEB-36). Sales page only; offers skip it.
+credibility:
+  name: "Lee Atchison"
+  photo: /images/lee-atchison.png          # 240×240 studio headshot
+  cover: /images/books/architecting-for-scale.jpg   # 381×500, shared cover art
+  cover_alt: "Architecting for Scale, by Lee Atchison (O'Reilly)"
+  lines:
+    - "Seven years at Amazon and AWS and eight at New Relic, building and running systems at scale."
+    - "Author of *Architecting for Scale* (O'Reilly). More than 180,000 learners have taken his courses."
 
 modules:
   heading: "What you'll learn"
@@ -111,6 +136,26 @@ includes:
     - "Cost Guardrail Checklist"
     - "Executive Cost-Case One-Pager"
   closing: "Self-paced. Start any time, and go at your own speed."
+
+# "Need your manager's yes?" after "What you get" (WEB-36). Sales page only.
+# `message` paragraphs are shown in the box and copied, exactly, by the Copy
+# button (blank line between paragraphs). A paragraph that is a bare URL
+# becomes a link. Message text is plain: no **bold** expansion.
+manager:
+  heading: "Need your manager's yes?"
+  subhead: "Send them this."
+  box_label: "Message to forward"
+  message:
+    - "Architecting for Cost teaches architects to trace our cloud bill back to the design decisions behind it, and to change the ones worth changing. It ends with a one-page cost case for finance, which I'd write about our own system."
+    - "It's $695, with a 30-day refund. On a $50,000 monthly cloud bill, a 1% saving pays for it in six weeks."
+    - "https://atchisonacademy.com/courses/architecting-for-cost/"
+  after: "On any bill over $25,000 a month, a 1% saving pays for the course in under three months."
+  # The Buy 5 seats link uses team_pack's checkout, with utm_content=manager.
+  team_before: "Buying for your team? Five seats are $2,475."
+  team_middle: "Need more than five?"
+  team_contact_url: "https://leeatchison.com/contact/"
+  team_contact_label: "Contact me"
+  team_after: "and tell me how many."
 
 about:
   heading: "About your instructor"
