@@ -55,4 +55,4 @@ captivate_show_id: "37ede49a-021a-4f15-b0dd-18b2a2653785"
 # Captivate's Show Player (Static Embed) code, from Blast Radius > Podcast
 # Player > Static Embed. Empty shows a marked slot on /blastradius/.
 blastradius_rss_url: "https://feeds.captivate.fm/blast-radius/"
-blastradius_player_embed: ""
+blastradius_player_embed: '<div style="width: 100%; height: 600px; margin-bottom: 20px; border-radius: 6px; overflow: hidden;"><iframe style="width: 100%; height: 600px;" frameborder="no" scrolling="no" allow="clipboard-write" seamless src="https://player.captivate.fm/show/b0a271a2-54d1-4505-9ba6-3e1cdafb8bc1"></iframe></div>'
