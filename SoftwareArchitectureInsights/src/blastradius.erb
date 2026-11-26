@@ -1,0 +1,56 @@
+---
+layout: default
+title: "Blast Radius: The Podcast"
+description: >-
+  What today's tech news means for your architecture. Five to ten minutes. No
+  hype.
+---
+
+<header class="podcast-hero">
+  <img
+    src="<%= relative_url '/images/blastradius-cover.png' %>"
+    width="600"
+    height="600"
+    alt="Blast Radius podcast cover art"
+    class="podcast-show-art"
+  />
+  <h1>Blast Radius: The Podcast</h1>
+  <p class="podcast-tagline">What today's tech news means for your architecture.</p>
+  <div class="podcast-pitch podcast-pitch-long">
+    <p>Something big happened in tech today. An outage, an acquisition, a security hole, a new regulation.</p>
+    <p>So what does it mean for the systems you build? And for your career?</p>
+    <p>Blast Radius is a short, fast take on the news that matters to software architects and senior developers. Each episode takes one story and looks at what it changes: how you design, run, buy, or staff your systems.</p>
+    <p>Five to ten minutes. No hype. Just what it means for you.</p>
+    <p>From Lee Atchison and Software Architecture Insights.</p>
+  </div>
+
+  <%
+    # RSS only for now. Apple, Spotify and Overcast links wait for Lee's go to
+    # submit the show. To add one, add a line here: ["Apple Podcasts", "https://..."].
+    subscribe_links = [
+      ["RSS", site.metadata.blastradius_rss_url],
+    ].select { |_label, url| url.to_s != "" }
+  %>
+  <ul class="podcast-subscribe-buttons">
+    <% subscribe_links.each do |label, url| %>
+      <li><a href="<%= url %>" class="podcast-subscribe-button" target="_blank" rel="noopener"><%= label %></a></li>
+    <% end %>
+  </ul>
+</header>
+
+<section class="podcast-player">
+  <% if site.metadata.blastradius_player_embed.to_s != "" %>
+    <%== site.metadata.blastradius_player_embed %>
+  <% else %>
+    <%# PLAYER SLOT: paste Captivate's Show Player (Static Embed) code into blastradius_player_embed in src/_data/site_metadata.yml. %>
+    <p class="podcast-player-pending">(Show Player not yet configured: see blastradius_player_embed in site_metadata.yml)</p>
+  <% end %>
+</section>
+
+<section class="podcast-subscribe">
+  <div class="podcast-subscribe-inner">
+    <%= render "kit_form", uid: site.metadata.kit_inline_form_uid %>
+  </div>
+</section>
+
+<p class="podcast-crosslink">For the long-form show, see the <a href="<%= relative_url '/podcast/' %>">Software Architecture Insights podcast</a>.</p>
