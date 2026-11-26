@@ -23,7 +23,7 @@ categories:
 
 ---
 
-*Disclosure: When I wrote this article, Files.com was paying me to write for them. They're the company I use as the example near the end.*
+*This article was sponsored by Files.com.*
 
 It's hard not to admire confidence in marketing.
 
