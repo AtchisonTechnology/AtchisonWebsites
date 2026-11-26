@@ -24,8 +24,12 @@
   # case the episodes collection vs. the plain /podcast/ page separately.
   is_podcast_page = defined?(resource) && resource && resource.relative_url.to_s.start_with?("/podcast/")
 
+  is_blastradius_page = defined?(resource) && resource && resource.relative_url.to_s == "/blastradius/"
+
   og_image_url = if is_article && resource.data.hero_image
     absolute_url("/images/posts/#{resource.data.hero_image}")
+  elsif is_blastradius_page
+    absolute_url("/images/blastradius-cover.png")
   elsif is_podcast_page
     absolute_url("/images/podcast/show-art.png")
   else

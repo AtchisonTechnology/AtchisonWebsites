@@ -49,3 +49,10 @@ podcast_rss_url: "https://feeds.captivate.fm/sai/"
 # (Captivate's embed code is `player.captivate.fm/show/<id>`). Supplied by
 # Lee 2026-09-11.
 captivate_show_id: "37ede49a-021a-4f15-b0dd-18b2a2653785"
+
+# Blast Radius, the news show (WEB-37). RSS only until Lee approves
+# submitting to Apple, Spotify and the rest. blastradius_player_embed is
+# Captivate's Show Player (Static Embed) code, from Blast Radius > Podcast
+# Player > Static Embed. Empty shows a marked slot on /blastradius/.
+blastradius_rss_url: "https://feeds.captivate.fm/blast-radius/"
+blastradius_player_embed: ""

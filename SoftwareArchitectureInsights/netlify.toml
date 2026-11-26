@@ -193,6 +193,20 @@
   status = 301
   force = true
 
+# The Blast Radius show page lives at /blastradius/ (WEB-37). The hyphenated
+# spelling is what people type, so it 301s there.
+[[redirects]]
+  from = "/blast-radius"
+  to = "/blastradius/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blast-radius/"
+  to = "/blastradius/"
+  status = 301
+  force = true
+
 # The Sep 30, 2026 webinar ("Your AI Provider Will Fail. Design for It.").
 # /architecting-with-ai was its registration link, so it is in promo posts,
 # the LinkedIn Newsletter and a Kit send, and /webinar-architecting-systems-
