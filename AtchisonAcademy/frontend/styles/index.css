@@ -3953,6 +3953,9 @@ body.selling a:focus-visible {
   color: var(--aa-ink);
 }
 
+/* Keep each bold figure ("$50,000", "1%", "six weeks") on one line on phones. */
+.sales-roi strong { white-space: nowrap; }
+
 .sales-roi-badge {
   flex: none;
   width: 1.6rem;
