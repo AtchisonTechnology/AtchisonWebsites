@@ -23,6 +23,8 @@ categories:
 
 ---
 
+*Disclosure: When I wrote this article, Files.com was paying me to write for them. They're the company I use as the example near the end.*
+
 It's hard not to admire confidence in marketing.
 
 Take [Fortra](https://www.fortra.com/), for example. Fortra is the new parent company of [GoAnywhere](https://www.goanywhere.com/), a Managed File Transfer (MFT) solution that's been around for years. The Fortra website proudly declares, "We break the attack chain."
