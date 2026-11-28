@@ -4,7 +4,7 @@ subtitle: "Unlimited sun in, waste heat radiated out. No water, no grid, no neig
 author: "Lee Atchison"
 status: published
 created: 2026-09-22
-date: 2027-04-13
+date: 2027-05-11
 published_on:
 
 sai_url:
